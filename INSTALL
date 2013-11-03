@@ -1,0 +1,41 @@
+rails new rsh-web -d postgresql --skip-test-unit
+
+rvm --rvmrc --create use ruby-2.0.0-p0@rsh
+
+Updated Gemfile
+  - added quiet_assets to development
+  - added rspec/testing gems
+  - added unicorn for production
+
+Remove username/password from database.yml (all environments)
+
+rake db:create
+
+rails generate rspec:install
+
+mkdir spec/support spec/models spec/requests
+
+# Enable capybara by adding the following to spec/spec_helper.rb
+require 'capybara/rspec'
+
+# We're not using fixtures, so comment out the following line in spec/spec_helper.rb
+config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+# change the default use_transactional_fixtures to false:
+config.use_transactional_fixtures = false
+
+# Create a factory file in spec/factories.rb
+touch spec/factories.rb
+
+# Add to application.rb to prevent the generation of spec tests for areas that we don't need to test.
+config.generators do |g|
+  g.test_framework :rspec, fixture: true, controller_specs: false, helper_specs: false, routing_specs: false, view_specs: false
+  g.fixture_replacement :factory_girl, dir: "spec/factories"
+end
+
+# Include all /lib/ files/subdirectories in the autload_paths
+config.autoload_paths += Dir["#{config.root}/lib/**/"]  # include all subdirectories
+
+rails g controller home index
+
+Clean up routes
