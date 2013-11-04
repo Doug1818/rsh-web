@@ -6,6 +6,16 @@ Updated Gemfile
   - added quiet_assets to development
   - added rspec/testing gems
   - added unicorn for production
+  - bootstrap-rails (bootstrap 3 version)
+  - jquery-turbolinks
+  - simple_form
+  - devise
+  - stripe
+  - cancan
+  - carrierwave
+  - minimagick
+  - fog
+  - kaminari
 
 Remove username/password from database.yml (all environments)
 
@@ -35,6 +45,15 @@ end
 
 # Include all /lib/ files/subdirectories in the autload_paths
 config.autoload_paths += Dir["#{config.root}/lib/**/"]  # include all subdirectories
+
+Update application.css and application.js to load in bootstrap, jquery_ui and jquery.turbolinks (order is important)
+
+rails generate simple_form:install --bootstrap
+Update simple_form_bootstrap.rb to be bootstrap 3 compliant.
+
+rails g cancan:ability
+Update initialize method, add roles for this project
+
 
 rails g controller home index
 
