@@ -1,0 +1,18 @@
+<%= simple_form_for @coach, html: { class: "form-vertical" } do |f| %>
+  <%= f.input :email %>
+  <% unless @coach.new_record? %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :gender, as: :select, collection: Coach::GENDERS %>
+    <%= f.input :status, as: :select, collection: Coach::STATUSES %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+  <% end %>
+
+  <% if @coach.new_record? %>
+    <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
+  <% else %>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+<% end %>

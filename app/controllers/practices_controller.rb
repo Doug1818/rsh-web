@@ -1,4 +1,11 @@
 class PracticesController < ApplicationController
+  before_filter :authenticate_coach!, only: [:show]
+  authorize_resource
+
+  def show
+    @practice = Practice.find(params[:id])
+  end
+
   def new
     @practice = Practice.new
     @practice.coaches.build

@@ -22,6 +22,9 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="<%= 'active' if params[:controller] == 'home' %>"><%= link_to 'Home', root_path %></li>
+          <% if can? :manage,  current_practice %>
+            <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Practice Administration', practice_path(current_practice) %></li>
+        <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_coach %>
@@ -30,9 +33,11 @@
             <li><%= link_to 'Sign in for coaches', new_coach_session_path %></li>
           <% end %>
         </ul>
-      </div><!--/.nav-collapse -->
+      </div>
     </div>
   </div>
+
+  <%= render '/common/notification' %>
 
   <%= yield %>
 

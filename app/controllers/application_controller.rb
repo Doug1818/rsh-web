@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def current_ability
-    @current_ability ||= Ability.new(current_coach)
+    @current_ability ||= CoachAbility.new(current_coach)
   end
+
+  def current_practice
+    current_coach.practice if current_coach
+  end
+  helper_method :current_practice
 end
