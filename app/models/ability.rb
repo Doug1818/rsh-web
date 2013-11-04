@@ -2,25 +2,19 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    @user = user || User.new
-    role_name = @user.role.present? ? @user.role : "guest"
-
-    send(role_name)
+    role = (user && user.role) ? user.role : 'guest'
+    send(role)
   end
 
   def guest
-    # can :index, :home
-  end
-
-  def member
-    guest
   end
 
   def coach
-    member
+    guest
+    can :index, :coaches_home
   end
 
-  def admin
-    can :manage, :all
+  def owner
+    coach
   end
 end

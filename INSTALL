@@ -1,6 +1,6 @@
 rails new rsh-web -d postgresql --skip-test-unit
 
-rvm --rvmrc --create use ruby-2.0.0-p0@rsh
+rvm --rvmrc --create ruby-2.0.0-p0@rsh
 
 Updated Gemfile
   - added quiet_assets to development

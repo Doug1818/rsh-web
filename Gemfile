@@ -21,7 +21,7 @@ gem 'cancan' #authorization
 # gem 'carrierwave' #file upload
 # gem 'mini_magick' # rmagick replacement
 # gem "fog" # cloud services api
-# gem 'stripe' #credit card processing
+gem 'stripe' #credit card processing
 
 group :doc do
   gem 'sdoc', require: false
