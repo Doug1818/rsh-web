@@ -4,7 +4,8 @@
     <% if @users.present? %>
       <%= render @users %>
     <% else %>
-      Add your first patient.
+      <%= link_to 'Add your first patient', new_program_path %>
+
     <% end %>
   </div>
 </div>

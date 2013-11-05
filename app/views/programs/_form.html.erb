@@ -1,0 +1,12 @@
+<%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
+
+  <%= f.fields_for :user do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+  <% end %>
+
+  <%= f.input :purpose %>
+
+  <%= f.submit 'Add Patient', class: 'btn btn-primary' %>
+<% end %>
