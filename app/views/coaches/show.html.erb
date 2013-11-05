@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="col-md-12">
+    <h2>I'm the coaches homepage</h2>
+    <% if @users.present? %>
+      <%= render @users %>
+    <% else %>
+      Add your first patient.
+    <% end %>
+  </div>
+</div>

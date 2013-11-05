@@ -14,8 +14,8 @@ class CoachAbility
 
   def coach
     guest
-    can :index, :coaches_home
     can :edit, Coach, id: @coach.id
+    can :show, Coach, id: @coach.id
   end
 
   def owner

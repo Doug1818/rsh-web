@@ -6,6 +6,11 @@ class CoachesController < ApplicationController
     @coaches = current_practice.coaches
   end
 
+  def show
+    @coach = current_practice.coaches.find(params[:id])
+    @users = @coach.users
+  end
+
   def new
     @coach = Coach.new
   end

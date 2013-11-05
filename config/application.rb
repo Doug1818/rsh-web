@@ -25,6 +25,8 @@ module RshWeb
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    GENDERS = ["Male", "Female", "I'd rather not say"]
+
     config.autoload_paths += Dir["#{config.root}/lib/**/"]  # include all subdirectories
 
     config.generators do |g|

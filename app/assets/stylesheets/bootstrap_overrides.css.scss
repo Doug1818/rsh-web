@@ -5,6 +5,14 @@ body {
   color: #939598;
 }
 
+a {
+  color: #000;
+}
+
+a:hover {
+  color: #ffa721;
+}
+
 h1 {
   font-size: 43.51pt;
 }
@@ -35,6 +43,10 @@ h3 {
       color: #fff;
       font-size: 18px;
       line-height: 92px;
+    }
+
+    li a:hover {
+      color: #ffa721;
     }
 
   }

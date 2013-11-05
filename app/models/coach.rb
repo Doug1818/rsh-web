@@ -1,11 +1,12 @@
 class Coach < ActiveRecord::Base
-  GENDERS = ["male", "female", "rather not say"]
-  STATUSES = { inactive: 0, active: 1 }
+  STATUSES = { invited: 0, inactive: 1, active: 2 }
+
   belongs_to :practice
+  has_many :programs
+  has_many :users, through: :programs
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
 
   def full_name
     if first_name.present? && last_name.present?
