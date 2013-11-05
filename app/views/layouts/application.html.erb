@@ -17,10 +17,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to 'Right Side Health', root_path, class: 'navbar-brand' %>
+        <%= link_to image_tag('logo.png'), root_path %>
+        <div class="welcome">
+          <div class="top">Welcome, Adam</div>
+          <div class="bottom">Sign Out</div>
+        </div>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
+          <li>
+          </li>
           <li class="<%= 'active' if params[:controller] == 'home' %>"><%= link_to 'Home', root_path %></li>
           <% if can? :manage,  current_practice %>
             <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Practice Administration', practice_path(current_practice) %></li>
