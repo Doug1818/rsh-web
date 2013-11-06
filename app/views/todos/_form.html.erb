@@ -1,0 +1,6 @@
+<%= simple_form_for @todo, html: { class: "form-vertical" } do |f| %>
+  <%= f.hidden_field :program_id %>
+  <%= f.input :body %>
+
+  <%= f.submit "Add To-Do", class: 'btn btn-primary' %>
+<% end %>

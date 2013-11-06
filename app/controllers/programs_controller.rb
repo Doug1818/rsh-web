@@ -4,6 +4,7 @@ class ProgramsController < ApplicationController
     @alerts = @program.alerts
     @reminders = @program.reminders
     @supporters = @program.supporters
+    @todos = @program.todos
   end
 
   def new

@@ -22,6 +22,10 @@
       <%= render @supporters %>
       <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
 
+      <hr/>
+      <%= render @todos %>
+      <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
+
     </div>
   </div>
 </div>
