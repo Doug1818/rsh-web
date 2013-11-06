@@ -8,6 +8,7 @@ RshWeb::Application.routes.draw do
   resources :programs
   resources :alerts
   resources :reminders
+  resources :supporters
 
   root 'home#index'
 end

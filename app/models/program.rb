@@ -5,6 +5,7 @@ class Program < ActiveRecord::Base
   belongs_to :coach
   has_many :alerts, dependent: :destroy
   has_many :reminders, dependent: :destroy
+  has_many :supporters, dependent: :destroy
 
   accepts_nested_attributes_for :user
 end

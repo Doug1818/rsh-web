@@ -1,0 +1,6 @@
+<%= simple_form_for @supporter, html: { class: "form-vertical" } do |f| %>
+  <%= f.hidden_field :program_id %>
+  <%= f.input :email %>
+
+  <%= f.submit "Add Supporter", class: 'btn btn-primary' %>
+<% end %>

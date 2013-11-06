@@ -3,6 +3,7 @@ class ProgramsController < ApplicationController
     @program = current_coach.programs.find(params[:id])
     @alerts = @program.alerts
     @reminders = @program.reminders
+    @supporters = @program.supporters
   end
 
   def new

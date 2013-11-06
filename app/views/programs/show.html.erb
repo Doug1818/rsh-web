@@ -17,6 +17,11 @@
       <hr/>
       <%= render @reminders %>
       <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
+
+      <hr/>
+      <%= render @supporters %>
+      <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
+
     </div>
   </div>
 </div>
