@@ -1,0 +1,8 @@
+<%= simple_form_for @reminder, html: { class: "form-vertical" } do |f| %>
+  <%= f.hidden_field :program_id %>
+  <%= f.input :frequency, as: :select, collection: Reminder::FREQUENCIES %>
+  <%= f.input :body %>
+  <%= f.input :send_at %>
+
+  <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
+<% end %>

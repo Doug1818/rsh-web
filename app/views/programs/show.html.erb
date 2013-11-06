@@ -13,6 +13,10 @@
     <div class="col-md-12">
       <%= render @alerts %>
       <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
+
+      <hr/>
+      <%= render @reminders %>
+      <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
     </div>
   </div>
 </div>
