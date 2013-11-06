@@ -1,0 +1,5 @@
+<div class="program-alert">
+  <%= Alert::ACTION_TYPES.keys[alert.action_type] %>
+  <%= alert.streak %>
+  <%= Alert::SEQUENCES.keys[alert.sequence] %>
+</div>

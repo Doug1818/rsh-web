@@ -1,14 +1,12 @@
 RshWeb::Application.routes.draw do
-
-  resources :programs
-
+  resources :practices
+  devise_for :coaches
+  resources :coaches
   devise_for :users
   resources :users
 
-  devise_for :coaches
-  resources :coaches
-
-  resources :practices
+  resources :programs
+  resources :alerts
 
   root 'home#index'
 end

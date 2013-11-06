@@ -8,7 +8,7 @@ class CoachesController < ApplicationController
 
   def show
     @coach = current_practice.coaches.find(params[:id])
-    @users = @coach.users
+    @programs = @coach.programs
   end
 
   def new
@@ -34,6 +34,4 @@ class CoachesController < ApplicationController
   def coach_params
     params.require(:coach).permit(:first_name, :last_name, :password, :password_confirmation, :email, :gender, :status)
   end
-
-
 end

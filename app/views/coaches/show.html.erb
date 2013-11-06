@@ -1,11 +1,19 @@
 <div class="container">
-  <div class="col-md-12">
-    <h2>I'm the coaches homepage</h2>
-    <% if @users.present? %>
-      <%= render @users %>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Your Patients</h2>
+    </div>
+    <div class="col-md-6">
+      View: All | Alerts | Active
+      <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary' %>
+
+    </div>
+  </div>
+  <div class="row">
+    <% if @programs.present? %>
+      <%= render @programs %>
     <% else %>
       <%= link_to 'Add your first patient', new_program_path %>
-
     <% end %>
   </div>
 </div>

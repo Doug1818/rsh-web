@@ -1,4 +1,9 @@
 class ProgramsController < ApplicationController
+  def show
+    @program = current_coach.programs.find(params[:id])
+    @alerts = @program.alerts
+  end
+
   def new
     @program = Program.new
     @program.build_user
@@ -21,6 +26,6 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params.require(:program).permit(:purpose, user_attributes: [:first_name, :last_name, :email])
+    params.require(:program).permit(:purpose, user_attributes: [:full_name, :email])
   end
 end
