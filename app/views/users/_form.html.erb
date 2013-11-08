@@ -1,0 +1,12 @@
+<%= simple_form_for @user, html: { class: "form-vertical" } do |f| %>
+  <%= f.input :email %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <%= f.input :gender, as: :select, collection: User::GENDERS %>
+  <%= f.input :status, as: :select, collection: User::STATUSES %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

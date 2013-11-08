@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   STATUSES = { invited: 0, inactive: 1, active: 2 }
+  GENDERS = ["Male", "Female", "I'd rather not say"]
 
   has_many :programs
   has_many :coaches, through: :programs

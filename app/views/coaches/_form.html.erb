@@ -4,7 +4,7 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :email %>
-    <%= f.input :gender, as: :select, collection: Application::GENDERS %>
+    <%= f.input :gender, as: :select, collection: Coach::GENDERS %>
     <%= f.input :status, as: :select, collection: Coach::STATUSES %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>

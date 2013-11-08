@@ -1,4 +1,11 @@
 class ProgramsController < ApplicationController
+  before_filter :authenticate_coach!
+  authorize_resource
+
+  def index
+    @programs = current_practice.programs
+  end
+
   def show
     @program = current_coach.programs.find(params[:id])
     @alerts = @program.alerts

@@ -1,4 +1,7 @@
 class SupportersController < ApplicationController
+  before_filter :authenticate_coach!
+  authorize_resource
+
   def new
     @program = current_coach.programs.find(params[:program_id])
     @supporter = @program.supporters.new
