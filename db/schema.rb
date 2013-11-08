@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106035226) do
+ActiveRecord::Schema.define(version: 20131108014921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20131106035226) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "invite_token"
   end
 
   create_table "reminders", force: true do |t|
@@ -104,7 +105,6 @@ ActiveRecord::Schema.define(version: 20131106035226) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "invite_token"
     t.integer  "status"
     t.string   "device_id"
     t.string   "gender"

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="col-md-12 center">
+    <h3 class="middle">Add a New Patient</h3>
+  </div>
+  <div class="col-md-12">
+    <p><%= @program.user.full_name %> has successfully been added!</p>
+    <p>Their sign in code is: <code><%= @program.invite_token %></code></p>
+    <p>They should receive an email shortly via email.</p>
+  </div>
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= link_to 'Build Their Plan', '#', class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>

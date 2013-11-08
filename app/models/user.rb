@@ -19,8 +19,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def display_name
-    "#{first_name} #{last_name}"
+  def full_name
+    if first_name.present? && last_name.present?
+      "#{first_name} #{last_name}"
+    end
   end
 
   def full_name=(full_name)
