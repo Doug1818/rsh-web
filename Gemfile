@@ -17,10 +17,10 @@ gem 'devise', '~> 3.1.0' #authentication
 gem 'kaminari' #pagination
 gem 'bootstrap-kaminari-views', git: 'git://github.com/jharbert/bootstrap-kaminari-views'
 gem 'cancan' #authorization
-# TO BE USED LATER IN THE PROJECT
-# gem 'carrierwave' #file upload
-# gem 'mini_magick' # rmagick replacement
-# gem "fog" # cloud services api
+gem 'carrierwave' #file upload
+gem 'mini_magick' # rmagick replacement
+gem "fog" # cloud services api
+gem 'unf' # fog string encoding
 gem 'stripe' #credit card processing
 
 group :doc do

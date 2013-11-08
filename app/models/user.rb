@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   STATUSES = { invited: 0, inactive: 1, active: 2 }
   GENDERS = ["Male", "Female", "I'd rather not say"]
 
+  before_create :set_invited_status
+
   has_many :programs
   has_many :coaches, through: :programs
 
@@ -9,6 +11,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  mount_uploader :avatar, AvatarUploader
 
   attr_reader :full_name
 
@@ -30,5 +34,9 @@ class User < ActiveRecord::Base
     if full_name.present?
       (self.first_name, self.last_name) = full_name.split(" ")
     end
+  end
+
+  def set_invited_status
+    self.status = STATUSES[:invited]
   end
 end

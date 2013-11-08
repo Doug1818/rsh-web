@@ -9,6 +9,8 @@ class Coach < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  mount_uploader :avatar, AvatarUploader
+
   def full_name
     if first_name.present? && last_name.present?
       "#{first_name} #{last_name}"

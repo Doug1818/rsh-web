@@ -8,5 +8,18 @@
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
 
+  <label>Avatar</label>
+  <%= f.file_field :avatar %>
+
+
+  <% if @user.avatar.present? %>
+    <br/>
+    <%= image_tag(@user.avatar.small.url) if @user.avatar? %>
+
+    <label>
+      <%= f.check_box :remove_avatar %> Remove avatar
+    </label>
+  <% end %>
+  <p class="clear"></p><br/>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>
