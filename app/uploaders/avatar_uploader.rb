@@ -4,6 +4,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   storage :fog
 
+  def default_url
+    ActionController::Base.helpers.asset_path("default-avatar.png")
+  end
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
@@ -25,10 +29,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   version :medium do
-    process resize_to_fill: [80, 80, gravity='NorthWest']
+    process resize_to_fill: [123, 123, gravity='NorthWest']
   end
 
   version :large do
-    process resize_to_fill: [200, 200, gravity='NorthWest']
+    process resize_to_fill: [201, 201, gravity='NorthWest']
   end
 end
