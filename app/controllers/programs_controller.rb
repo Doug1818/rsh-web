@@ -45,6 +45,7 @@ class ProgramsController < ApplicationController
     @program = current_practice.programs.find(params[:id])
     respond_to do |format|
       if @program.update_attributes(program_params)
+        @program.small_steps.build
         format.html { render "new_small_steps" }
       else
         format.html { render action: "new_big_steps" }
