@@ -1,4 +1,7 @@
 <div class="nested-fields">
   <%= f.input_field :name %>
-  <%= f.input_field :length %>
+  towards
+  <%= f.input_field :big_step, as: :select, collection: BigStep.where(program_id: @program.id).order(:name) %>
+  done
+  <%= f.input_field :frequency %>
 </div>

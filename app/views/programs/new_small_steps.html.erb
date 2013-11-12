@@ -3,6 +3,7 @@
     <h3 class="middle">Add a New Patient</h3>
   </div>
   <div class="col-md-12">
+    <h3>What small step should they focus on first?</h3>
     <%= simple_form_for @program, url: url_for(:action => 'update_small_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
       <div id="program_small_steps">
         <%= f.simple_fields_for :small_steps do |small_step| %>
