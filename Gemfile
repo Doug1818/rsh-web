@@ -22,6 +22,7 @@ gem 'mini_magick' # rmagick replacement
 gem "fog" # cloud services api
 gem 'unf' # fog string encoding
 gem 'stripe' #credit card processing
+gem 'cocoon'
 
 group :doc do
   gem 'sdoc', require: false

@@ -34,7 +34,31 @@ class ProgramsController < ApplicationController
     end
   end
 
+
+  # Non restful methods to accommodate the final two steps of creating a new program
+  def new_big_steps
+    @program = current_practice.programs.find(params[:id])
+    @program.big_steps.build
+  end
+
+  def update_big_steps
+    @program = current_practice.programs.find(params[:id])
+    respond_to do |format|
+      if @program.update_attributes(program_params)
+        format.html { render "new_small_steps" }
+      else
+        format.html { render action: "new_big_steps" }
+      end
+    end
+  end
+
+  def update_small_steps
+
+  end
+
+
+
   def program_params
-    params.require(:program).permit(:purpose, user_attributes: [:full_name, :email])
+    params.require(:program).permit(:purpose, user_attributes: [:full_name, :email], big_steps_attributes: [:name])
   end
 end

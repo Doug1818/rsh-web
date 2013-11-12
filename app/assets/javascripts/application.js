@@ -19,5 +19,6 @@
 //= require jquery.ui.effect
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require cocoon
 //= require_tree .
 //= require turbolinks

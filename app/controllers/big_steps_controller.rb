@@ -1,0 +1,2 @@
+class BigStepsController < ApplicationController
+end

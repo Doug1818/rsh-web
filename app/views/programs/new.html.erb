@@ -3,6 +3,15 @@
     <h3 class="middle">Add a New Patient</h3>
   </div>
   <div class="col-md-12">
-    <%= render 'form' %>
+    <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
+      <%= f.fields_for :user do |f| %>
+        <%= f.input :full_name %>
+        <%= f.input :email %>
+      <% end %>
+
+      <%= f.input :purpose %>
+
+      <%= f.submit 'Add Patient', class: 'btn btn-primary' %>
+    <% end %>
   </div>
 </div>

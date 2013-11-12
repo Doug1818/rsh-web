@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108031745) do
+ActiveRecord::Schema.define(version: 20131112002221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20131108031745) do
     t.integer  "action_type"
     t.integer  "streak"
     t.integer  "sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "big_steps", force: true do |t|
+    t.integer  "program_id"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,6 +89,24 @@ ActiveRecord::Schema.define(version: 20131108031745) do
     t.text     "body"
     t.integer  "frequency"
     t.datetime "send_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "small_steps", force: true do |t|
+    t.integer  "big_step_id"
+    t.string   "name"
+    t.integer  "priority"
+    t.integer  "length"
+    t.integer  "frequency"
+    t.integer  "times_per_week"
+    t.boolean  "sunday"
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
