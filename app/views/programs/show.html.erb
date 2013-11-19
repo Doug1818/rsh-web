@@ -7,24 +7,43 @@
       <%= @program.user.full_name %><br/>
       <%= @program.purpose %>
       <hr/>
+      View:
+      <a href="#steps" data-toggle="tab">Steps</a>
+      <a href="#advanced-settings" data-toggle="tab">Advanced Settings</a>
+
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <%= render @alerts %>
-      <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
+    <div class="col-md-12 tab-content">
 
-      <hr/>
-      <%= render @reminders %>
-      <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
+      <!-- this area needs to be scrollable -->
 
-      <hr/>
-      <%= render @supporters %>
-      <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
+      <div class="tab-pane active" id="steps">
+        <br/><br/>
+        Steps here
 
-      <hr/>
-      <%= render @todos %>
-      <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
+
+      </div>
+
+
+      <div class="tab-pane" id="advanced-settings">
+        <%= render @alerts %>
+        <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
+
+        <hr/>
+        <%= render @reminders %>
+        <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
+
+        <hr/>
+        <%= render @supporters %>
+        <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
+
+        <hr/>
+        <%= render @todos %>
+        <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
+      </div>
+
+      <!-- end scrollable area -->
 
     </div>
   </div>
