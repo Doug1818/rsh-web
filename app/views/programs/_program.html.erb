@@ -1,6 +1,6 @@
 <div class="col-md-3">
   <div class="well patient">
-    <img src="http://placehold.it/123x123" width="123" height="123" alt="patient avatar" />
+    <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "patient avatar") %>
     <h3><%= link_to program.user.full_name, program_path(program) %></h3>
   </div>
 </div>
