@@ -4,9 +4,17 @@
       <h2>Your Patients</h2>
     </div>
     <div class="col-md-6">
-      View: All | Alerts | Active
-      <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary' %>
-
+      <div class="col-md-7">
+        <ul class="list-inline view">
+          <li>View:</li>
+          <li><a href="#">All</a></li>
+          <li><a href="#">Alerts</a></li>
+          <li><a href="#">Active</a></li>
+        </ul>
+      </div>
+      <div class="col-md-5">
+        <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary' %>
+      </div>
     </div>
   </div>
   <div class="row">
