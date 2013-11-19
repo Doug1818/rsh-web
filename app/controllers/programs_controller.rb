@@ -58,12 +58,17 @@ class ProgramsController < ApplicationController
   end
 
   def update_small_steps
-
+    @program = current_practice.programs.find(params[:id])
+    respond_to do |format|
+      if @program.update_attributes(program_params)
+        format.html { redirect_to program_path(@program) }
+      else
+        format.html { render action: "new_small_steps" }
+      end
+    end
   end
 
-
-
   def program_params
-    params.require(:program).permit(:purpose, user_attributes: [:full_name, :email], big_steps_attributes: [:name])
+    params.require(:program).permit(:purpose, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :_destroy], small_steps_attributes: [:name, :big_step_id, :week_number, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id])
   end
 end

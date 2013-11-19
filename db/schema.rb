@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112002221) do
+ActiveRecord::Schema.define(version: 20131119031300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,8 +96,7 @@ ActiveRecord::Schema.define(version: 20131112002221) do
   create_table "small_steps", force: true do |t|
     t.integer  "big_step_id"
     t.string   "name"
-    t.integer  "priority"
-    t.integer  "length"
+    t.integer  "week_number"
     t.integer  "frequency"
     t.integer  "times_per_week"
     t.boolean  "sunday"
@@ -109,6 +108,7 @@ ActiveRecord::Schema.define(version: 20131112002221) do
     t.boolean  "saturday"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "program_id"
   end
 
   create_table "supporters", force: true do |t|

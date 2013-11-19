@@ -7,7 +7,8 @@ class Program < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
   belongs_to :coach
   has_many :big_steps, dependent: :destroy
-  has_many :small_steps, through: :big_steps, dependent: :destroy
+  # has_many :small_steps, through: :big_steps, dependent: :destroy
+  has_many :small_steps, dependent: :destroy
   has_many :alerts, dependent: :destroy
   has_many :reminders, dependent: :destroy
   has_many :supporters, dependent: :destroy

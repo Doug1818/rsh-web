@@ -10,7 +10,8 @@
           <%= render 'small_step_fields', f: small_step %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association 'add small step', f, :small_steps %>
+          <br/>
+          <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :small_steps %>
         </div>
       </div>
 

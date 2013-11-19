@@ -9,7 +9,8 @@
           <%= render 'big_step_fields', f: big_step %>
         <% end %>
         <div class="links">
-          <%= link_to_add_association 'add big step', f, :big_steps %>
+          <br/>
+          <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :big_steps %>
         </div>
       </div>
 
