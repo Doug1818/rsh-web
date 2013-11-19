@@ -8,6 +8,10 @@ class ProgramsController < ApplicationController
 
   def show
     @program = current_coach.programs.find(params[:id])
+
+    @small_steps = @program.small_steps.order(week_number: :asc)
+    @small_step_weeks = @small_steps.group_by { |t| t.week_number }
+
     @alerts = @program.alerts
     @reminders = @program.reminders
     @supporters = @program.supporters

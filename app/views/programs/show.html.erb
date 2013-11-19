@@ -19,10 +19,10 @@
       <!-- this area needs to be scrollable -->
 
       <div class="tab-pane active" id="steps">
-        <br/><br/>
-        Steps here
-
-
+        <%= render 'small_steps/list', collection: @small_step_weeks %>
+        <%#= @small_step_weeks %>
+        <%#= render partial: '/small_steps/week', collection: @small_step_weeks %>
+        <%#= render @small_steps %>
       </div>
 
 
