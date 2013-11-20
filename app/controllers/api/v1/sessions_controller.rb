@@ -10,8 +10,7 @@ class Api::V1::SessionsController < Api::V1::ApplicationController
         data: { user: current_user, program: @program }
       }
     else
-      puts "FAILED TO FIND THE TOKEN"
-      render :json=> {:success=>false}
+      render json: { success: false }
     end
   end
 end
