@@ -1,7 +1,7 @@
 class Program < ActiveRecord::Base
   STATUSES = { inactive: 0, active: 1 }
 
-  before_create :create_invite_token
+  before_save :ensure_authentication_token
   after_create :send_invitation
 
   belongs_to :user, dependent: :destroy
@@ -18,9 +18,19 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :big_steps, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :small_steps, :reject_if => :all_blank, :allow_destroy => true
 
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
 
-  def create_invite_token
-    self.invite_token = Security.generate_token
+  private
+
+  def generate_authentication_token
+    loop do
+      token = SecureRandom.base64(4).tr('+/=', '0aZ')
+      break token unless Program.where(authentication_token: token).first
+    end
   end
 
   def send_invitation

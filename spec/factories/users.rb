@@ -5,7 +5,6 @@ FactoryGirl.define do
     first_name "MyString"
     last_name "MyString"
     email "MyString"
-    invite_token "MyString"
     status 1
     device_id "MyString"
     gender "MyString"

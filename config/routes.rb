@@ -1,4 +1,12 @@
 RshWeb::Application.routes.draw do
+
+  namespace :api do
+    namespace :v1 do
+      resources :sessions
+      resources :small_steps
+    end
+  end
+
   resources :practices
   devise_for :coaches
   resources :coaches

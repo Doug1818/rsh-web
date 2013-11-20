@@ -7,6 +7,7 @@ FactoryGirl.define do
     state_date "2013-11-04 20:42:11"
     purpose "MyText"
     goal "MyText"
+    authentication_token "MyText"
     status 1
   end
 end

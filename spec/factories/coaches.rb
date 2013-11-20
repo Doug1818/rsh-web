@@ -8,6 +8,7 @@ FactoryGirl.define do
     email "MyString"
     gender "MyString"
     avatar "MyString"
+    invite_token "MyString"
     status 1
   end
 end
