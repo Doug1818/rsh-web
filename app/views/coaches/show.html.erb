@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-5 col-sm-4">
       <h2>Your Patients</h2>
     </div>
-    <div class="col-md-6">
-      <div class="col-md-7">
+    <div class="col-md-7 col-sm-8">
+      <div class="col-md-7 col-sm-6">
         <ul class="list-inline view">
           <li>View:</li>
           <li><a href="#">All</a></li>
           <li><a href="#">Alerts</a></li>
-          <li><a href="#">Active</a></li>
+          <li><a href="#" class="active">Active</a></li>
         </ul>
       </div>
-      <div class="col-md-5">
-        <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary' %>
+      <div class="col-md-5 col-sm-6">
+        <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary add-patient' %>
       </div>
     </div>
   </div>
