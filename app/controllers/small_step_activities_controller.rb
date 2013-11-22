@@ -1,0 +1,2 @@
+class SmallStepActivitiesController < ApplicationController
+end

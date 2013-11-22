@@ -9,6 +9,7 @@ class Program < ActiveRecord::Base
   has_many :big_steps, dependent: :destroy
   # has_many :small_steps, through: :big_steps, dependent: :destroy
   has_many :small_steps, dependent: :destroy
+  has_many :small_step_activities, through: :small_steps
   has_many :alerts, dependent: :destroy
   has_many :reminders, dependent: :destroy
   has_many :supporters, dependent: :destroy

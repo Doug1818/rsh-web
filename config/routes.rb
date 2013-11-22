@@ -1,5 +1,4 @@
 RshWeb::Application.routes.draw do
-
   namespace :api do
     namespace :v1 do
       resources :sessions
@@ -19,8 +18,9 @@ RshWeb::Application.routes.draw do
   get 'programs/new_small_steps/:id', to: 'programs#new_small_steps', as: :new_small_steps
   patch 'programs/update_small_steps/:id', to: 'programs#update_small_steps', as: :update_small_steps
 
-  resources :small_steps
   resources :big_steps
+  resources :small_steps
+  resources :small_step_activities
   resources :alerts
   resources :reminders
   resources :supporters

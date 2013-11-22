@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120210746) do
+ActiveRecord::Schema.define(version: 20131122043532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20131120210746) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "authentication_token"
+    t.date     "start_date"
   end
 
   create_table "reminders", force: true do |t|
@@ -89,6 +90,15 @@ ActiveRecord::Schema.define(version: 20131120210746) do
     t.text     "body"
     t.integer  "frequency"
     t.datetime "send_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "small_step_activities", force: true do |t|
+    t.integer  "small_step_id"
+    t.integer  "status"
+    t.integer  "excuse"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
