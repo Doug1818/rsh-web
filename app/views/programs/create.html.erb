@@ -1,15 +1,31 @@
 <div class="container">
-  <div class="col-md-12 center">
-    <h3 class="middle">Add a New Patient</h3>
+  <div class="row">
+    <div class="col-md-12 center">
+      <h3 class="middle">Add a New Patient</h3>
+    </div>
   </div>
-  <div class="col-md-12">
-    <p><%= @program.user.full_name %> has successfully been added!</p>
-    <p>Their sign in code is: <code><%= @program.authentication_token %></code></p>
-    <p>They should receive the code shortly via email.</p>
+  <div class="row">
+    <div class="col-md-12 center">
+      <ol class="breadcrumb">
+        <li><a href="#"></a></li>
+        <li class="active"></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ol>
+    </div>
   </div>
-  <div class="col-md-12">
-    <div class="pull-right">
-      <%= link_to 'Build Their Plan', new_big_steps_path(@program), class: 'btn btn-primary' %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <p><b><%= @program.user.full_name %> has successfully been added!</b></p>
+        <p>Their sign in code is: <span class="code"><%= @program.authentication_token %></span></p>
+        <p>They should receive the code shortly via email.</p>
+        <div class="row">
+          <div class="pull-right">
+            <%= link_to 'Build Their Plan', new_big_steps_path(@program), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

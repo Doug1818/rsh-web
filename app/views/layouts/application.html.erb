@@ -26,24 +26,23 @@
             <h4>Welcome, Adam</h4>
           </div>
           <div class="bottom">
-            <p><%= link_to 'Sign Out', destroy_coach_session_path, method: :delete %></p>
+            <p>
+              <% if current_coach %>
+                <%= link_to 'Sign out', destroy_coach_session_path, method: :delete %>
+              <% else %>
+                <%= link_to 'Sign in for coaches', new_coach_session_path %></li>
+              <% end %>
+            </p>
           </div>
         </div>
         <% end %>
-      </div>
-      <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <% if can? :manage,  current_practice %>
-            <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Practice Administration', practice_path(current_practice) %></li>
+            <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Admin', practice_path(current_practice) %></li>
           <% end %>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <% if current_coach %>
-            <li><%= link_to 'Sign out', destroy_coach_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to 'Sign in for coaches', new_coach_session_path %></li>
-          <% end %>
-        </ul>
+      </div>
+      <div class="navbar-collapse collapse">
       </div>
       <div class="navbar-header col-lg-4 col-md-5 col-sm-6">
         <form class="navbar-form navbar-right" role="search">

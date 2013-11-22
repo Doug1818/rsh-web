@@ -54,3 +54,19 @@
     }
   }
 }
+
+#new_program {
+  input[type=text], input[type=email], textarea {
+    background: #f1f1f2;
+    color: #6d6e71;
+    font-size: 18px;
+  }
+  input[type=text], input[type=email] {
+    height: 46px;
+  }
+}
+
+.code {
+  padding: 5px 12px;
+  background: #f1f1f2;
+}

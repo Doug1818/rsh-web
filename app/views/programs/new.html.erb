@@ -1,17 +1,35 @@
 <div class="container">
-  <div class="col-md-12 center">
-    <h3 class="middle">Add a New Patient</h3>
+  <div class="row">
+    <div class="col-md-12 center">
+      <h3 class="middle">Add a New Patient</h3>
+    </div>
   </div>
-  <div class="col-md-12">
-    <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
-      <%= f.fields_for :user do |f| %>
-        <%= f.input :full_name %>
-        <%= f.input :email %>
-      <% end %>
+  <div class="row">
+    <div class="col-md-12 center">
+      <ol class="breadcrumb">
+        <li class="active"></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well">
+        <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
+          <%= f.fields_for :user do |f| %>
+            <%= f.input :full_name, label: false, placeholder: 'Name' %>
+            <%= f.input :email, label: false, placeholder: 'Email Address' %>
+          <% end %>
 
-      <%= f.input :purpose %>
-
-      <%= f.submit 'Add Patient', class: 'btn btn-primary' %>
-    <% end %>
+          <%= f.input :purpose, label: false, placeholder: 'Why are they here?' %>
+        <div class="row">
+          <div class="pull-right">
+          <%= f.submit 'Add Patient', class: 'btn btn-primary' %>
+          </div>
+        </div>
+        <% end %>
+    </div>
   </div>
 </div>
