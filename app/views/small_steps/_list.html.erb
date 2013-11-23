@@ -1,4 +1,10 @@
 <% @small_step_weeks.each do |week, small_steps| %>
-  Week <%= week %>:<br/>
-  <%= render small_steps %>
+  <div class="row">
+    <div class="col-md-1">
+      Week <%= week %>:
+    </div>
+    <div class="col-md-11">
+      <%= render small_steps %>
+    </div>
+  </div>
 <% end %>
