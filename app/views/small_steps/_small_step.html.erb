@@ -1,3 +1,16 @@
-<%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
-  <%= f.input_field :big_step, as: :select, collection: small_step.program.big_steps, default: nil %>
+<div class="small-step">
+  <div class="big-step-name"><%= small_step.big_step.name %></div>
+  <div class="colon">:</div>
+  <div class="small-step-name"><%= small_step.name %></div>
+  <div class="frequency"><%= display_frequency(small_step) %></div>
+  <div class="clearfix"></div>
+</div>
+
+
+
+
+<% if false %>
+  <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
+    <%= f.input_field :big_step, as: :select, collection: small_step.program.big_steps, default: nil %>
+  <% end %>
 <% end %>

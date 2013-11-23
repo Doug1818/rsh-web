@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122043532) do
+ActiveRecord::Schema.define(version: 20131123205301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer  "check_in_id"
+    t.integer  "small_step_id"
+    t.integer  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "alerts", force: true do |t|
     t.integer  "program_id"
@@ -28,6 +36,18 @@ ActiveRecord::Schema.define(version: 20131122043532) do
   create_table "big_steps", force: true do |t|
     t.integer  "program_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "check_in_excuses", id: false, force: true do |t|
+    t.integer "check_in_id", null: false
+    t.integer "excuse_id",   null: false
+  end
+
+  create_table "check_ins", force: true do |t|
+    t.integer  "small_step_id"
+    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,6 +77,13 @@ ActiveRecord::Schema.define(version: 20131122043532) do
 
   add_index "coaches", ["email"], name: "index_coaches_on_email", unique: true, using: :btree
   add_index "coaches", ["reset_password_token"], name: "index_coaches_on_reset_password_token", unique: true, using: :btree
+
+  create_table "excuses", force: true do |t|
+    t.integer  "practice_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "practices", force: true do |t|
     t.string   "name"
@@ -90,15 +117,6 @@ ActiveRecord::Schema.define(version: 20131122043532) do
     t.text     "body"
     t.integer  "frequency"
     t.datetime "send_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "small_step_activities", force: true do |t|
-    t.integer  "small_step_id"
-    t.integer  "status"
-    t.integer  "excuse"
-    t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

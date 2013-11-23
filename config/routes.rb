@@ -20,7 +20,9 @@ RshWeb::Application.routes.draw do
 
   resources :big_steps
   resources :small_steps
-  resources :small_step_activities
+  resources :check_ins
+  resources :activities
+  resources :excuses
   resources :alerts
   resources :reminders
   resources :supporters
