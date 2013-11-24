@@ -16,7 +16,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="well">
+      <div class="well create">
         <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
           <%= f.fields_for :user do |f| %>
             <%= f.input :full_name, label: false, placeholder: 'Name' %>
