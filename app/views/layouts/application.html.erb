@@ -11,10 +11,12 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
-      <div class="navbar-header col-lg-8 col-md-7 col-sm-6">
+      <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -36,24 +38,26 @@
           </div>
         </div>
         <% end %>
+      </div>
+      <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <% if can? :manage,  current_practice %>
             <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Admin', practice_path(current_practice) %></li>
           <% end %>
         </ul>
-      </div>
-      <div class="navbar-collapse collapse">
-      </div>
-      <div class="navbar-header col-lg-4 col-md-5 col-sm-6">
-        <form class="navbar-form navbar-right" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="find a patient">
-          </div>
-          <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
-        </form>
-      </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="find a patient">
+              </div>
+              <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
+            </form>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
-  </nav>
+  </div>
 
   <%= render '/common/notification' %>
 
