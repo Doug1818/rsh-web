@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Listing Excuses (<%= @excuses.size %>)</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <% if @excuses.present? %>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @excuses.each do |excuse| %>
+            <tr>
+              <td><%= excuse.name %></td>
+              <td>
+                <%= link_to 'delete', excuse, data: { confirm: "Are you sure?" }, method: :delete %>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%#= paginate @users %>
+      <% else %>
+        <br/>
+        <p>No excuses have been created yet.</p>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+      <h2>Create a new excuse</h2>
+      <%= render 'form' %>
+      <hr/>
+      <h2>Or may we suggest...</h2>
+      <% Excuse::GLOBAL_EXCUSES.each do |excuse| %>
+        <% unless @excuses.pluck(:name).include?(excuse) %>
+
+          <div>
+            <%= excuse %>
+            <%= link_to excuses_path(excuse: { name: excuse }), method: :post do %>
+              <span class='glyphicon glyphicon-plus-sign'></span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+

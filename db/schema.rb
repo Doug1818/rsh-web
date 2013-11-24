@@ -40,16 +40,16 @@ ActiveRecord::Schema.define(version: 20131123205301) do
     t.datetime "updated_at"
   end
 
-  create_table "check_in_excuses", id: false, force: true do |t|
-    t.integer "check_in_id", null: false
-    t.integer "excuse_id",   null: false
-  end
-
   create_table "check_ins", force: true do |t|
     t.integer  "small_step_id"
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "check_ins_excuses", id: false, force: true do |t|
+    t.integer "check_in_id", null: false
+    t.integer "excuse_id",   null: false
   end
 
   create_table "coaches", force: true do |t|

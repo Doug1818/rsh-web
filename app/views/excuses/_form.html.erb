@@ -1,0 +1,5 @@
+<% @excuse ||= Excuse.new %>
+<%= simple_form_for @excuse, html: { class: "form-vertical" } do |f| %>
+  <%= f.input_field :name, placeholder: 'excuse label', label: false %>
+  <%= f.submit "Add", class: 'btn btn-primary' %>
+<% end %>
