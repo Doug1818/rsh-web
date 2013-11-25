@@ -15,20 +15,30 @@
     </div>
   </div>
   <div class="col-md-12">
-    <%= simple_form_for @program, url: url_for(:action => 'update_big_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
-      <div id="program_big_steps">
-        <%= f.simple_fields_for :big_steps do |big_step| %>
-          <%= render 'big_step_fields', f: big_step %>
-        <% end %>
-        <div class="links">
-          <br/>
-          <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :big_steps %>
-        </div>
+    <div class="well create">
+      <div class="col-md-12">
+        <p><%= @program.user.full_name %> is here to ..........
+        <br />
+        What Big Steps should he take?</p>
       </div>
+      <%= simple_form_for @program, url: url_for(:action => 'update_big_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
+        <div id="program_big_steps">
+          <%= f.simple_fields_for :big_steps do |big_step| %>
+            <%= render 'big_step_fields', f: big_step %>
+          <% end %>
+          <div class="links">
+            <br/>
+            <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :big_steps %>
+          </div>
+        </div>
 
-      <br/><br/>
-
-      <%= f.submit "Next", class: 'btn btn-primary' %>
-    <% end %>
+        <br/><br/>
+        <div class="row">
+          <div class="pull-right">
+            <%= f.submit "Next", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

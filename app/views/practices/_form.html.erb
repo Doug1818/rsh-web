@@ -1,31 +1,29 @@
 <div class="payment-errors alert alert-error"></div>
 
 <%= simple_form_for @practice, html: { class: "form-vertical" } do |f| %>
-  <lengend>Your practice</lengend>
-  <%= f.input :name %>
+  <legend>Your practice</legend>
+  <%= f.input :name, label: false, placeholder: 'Name' %>
 
-  <lengend>Your account</lengend>
+  <legend>Your account</legend>
   <%= f.fields_for :coaches do |f| %>
-    <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
+    <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
+    <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
   <% end %>
 
   <legend>Billing Info</legend>
   <div class="form-group string required">
-    <label class="string optional control-label">Card Number</label>
-    <input class="card-number string optional form-control" maxlength="255" size="255" autocomplete="off" type="text">
+    <input class="card-number string optional form-control" maxlength="16" size="255" autocomplete="off" type="text" pattern="[0-9]{13,16}" placeholder="Card Number" />
   </div>
   <div class="form-group string required">
-    <label class="string optional control-label">CVC</label>
-    <input class="card-cvc string optional form-control" maxlength="255" size="255" autocomplete="off" type="text">
+    <input class="card-cvc string optional form-control" maxlength="4" size="255" autocomplete="off" type="text" pattern="[0-9]{3,4}" placeholder="CVC" />
   </div>
   <div class="form-group string required">
     <label class="string optional control-label">Expiration (MM/YYYY)</label>
     <br/>
-    <input class="card-expiry-month string optional form-control" maxlength="2" size="2" autocomplete="off" type="text">
+    <input class="card-expiry-month string optional form-control" maxlength="2" size="2" autocomplete="off" type="text" pattern="((0[1-9])|(1[0-2]))" placeholder="MM" />
     <span> / </span>
-    <input class="card-expiry-year string optional form-control" maxlength="4" size="4" autocomplete="off" type="text">
+    <input class="card-expiry-year string optional form-control" maxlength="4" size="4" autocomplete="off" type="text" pattern="(19\d\d|20\d\d)" placeholder="YYYY" />
   </div>
 
   <%= f.submit class: 'btn btn-primary' %>

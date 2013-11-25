@@ -11,4 +11,8 @@
  *= require twitter/bootstrap
  *= require_self
  *= require_tree .
+ *= require select2
+ *= require select2-bootstrap
+ *= require default.date
+ *= require classic.date
  */
