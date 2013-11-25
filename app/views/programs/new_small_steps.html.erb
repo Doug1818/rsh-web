@@ -27,8 +27,7 @@
         </div>
       </div>
 
-      <br/>
-      <input id="start_date" class="datepicker" type="text" placeholder="Start Date">
+      <%= f.input :start_date, as: :string, input_html: { class: "datepicker" } %>
 
       <%= f.submit "Next", class: 'btn btn-primary' %>
     <% end %>
