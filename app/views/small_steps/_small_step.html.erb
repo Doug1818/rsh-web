@@ -4,7 +4,13 @@
     <div class="colon">:</div>
     <div class="small-step-name"><%= small_step.name %></div>
     <div class="frequency"><%= display_frequency(small_step) %></div>
+    <div class="links">
+
+      <%= link_to 'edit', '#', class: 'small-step-edit-link' %>
+
+    </div>
     <div class="clearfix"></div>
+
   </div>
   <div class="form">
     <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
@@ -12,6 +18,9 @@
       <%= f.input_field :big_step, as: :select, collection: small_step.program.big_steps, default: nil %>
       done
       <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
+
+      <%= f.submit "Update", class: 'btn btn-default' %>
+      <%= link_to 'Cancel', '#', class: 'btn btn-default small-step-cancel-button' %>
 
       <div class="extra-fields">
         <div class="times-per-week">
@@ -29,12 +38,8 @@
           <%= f.input_field :saturday %> Saturday
         </div>
       </div>
+      <script>displayFrequencyFields($(".small-step-frequency").last());</script>
 
-      <script>
-
-        console.log($(".small-step-frequency").last());
-        displayFrequencyFields($(".small-step-frequency").last());
-      </script>
     <% end %>
   </div>
 </div>
