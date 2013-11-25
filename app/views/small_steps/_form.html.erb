@@ -1,0 +1,26 @@
+<%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
+  <%= f.input_field :name %> towards
+  <%= f.input_field :big_step, as: :select, collection: small_step.program.big_steps, default: nil %>
+  done
+  <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
+
+  <%= f.submit "Update", class: 'btn btn-default' %>
+  <%= link_to 'Cancel', '#', class: 'btn btn-default small-step-cancel-button' %>
+
+  <div class="extra-fields">
+    <div class="times-per-week">
+      <p>How many times per week?</p>
+      <%= f.input_field :times_per_week, as: :select, collection: 1..7, default: nil %>
+    </div>
+    <div class="specifc-days-per-week">
+      <p>Which days of the week?</p>
+      <%= f.input_field :sunday %> Sunday
+      <%= f.input_field :monday %> Monday
+      <%= f.input_field :tuesday %> Tuesday
+      <%= f.input_field :wednesday %> Wednesday
+      <%= f.input_field :thursday %> Thursday
+      <%= f.input_field :friday %> Friday
+      <%= f.input_field :saturday %> Saturday
+    </div>
+  </div>
+<% end %>

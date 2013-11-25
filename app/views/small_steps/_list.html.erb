@@ -5,6 +5,14 @@
     </div>
     <div class="col-md-11">
       <%= render small_steps %>
+      + small step
+
+      <div class="small-step">
+        <div class="form">
+          <%= render partial: 'small_steps/form', locals: { small_step: SmallStep.new(program: @program) } %>
+        </div>
+      </div>
+
     </div>
   </div>
 <% end %>
