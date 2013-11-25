@@ -993,6 +993,3 @@ Picker.extend( 'pickadate', DatePicker )
 
 
 }));
-
-
-
