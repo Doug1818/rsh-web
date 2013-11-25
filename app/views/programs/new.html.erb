@@ -23,7 +23,7 @@
             <%= f.input :email, label: false, placeholder: 'Email Address' %>
           <% end %>
 
-          <%= f.input :purpose, label: false, placeholder: 'Why are they here?' %>
+          <%= f.input :purpose, :input_html => { :rows => 6 }, label: false, placeholder: 'Why are they here?' %>
         <div class="row">
           <div class="pull-right">
           <%= f.submit 'Add Patient', class: 'btn btn-primary' %>

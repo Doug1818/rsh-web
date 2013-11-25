@@ -22,3 +22,6 @@
 //= require cocoon
 //= require_tree .
 //= require turbolinks
+//= require select2
+//= require picker.date
+//= require legacy

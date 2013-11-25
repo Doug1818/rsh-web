@@ -1,8 +1,13 @@
 .big-step-fields {
+  position: relative;
   padding: 10px 0;
-
   input, select {
     display: inline-block;
-    width: 50%;
+    width: 100%;
+  }
+  .remove_fields {
+    position: absolute;
+    top: 19px;
+    right: 14px;
   }
 }

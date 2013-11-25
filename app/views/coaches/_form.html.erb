@@ -1,13 +1,13 @@
 <%= simple_form_for @coach, html: { class: "form-vertical" } do |f| %>
   <%= f.input :email %>
   <% unless @coach.new_record? %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-    <%= f.input :gender, as: :select, collection: Coach::GENDERS %>
-    <%= f.input :status, as: :select, collection: Coach::STATUSES %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :first_name, label: false, placeholder: 'First Name' %>
+    <%= f.input :last_name, label: false, placeholder: 'Last Name' %>
+    <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
+    <%= f.input :gender, as: :select, collection: Coach::GENDERS, label: false, placeholder: 'Gender' %>
+    <%= f.input :status, as: :select, collection: Coach::STATUSES, label: false, placeholder: 'Status' %>
+    <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
+    <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
   <% end %>
 
   <% if @coach.new_record? %>
