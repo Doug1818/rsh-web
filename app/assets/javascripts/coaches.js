@@ -1,6 +1,6 @@
-$(document).ready(function() {
+jQuery(document).ready(function() {
 
-  $("#coach_gender, #coach_status").select2({
+  jQuery("#coach_gender, #coach_status").select2({
     minimumResultsForSearch: -1
   });
 

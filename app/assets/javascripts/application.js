@@ -25,3 +25,11 @@
 //= require select2
 //= require picker.date
 //= require legacy
+
+jQuery.noConflict();
+
+jQuery(document).ready(function($) {
+
+  $('.datepicker').pickadate();
+
+}); /* end jQuery(document).ready(function($) {} ); */
