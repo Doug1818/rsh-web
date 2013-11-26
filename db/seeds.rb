@@ -117,12 +117,14 @@ BigStep.all.each do |big_step|
     else
     end
     
+    week_number = i > 2 ? 2 : 1 # Put the first two small steps in week 1, the remaining in week 2
+
     small_step = {
       name: small_step_name,
-      week_number: i,
+      week_number: week_number,
       frequency: SmallStep::FREQUENCIES[frequency],
       program_id: big_step.program.id,
-      days: (1..60).to_a.sample
+      days: (1..7).to_a.sample
     }
 
     # Determine which other columns to set based on the frequency
@@ -141,27 +143,32 @@ BigStep.all.each do |big_step|
   end
 end
 
-# Check-ins, Excuses, and Activities
-1.upto(150) do |i|
-  small_step_id = SmallStep.pluck(:id).sample
-  comments = Faker::Lorem.paragraph
-  check_in = CheckIn.create({ small_step_id: small_step_id, comments: comments })
-
-  # Give every 3 check ins an activity
-  if i % 3 == 0
-    activity = Activity.create({check_in_id: check_in.id, small_step_id: small_step_id, status: [0,1].sample })
+# Check-ins and Activities
+SmallStep.all.each_with_index do |small_step, index|
+  # Check in the first small step of the first week
+  if index % 10 == 0 and small_step.week_number == 1
+    comments = Faker::Lorem.paragraph
+    check_in = CheckIn.create({ comments: comments })
+    
+    # Add the activity
+    activity = Activity.create({small_step_id: small_step.id, status: [0,1].sample })
     check_in.activities << activity
+    small_step.check_ins << check_in
   end
-
-  # Give every 5 check ins an excuse
-  if i % 5 == 0
-    excuse = Excuse.create({ name: Faker::Lorem.sentence })
-    check_in.excuses << excuse
-    excuse.practice = Practice.all.sample
-    excuse.save!
-    check_in.excuses << excuse
-  end
-  check_in.save!
 end
 
+# Excuses
+Activity.where(status: 0).each_with_index do |activity, index|
+  # Give every other check in that has an activity status of 0 an excuse
+  if index % 2 == 0
+    check_in = activity.check_in
+
+    excuse = Excuse.create({ name: Excuse::GLOBAL_EXCUSES.sample })
+    excuse.practice = check_in.small_step.program.coach.practice
+    excuse.save!
+
+    check_in.excuses << excuse
+    check_in.save!
+  end
+end
 
