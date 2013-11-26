@@ -124,7 +124,7 @@ BigStep.all.each do |big_step|
       week_number: week_number,
       frequency: SmallStep::FREQUENCIES[frequency],
       program_id: big_step.program.id,
-      days: (1..7).to_a.sample
+      days: (1..20).to_a.sample
     }
 
     # Determine which other columns to set based on the frequency
