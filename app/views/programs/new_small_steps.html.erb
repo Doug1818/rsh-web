@@ -15,22 +15,27 @@
     </div>
   </div>
   <div class="col-md-12">
-    <h3>What small step should they focus on first?</h3>
-    <%= simple_form_for @program, url: url_for(:action => 'update_small_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
-      <div id="program_small_steps">
-        <%= f.simple_fields_for :small_steps do |small_step| %>
-          <%= render 'small_step_fields', f: small_step %>
-        <% end %>
-        <div class="links">
-          <br/>
-          <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :small_steps %>
+    <div class="well">
+      <h3>What small step should they focus on first?</h3>
+      <%= simple_form_for @program, url: url_for(:action => 'update_small_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
+        <div id="program_small_steps">
+          <%= f.simple_fields_for :small_steps do |small_step| %>
+            <%= render 'small_step_fields', f: small_step %>
+          <% end %>
+          <div class="links">
+            <br/>
+            <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :small_steps %>
+          </div>
         </div>
-      </div>
 
-      <br/>
-      <input id="start_date" class="datepicker" type="text" placeholder="Start Date">
+        <%= f.input :start_date, as: :string, input_html: { class: "datepicker" } %>
 
-      <%= f.submit "Next", class: 'btn btn-primary' %>
-    <% end %>
+        <div class="row">
+          <div class="pull-right">
+            <%= f.submit "Next", class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
