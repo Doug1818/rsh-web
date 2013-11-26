@@ -143,16 +143,18 @@ BigStep.all.each do |big_step|
   end
 end
 
-# Check-ins and Activities
+# Check-ins
 SmallStep.all.each_with_index do |small_step, index|
-  # Check in the first small step of the first week
-  if index % 10 == 0 and small_step.week_number == 1
+  # Check in every 5 small steps
+  if index % 5 == 0
     comments = Faker::Lorem.paragraph
     check_in = CheckIn.create({ comments: comments })
-    
-    # Add the activity
-    activity = Activity.create({small_step_id: small_step.id, status: [0,1].sample })
-    check_in.activities << activity
+
+    # For each small step that week, create an Activity
+    SmallStep.where(big_step_id: small_step.big_step_id, week_number: small_step.week_number).each do |ss|
+      activity = Activity.create({small_step_id: ss.id, status: [0,1].sample })
+      check_in.activities << activity
+    end
     small_step.check_ins << check_in
   end
 end
