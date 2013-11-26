@@ -109,8 +109,16 @@ BigStep.all.each do |big_step|
   # Create between 1 and 10 small steps
   (1..10).to_a.sample.times do
     frequency = SmallStep::FREQUENCIES.keys.sample
+
+    small_step_name = case big_step.name
+    when 'Flexibility' then ['do stretches', 'do toe touches', 'do cartwheels'].sample
+    when 'Strength' then ['do 3 sets of dead lifts', 'do 10 push ups', 'do 4 sets of barbell raises', 'do 3 sets of shoulder presses'].sample
+    when 'Nutrition' then ['eat a carrot', 'eat more fruit', 'eat green vegetables', 'drink more water', 'eat fewer calories'].sample
+    else
+    end
+    
     small_step = {
-      name: Faker::Company.bs,
+      name: small_step_name,
       week_number: (1..20).to_a.sample,
       frequency: SmallStep::FREQUENCIES[frequency],
       program_id: big_step.program.id,
