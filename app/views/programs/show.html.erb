@@ -26,7 +26,7 @@
         <br/>
         <%= render 'small_steps/list', collection: @small_step_weeks %>
 
-        + week
+        <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-week-link' %>
       </div>
 
 

@@ -20,6 +20,13 @@ jQuery(document).ready(function($) {
     event.preventDefault(); // Prevent link from following its href
   });
 
+  // show the form for adding a new small-step to the current week
+  $('.new-small-step-link').click(function (event) {
+    $(this).next().find(".form").show();
+
+    event.preventDefault(); // Prevent link from following its href
+  });
+
 });
 
 // this gets called from the on("change", ".small-step-frequency") above,

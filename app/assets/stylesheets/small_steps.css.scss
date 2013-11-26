@@ -8,6 +8,21 @@
   padding: 15px;
 }
 
+.small-steps-for-week {
+  .check-ins {
+    margin-top: 10px;
+    .check-in {
+      .activity {
+        border: 1px solid #ccc;
+
+      }
+      .day-of-week {
+
+      }
+    }
+  }
+}
+
 .small-step {
   padding-bottom: 10px;
 
