@@ -147,22 +147,19 @@ end
   comments = Faker::Lorem.paragraph
   check_in = CheckIn.create({ small_step_id: small_step_id, comments: comments })
 
-  # Give some check ins activities, some excuses, and some both
+  # Give every 3 check ins an activity
   if i % 3 == 0
     activity = Activity.create({check_in_id: check_in.id, small_step_id: small_step_id, status: [0,1].sample })
     check_in.activities << activity
-  elsif i % 5 == 0
+  end
+
+  # Give every 5 check ins an excuse
+  if i % 5 == 0
     excuse = Excuse.create({ name: Faker::Lorem.sentence })
     check_in.excuses << excuse
-  elsif (i % 3) && (i % 5)
-    activity = Activity.create({check_in_id: check_in.id, small_step_id: small_step_id, status: [0,1].sample })
-    check_in.activities << activity
-    excuse = Excuse.create({ name: Faker::Lorem.sentence })
     excuse.practice = Practice.all.sample
     excuse.save!
-
     check_in.excuses << excuse
-  else
   end
   check_in.save!
 end
