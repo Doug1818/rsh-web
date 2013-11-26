@@ -51,13 +51,25 @@ legend {
   font-weight: 700;
 }
 
+.form-control {
+  height: 46px;
+  font-size: 18px;
+  line-height: 1.428571429;
+  color: #6d6e71;
+  vertical-align: middle;
+  background-color: #f1f1f2;
+  background-image: none;
+  border: none;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
 .row {
   margin-left: -5px;
   margin-right: -5px;
-}
-
-.well p {
-  font-weight: 700;
 }
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
@@ -156,6 +168,7 @@ legend {
     padding: 0 10px;
     width: 100%;
     height: 46px;
+    background: #fff;
     line-height: 20px;
     border: none;
     border-radius: 0;

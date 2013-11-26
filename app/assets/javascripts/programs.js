@@ -1,8 +1,10 @@
-<<<<<<< HEAD
-=======
 $(document).ready(function() {
 
   $('.datepicker').pickadate();
 
+  $('select').select2({
+    minimumResultsForSearch: -1,
+    width: 200
+  });
+
 });
->>>>>>> 5b064db13d0a6f8cab5fdf235defebd40800a527
