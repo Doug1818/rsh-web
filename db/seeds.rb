@@ -107,7 +107,7 @@ end
 # Small steps
 BigStep.all.each do |big_step|
   # Create between 1 and 10 small steps
-  (1..10).to_a.sample.times do
+  1.upto((2..10).to_a.sample) do |i|
     frequency = SmallStep::FREQUENCIES.keys.sample
 
     small_step_name = case big_step.name
@@ -119,7 +119,7 @@ BigStep.all.each do |big_step|
     
     small_step = {
       name: small_step_name,
-      week_number: (1..20).to_a.sample,
+      week_number: i,
       frequency: SmallStep::FREQUENCIES[frequency],
       program_id: big_step.program.id,
       days: (1..60).to_a.sample
