@@ -260,6 +260,8 @@ legend {
     background: #6d6e71;
     border: none;
     border-color: transparent;
+    position: relative;
+    z-index: 999999;
   }
   .navbar-toggle {
     top: 20px;
