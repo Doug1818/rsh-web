@@ -108,6 +108,11 @@ legend {
   }
 }
 
+.navbar-collapse {
+  position: relative;
+  z-index: 999999;
+}
+
 .navbar {
   height: 92px;
   line-height: 92px;
@@ -242,7 +247,7 @@ legend {
 @media (max-width: 767px) {
   .navbar {
     .btn-primary {
-      top: -25px;
+      top: -27px;
     }
     input[type=text]{
       width: 70%;
