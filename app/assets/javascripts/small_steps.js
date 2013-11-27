@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
   });
 
   // hide the small-step, display the form
-  $('.small-step-edit-link').click(function (event) {
+  $('.small-step-edit-link').on('click', function (event) {
     $(this).parent().parent().hide();
     $(this).parent().parent().parent().find(".form").show();
     event.preventDefault(); // Prevent link from following its href
@@ -13,17 +13,15 @@ jQuery(document).ready(function($) {
 
 
   // hide the form, display the small step
-  $('.small-step-cancel-button').click(function (event) {
+  $('.small-step-cancel-button').on('click', function (event) {
     $(this).parent().parent().parent().find(".display").show();
     $(this).parent().parent().parent().find(".form").hide();
-
     event.preventDefault(); // Prevent link from following its href
   });
 
   // show the form for adding a new small-step to the current week
-  $('.new-small-step-link').click(function (event) {
+  $('.new-small-step-link').on('click', function (event) {
     $(this).next().find(".form").show();
-
     event.preventDefault(); // Prevent link from following its href
   });
 

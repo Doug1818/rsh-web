@@ -1,12 +1,12 @@
 <%= simple_form_for @user, html: { class: "form-vertical" } do |f| %>
-  <%= f.input :email %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :email %>
-  <%= f.input :gender, as: :select, collection: User::GENDERS %>
-  <%= f.input :status, as: :select, collection: User::STATUSES %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+  <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
+  <%= f.input :first_name, label: false, placeholder: 'First name' %>
+  <%= f.input :last_name, label: false, placeholder: 'Last name' %>
+  <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
+  <%= f.input :gender, as: :select, collection: User::GENDERS, label: false, placeholder: 'Gender' %>
+  <%= f.input :status, as: :select, collection: User::STATUSES, label: false, placeholder: 'Status' %>
+  <%= f.input :password, label: false, placeholder: 'Password', type: 'password' %>
+  <%= f.input :password_confirmation, label: false, placeholder: 'Password confirmation', type: 'password' %>
 
   <label>Avatar</label>
   <%= f.file_field :avatar %>

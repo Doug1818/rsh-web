@@ -15,4 +15,5 @@
  *= require select2-bootstrap
  *= require classic
  *= require classic.date
+ *= require classic.time
  */

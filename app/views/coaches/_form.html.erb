@@ -1,9 +1,9 @@
 <%= simple_form_for @coach, html: { class: "form-vertical" } do |f| %>
-  <%= f.input :email %>
+  <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
   <% unless @coach.new_record? %>
     <%= f.input :first_name, label: false, placeholder: 'First Name' %>
     <%= f.input :last_name, label: false, placeholder: 'Last Name' %>
-    <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
+    <%= f.input :email, type: 'email', label: false, placeholder: 'Email', type: 'email' %>
     <%= f.input :gender, as: :select, collection: Coach::GENDERS, label: false, placeholder: 'Gender' %>
     <%= f.input :status, as: :select, collection: Coach::STATUSES, label: false, placeholder: 'Status' %>
     <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>

@@ -1,8 +1,9 @@
 <%= simple_form_for @reminder, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id %>
-  <%= f.input :frequency, as: :select, collection: Reminder::FREQUENCIES %>
-  <%= f.input :body %>
-  <%= f.input :send_at %>
+  <%= f.input :frequency, as: :select, collection: Reminder::FREQUENCIES, label: false, placeholder: 'Frequency' %>
+  <%= f.input :body, label: false, placeholder: 'Message' %>
+  <%= f.input :send_at, as: :string, input_html: { class: "datepicker" }, label: false, placeholder: 'Send Date' %>
+  <input id="send_time" class='timepicker' type='text' placeholder="Send Time" />
 
   <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
 <% end %>

@@ -1,54 +1,56 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <%= image_tag(@program.user.avatar.large.url) %>
-    </div>
-    <div class="col-md-9">
-      <%= @program.user.full_name %><br/>
-      <%= @program.purpose %>
-      <hr/>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-offset-3 col-md-9">
-      View:
-      <a href="#steps" data-toggle="tab">Steps</a>
-      <a href="#advanced-settings" data-toggle="tab">Advanced Settings</a>
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 tab-content">
-
-      <!-- this area needs to be scrollable -->
-
-      <div class="tab-pane active" id="steps">
-        <br/>
-        <%= render 'small_steps/list', collection: @small_step_weeks %>
-
-        <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-week-link' %>
+  <div class="well">
+    <div class="row">
+      <div class="col-md-3">
+        <%= image_tag(@program.user.avatar.large.url) %>
       </div>
-
-
-      <div class="tab-pane" id="advanced-settings">
-        <%= render @alerts %>
-        <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
-
+      <div class="col-md-9">
+        <h2><%= @program.user.full_name %></h2>
+        <p><%= @program.purpose %></p>
         <hr/>
-        <%= render @reminders %>
-        <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
-
-        <hr/>
-        <%= render @supporters %>
-        <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
-
-        <hr/>
-        <%= render @todos %>
-        <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-3 col-md-9">
+        View:
+        <a href="#steps" data-toggle="tab">Steps</a>
+        <a href="#advanced-settings" data-toggle="tab">Advanced Settings</a>
 
-      <!-- end scrollable area -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 tab-content">
 
+        <!-- this area needs to be scrollable -->
+
+        <div class="tab-pane active" id="steps">
+          <br/>
+          <%= render 'small_steps/list', collection: @small_step_weeks %>
+
+          <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-week-link' %>
+        </div>
+
+
+        <div class="tab-pane" id="advanced-settings">
+          <%= render @alerts %>
+          <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
+
+          <hr/>
+          <%= render @reminders %>
+          <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
+
+          <hr/>
+          <%= render @supporters %>
+          <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
+
+          <hr/>
+          <%= render @todos %>
+          <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
+        </div>
+
+        <!-- end scrollable area -->
+
+      </div>
     </div>
   </div>
 </div>
