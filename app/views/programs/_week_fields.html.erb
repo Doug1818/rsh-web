@@ -1,0 +1,16 @@
+<div class="nested-fields week-fields">
+  <%= f.hidden_field :number %>
+  <%= f.hidden_field :start_date %>
+  <%= f.hidden_field :end_date %>
+
+
+  <div id="program_small_steps">
+    <%= f.simple_fields_for :small_steps do |small_step| %>
+      <%= render 'small_step_fields', f: small_step %>
+    <% end %>
+    <div class="links">
+      <br/>
+      <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :small_steps %>
+    </div>
+  </div>
+</div>

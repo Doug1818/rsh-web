@@ -1,4 +1,5 @@
 <% submit_btn_label = small_step.new_record? ? "Add" : "Update" %>
+
 <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
   <%= f.input_field :name %> towards
   <%= f.input_field :big_step, as: :select, collection: small_step.program.big_steps, default: nil %>

@@ -4,7 +4,6 @@ FactoryGirl.define do
   factory :small_step do
     big_step_id 1
     name "MyString"
-    week_number 1
     frequency 1
     times_per_week 1
     sunday false

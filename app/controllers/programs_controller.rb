@@ -8,9 +8,10 @@ class ProgramsController < ApplicationController
 
   def show
     @program = current_coach.programs.find(params[:id])
+    @weeks = @program.weeks
 
-    @small_steps = @program.small_steps.order(week_number: :asc)
-    @small_step_weeks = @small_steps.group_by { |s| s.week_number }
+    # @small_steps = @program.small_steps.order(week_number: :asc)
+    # @small_step_weeks = @small_steps.group_by { |s| s.week_number }
 
     @alerts = @program.alerts
     @reminders = @program.reminders
@@ -47,11 +48,14 @@ class ProgramsController < ApplicationController
 
   def new_small_steps
     @program = current_practice.programs.find(params[:id])
-    @program.small_steps.build
+    @week = @program.weeks.build(number: 1)
+    @week.small_steps.build
+    # @program.small_steps.build
   end
 
   def update_big_steps
     @program = current_practice.programs.find(params[:id])
+
     respond_to do |format|
       if @program.update_attributes(program_params)
         format.html { redirect_to new_small_steps_path }
@@ -63,6 +67,16 @@ class ProgramsController < ApplicationController
 
   def update_small_steps
     @program = current_practice.programs.find(params[:id])
+
+    # get the start date of the program (based on the attributes)
+    # set the start/end dates of the week
+    program_start_date = Date.parse(params[:program][:start_date])
+    week_start_date = program_start_date.beginning_of_week(:sunday)
+    week_end_date = program_start_date.end_of_week(:sunday)
+
+    params[:program][:weeks_attributes]["0"][:start_date] = week_start_date
+    params[:program][:weeks_attributes]["0"][:end_date] = week_end_date
+
     respond_to do |format|
       if @program.update_attributes(program_params)
         format.html { redirect_to program_path(@program) }
@@ -73,6 +87,6 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params.require(:program).permit(:purpose, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :_destroy], small_steps_attributes: [:name, :big_step_id, :week_number, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id])
+    params.require(:program).permit(:purpose, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
   end
 end

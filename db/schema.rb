@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125175437) do
+ActiveRecord::Schema.define(version: 20131126202527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 20131125175437) do
   create_table "small_steps", force: true do |t|
     t.integer  "big_step_id"
     t.string   "name"
-    t.integer  "week_number"
     t.integer  "frequency"
     t.integer  "times_per_week"
     t.boolean  "sunday"
@@ -136,7 +135,11 @@ ActiveRecord::Schema.define(version: 20131125175437) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "program_id"
-    t.integer  "days",           default: 7
+  end
+
+  create_table "small_steps_weeks", id: false, force: true do |t|
+    t.integer "small_step_id", null: false
+    t.integer "week_id",       null: false
   end
 
   create_table "supporters", force: true do |t|
@@ -177,5 +180,14 @@ ActiveRecord::Schema.define(version: 20131125175437) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "weeks", force: true do |t|
+    t.integer  "program_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

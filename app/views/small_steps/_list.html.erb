@@ -6,12 +6,12 @@
     <div class="col-md-11 small-steps-for-week">
       <%= render small_steps %>
       <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-small-step-link' %>
-      <%= render 'small_steps/checkins' %>
       <div class="small-step">
         <div class="form">
           <%= render partial: 'small_steps/form', locals: { small_step: SmallStep.new(program: @program) } %>
         </div>
       </div>
+      <%= render 'small_steps/checkins' %>
 
     </div>
   </div>
