@@ -6,9 +6,12 @@ class Program < ActiveRecord::Base
 
   belongs_to :user, dependent: :destroy
   belongs_to :coach
+
   has_many :big_steps, dependent: :destroy
   has_many :small_steps, dependent: :destroy
   has_many :check_ins, through: :small_steps
+  has_many :weeks
+
   has_many :alerts, dependent: :destroy
   has_many :reminders, dependent: :destroy
   has_many :supporters, dependent: :destroy
@@ -16,7 +19,8 @@ class Program < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
   accepts_nested_attributes_for :big_steps, :reject_if => :all_blank, :allow_destroy => true
-  accepts_nested_attributes_for :small_steps, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
+
 
   def ensure_authentication_token
     if authentication_token.blank?
