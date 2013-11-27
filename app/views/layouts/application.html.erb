@@ -22,22 +22,25 @@
           <span class="icon-bar"></span>
         </button>
         <%= link_to image_tag('logo.png'), root_path, class: 'logo' %>
-        <% if current_coach %>
+
         <div class="welcome">
           <div class="top">
-            <h4>Welcome, Adam</h4>
+            <% if current_coach %>
+              <h4>Welcome, Adam</h4>
+            <% else %>
+              <h4>Welcome</h4>
+            <% end %>
           </div>
           <div class="bottom">
             <p>
               <% if current_coach %>
                 <%= link_to 'Sign out', destroy_coach_session_path, method: :delete %>
               <% else %>
-                <%= link_to 'Sign in for coaches', new_coach_session_path %></li>
+                <%= link_to 'Sign in', new_coach_session_path %></li>
               <% end %>
             </p>
           </div>
         </div>
-        <% end %>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
