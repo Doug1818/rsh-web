@@ -1,11 +1,11 @@
 jQuery(document).ready(function($) {
   // when the frequency pull down is changed, show the appropriate "extra" fields
-  $(document).on("change",".small-step-frequency",function() {
+  $(document).on('change','.small-step-frequency',function() {
     displayFrequencyFields( $(this) );
   });
 
   // hide the small-step, display the form
-  $('.small-step-edit-link').on('click', function (event) {
+  $(document).on('click','.small-step-edit-link',function (event) {
     $(this).parent().parent().hide();
     $(this).parent().parent().parent().find(".form").show();
     event.preventDefault(); // Prevent link from following its href
@@ -13,14 +13,15 @@ jQuery(document).ready(function($) {
 
 
   // hide the form, display the small step
-  $('.small-step-cancel-button').on('click', function (event) {
+  $(document).on('click','.small-step-cancel-button',function (event) {
     $(this).parent().parent().parent().find(".display").show();
     $(this).parent().parent().parent().find(".form").hide();
     event.preventDefault(); // Prevent link from following its href
   });
 
   // show the form for adding a new small-step to the current week
-  $('.new-small-step-link').on('click', function (event) {
+  $(document).on('click','.new-small-step-link',function (event) {
+    console.log( $(this).next().attr("class") );
     $(this).next().find(".form").show();
     event.preventDefault(); // Prevent link from following its href
   });

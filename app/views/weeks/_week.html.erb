@@ -1,4 +1,17 @@
-<div>
-  <div>Week <%= week.number %></div>
-  <div><%= render week.small_steps %></div>
+<div class="row">
+  <div class="col-md-1">
+    Week <%= week.number %>:
+  </div>
+  <div class="col-md-11 small-steps-for-week">
+    <%= render week.small_steps, week: week %>
+
+    <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-small-step-link' %>
+
+    <div class="small-step">
+      <div class="form">
+        <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
+      </div>
+    </div>
+    <%= render 'small_steps/check_ins' %>
+  </div>
 </div>

@@ -20,32 +20,13 @@
 
       <%= simple_form_for @program, url: url_for(:action => 'update_small_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
 
-
-
-
-        <div id="program_weeks">
+        <div id="program-weeks">
           <%= f.simple_fields_for :weeks do |week| %>
             <%= render 'week_fields', f: week %>
           <% end %>
         </div>
 
-
-
-
-        <% if false %>
-        <div id="program_small_steps">
-          <%= f.simple_fields_for :small_steps do |small_step| %>
-            <%= render 'small_step_fields', f: small_step %>
-          <% end %>
-          <div class="links">
-            <br/>
-            <%= link_to_add_association "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, f, :small_steps %>
-          </div>
-        </div>
-        <% end %>
-
         <%= f.input :start_date, as: :string, input_html: { class: "datepicker" } %>
-
         <div class="row">
           <div class="pull-right">
             <%= f.submit "Next", class: 'btn btn-primary' %>

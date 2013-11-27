@@ -23,6 +23,7 @@ gem "fog" # cloud services api
 gem 'unf' # fog string encoding
 gem 'stripe' #credit card processing
 gem 'cocoon'
+gem 'deep_cloneable', '~> 1.6.0'
 
 group :doc do
   gem 'sdoc', require: false

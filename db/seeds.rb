@@ -12,6 +12,7 @@
 ActiveRecord::Base.connection.execute("TRUNCATE users")
 ActiveRecord::Base.connection.execute("TRUNCATE programs")
 ActiveRecord::Base.connection.execute("TRUNCATE weeks")
+ActiveRecord::Base.connection.execute("TRUNCATE small_steps_weeks")
 ActiveRecord::Base.connection.execute("TRUNCATE big_steps")
 ActiveRecord::Base.connection.execute("TRUNCATE small_steps")
 ActiveRecord::Base.connection.execute("TRUNCATE excuses")

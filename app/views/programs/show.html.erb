@@ -26,9 +26,10 @@
         <div class="tab-pane active" id="steps">
           <br/>
           <%= render @weeks %>
-          <%#= render 'small_steps/list', collection: @small_step_weeks %>
 
-          <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, "#", class: 'new-week-link' %>
+          <div class="new-week">
+            <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
+          </div>
         </div>
 
 

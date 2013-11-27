@@ -82,6 +82,8 @@ GEM
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
+    deep_cloneable (1.6.0)
+      activerecord (>= 3.1.0)
     devise (3.1.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -248,6 +250,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   debugger
+  deep_cloneable (~> 1.6.0)
   devise (~> 3.1.0)
   factory_girl_rails (~> 4.0)
   faker
