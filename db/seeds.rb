@@ -47,7 +47,7 @@ end
 
 def new_program
   program = {
-    purpose: ["To improve flexibility", "To improve strength", "To help with my hip"].sample,
+    purpose: ["to heal their hip", "to recover from back surgery", "to improve their quality of life"].sample,
     status: 1,
     start_date: 2.weeks.ago
   }
