@@ -6,19 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# Wipe the current data
-ActiveRecord::Base.connection.execute("TRUNCATE practices")
-ActiveRecord::Base.connection.execute("TRUNCATE coaches")
-ActiveRecord::Base.connection.execute("TRUNCATE users")
-ActiveRecord::Base.connection.execute("TRUNCATE programs")
-ActiveRecord::Base.connection.execute("TRUNCATE weeks")
-ActiveRecord::Base.connection.execute("TRUNCATE small_steps_weeks")
-ActiveRecord::Base.connection.execute("TRUNCATE big_steps")
-ActiveRecord::Base.connection.execute("TRUNCATE small_steps")
-ActiveRecord::Base.connection.execute("TRUNCATE excuses")
-ActiveRecord::Base.connection.execute("TRUNCATE check_ins")
-ActiveRecord::Base.connection.execute("TRUNCATE activities")
-ActiveRecord::Base.connection.execute("TRUNCATE check_ins_excuses")
+db_tables = %w{ practices coaches users programs weeks small_steps_weeks big_steps small_steps excuses check_ins activities check_ins_excuses }
+db_tables.each {|db_table| ActiveRecord::Base.connection.execute("TRUNCATE #{ db_table }") }
 
 class Seed
 
