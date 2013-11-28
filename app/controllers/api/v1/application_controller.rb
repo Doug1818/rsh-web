@@ -4,7 +4,7 @@ class Api::V1::ApplicationController < ActionController::Base
 
   before_filter :authenticate_program
 
-  def authentication_program
+  def authenticate_program
     if params[:authentication_token].present?
       @program = Program.where(authentication_token: params[:authentication_token]).first
       auth_failure unless @program.present?
