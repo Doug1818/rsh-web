@@ -97,7 +97,7 @@ class Seed
     @practices.each do |practice|
 
       puts "\nPractice: #{ practice.name }"
-      @program = practice.programs.first 
+      @program = practice.programs.last 
 
       puts "\n#{ @program.user.first_name }'s Program"
 
@@ -134,8 +134,11 @@ class Seed
             @excuse = practice.excuses.find_or_create_by name: excuse_name
             @check_in.excuses << @excuse 
           end
-          
+
+          week = @program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
+
           @check_in.small_step_id = small_step.id
+          @check_in.week_id = week.id 
           @check_in.activities.create(small_step_id: small_step.id, status: status)
           @check_in.save!
         end
