@@ -15,13 +15,13 @@ class Seed
     @program_count = options[:program_count] || 8
     @coaches = options[:coaches]
 
-    @big_steps = ['Flexibility', 'Strength', 'Nutrition'] 
+    @big_steps = ['Flexibility', 'Strength', 'Nutrition']
   end
 
   def run
     # Practices and Coaches
     @coaches.each do |coach|
-      new_practice do |practice| 
+      new_practice do |practice|
 
         @coach = @practice.coaches.create(coach)
         @coach.password = 'test123test'
@@ -37,7 +37,7 @@ class Seed
             program.coach_id = @coach.id
             program.save!
             program.weeks.create(start_date: program.start_date.beginning_of_week(:sunday), end_date: program.start_date.end_of_week(:sunday), number: 1)
-          
+
             @big_steps.each_with_index do |big_step_name, index|
               @big_step = program.big_steps.create(name: big_step_name)
 
@@ -75,11 +75,11 @@ class Seed
                 when '# Times Per Week'
                   small_step[:times_per_week] = 4
                 when 'Specific Days of the Week'
-                  small_step[:monday] = true 
+                  small_step[:monday] = true
                   small_step[:wednesday] = true
                   small_step[:friday] = true
                 end
-                
+
                 @small_step = @week.small_steps.create(small_step)
                 @big_step.small_steps << @small_step
               end
@@ -97,7 +97,7 @@ class Seed
     @practices.each do |practice|
 
       puts "\nPractice: #{ practice.name }"
-      @program = practice.programs.last 
+      @program = practice.programs.last
 
       puts "\n#{ @program.user.first_name }'s Program"
 
@@ -109,7 +109,7 @@ class Seed
 
         # Create a check in for the day
         comments = "Checking in for #{ day }"
-        @check_in = CheckIn.create(comments: comments)
+        @check_in = CheckIn.create(comments: comments, created_at: day)
         puts "\n#{ comments }"
 
         # Mark each of the small steps for the check in
@@ -132,14 +132,14 @@ class Seed
           if status == 0 and i.odd? # Give an excuse for every other one marked as did not do
             excuse_name = "This is my excuse"
             @excuse = practice.excuses.find_or_create_by name: excuse_name
-            @check_in.excuses << @excuse 
+            @check_in.excuses << @excuse
           end
 
           week = @program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
 
           @check_in.small_step_id = small_step.id
-          @check_in.week_id = week.id 
-          @check_in.activities.create(small_step_id: small_step.id, status: status)
+          @check_in.week_id = week.id
+          @check_in.activities.create(small_step_id: small_step.id, status: status, created_at: day)
           @check_in.save!
         end
       end
@@ -159,7 +159,7 @@ class Seed
     }
     @practice = Practice.create(practice)
     @practice.save!
-    
+
     yield @practice
   end
 

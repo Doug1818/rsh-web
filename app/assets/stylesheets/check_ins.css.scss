@@ -1,3 +1,25 @@
-// Place all the styles related to the CheckIns controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.check-in {
+  width: 50px;
+  border: 1px solid #333;
+  display: inline-block
+}
+
+// no status for this check-in
+.status-0 {
+  background: #ccc;
+}
+
+// mixed status (some yes, some no)
+.status-1 {
+  background: blue;
+}
+
+// all yes (check)
+.status-2 {
+  background: green;
+}
+
+// all no (x)
+.status-3 {
+  background: red;
+}

@@ -4,4 +4,21 @@ class Week < ActiveRecord::Base
   has_many :check_ins
 
   accepts_nested_attributes_for :small_steps, :reject_if => :all_blank, :allow_destroy => true
+
+  def has_check_in_for_day(day)
+    if check_ins.pluck(:created_at).map(&:wday).include?(day.wday)
+      true
+    else
+      false
+    end
+  end
+
+  def find_check_in_for_day(day)
+    check_ins.each do |check_in|
+      if check_in.created_at.wday == day.wday
+        return check_in
+      end
+    end
+  end
+
 end
