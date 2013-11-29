@@ -51,14 +51,27 @@ class Seed
               # Use the first week if this is our first time through; otherwise, create a new week
               @week = index == 0 ? program.weeks.first : program.weeks.create(start_date: next_start_date, end_date: next_end_date, number: week_number)
 
-              SmallStep::FREQUENCIES.keys.each_with_index do |frequency, i|
+              @frequencies = SmallStep::FREQUENCIES
+
+              0.upto(6) do |i|
+
+                frequency_value = if i < 3
+                  @frequencies.values[0]
+                elsif (i >= 3 and i < 5)
+                  @frequencies.values[1]
+                else
+                  @frequencies.values[2]
+                end
+
+                frequency_name = @frequencies.keys[frequency_value]
+
                 small_step = {
                   name: @small_step_name[i],
-                  frequency: SmallStep::FREQUENCIES[frequency],
                   program_id: program.id,
+                  frequency: frequency_value
                 }
 
-                case frequency
+                case frequency_name
                 when '# Times Per Week'
                   small_step[:times_per_week] = 4
                 when 'Specific Days of the Week'
@@ -172,11 +185,11 @@ class Seed
   def get_small_step_name(big_step_name)
     case big_step_name
     when 'Flexibility'
-      ['stretch for 10 minutes', 'jog around the block', 'do a cartwheel']
+      ['stretch for 10 minutes', 'jog around the block', 'do a cartwheel', 'fly a kite', 'do 20 jumping jacks', 'play tennis for 30 minutes', 'practice martial arts']
     when 'Strength'
-      ['do 3 sets of bench presses', 'curl a 30 lb dumbbell', 'do 20 push ups']
+      ['do 3 sets of bench presses', 'curl a 30 lb dumbbell', 'do 20 push ups', 'do 3 sets of 10 squats', 'lift a car', '20 minutes of circuit training', 'do a 200 lb dead-lift']
     when 'Nutrition'
-      ['eat 2 vegetables per day', 'drink a protein shake', 'eat fish']
+      ['eat 2 vegetables per day', 'drink a protein shake', 'eat fish', 'eat a piece of fruit', 'take vitamins', 'eat green leafy vegetables', 'count your calories']
     else
       []
     end
