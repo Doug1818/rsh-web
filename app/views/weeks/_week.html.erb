@@ -12,6 +12,7 @@
         <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
       </div>
     </div>
-    <%= render 'small_steps/check_ins' %>
+    WEEK CHECK INS ARE: <%= week.check_ins %>
+    <%= render week.check_ins %>
   </div>
 </div>
