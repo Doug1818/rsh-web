@@ -7,6 +7,9 @@ class WeeksController < ApplicationController
     @week.number = @last_week.number + 1
 
     # TODO set the start & end dates
+    program_start_plus_weeks = @program.start_date + (@week.number - 1).weeks
+    @week.start_date = program_start_plus_weeks.beginning_of_week(:sunday)
+    @week.end_date = program_start_plus_weeks.end_of_week(:sunday)
 
     respond_to do |format|
       if @week.save

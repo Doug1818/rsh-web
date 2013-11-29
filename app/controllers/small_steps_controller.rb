@@ -27,6 +27,18 @@ class SmallStepsController < ApplicationController
     end
   end
 
+  def destroy
+    @program = current_practice.programs.find(params[:program_id])
+    @week = @program.weeks.find(params[:week_id])
+    @small_step = @program.small_steps.find(params[:id])
+
+    @program.small_steps.find(@small_step.id).weeks.delete(@week.id)
+
+    respond_to do |format|
+      format.html { redirect_to(program_path(@program)) }
+    end
+  end
+
 
   def small_step_params
     params.require(:small_step).permit(:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id)
