@@ -1,5 +1,7 @@
 <% submit_btn_label = small_step.new_record? ? "Add" : "Update" %>
 
+
+
 <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id, value: @program.id %>
   <% if small_step.new_record? %>
@@ -36,6 +38,6 @@
 $(".small_step_name").select2({
 createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
 multiple: false,
-data: [{id: 0, text: 'story'},{id: 1, text: 'foo'},{id: 2, text: 'task'}]
+data: <%= raw(@program.small_steps.to_json) %>
 });
 </script>
