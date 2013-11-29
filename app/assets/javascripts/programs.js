@@ -7,4 +7,11 @@ jQuery(document).ready(function($) {
     width: 200
   });
 
+  $(document).on('cocoon:after-insert','#program_small_steps',function (event) {
+    $('select').select2({
+      minimumResultsForSearch: -1,
+      width: 200
+    });
+  });
+
 });
