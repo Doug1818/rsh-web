@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126202527) do
+ActiveRecord::Schema.define(version: 20131129194906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20131126202527) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "week_id"
   end
 
   create_table "check_ins_excuses", id: false, force: true do |t|
