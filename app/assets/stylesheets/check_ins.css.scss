@@ -1,25 +1,48 @@
 .check-in {
-  width: 50px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  width: 48px;
+  height: 38px;
   border: 1px solid #333;
-  display: inline-block
+  color: #fff;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  line-height: 36px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 // no status for this check-in
 .status-0 {
   background: #ccc;
+  &:before {
+    content: "\e090";
+  }
 }
 
 // mixed status (some yes, some no)
 .status-1 {
   background: blue;
+  &:before {
+    content: "\e014";
+  }
 }
 
 // all yes (check)
 .status-2 {
   background: green;
+  &:before {
+    content: "\e013";
+  }
 }
 
 // all no (x)
 .status-3 {
   background: red;
+  &:before {
+    content: "\e014";
+  }
 }

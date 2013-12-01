@@ -1,8 +1,8 @@
 <% (week.start_date..week.end_date).each do | day| %>
   <% if week.has_check_in_for_day(day) %>
     <% status = week.find_check_in_for_day(day).status %>
-    <div class="check-in status-<%=status%>">...</div>
+    <div class="check-in status-<%=status%>"></div>
   <% else %>
-    <div class="check-in status-<%=CheckIn::STATUSES[:none]%>">...</div>
+    <div class="check-in status-<%=CheckIn::STATUSES[:none]%>"></div>
   <% end %>
 <% end %>

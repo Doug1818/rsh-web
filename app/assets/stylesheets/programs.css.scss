@@ -61,6 +61,12 @@
   }
 }
 
+.tab-pane {
+  .row {
+    margin-bottom: 40px;
+  }
+}
+
 form {
   input[type=text], input[type=email], textarea {
     background: #f1f1f2;
@@ -74,6 +80,10 @@ form {
   input[type=text], input[type=email] {
     height: 46px;
   }
+}
+
+.small-step-cancel-button {
+  width: auto;
 }
 
 .simple_form {
