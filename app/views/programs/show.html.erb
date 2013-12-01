@@ -28,7 +28,7 @@
           <%= render @weeks %>
 
           <div class="new-week">
-            <%= link_to "<span class='glyphicon glyphicon-plus-sign'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
+            <%= link_to "<span class='btn-plus'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
           </div>
         </div>
 

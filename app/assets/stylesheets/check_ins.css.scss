@@ -14,9 +14,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.patient {
+  .status-0, .status-1, .status-2, .status-3 {
+    background: transparent;
+  }
+}
+
 // no status for this check-in
 .status-0 {
   background: #ccc;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
   &:before {
     content: "\e090";
   }
@@ -25,25 +32,26 @@
 // mixed status (some yes, some no)
 .status-1 {
   background: #4285f4;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
   &:before {
     content: "\e014";
   }
   &:after {
-    content: "";
+    content: " ";
     position: absolute;
-    top: 1px;
-    right: 1px;
-    border-width: 0 15px 15px 0;
-    border-style: solid;
-    border-color: #dd4937 #dd4937 transparent transparent;
-    display: block;
+    top: 2px;
+    right: 2px;
     width: 0;
+    height: 0;
+    border-top: 0.5em solid #dd4937;
+    border-left: 0.5em solid transparent;
   }
 }
 
 // all yes (check)
 .status-2 {
   background: #009d59;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
   &:before {
     content: "\e013";
   }
@@ -52,7 +60,9 @@
 // all no (x)
 .status-3 {
   background: #dd4937;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
   &:before {
     content: "\e014";
   }
 }
+

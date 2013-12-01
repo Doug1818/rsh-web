@@ -1,17 +1,19 @@
 <div class="col-lg-3 col-md-4 col-sm-6">
+  <%= link_to program_path(program) do %>
   <div class="well patient">
     <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "patient avatar") %>
-    <h3><%= link_to program.user.full_name, program_path(program) %></h3>
+    <h3><%= program.user.full_name %></h3>
     <div class="check-ins">
       <ul class="list-inline">
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
-        <li class="glyphicon glyphicon-ok"></li>
+        <li class="check-in status-0"></li>
+        <li class="check-in status-1"></li>
+        <li class="check-in status-2"></li>
+        <li class="check-in status-3"></li>
+        <li class="check-in status-0"></li>
+        <li class="check-in status-0"></li>
+        <li class="check-in status-0"></li>
       </ul>
     </div>
   </div>
+  <% end %>
 </div>
