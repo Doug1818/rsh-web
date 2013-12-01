@@ -2,15 +2,14 @@
   display: inline-block;
   position: relative;
   top: 1px;
-  width: 48px;
-  height: 38px;
-  border: 1px solid #333;
+  width: 50px;
+  height: 40px;
   color: #fff;
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
   text-align: center;
-  line-height: 36px;
+  line-height: 40px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,15 +24,26 @@
 
 // mixed status (some yes, some no)
 .status-1 {
-  background: blue;
+  background: #4285f4;
   &:before {
     content: "\e014";
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    border-width: 0 15px 15px 0;
+    border-style: solid;
+    border-color: #dd4937 #dd4937 transparent transparent;
+    display: block;
+    width: 0;
   }
 }
 
 // all yes (check)
 .status-2 {
-  background: green;
+  background: #009d59;
   &:before {
     content: "\e013";
   }
@@ -41,7 +51,7 @@
 
 // all no (x)
 .status-3 {
-  background: red;
+  background: #dd4937;
   &:before {
     content: "\e014";
   }

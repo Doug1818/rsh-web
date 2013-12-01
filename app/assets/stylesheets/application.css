@@ -16,4 +16,5 @@
  *= require classic
  *= require classic.date
  *= require classic.time
+ *= require uniform.default
  */

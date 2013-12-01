@@ -25,5 +25,6 @@
 //= require picker.date
 //= require picker.time
 //= require legacy
+//= require jquery.uniform
 //= require_tree .
 //= require turbolinks

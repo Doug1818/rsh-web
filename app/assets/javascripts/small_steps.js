@@ -26,6 +26,8 @@ jQuery(document).ready(function($) {
     event.preventDefault(); // Prevent link from following its href
   });
 
+  $('input[type=checkbox]').uniform();
+
 });
 
 // this gets called from the on("change", ".small-step-frequency") above,
@@ -42,3 +44,5 @@ function displayFrequencyFields(o) {
     o.parent().find(".times-per-week").hide();
   }
 }
+
+

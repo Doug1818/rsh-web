@@ -55,16 +55,25 @@
 
     .times-per-week, .specifc-days-per-week {
       display: none;
+      font-size: 14px;
+      + p {
+        margin: 10px 0 0 0;
+      }
     }
 
     label.checkbox {
       display: inline-block;
+      cursor: pointer;
     }
 
-    input[type="submit"] {
-      width: 10%;
+    input[type='submit'] {
+      width: auto;
     }
   }
+}
+
+input[name='small_step[sunday]'] + label {
+  padding-left: 0;
 }
 
 .small-step-fields {
@@ -73,6 +82,10 @@
 
   label.checkbox {
     display: inline-block;
+    cursor: pointer;
+    &:after {
+      cursor: pointer;
+    }
   }
 
   input, select {
@@ -83,4 +96,9 @@
   .times-per-week, .specifc-days-per-week {
     display: none;
   }
+}
+
+div.checker {
+  top: -5px;
+  cursor: pointer;
 }
