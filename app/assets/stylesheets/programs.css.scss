@@ -46,10 +46,7 @@
       text-align: center;
       li {
         width: 12%;
-        a {
-          color: #fff;
-          text-decoration: none;
-        }
+        color: #fff;
       }
     }
   }
@@ -81,6 +78,7 @@ form {
 
 .simple_form {
   .select2-container {
+    max-width: 200px;
     .select2-choice {
       height: 46px !important;
       background: #f1f1f2 !important;
