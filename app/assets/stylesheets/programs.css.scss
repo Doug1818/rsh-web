@@ -92,6 +92,12 @@ h2 ~ div {
   line-height: 44px;
 }
 
+ul.view {
+  float: none;
+  text-align: center;
+  font-weight: 700;
+}
+
 .well {
   background: #fff;
   p:first-child b {
@@ -103,7 +109,12 @@ h2 ~ div {
 
 .tab-pane {
   .row {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 
