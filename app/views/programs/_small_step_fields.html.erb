@@ -15,13 +15,20 @@
     </div>
     <div class="specifc-days-per-week">
       <p>Which days of the week?</p>
-      <%= f.input_field :sunday %> Sunday
-      <%= f.input_field :monday %> Monday
-      <%= f.input_field :tuesday %> Tuesday
-      <%= f.input_field :wednesday %> Wednesday
-      <%= f.input_field :thursday %> Thursday
-      <%= f.input_field :friday %> Friday
-      <%= f.input_field :saturday %> Saturday
+      <%= f.input_field :monday, label: false %>
+      <label>Monday</label>
+      <%= f.input_field :tuesday, label: false %>
+      <label>Tuesday</label>
+      <%= f.input_field :wednesday, label: false %>
+      <label>Wednesday</label>
+      <%= f.input_field :thursday, label: false %>
+      <label>Thursday</label>
+      <%= f.input_field :friday, label: false %>
+      <label>Friday</label>
+      <%= f.input_field :saturday, label: false %>
+      <label>Saturday</label>
+        <%= f.input_field :sunday, label: false %>
+      <label>Sunday</label>
     </div>
   </div>
 </div>
