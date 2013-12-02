@@ -247,6 +247,11 @@ legend {
   }
 }
 
+.tab-content > .active {
+  max-height: 260px;
+  overflow-y: scroll;
+}
+
 @media (max-width: 767px) {
   .navbar {
     .btn-primary {
