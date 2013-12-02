@@ -32,7 +32,7 @@
         <div class="welcome">
           <div class="top">
             <% if current_coach %>
-              <h4>Welcome, Adam</h4>
+              <h4>Welcome, <%= current_coach.name %></h4>
             <% else %>
               <h4>Welcome</h4>
             <% end %>

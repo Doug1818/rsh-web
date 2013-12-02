@@ -19,6 +19,14 @@ class Coach < ActiveRecord::Base
     end
   end
 
+  def name
+    if first_name.present?
+      "#{first_name}"
+    else
+      "Coach"
+    end
+  end
+
   def password_required?
     # new coaches are created by admin invites. They do not need passwords at that point.
     if new_record?
