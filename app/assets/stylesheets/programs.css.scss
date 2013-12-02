@@ -214,21 +214,10 @@ form {
   margin: 0;
   padding: 0;
   div.checker, div.checker span, div.checker input {
-    width: 48px;
-    height: 40px;
+    width: 36px;
+    height: 32px;
     cursor: pointer;
   }
-}
-
-.checkbox div.checker.focus span.checked,
-.checkbox div.checker.hover span.checked,
-.checkbox div.checker.focus.active span.checked,
-.checkbox div.checker.hover.active span.checked,
-.checkbox div.checker span.checked {
-  width: 48px;
-  height: 40px;
-  background: asset_url('/assets/checkbox-sprite.png', image) no-repeat;
-  background-position: 0 -48px;
 }
 
 .checkbox div.checker.focus span,
@@ -236,11 +225,24 @@ form {
 .checkbox div.checker.focus.active span,
 .checkbox div.checker.hover.active span,
 .checkbox div.checker span {
-  width: 48px;
-  height: 40px;
+  width: 36px;
+  height: 32px;
   background: asset_url('/assets/checkbox-sprite.png', image) no-repeat;
-  background-position: 0 6px;
+  background-position: 0 5px;
 }
+
+.checkbox div.checker.focus span.checked,
+.checkbox div.checker.hover span.checked,
+.checkbox div.checker.focus.active span.checked,
+.checkbox div.checker.hover.active span.checked,
+.checkbox div.checker span.checked {
+  width: 36px;
+  height: 32px;
+  background: asset_url('/assets/checkbox-sprite.png', image) no-repeat;
+  background-position: 0 -34px;
+}
+
+
 
 .code {
   padding: 5px 12px;
