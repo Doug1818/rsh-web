@@ -1,7 +1,7 @@
 class SmallStepsController < ApplicationController
   def create
     @program = current_practice.programs.find(params[:small_step][:program_id])
-    @week = @program.weeks.find(params[:week_id])
+    @week = @program.weeks.find(params[:small_step][:week_id])
 
     @small_step = @week.small_steps.build(small_step_params)
 
@@ -18,11 +18,22 @@ class SmallStepsController < ApplicationController
 
   def update
     @program = current_practice.programs.find(params[:small_step][:program_id])
-    @small_step = @program.small_steps.find(params[:id])
+    @week = @program.weeks.find(params[:small_step][:week_id])
+    @old_small_step = @program.small_steps.find(params[:id])
+
+    # Remove the old HABTM relationship
+    @program.weeks.find(@week.id).small_steps.delete(@old_small_step.id)
+
+    # Create a new small step and relationship to the week
+    @small_step = @week.small_steps.build(small_step_params)
 
     respond_to do |format|
-      if @small_step.update_attributes(small_step_params)
+      if @week.save
         format.html { redirect_to(program_path(@small_step.program)) }
+        format.json { render json: @small_step, status: :created, location: @small_step }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @small_step.errors, status: :unprocessable_entity }
       end
     end
   end

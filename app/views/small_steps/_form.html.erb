@@ -4,10 +4,9 @@
 
 <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id, value: @program.id %>
-  <% if small_step.new_record? %>
-    <input type="hidden" name="week_id" value="<%= week.id %>">
-  <% end %>
-  <%= f.input_field :name, as: :string, collection: @program.small_steps, class: 'small_step_name' %> towards
+  <%= f.hidden_field :week_id, value: week.id %>
+  
+  <%= f.input_field :name, as: :string %> towards
   <%= f.input_field :big_step_id, as: :select, collection: small_step.program.big_steps, default: nil %>
   done
   <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
