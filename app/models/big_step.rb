@@ -5,4 +5,11 @@ class BigStep < ActiveRecord::Base
   def to_s
     "#{name}"
   end
+
+  def as_json(options={})
+    {
+      id: self.id,
+      text: self.name
+    }
+  end
 end

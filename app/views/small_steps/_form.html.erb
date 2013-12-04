@@ -5,9 +5,9 @@
 <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id, value: @program.id %>
   <%= f.hidden_field :week_id, value: week.id %>
-  
+
   <%= f.input_field :name, as: :string %> towards
-  <%= f.input_field :big_step_id, as: :select, collection: small_step.program.big_steps, default: nil %>
+  <%= f.input_field :big_step_id, as: :string, collection: @program.big_steps, class: 'big_step_name' %>
   done
   <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
 
@@ -41,9 +41,9 @@
 <% end %>
 
 <script>
-$(".small_step_name").select2({
+$(".big_step_name").select2({
 createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} },
 multiple: false,
-data: <%= raw(@program.small_steps.to_json) %>
+data: <%= raw(@program.big_steps.to_json) %>
 });
 </script>

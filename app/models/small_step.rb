@@ -20,10 +20,4 @@ class SmallStep < ActiveRecord::Base
     days.to_sentence
   end
 
-  def as_json(options={})
-    {
-      id: self.id,
-      text: self.name
-    }
-  end
 end
