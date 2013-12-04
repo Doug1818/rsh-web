@@ -25,12 +25,11 @@
   text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
 
-// no check-in necessary
+// user didn't check in at all (?)
 .status-0 {
-  background: #ffa721;
-  color: #ffa721;
+  background: #6d6e71;
   &:before {
-    content: "\e090";
+    content: "\e085";
   }
 }
 
@@ -68,11 +67,12 @@
   }
 }
 
-// user didn't check in at all (?)
+// no check-in necessary
 .status-4 {
-  background: #6d6e71;
+  background: #ffa721;
+  color: #ffa721;
   &:before {
-    content: "\e085";
+    content: "\e090";
   }
 }
 
