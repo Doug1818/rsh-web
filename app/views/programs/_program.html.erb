@@ -4,15 +4,7 @@
     <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "patient avatar") %>
     <h3><%= program.user.full_name %></h3>
     <div class="check-ins">
-      <ul class="list-inline">
-        <li class="check-in status-0"></li>
-        <li class="check-in status-1"></li>
-        <li class="check-in status-2"></li>
-        <li class="check-in status-3"></li>
-        <li class="check-in status-0"></li>
-        <li class="check-in status-0"></li>
-        <li class="check-in status-0"></li>
-      </ul>
+      <%= daily_checkmarks(program) %>
     </div>
   </div>
   <% end %>

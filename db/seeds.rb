@@ -97,50 +97,53 @@ class Seed
     @practices.each do |practice|
 
       puts "\nPractice: #{ practice.name }"
-      @program = practice.programs.last
+      @programs = practice.programs
 
-      puts "\n#{ @program.user.first_name }'s Program"
+      @programs.each do |program|
 
-      start_date = @program.start_date
-      end_date = Date.today
+        puts "\n#{ program.user.first_name }'s Program"
 
-      (start_date..end_date).each do |day|
-        @small_steps = @program.small_steps.includes(:weeks).where("DATE(?) BETWEEN weeks.start_date AND weeks.end_date", day).references(:weeks)
+        start_date = program.start_date
+        end_date = Date.today
 
-        # Create a check in for the day
-        comments = "Checking in for #{ day }"
-        @check_in = CheckIn.create(comments: comments, created_at: day)
-        puts "\n#{ comments }"
+        (start_date..end_date).each do |day|
+          @small_steps = program.small_steps.includes(:weeks).where("DATE(?) BETWEEN weeks.start_date AND weeks.end_date", day).references(:weeks)
 
-        # Mark each of the small steps for the check in
-        @small_steps.each_with_index do |small_step, i|
+          # Create a check in for the day
+          comments = "Checking in for #{ day }"
+          @check_in = CheckIn.create(comments: comments, created_at: day)
+          puts "\n#{ comments }"
 
-          # Mark all if it's Monday or Tuesday
-          # Mark none if it's Wednesday or Thursday
-          # Mark individually otherwise
-            # No if the current iteration is even, yes if it is odd
-          status = if (day.monday? or day.tuesday?)
-            1
-          elsif (day.wednesday? or day.thursday?)
-            0
-          else
-            i.even? ? 0 : 1
+          # Mark each of the small steps for the check in
+          @small_steps.each_with_index do |small_step, i|
+
+            # Mark all if it's Monday or Tuesday
+            # Mark none if it's Wednesday or Thursday
+            # Mark individually otherwise
+              # No if the current iteration is even, yes if it is odd
+            status = if (day.monday? or day.wednesday?)
+              1
+            elsif (day.tuesday? or day.thursday?)
+              0
+            else
+              i.even? ? 0 : 1
+            end
+
+            puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
+
+            if status == 0 and i.odd? # Give an excuse for every other one marked as did not do
+              excuse_name = "This is my excuse"
+              @excuse = practice.excuses.find_or_create_by name: excuse_name
+              @check_in.excuses << @excuse
+            end
+
+            week = program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
+
+            @check_in.small_step_id = small_step.id
+            @check_in.week_id = week.id
+            @check_in.activities.create(small_step_id: small_step.id, status: status, created_at: day)
+            @check_in.save!
           end
-
-          puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
-
-          if status == 0 and i.odd? # Give an excuse for every other one marked as did not do
-            excuse_name = "This is my excuse"
-            @excuse = practice.excuses.find_or_create_by name: excuse_name
-            @check_in.excuses << @excuse
-          end
-
-          week = @program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
-
-          @check_in.small_step_id = small_step.id
-          @check_in.week_id = week.id
-          @check_in.activities.create(small_step_id: small_step.id, status: status, created_at: day)
-          @check_in.save!
         end
       end
     end
