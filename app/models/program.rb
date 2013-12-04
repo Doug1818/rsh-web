@@ -21,6 +21,7 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :big_steps, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
+  scope :active, -> { where(status: STATUSES[:active])}
 
   def ensure_authentication_token
     if authentication_token.blank?
