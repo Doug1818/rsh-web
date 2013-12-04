@@ -8,7 +8,7 @@ class CoachesController < ApplicationController
 
   def show
     @coach = current_practice.coaches.find(params[:id])
-    @programs = @coach.programs.includes(:user)
+    @programs = @coach.programs.includes(:user).decorate
   end
 
   def new

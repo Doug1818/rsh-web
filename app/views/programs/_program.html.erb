@@ -4,7 +4,7 @@
     <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "patient avatar") %>
     <h3><%= program.user.full_name %></h3>
     <div class="check-ins">
-      <%= daily_checkmarks(program) %>
+      <%= program.daily_checkmarks %>
     </div>
   </div>
   <% end %>
