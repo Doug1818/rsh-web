@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-1">
+  <div class="col-md-12">
     Week <%= week.number %>:
   </div>
-  <div class="col-md-11 small-steps-for-week">
+  <div class="col-md-12 small-steps-for-week">
     <%= render week.small_steps.order('name'), week: week %>
 
     <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' %>
