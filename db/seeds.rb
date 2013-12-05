@@ -72,9 +72,9 @@ class Seed
                 }
 
                 case frequency_name
-                when '# Times Per Week'
+                when 'Times Per Week'
                   small_step[:times_per_week] = 4
-                when 'Specific Days of the Week'
+                when 'Specific Days'
                   small_step[:monday] = true
                   small_step[:wednesday] = true
                   small_step[:friday] = true
