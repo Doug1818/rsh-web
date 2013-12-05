@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8">
       <h2><%= @program.user.full_name %></h2>
-      <p><%= @program.purpose %></p>
+      <p><%= @program.purpose %> <%= @program.goal %></p>
       <hr/>
     </div>
   </div>
@@ -26,7 +26,7 @@
       <!-- this area needs to be scrollable -->
 
       <div class="tab-pane active" id="steps">
-        
+
         <%= render @weeks %>
 
         <div class="new-week">

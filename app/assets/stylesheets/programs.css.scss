@@ -134,6 +134,14 @@ form {
   input[type=text], input[type=email] {
     height: 46px;
   }
+  #program_purpose, #program_goal {
+    display: inline-block;
+    width: 49%;
+    float: left;
+  }
+  #program_goal {
+    float: right;
+  }
 }
 
 .small-step-cancel-button {
