@@ -231,6 +231,20 @@ owners = [{
   gender: 'Male',
   status: 1,
   role: 'owner'
+},{
+  first_name: 'Josh',
+  last_name: 'Boehringer',
+  email: 'joshadelic@gmail.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
+},{
+  first_name: 'Jon',
+  last_name: 'Rish',
+  email: 'jon@barbershoplabs.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
 }]
 
 seed = Seed.new(coaches: owners, program_count: 8) # Change the program_count to specify how many Programs each Practice should have.
