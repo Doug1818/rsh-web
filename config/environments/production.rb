@@ -84,7 +84,7 @@ RshWeb::Application.configure do
     :port           => "25",
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD']
+    :password       => ENV['SENDGRID_PASSWORD'],
     :domain         => ENV['SENDGRID_DOMAIN']
   }
 end
