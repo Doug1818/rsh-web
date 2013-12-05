@@ -1,6 +1,6 @@
 class Coach < ActiveRecord::Base
   STATUSES = { invited: 0, inactive: 1, active: 2 }
-  GENDERS = ["Male", "Female"]
+  GENDERS = ['', "Male", "Female"]
 
   belongs_to :practice
   has_many :programs

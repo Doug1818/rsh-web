@@ -142,6 +142,12 @@ form {
   #program_goal {
     float: right;
   }
+  label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 20px;
+    margin-left: -5px;
+  }
 }
 
 .small-step-cancel-button {
@@ -165,6 +171,11 @@ form {
     color: #6d6e71 !important;
     font-size: 18px !important;
     line-height: 46px !important;
+  }
+  &.new-program {
+    .select2-container {
+      max-width: 267px;
+    }
   }
 }
 
@@ -219,6 +230,19 @@ form {
   top: 12px !important;
   left: 12px !important;
   content: "\e113" !important;
+}
+
+.select2-chosen {
+  color: #999 !important;
+}
+
+.select2-results .select2-highlighted {
+  background: #e3952c !important;
+}
+
+.select2-drop-active {
+  border: 1px solid #e3952c !important;
+  border-top: none !important;
 }
 
 .checkbox {
