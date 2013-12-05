@@ -50,4 +50,5 @@ end
 
 group :production do
   gem 'unicorn', '4.6.3' # rack http server
+  gem 'rails_12factor'
 end
