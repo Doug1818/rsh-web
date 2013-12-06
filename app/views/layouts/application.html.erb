@@ -56,14 +56,14 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <%= form_tag coach_path, :method => :get, :class => "navbar-form navbar-right", role: "search" do %>
-            <!-- <form class="navbar-form navbar-right" role="search"> -->
+            <% if current_coach.present? %>
+            <%= form_tag coach_path(current_coach), :method => :get, :class => "navbar-form navbar-right", role: "search" do %>
               <div class="form-group">
                 <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "find a patient" %>
               </div>
               <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
             <% end %>
-           <!-- </form> -->
+            <% end %>
           </li>
         </ul>
       </div><!--/.nav-collapse -->
