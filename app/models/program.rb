@@ -21,6 +21,16 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :big_steps, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
+  searchable do
+    integer :coach_id do
+      coach.id
+    end
+    text :user do
+      user.full_name
+    end
+    text :purpose
+    text :goal
+  end
 
   def ensure_authentication_token
     if authentication_token.blank?
