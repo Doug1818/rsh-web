@@ -72,9 +72,9 @@ class Seed
                 }
 
                 case frequency_name
-                when '# Times Per Week'
+                when 'Times Per Week'
                   small_step[:times_per_week] = 4
-                when 'Specific Days of the Week'
+                when 'Specific Days'
                   small_step[:monday] = true
                   small_step[:wednesday] = true
                   small_step[:friday] = true
@@ -214,6 +214,34 @@ owners = [{
   first_name: 'Adam',
   last_name: 'Rubin',
   email: 'adam@barbershoplabs.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
+},{
+  first_name: 'Rick',
+  last_name: 'McMullen',
+  email: 'roderick.mcmullen@gmail.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
+},{
+  first_name: 'Doug',
+  last_name: 'Raicek',
+  email: 'doug.raicek@gmail.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
+},{
+  first_name: 'Josh',
+  last_name: 'Boehringer',
+  email: 'joshadelic@gmail.com',
+  gender: 'Male',
+  status: 1,
+  role: 'owner'
+},{
+  first_name: 'Jon',
+  last_name: 'Rish',
+  email: 'jon@barbershoplabs.com',
   gender: 'Male',
   status: 1,
   role: 'owner'

@@ -25,6 +25,9 @@ gem 'stripe' #credit card processing
 gem 'cocoon'
 gem 'deep_cloneable', '~> 1.6.0'
 gem 'draper', '~> 1.3' # Decorators
+gem 'faker'
+gem 'sunspot_rails' # search
+gem 'sunspot_solr' # search
 
 group :doc do
   gem 'sdoc', require: false
@@ -39,7 +42,6 @@ group :development, :test do
   gem 'debugger'
   gem 'rspec-rails', '~> 2.0'
   gem 'factory_girl_rails', '~> 4.0'
-  gem 'faker'
 end
 
 group :test do
@@ -50,4 +52,5 @@ end
 
 group :production do
   gem 'unicorn', '4.6.3' # rack http server
+  gem 'rails_12factor'
 end

@@ -1,15 +1,18 @@
 <div class="row">
   <div class="col-md-1">
     Week <%= week.number %>:
+    <button type="button" class="btn btn-warning toggle" data-toggle="collapse" data-target="#detail-<%= week.number %>">hide</button>
   </div>
   <div class="col-md-11 small-steps-for-week">
-    <%= render week.small_steps.order('name'), week: week %>
+    <div id="detail-<%= week.number %>" class="collapse in">
+      <%= render week.small_steps.order('name'), week: week %>
 
-    <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' %>
+      <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' %>
 
-    <div class="small-step">
-      <div class="form">
-        <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
+      <div class="small-step">
+        <div class="form">
+          <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
+        </div>
       </div>
     </div>
     <%= render 'check_ins/list', collection: week.check_ins, week: week %>

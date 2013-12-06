@@ -2,14 +2,15 @@
   display: inline-block;
   position: relative;
   top: 1px;
-  width: 50px;
-  height: 40px;
+  width: 139px;
+  height: 76px;
   color: #fff;
   font-family: 'Glyphicons Halflings';
   font-style: normal;
   font-weight: normal;
+  font-size: 38px;
+  line-height: 78px;
   text-align: center;
-  line-height: 40px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -20,19 +21,21 @@
   }
 }
 
-// no status for this check-in
+.status-1, .status-2, .status-3, .status-4 {
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+// user didn't check in at all (?)
 .status-0 {
-  background: #ccc;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+  background: #6d6e71;
   &:before {
-    content: "\e090";
+    content: "\e085";
   }
 }
 
 // mixed status (some yes, some no)
 .status-1 {
-  background: #4285f4;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+  background: #6d6e71;
   &:before {
     content: "\e014";
   }
@@ -43,15 +46,14 @@
     right: 2px;
     width: 0;
     height: 0;
-    border-top: 0.5em solid #dd4937;
+    border-top: 0.5em solid #fff;
     border-left: 0.5em solid transparent;
   }
 }
 
 // all yes (check)
 .status-2 {
-  background: #009d59;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+  background: #ffa721;
   &:before {
     content: "\e013";
   }
@@ -59,10 +61,18 @@
 
 // all no (x)
 .status-3 {
-  background: #dd4937;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.35);
+  background: #6d6e71;
   &:before {
     content: "\e014";
+  }
+}
+
+// no check-in necessary
+.status-4 {
+  background: #ffa721;
+  color: #ffa721;
+  &:before {
+    content: "\e090";
   }
 }
 

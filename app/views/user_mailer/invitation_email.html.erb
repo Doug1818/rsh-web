@@ -1,6 +1,6 @@
 <p>Hello <%= @user.first_name %>,</p>
 
-<p><%= @program.coach.full_name %> has been invited to join Right Side Health to <%= @program.purpose %>.</p>
+<p><%= @program.coach.full_name %> has been invited to join Right Side Health <%= @program.purpose %> <%= @program.goal%>.</p>
 
 <p>Please download the Right Side Health iOS app via: ..., and sign in using the following invitation code: <%= @program.authentication_token %></p>
 

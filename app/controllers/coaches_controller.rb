@@ -8,7 +8,15 @@ class CoachesController < ApplicationController
 
   def show
     @coach = current_practice.coaches.find(params[:id])
-    @programs = @coach.programs.includes(:user).decorate
+
+    if params[:search].present?
+      @search = Program.search(include: :user) do
+        fulltext params[:search]
+      end
+      @programs = ProgramDecorator.decorate_collection(@search.results)
+    else
+      @programs = @coach.programs.includes(:user).decorate
+    end
   end
 
   def new

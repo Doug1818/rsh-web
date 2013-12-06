@@ -22,6 +22,16 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
   scope :active, -> { where(status: STATUSES[:active])}
+  searchable do
+    integer :coach_id do
+      coach.id
+    end
+    text :user do
+      user.full_name
+    end
+    text :purpose
+    text :goal
+  end
 
   def ensure_authentication_token
     if authentication_token.blank?
@@ -39,6 +49,7 @@ class Program < ActiveRecord::Base
   end
 
   def send_invitation
-    UserMailer.invitation_email(self).deliver
+    # TODO remove the unless when we're ready to go live
+    UserMailer.invitation_email(self).deliver unless Rails.env.production?
   end
 end

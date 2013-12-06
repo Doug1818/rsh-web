@@ -17,13 +17,22 @@
   <div class="row">
     <div class="col-md-12">
       <div class="well create">
-        <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
+        <%= simple_form_for @program, html: { class: "form-vertical new-program" } do |f| %>
           <%= f.fields_for :user do |f| %>
-            <%= f.input :full_name, label: false, placeholder: 'Name' %>
-            <%= f.input :email, label: false, placeholder: 'Email Address' %>
+          <div class="row">
+            <div class="col-md-9">
+              <%= f.input :full_name, label: false, placeholder: 'Name' %>
+            </div>
+            <div class="col-md-3">
+              <%= f.input :gender, collection: User::GENDERS, label: false, default: nil, placeholder: 'Gender' %>
+            </div>
+          </div>
+            <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
+            
           <% end %>
-
-          <%= f.input :purpose, :input_html => { :rows => 6 }, label: false, placeholder: 'Why are they here?' %>
+          <%= f.input :purpose, label: false, placeholder: 'Why are they here?' %>
+          <%= f.input :goal, label: false, placeholder: 'In order to?' %>
+          <div class="clearfix"></div>
         <div class="row">
           <div class="pull-right">
           <%= f.submit 'Add Patient', class: 'btn btn-primary' %>

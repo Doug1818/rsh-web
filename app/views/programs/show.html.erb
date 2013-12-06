@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <%= image_tag(@program.user.avatar.large.url) %>
+    <div class="col-md-4">
+      <div class="pull-right">
+        <%= image_tag(@program.user.avatar.large.url) %>
+      </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <h2><%= @program.user.full_name %></h2>
-      <p><%= @program.purpose %></p>
+      <p><%= @program.purpose %> <%= @program.goal %></p>
       <hr/>
     </div>
   </div>
@@ -13,7 +15,7 @@
     <div class="col-md-12">
       <ul class="list-inline view">
         <li>View:</li>
-        <li><a href="#steps" data-toggle="tab" class="active">Steps</a></li>
+        <li class="active"><a href="#steps" data-toggle="tab">Steps</a></li>
         <li><a href="#advanced-settings" data-toggle="tab">Advanced Settings</a></li>
       </ul>
     </div>
@@ -24,7 +26,7 @@
       <!-- this area needs to be scrollable -->
 
       <div class="tab-pane active" id="steps">
-        <br/>
+
         <%= render @weeks %>
 
         <div class="new-week">
@@ -37,25 +39,25 @@
         <div class="well">
           <h2>My Alerts</h2>
           <%= render @alerts %>
-          <%= link_to 'Create a new alert', new_alert_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, new_alert_path(program_id: @program.id) %>
         </div>
 
         <div class="well">
           <h2>User Reminders</h2>
           <%= render @reminders %>
-          <%= link_to 'Create a new reminder', new_reminder_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, new_reminder_path(program_id: @program.id) %>
         </div>
 
         <div class="well">
           <h2>Accountability Tools</h2>
           <%= render @supporters %>
-          <%= link_to 'Create a new supporter', new_supporter_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, new_supporter_path(program_id: @program.id) %>
         </div>
 
         <div class="well">
           <h2>To Dos</h2>
           <%= render @todos %>
-          <%= link_to 'Create a new to-do', new_todo_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, new_todo_path(program_id: @program.id) %>
         </div>
       </div>
 
