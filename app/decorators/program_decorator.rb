@@ -25,4 +25,9 @@ class ProgramDecorator < Draper::Decorator
     end
   end
 
+  def day_number(day)
+    date_difference = (day - start_date).to_i + 1
+    "Day #{date_difference}" if date_difference > 0
+  end
+
 end
