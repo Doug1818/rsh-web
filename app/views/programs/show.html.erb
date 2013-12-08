@@ -15,8 +15,8 @@
     <div class="col-md-12">
       <ul class="list-inline view">
         <li>View:</li>
-        <li class="active"><a href="#steps" data-toggle="tab">Steps</a></li>
-        <li><a href="#advanced-settings" data-toggle="tab">Advanced Settings</a></li>
+        <li class="<%= 'active' if @active == 'steps' %>"><a href="#steps" data-toggle="tab">Steps</a></li>
+        <li class="<%= 'active' if @active == 'advanced-settings' %>"><a href="#advanced-settings" data-toggle="tab">Advanced Settings</a></li>
       </ul>
     </div>
   </div>
@@ -25,7 +25,7 @@
 
       <!-- this area needs to be scrollable -->
 
-      <div class="tab-pane active" id="steps">
+      <div class="tab-pane <%= 'active' if @active == 'steps' %>" id="steps">
 
         <%= render @weeks %>
 
@@ -35,11 +35,17 @@
       </div>
 
 
-      <div class="tab-pane" id="advanced-settings">
+      <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
           <h2>My Alerts</h2>
           <%= render @alerts %>
-          <%= link_to "<span class='btn-plus'></span>".html_safe, new_alert_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-alert-link' %>
+
+          <div class="alert">
+            <div class="form">
+              <%= render partial: 'alerts/form', locals: { alert: Alert.new(program: @program) } %>
+            </div>
+          </div>
         </div>
 
         <div class="well">

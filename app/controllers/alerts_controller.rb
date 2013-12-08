@@ -13,7 +13,7 @@ class AlertsController < ApplicationController
 
     respond_to do |format|
       if @program.present? && @alert.save
-        format.html { redirect_to(program_path(@program)) }
+        format.html { redirect_to(program_path(@program, active: 'advanced-settings')) }
         format.json { render json: @alert, status: :created, location: @alert }
       else
         format.html { render action: "new" }

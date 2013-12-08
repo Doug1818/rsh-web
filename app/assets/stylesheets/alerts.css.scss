@@ -14,6 +14,12 @@
   }
 }
 
+.alert {
+  .form {
+    display: none;
+  }
+}
+
 @media (max-width: 991px) {
   #new_alert {
     > p, .form-group {

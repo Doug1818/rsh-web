@@ -1,9 +1,9 @@
-<%= simple_form_for @alert, html: { class: "form-vertical" } do |f| %>
-  <p>Alert me when <%= @program.user.full_name %></p>
+<%= simple_form_for alert, html: { class: "form-vertical" } do |f| %>
+  <p>Send me an email when <%= @program.user.first_name %> gets</p>
   <%= f.hidden_field :program_id %>
-  <%= f.input :action_type, as: :select, collection: Alert::ACTION_TYPES, label: false, placeholder: 'Action type' %>
-  <%= f.input :streak, as: :select, collection: 1..7, label: false, placeholder: 'Streak' %>
-  <%= f.input :sequence, as: :select, collection: Alert::SEQUENCES, label: false, placeholder: 'Sequence' %>
+  <%= f.input :streak, as: :select, collection: 1..7, label: false, selected: 3 %>
+  <%= f.input :action_type, as: :select, collection: Alert::ACTION_TYPES, label: false, selected: Alert::ACTION_TYPES['Misses'] %>
+  <%= f.input :sequence, as: :select, collection: Alert::SEQUENCES, label: false, selected: Alert::SEQUENCES['In a row'] %>
 
   <%= f.submit "Create Alert", class: 'btn btn-primary' %>
 <% end %>

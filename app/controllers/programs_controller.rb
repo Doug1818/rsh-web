@@ -14,6 +14,13 @@ class ProgramsController < ApplicationController
     @reminders = @program.reminders
     @supporters = @program.supporters
     @todos = @program.todos
+
+    @active = if params[:active]
+      params[:active]
+    else
+      'steps'
+    end
+
   end
 
   def new
