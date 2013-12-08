@@ -48,6 +48,7 @@
           <%= link_to "<span class='btn-plus'></span>".html_safe, new_reminder_path(program_id: @program.id) %>
         </div>
 
+        <% if false # Currently not in use, but may be in the future %>
         <div class="well">
           <h2>Accountability Tools</h2>
           <%= render @supporters %>
@@ -60,6 +61,7 @@
           <%= link_to "<span class='btn-plus'></span>".html_safe, new_todo_path(program_id: @program.id) %>
         </div>
       </div>
+      <% end %>
 
       <!-- end scrollable area -->
 
