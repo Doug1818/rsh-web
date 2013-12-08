@@ -6,9 +6,7 @@
   <div class="col-md-11 small-steps-for-week">
     <div id="detail-<%= week.number %>" class="collapse in">
       <%= render week.small_steps.order('name'), week: week %>
-
-      <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' %>
-
+      <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' if week.end_date >= Date.today %>
       <div class="small-step">
         <div class="form">
           <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
