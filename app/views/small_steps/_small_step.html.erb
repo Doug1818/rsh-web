@@ -5,9 +5,10 @@
     <div class="small-step-name"><%= small_step.name %></div>
     <div class="frequency"><%= display_frequency(small_step) %></div>
     <div class="links">
+      <% if week.end_date >= Date.today %>
       <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, "#", class: 'small-step-edit-link' %>
       <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, small_step_path(small_step, program_id: @program.id, week_id: week.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'small-step-delete-link' %>
-
+      <% end %>
     </div>
     <div class="clearfix"></div>
   </div>
