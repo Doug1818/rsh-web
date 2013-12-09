@@ -29,5 +29,18 @@ jQuery(document).ready(function($) {
     _this.html(_this.text() == 'hide' ? 'show' : 'hide');
   });
 
+  $('.display').hover(
+    function() {
+      $(this).find('.links').css('display', 'inline-block');
+    }, function() {
+      $(this).find('.links').css('display', 'none');
+    }
+  );
+  
+  $('.collapse').on('hidden.bs.collapse', function(){
+    $('#steps').animate({ scrollTop: $('.past_week').offset().top - 370 }, 1000);
+  });
+
+
   $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
 });

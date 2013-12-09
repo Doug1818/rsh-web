@@ -285,9 +285,29 @@ form {
   background-position: 0 -34px;
 }
 
-
-
 .code {
   padding: 5px 12px;
   background: #f1f1f2;
+}
+
+.past_week .small-steps-for-week {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.links {
+  display: none;
+}
+
+.day-names {
+  margin-top: 6px;
+  color: #6d6e71;
+  line-height: 24px;
+}
+.day-numbers {
+  color: #ffa721;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 26px;
 }

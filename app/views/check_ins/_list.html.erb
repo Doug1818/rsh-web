@@ -1,12 +1,12 @@
 <% (week.start_date..week.end_date).each do |day| %>
-  <div style="float: left; margin-right: 3px;">
+  <div class="check-in-wrap">
   <% if week.has_check_in_for_day(day) %>
     <% status = week.find_check_in_for_day(day).status %>
     <div class="check-in status-<%=status%>"></div>
   <% else %>
     <div class="check-in status-<%=CheckIn::STATUSES[:none]%>"></div>
   <% end %>
-  <div><%= Date::ABBR_DAYNAMES[day.wday] %></div>
-  <div><%= @program.day_number(day) %></div>
+  <div class="day-names"><%= Date::ABBR_DAYNAMES[day.wday] %></div>
+  <div class="day-numbers"><%= @program.day_number(day) %></div>
   </div>
 <% end %>

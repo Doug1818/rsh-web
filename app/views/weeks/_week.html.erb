@@ -1,10 +1,9 @@
-<div class="row <%= 'current_week' if week.current_week? %>">
+<div class="row <%= 'current_week' if week.current_week? %><%= 'past_week' if week.past_week? %>">
   <div class="col-md-1">
     Week <%= week.number %>:
-    <button type="button" class="btn btn-warning toggle" data-toggle="collapse" data-target="#detail-<%= week.number %>">hide</button>
   </div>
   <div class="col-md-11 small-steps-for-week">
-    <div id="detail-<%= week.number %>" class="collapse in <%= 'hidden' if week.past_week? %>">
+    <div id="detail-<%= week.number %>" class="collapse <%= 'in' if week.current_week? %>">
       <%= render week.small_steps.order('name'), week: week %>
       <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' unless week.past_week? %>
       <div class="small-step">
@@ -13,6 +12,8 @@
         </div>
       </div>
     </div>
-    <%= render 'check_ins/list', collection: week.check_ins, week: week unless week.future_week? %>
+    <div class="toggle col-md-12" data-toggle="collapse" data-target="#detail-<%= week.number %>">
+      <%= render 'check_ins/list', collection: week.check_ins, week: week unless week.future_week? %>
+    </div>
   </div>
 </div>
