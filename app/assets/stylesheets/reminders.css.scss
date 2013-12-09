@@ -12,40 +12,83 @@ input#send_time {
   p {
     float: left;
     padding-right: 6px;
+    line-height: 46px;
   }
   .form {
     display: none;
-
     .frequency-option {
       display: none;
     }
   }
   #new_reminder {
-    .col-md-12 + p {
-      margin-left: -5px;
-    }
     label {
+      float: left;
       margin-left: 5px;
+      min-width: 31px;
+      width: auto;
+      font-size: 16.31pt;
+      line-height: 46px;
+      text-align: right;
     }
     span {
       float: left;
+      margin: 0;
     }
-    .form-group.reminder_frequency {
-      float: left;
-      margin-top: -6px;
+    .once, .daily {
+      .form-group {
+        .form-control {
+          width: 100%;
+          max-width: 80%;
+        }
+        +.reminder_frequency {
+          float: left;
+          margin-top: -6px;
+        }
+        +.reminder_body {
+          float: none;
+          margin: 10px 5px;
+        }
+      }
+      .form-group.reminder_send_at,
+      .form-group.reminder_send_on {
+        display: inline-block;
+        width: 100%;
+        max-width: 46%;
+        .picker {
+          width: 95%;
+          margin-left: 5%;
+        }
+      }
     }
-    .form-group.reminder_send_at,
-    .form-group.reminder_send_on {
-      display: inline-block;
+    .weekly, .monthly {
+      .form-group {
+        margin: -6px 6px 20px 6px;
+        .form-control {
+          width: 75%;
+        }
+        +.reminder_frequency {
+          float: left;
+          margin-top: -6px;
+        }
+        +.reminder_body {
+          float: none;
+          margin: 10px 5px;
+        }
+      }
+      .form-group.reminder_send_at,
+      .form-group.reminder_send_on {
+        display: inline-block;
+        width: 100%;
+        max-width: 51%;
+        .picker {
+          width: 95%;
+          margin-left: 5%;
+        }
+      }
     }
-    .form-group.reminder_body {
-      float: none;
-      margin: 10px 5px;
-    }
+    
     .weekly .form-group {
-      margin-top: -6px;
-      margin-left: 6px;
-      margin-right: 6px;
+      
     }
     .reminder_weekly_recurrence,
     .reminder_day_of_week {
