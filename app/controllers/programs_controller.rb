@@ -8,7 +8,7 @@ class ProgramsController < ApplicationController
 
   def show
     @program = current_coach.programs.find(params[:id]).decorate
-    @weeks = @program.weeks.includes(:small_steps => [:big_step, :program]).includes(:check_ins)
+    @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
 
     @alerts = @program.alerts
     @reminders = @program.reminders
