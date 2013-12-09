@@ -36,14 +36,6 @@ jQuery(document).ready(function($) {
       $(this).find('.links').css('display', 'none');
     }
   );
-
-  $(function(){
-    $('.small-steps-for-week').each(function(i) {
-      if(i > -1){
-        $(this).addClass("week-number-" + (i+1));
-      }
-    });
-  });
   
   $('.collapse').on('hidden.bs.collapse', function(){
     $('#steps').animate({ scrollTop: $('.past_week').offset().top - 370 }, 1000);
