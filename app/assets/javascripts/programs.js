@@ -15,6 +15,8 @@ jQuery(document).ready(function($) {
     });
   }
 
+  
+
   $(document).on('cocoon:after-insert','#program_small_steps',function (event) {
     $('select').select2({
       minimumResultsForSearch: -1,
@@ -27,8 +29,5 @@ jQuery(document).ready(function($) {
     _this.html(_this.text() == 'hide' ? 'show' : 'hide');
   });
 
-  if ($('.current_week').length > 0) {
-    $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
-  }
-
+  $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
 });
