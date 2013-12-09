@@ -20,7 +20,6 @@ class ProgramsController < ApplicationController
     else
       'steps'
     end
-
   end
 
   def new

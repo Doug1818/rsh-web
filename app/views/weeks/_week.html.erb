@@ -1,4 +1,7 @@
 <div class="row">
+  <% if week.current_week? %>
+    <div><a name="current_week"></a></div>
+  <% end %>
   <div class="col-md-1">
     Week <%= week.number %>:
     <button type="button" class="btn btn-warning toggle" data-toggle="collapse" data-target="#detail-<%= week.number %>">hide</button>
