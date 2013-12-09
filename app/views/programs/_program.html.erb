@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-md-4 col-sm-6">
-  <%= link_to program_path(program, anchor: "current_week") do %>
+  <%= link_to program_path(program) do %>
   <div class="well patient">
     <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "patient avatar") %>
     <h3><%= program.user.full_name %></h3>

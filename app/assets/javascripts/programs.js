@@ -29,4 +29,5 @@ jQuery(document).ready(function($) {
     _this.html(_this.text() == 'hide' ? 'show' : 'hide');
   });
 
+  $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
 });
