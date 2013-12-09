@@ -27,7 +27,7 @@
     <div class="col-md-12">
       <%= f.input :send_at, as: :string, input_html: { class: "datepicker" }, label: 'Starting on', placeholder: 'Start Date' %>
     </div>
-    <%= f.input :body, label: false, placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
+    <%= f.input :body, label: 'Message', placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
     <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
   </div>
 
