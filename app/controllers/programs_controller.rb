@@ -11,7 +11,7 @@ class ProgramsController < ApplicationController
     @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
 
     @alerts = @program.alerts
-    @reminders = @program.reminders
+    @reminders = @program.reminders.decorate
     @supporters = @program.supporters
     @todos = @program.todos
 

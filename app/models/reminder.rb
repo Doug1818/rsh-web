@@ -5,20 +5,18 @@ class Reminder < ActiveRecord::Base
   belongs_to :program
   has_one :user, through: :program
 
-  attr_accessor :send_on
-
   before_save :set_send_at
 
   private
 
-  # Time and Date are separate fields in the form
-  # This combines them to set the send_at column
-  # Note: send_on is a virtual attribute
+  # Use the provided time if it's specified,
+  # otherwise set it to 8:00 AM.
   def set_send_at
-    if self.frequency == FREQUENCIES["Once"]
-      time = Time.parse(send_at.strftime("%H:%M %p")) 
-      date = Date.parse(send_on)
-      self.send_at = DateTime.parse("#{ date.strftime } #{ time }")
+    time = unless send_at.nil?
+      Time.parse(send_at.strftime("%H:%M %p")) 
+    else
+      Time.parse("8:00 AM")
     end
+    self.send_at = DateTime.parse("#{ send_on } #{ time }")
   end
 end

@@ -23,6 +23,6 @@ class RemindersController < ApplicationController
   end
 
   def reminder_params
-    params.require(:reminder).permit(:body, :frequency, :send_at, :send_on, :program_id, :weekly_recurrence, :day_of_week, :start_date)
+    params.require(:reminder).permit(:body, :frequency, :send_at, :send_on, :program_id, :monthly_recurrence, :weekly_recurrence, :daily_recurrence, :day_of_week, :start_date)
   end
 end

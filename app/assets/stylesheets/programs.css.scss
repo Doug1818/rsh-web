@@ -108,6 +108,14 @@ ul.view {
     margin-bottom: 18px;
     font-size: 1.1em;
   }
+  table {
+    tr {
+      td {
+        width: 100px;
+        vertical-align: top;
+      }
+    }
+  }
 }
 
 .tab-pane {
