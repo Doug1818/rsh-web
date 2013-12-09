@@ -1,15 +1,18 @@
 <%= simple_form_for reminder, html: { class: "form-vertical" } do |f| %>
-  <p>Message should be sent</p>
-  <%= f.hidden_field :program_id %>
-  <%= f.input :frequency, as: :select, input_html: { class: 'frequency' }, collection: Reminder::FREQUENCIES, label: false, placeholder: 'Frequency' %>
+  <div class="col-md-12">
+    <p>Message should be sent</p>
+    <%= f.hidden_field :program_id %>
+    <%= f.input :frequency, as: :select, input_html: { class: 'frequency' }, collection: Reminder::FREQUENCIES, label: false, placeholder: 'Frequency' %>
+  </div>
+  <div class="clearfix"></div>
 
   <!-- ONCE //-->
   <div class="row frequency-option once">
-    <div class="col-md-5">
+    <div class="col-md-12">
       <%= f.input :send_at, as: :string, input_html: { class: 'timepicker' }, label: 'At', placeholder: 'Send Time' %>
     </div>
-    <div class="col-md-5">
-      <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: "On", placeholder: 'Send Date' %>
+    <div class="col-md-12">
+      <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: 'On', placeholder: 'Send Date' %>
     </div>
     <%= f.input :body, label: false, placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
     <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
@@ -17,14 +20,12 @@
 
   <!-- WEEKLY //-->
   <div class="row frequency-option weekly">
-    <div class="col-md-5">
-      Every <%= f.input :weekly_recurrence, as: :select, collection: 1..5, label: false, selected: 2 %> weeks
+    <div class="col-md-12">
+      <span>Every </span><%= f.input :weekly_recurrence, as: :select, collection: 1..5, label: false, selected: 2 %> <span>weeks on </span><%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false, selected: Reminder::DAYS_OF_THE_WEEK["Monday"] %>
+      <div class="clearfix"></div>
     </div>
-    <div class="col-md-5">
-      On <%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false, selected: Reminder::DAYS_OF_THE_WEEK["Monday"] %>
-    </div>
-    <div class="col-md-5">
-      Starting <%= f.input :send_at, as: :string, input_html: { class: "datepicker" }, label: false, placeholder: 'Start Date' %>
+    <div class="col-md-12">
+      <%= f.input :send_at, as: :string, input_html: { class: "datepicker" }, label: 'Starting on', placeholder: 'Start Date' %>
     </div>
     <%= f.input :body, label: false, placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
     <%= f.submit "Create Reminder", class: 'btn btn-primary' %>

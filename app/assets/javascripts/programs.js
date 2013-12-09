@@ -15,8 +15,6 @@ jQuery(document).ready(function($) {
     });
   }
 
-  
-
   $(document).on('cocoon:after-insert','#program_small_steps',function (event) {
     $('select').select2({
       minimumResultsForSearch: -1,
