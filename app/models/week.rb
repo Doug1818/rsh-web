@@ -24,4 +24,13 @@ class Week < ActiveRecord::Base
   def current_week?
     (start_date..end_date).cover? Date.today
   end
+
+  def past_week?
+    Date.today > end_date
+  end
+
+  def future_week?
+    Date.today < start_date
+  end
+
 end
