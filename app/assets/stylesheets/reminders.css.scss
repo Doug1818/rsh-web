@@ -6,3 +6,13 @@ input#send_time {
   padding: 0 15px;
   width: 100%;
 }
+
+.reminder {
+  .form {
+    display: none;
+
+    .frequency-option {
+      display: none;
+    }
+  }
+}

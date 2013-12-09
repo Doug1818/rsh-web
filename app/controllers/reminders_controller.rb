@@ -13,7 +13,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @program.present? && @reminder.save
-        format.html { redirect_to(program_path(@program)) }
+        format.html { redirect_to(program_path(@program, active: 'advanced-settings')) }
         format.json { render json: @reminder, status: :created, location: @reminder }
       else
         format.html { render action: "new" }
@@ -23,6 +23,6 @@ class RemindersController < ApplicationController
   end
 
   def reminder_params
-    params.require(:reminder).permit(:body, :frequency, :send_at, :program_id)
+    params.require(:reminder).permit(:body, :frequency, :send_at, :send_on, :program_id, :weekly_recurrence, :day_of_week, :start_date)
   end
 end

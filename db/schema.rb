@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205204613) do
+ActiveRecord::Schema.define(version: 20131209003007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,8 @@ ActiveRecord::Schema.define(version: 20131205204613) do
     t.datetime "send_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "weekly_recurrence"
+    t.integer  "day_of_week"
   end
 
   create_table "small_steps", force: true do |t|

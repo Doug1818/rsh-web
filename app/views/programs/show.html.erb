@@ -25,7 +25,7 @@
 
       <!-- this area needs to be scrollable -->
 
-      <div class="tab-pane <%= 'active' if @active == 'steps' %>" id="steps">
+      <div class="tab-pane scrollable <%= 'active' if @active == 'steps' %>" id="steps">
 
         <%= render @weeks %>
 
@@ -48,10 +48,16 @@
           </div>
         </div>
 
-        <div class="well">
+        <div class="well" style="min-height: 550px;">
           <h2>User Reminders</h2>
           <%= render @reminders %>
-          <%= link_to "<span class='btn-plus'></span>".html_safe, new_reminder_path(program_id: @program.id) %>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-reminder-link' %>
+
+          <div class="reminder">
+            <div class="form">
+              <%= render partial: 'reminders/form', locals: { reminder: Reminder.new(program: @program) } %>
+            </div>
+          </div>
         </div>
 
         <% if false # Currently not in use, but may be in the future %>

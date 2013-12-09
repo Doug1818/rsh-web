@@ -1,5 +1,5 @@
 <div class="program-reminder">
   <%= Reminder::FREQUENCIES.keys[reminder.frequency] %>
-  <%= reminder.body %>
-  <%= reminder.send_at %>
+  <%= reminder.body %></td>
+  <%= reminder.send_at.getlocal.strftime("%B %e, %Y at %l:%M %p") %>
 </div>
