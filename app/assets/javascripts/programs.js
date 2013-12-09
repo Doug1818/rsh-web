@@ -29,5 +29,17 @@ jQuery(document).ready(function($) {
     _this.html(_this.text() == 'hide' ? 'show' : 'hide');
   });
 
+  $('.display').hover(
+    function() {
+      $(this).find('.links').css('display', 'inline-block');
+    }, function() {
+      $(this).find('.links').css('display', 'none');
+    }
+  );
+
+  $('.past_week .small-steps-for-week').on('click', function(){
+    $(this).find('.collapse').collapse();
+  });
+
   $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
 });
