@@ -1,0 +1,1 @@
+$("#small-step-<%= @small_step.id %>").html('<%= escape_javascript(render partial: 'small_steps/form', locals: { small_step: @small_step, week: @week }) %>');

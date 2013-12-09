@@ -51,7 +51,17 @@
         
         <div class="well">
           <h2>User Reminders</h2>
-          <%= render @reminders %>
+          <% if @reminders.present? %>
+          <table width="1000">
+            <tr>
+              <th>Frequency</th>
+              <th>Date/Starting</th>
+              <th>Time</th>
+              <th>Message</th>
+            </tr>
+            <%= render @reminders %>
+          </table>
+          <% end %>
           <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-reminder-link' %>
 
           <div class="reminder">

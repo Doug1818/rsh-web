@@ -9,14 +9,20 @@ input#send_time {
 
 .reminder {
   margin-top: 15px;
-  p {
+  p, span, label {
     float: left;
     padding-right: 6px;
     line-height: 46px;
+    font-size: 18px;
+    display: inline-block;
   }
   .form {
     display: none;
     .frequency-option {
+      display: none;
+    }
+
+    .message-send-on {
       display: none;
     }
   }
@@ -90,9 +96,12 @@ input#send_time {
     .weekly .form-group {
       
     }
+    .reminder_monthly_recurrence,
     .reminder_weekly_recurrence,
+    .reminder_daily_recurrence,
     .reminder_day_of_week {
       float: left;
+      display: inline-block;
     }
   }
 }
