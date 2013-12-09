@@ -4,4 +4,6 @@ jQuery(document).ready(function($) {
     minimumResultsForSearch: -1
   });
 
+  $('input[type=checkbox]').uniform();
+
 });

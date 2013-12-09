@@ -88,13 +88,13 @@ a, a:hover {
     content: "\2b";
   }
 }
-
+/* conflicting with alerts and reminders boxes
 h2 ~ div {
   margin-bottom: 10px;
   height: 46px;
   line-height: 44px;
 }
-
+ */
 ul.view {
   float: none;
   text-align: center;

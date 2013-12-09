@@ -41,14 +41,15 @@
           <%= render @alerts %>
           <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-alert-link' %>
 
-          <div class="alert">
+          <div class="alerts">
             <div class="form">
               <%= render partial: 'alerts/form', locals: { alert: Alert.new(program: @program) } %>
             </div>
           </div>
+          <div class="clearfix"></div>
         </div>
-
-        <div class="well" style="min-height: 550px;">
+        
+        <div class="well">
           <h2>User Reminders</h2>
           <%= render @reminders %>
           <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-reminder-link' %>
@@ -58,6 +59,7 @@
               <%= render partial: 'reminders/form', locals: { reminder: Reminder.new(program: @program) } %>
             </div>
           </div>
+          <div class="clearfix"></div>
         </div>
 
         <% if false # Currently not in use, but may be in the future %>
