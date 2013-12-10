@@ -6,44 +6,28 @@
     <div class="clearfix"></div>
   </div>
 
-  <!-- ONCE //-->
-  <div class="frequency-option once">
-    <div class="col-md-12">
-      <%= f.input :send_at, as: :string, input_html: { class: "timepicker" }, label: 'At', placeholder: 'Send Time' %>
-    </div>
-  </div>
-
   <!-- DAILY //-->
-  <div class="frequency-option daily">
-    <div class="col-md-12">
-      <span>Every </span><%= f.input :daily_recurrence, as: :select, collection: 1..7, label: false %> <span>days</span>
-      <div class="clearfix"></div>
-    </div>
+  <div class="frequency-option daily col-md-12">
+    <span>Every </span><%= f.input :daily_recurrence, as: :select, collection: 1..7, label: false %> <span>days</span>
+    <div class="clearfix"></div>
   </div>
 
   <!-- WEEKLY //-->
-  <div class="frequency-option weekly">
-    <div class="col-md-12">
-      <span>Every </span><%= f.input :weekly_recurrence, as: :select, collection: 1..4, label: false %> <span>weeks on </span><%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false %>
-      <div class="clearfix"></div>
-    </div>
+  <div class="frequency-option weekly col-md-12">
+    <span>Every </span><%= f.input :weekly_recurrence, as: :select, collection: 1..4, label: false %> <span>weeks on </span><%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false %>
+    <div class="clearfix"></div>
   </div>
 
   <!-- MONTHLY //-->
-  <div class="frequency-option monthly">
-    <div class="col-md-12">
-      <span>Every </span><%= f.input :monthly_recurrence, as: :select, collection: 1..12, label: false %> <span>months</span>
-      <div class="clearfix"></div>
-    </div>
+  <div class="frequency-option monthly col-md-12">
+    <span>Every </span><%= f.input :monthly_recurrence, as: :select, collection: 1..12, label: false %> <span>months</span>
+    <div class="clearfix"></div>
   </div>
 
-  <div class="message-send-on">
-    <div class="col-md-12">
-      <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: 'On', placeholder: 'Date' %>
-    </div>
-    <div class="col-md-12">
-      <%= f.input :body, label: 'Message', placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
-      <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
-    </div>
+  <div class="message-send-on col-md-12">
+    <%= f.input :send_at, as: :string, input_html: { class: "timepicker" }, label: 'At', placeholder: 'Send Time' %>
+    <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: 'On', placeholder: 'Date' %>
+    <%= f.input :body, label: 'Message', placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
+    <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
   </div>
 <% end %>

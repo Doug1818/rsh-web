@@ -9,14 +9,8 @@ class Reminder < ActiveRecord::Base
 
   private
 
-  # Use the provided time if it's specified,
-  # otherwise set it to 8:00 AM.
   def set_send_at
-    time = unless send_at.nil?
-      Time.parse(send_at.strftime("%H:%M %p")) 
-    else
-      Time.parse("8:00 AM")
-    end
+    time = Time.parse(send_at.strftime("%H:%M %p")) 
     self.send_at = DateTime.parse("#{ send_on } #{ time }")
   end
 end
