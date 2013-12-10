@@ -42,6 +42,16 @@ ul.view {
 
 .add-patient {
   float: right;
+  margin: 0;
+}
+
+.new_coach {
+  .checker {
+    margin-left: -3px;
+  }
+  .checkbox input[type="checkbox"] {
+    margin-left: 0;
+  }
 }
 
 

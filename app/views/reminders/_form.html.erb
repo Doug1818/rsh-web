@@ -1,33 +1,33 @@
 <%= simple_form_for reminder, html: { class: "form-vertical" } do |f| %>
-  <p>Message should be sent</p>
-  <%= f.hidden_field :program_id %>
-  <%= f.input :frequency, as: :select, input_html: { class: 'frequency' }, collection: Reminder::FREQUENCIES, label: false, placeholder: 'Frequency' %>
+  <div class="col-md-12">
+    <p>Message should be sent</p>
+    <%= f.hidden_field :program_id %>
+    <%= f.input :frequency, as: :select, input_html: { class: 'frequency' }, collection: Reminder::FREQUENCIES, label: false, placeholder: 'Frequency' %>
+    <div class="clearfix"></div>
+  </div>
 
-  <!-- ONCE //-->
-  <div class="row frequency-option once">
-    <div class="col-md-5">
-      <%= f.input :send_at, as: :string, input_html: { class: 'timepicker' }, label: 'At', placeholder: 'Send Time' %>
-    </div>
-    <div class="col-md-5">
-      <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: "On", placeholder: 'Send Date' %>
-    </div>
-    <%= f.input :body, label: false, placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
-    <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
+  <!-- DAILY //-->
+  <div class="frequency-option daily col-md-12">
+    <span>Every </span><%= f.input :daily_recurrence, as: :select, collection: 1..7, label: false %> <span>days</span>
+    <div class="clearfix"></div>
   </div>
 
   <!-- WEEKLY //-->
-  <div class="row frequency-option weekly">
-    <div class="col-md-5">
-      Every <%= f.input :weekly_recurrence, as: :select, collection: 1..5, label: false, selected: 2 %> weeks
-    </div>
-    <div class="col-md-5">
-      On <%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false, selected: Reminder::DAYS_OF_THE_WEEK["Monday"] %>
-    </div>
-    <div class="col-md-5">
-      Starting <%= f.input :send_at, as: :string, input_html: { class: "datepicker" }, label: false, placeholder: 'Start Date' %>
-    </div>
-    <%= f.input :body, label: false, placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
-    <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
+  <div class="frequency-option weekly col-md-12">
+    <span>Every </span><%= f.input :weekly_recurrence, as: :select, collection: 1..4, label: false %> <span>weeks on </span><%= f.input :day_of_week, as: :select, collection: Reminder::DAYS_OF_THE_WEEK, label: false %>
+    <div class="clearfix"></div>
   </div>
 
+  <!-- MONTHLY //-->
+  <div class="frequency-option monthly col-md-12">
+    <span>Every </span><%= f.input :monthly_recurrence, as: :select, collection: 1..12, label: false %> <span>months</span>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="message-send-on col-md-12">
+    <%= f.input :send_at, as: :string, input_html: { class: "timepicker" }, label: 'At', placeholder: 'Send Time' %>
+    <%= f.input :send_on, as: :string, input_html: { class: "datepicker" }, label: 'On', placeholder: 'Date' %>
+    <%= f.input :body, label: 'Message', placeholder: 'What should it say?', :input_html => { :rows => 4 } %>
+    <%= f.submit "Create Reminder", class: 'btn btn-primary' %>
+  </div>
 <% end %>

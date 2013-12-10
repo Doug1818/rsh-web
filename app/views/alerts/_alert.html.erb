@@ -1,3 +1,10 @@
 <div class="program-alert">
-  <p>Alert me when <%= @program.user.first_name %> <%= Alert::ACTION_TYPES.keys[alert.action_type] %> <%= alert.streak %> <%= Alert::SEQUENCES.keys[alert.sequence] %></p>
+  <p>
+    Send me an email when <%= @program.user.first_name %> gets <%= alert.streak %> <%= Alert::ACTION_TYPES.keys[alert.action_type].downcase %> <%= Alert::SEQUENCES.keys[alert.sequence].downcase %>
+    <% if false %>
+    <span>
+      <button class="btn btn-warning">Done</button>
+    </span>
+    <% end %>
+  </p>
 </div>

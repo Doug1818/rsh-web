@@ -14,8 +14,8 @@ jQuery(document).ready(function($) {
 
   // hide the form, display the small step
   $(document).on('click','.small-step-cancel-button',function (event) {
-    $(this).parent().parent().parent().find(".display").show();
-    $(this).parent().parent().parent().find(".form").hide();
+    $(this).parent().parent().parent().parent().find(".display").show();
+    $(this).parent().parent().parent().parent().find(".form").hide();
     event.preventDefault(); // Prevent link from following its href
   });
 

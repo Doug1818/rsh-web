@@ -1,4 +1,5 @@
 class SmallStepsController < ApplicationController
+
   def create
     @program = current_practice.programs.find(params[:small_step][:program_id])
     @week = @program.weeks.find(params[:small_step][:week_id])
@@ -59,6 +60,16 @@ class SmallStepsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(program_path(@program)) }
+    end
+  end
+
+  def edit
+    @program = current_practice.programs.find(params[:program_id])
+    @week = @program.weeks.find(params[:week_id])
+    @small_step = @program.small_steps.find(params[:id])
+
+    respond_to do |format|
+      format.js
     end
   end
 
