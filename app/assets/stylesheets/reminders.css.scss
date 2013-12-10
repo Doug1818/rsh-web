@@ -7,13 +7,18 @@ input#send_time {
   width: 100%;
 }
 
+.message-send-on {
+  display: none;
+}
+
 .reminder {
   margin-top: 15px;
-  p, span, label {
+  p {
     float: left;
     padding-right: 6px;
     line-height: 46px;
-    font-size: 18px;
+    font-size: 16.31pt;
+    font-weight: 500;
     display: inline-block;
   }
   .form {
@@ -31,28 +36,35 @@ input#send_time {
       float: left;
       margin-left: 5px;
       min-width: 31px;
-      width: auto;
-      font-size: 16.31pt;
+      width: auto;      font-size: 16.31pt;
       line-height: 46px;
       text-align: right;
     }
     span {
       float: left;
       margin: 0;
+     }
+    .form-group.reminder_frequency {
+      float: left;
+      margin-top: 0;
     }
-    .once, .daily {
-      .form-group {
-        .form-control {
-          width: 100%;
-          max-width: 80%;
-        }
-        +.reminder_frequency {
-          float: left;
-          margin-top: -6px;
-        }
-        +.reminder_body {
-          float: none;
-          margin: 10px 5px;
+    .form-group.reminder_send_at,
+    .form-group.reminder_send_on {
+      display: inline-block;
+      .once, .daily {
+        .form-group {
+          .form-control {
+            width: 100%;
+            max-width: 80%;
+          }
+          +.reminder_frequency {
+            float: left;
+            margin-top: 0;
+          }
+          +.reminder_body {
+            float: none;
+            margin: 10px 5px;
+          }
         }
       }
       .form-group.reminder_send_at,
@@ -66,15 +78,19 @@ input#send_time {
         }
       }
     }
+    .form-group.reminder_body {
+      float: none;
+      margin: 10px 5px;
+    }
     .weekly, .monthly {
       .form-group {
-        margin: -6px 6px 20px 6px;
+        margin: 0 6px 20px 6px;
         .form-control {
           width: 75%;
         }
         +.reminder_frequency {
           float: left;
-          margin-top: -6px;
+          margin-top: 0;
         }
         +.reminder_body {
           float: none;
@@ -92,6 +108,7 @@ input#send_time {
         }
       }
     }
+
     
     .weekly .form-group {
       
