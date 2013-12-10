@@ -85,7 +85,7 @@ legend {
 }
 
 .btn-primary, .btn-primary:active {
-  margin: 5px 0;
+  margin: 0;
   width: auto;
   max-width: 198px;
   height: 38px;
@@ -102,6 +102,12 @@ legend {
   font-size: 18px;
   line-height: 22px;
   border-radius: 0;
+}
+
+.pull-right {
+  .btn-primary, .btn-primary:active {
+    margin: 5px 0;
+  }
 }
 
 .navbar-default {
