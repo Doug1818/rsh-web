@@ -7,9 +7,9 @@
       <div class="col-md-7 col-sm-6">
         <ul class="list-inline view">
           <li>View:</li>
-          <li><a href="#">All</a></li>
-          <li><a href="#">Alerts</a></li>
-          <li><a href="#" class="active">Active</a></li>
+          <li><%= link_to 'All', coach_path %></li>
+          <li><%= link_to 'Alerts', coach_path(filter: 'alerts') %></li>
+          <li><%= link_to 'Active', coach_path(filter: 'active') %></li>
         </ul>
       </div>
       <div class="col-md-5 col-sm-6">

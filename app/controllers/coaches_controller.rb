@@ -15,6 +15,8 @@ class CoachesController < ApplicationController
         with :coach_id, current_coach.id
       end
       @programs = ProgramDecorator.decorate_collection(@search.results)
+    elsif params[:filter].present? and @coach.programs.respond_to?(params[:filter])
+      @programs = @coach.programs.send(params[:filter]).decorate
     else
       @programs = @coach.programs.includes(:user).decorate
     end

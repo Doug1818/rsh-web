@@ -22,6 +22,7 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
   scope :active, -> {where(status: STATUSES[:active])}
+  scope :alerts, -> {joins(:alerts)}
   
   searchable do
     integer :coach_id do
