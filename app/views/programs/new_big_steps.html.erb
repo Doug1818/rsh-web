@@ -19,7 +19,7 @@
       <div class="col-md-12">
         <p><%= @program.user.full_name %> is here <%= @program.purpose %> <%= @program.goal %>
         <br />
-        What Big Steps should he take?</p>
+        What Big Steps should I take?</p>
       </div>
       <%= simple_form_for @program, url: url_for(:action => 'update_big_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
         <div id="program_big_steps">
