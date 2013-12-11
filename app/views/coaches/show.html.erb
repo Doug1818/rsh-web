@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-5 col-sm-4">
-      <h2>Your Patients</h2>
+      <h2>Your Users</h2>
     </div>
     <div class="col-md-7 col-sm-8">
       <div class="col-md-7 col-sm-6">
@@ -13,7 +13,7 @@
         </ul>
       </div>
       <div class="col-md-5 col-sm-6">
-        <%= link_to 'Add a New Patient', new_program_path, class: 'btn btn-primary add-patient' %>
+        <%= link_to 'Add a New User', new_program_path, class: 'btn btn-primary add-patient' %>
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@
     <% if @programs.present? %>
       <%= render @programs %>
     <% else %>
-      <%= link_to 'Add your first patient', new_program_path %>
+      <%= link_to 'Add your first user', new_program_path %>
     <% end %>
   </div>
 </div>

@@ -59,7 +59,7 @@
             <% if current_coach.present? %>
             <%= form_tag coach_path(current_coach), :method => :get, :class => "navbar-form navbar-right", role: "search" do %>
               <div class="form-group">
-                <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "find a patient" %>
+                <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "find a user" %>
               </div>
               <button type="submit" class="btn btn-primary glyphicon glyphicon-search"></button>
             <% end %>
