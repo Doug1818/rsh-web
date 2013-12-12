@@ -156,6 +156,11 @@ form {
   #program_purpose, #program_goal {
     height: 92px;
   }
+  .small-step-fields {
+    input[type=text] {
+      width: 372px;
+    }
+  }
   label {
     font-size: 18px;
     font-weight: 500;
