@@ -142,14 +142,19 @@ form {
   input[type=text], input[type=email] {
     height: 46px;
   }
-  #program_purpose, #program_goal {
+  .program_purpose, .program_goal {
     display: inline-block;
     width: 49%;
-    height: 92px;
     float: left;
+    label {
+      margin-left:0;
+    }
   }
-  #program_goal {
+  .program_goal {
     float: right;
+  }
+  #program_purpose, #program_goal {
+    height: 92px;
   }
   label {
     font-size: 18px;
