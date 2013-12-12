@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8">
       <h2><%= @program.user.full_name %></h2>
-      <p><%= @program.purpose %> <%= @program.goal %></p>
+      <p>Is here to <%= @program.purpose.downcase %> so I can <%= @program.goal.downcase %></p>
       <hr/>
     </div>
   </div>

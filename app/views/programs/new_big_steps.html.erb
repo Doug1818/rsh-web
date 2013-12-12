@@ -17,9 +17,9 @@
   <div class="col-md-12">
     <div class="well create">
       <div class="col-md-12">
-        <p><%= @program.user.full_name %> is here <%= @program.purpose %> <%= @program.goal %>
-        <br />
-        What Big Steps should I take?</p>
+        <p>I am here to <%= @program.purpose.downcase %> so I can <%= @program.goal.downcase %>
+        <br/>
+        What Big Steps will get me closer to my goal?</p>
       </div>
       <%= simple_form_for @program, url: url_for(:action => 'update_big_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
         <div id="program_big_steps">
