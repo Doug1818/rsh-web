@@ -26,7 +26,7 @@
           <%= f.simple_fields_for :big_steps do |big_step| %>
             <%= render 'big_step_fields', f: big_step %>
           <% end %>
-          <div class="links">
+          <div>
             <br/>
             <%= link_to_add_association "<span class='btn-plus'></span>".html_safe, f, :big_steps %>
           </div>
