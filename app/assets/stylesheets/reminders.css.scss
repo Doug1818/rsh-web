@@ -35,10 +35,11 @@ input#send_time {
   #new_reminder {
     label {
       float: left;
-      min-width: 31px;
+      min-width: 81px;
       width: auto;
       font-size: 16.31pt;
       line-height: 46px;
+      text-align: right;
     }
     span {
       float: left;
