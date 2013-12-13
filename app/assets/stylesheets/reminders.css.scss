@@ -25,6 +25,7 @@ input#send_time {
     display: none;
     .frequency-option {
       display: none;
+      margin-top: 20px;
     }
 
     .message-send-on {
@@ -34,11 +35,10 @@ input#send_time {
   #new_reminder {
     label {
       float: left;
-      margin-left: 5px;
       min-width: 31px;
-      width: auto;      font-size: 16.31pt;
+      width: auto;
+      font-size: 16.31pt;
       line-height: 46px;
-      text-align: right;
     }
     span {
       float: left;
@@ -51,6 +51,7 @@ input#send_time {
     .form-group.reminder_send_at,
     .form-group.reminder_send_on {
       display: inline-block;
+      width: 450px;
       .once, .daily {
         .form-group {
           .form-control {
@@ -121,4 +122,26 @@ input#send_time {
       display: inline-block;
     }
   }
+}
+
+.message-send-on {
+  margin-top: 20px;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  float: left;
+  width: 350px;
+}
+
+.lbl {
+  line-height: 46px;
+  + .form-group {
+    margin: 0 5px;
+  }
+}
+
+.picker--time {
+  left: 90px;
 }
