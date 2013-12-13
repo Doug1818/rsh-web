@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-  $("#small-step-<%= @small_step.id %>").html('<%= escape_javascript(render partial: 'small_steps/form', locals: { small_step: @small_step, week: @week }) %>');
+  $("#week-<%= @week.number %>-small-step-<%= @small_step.id %>").html('<%= escape_javascript(render partial: 'small_steps/form', locals: { small_step: @small_step, week: @week }) %>');
   displayFrequencyFields($('#small-step-<%= @small_step.id %>').find('.small-step-frequency'));
   $('input[type=checkbox]').uniform();
 });
