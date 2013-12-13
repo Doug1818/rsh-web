@@ -43,7 +43,6 @@ input#send_time {
     }
     span {
       float: left;
-      margin: 0;
      }
     .form-group.reminder_frequency {
       float: left;
@@ -86,7 +85,6 @@ input#send_time {
     }
     .weekly, .monthly {
       .form-group {
-        margin: 0 6px 20px 6px;
         .form-control {
           width: 75%;
         }
@@ -138,6 +136,7 @@ fieldset[disabled] .form-control {
 
 .lbl {
   line-height: 46px;
+  margin-left: 10px;
   + .form-group {
     margin: 0 5px;
   }
