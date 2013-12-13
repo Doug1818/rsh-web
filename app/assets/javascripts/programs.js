@@ -42,5 +42,5 @@ jQuery(document).ready(function($) {
   });
 
 
-  $("html, body").find('#steps').animate({ scrollTop: $('.current_week').offset().top - 370 }, 1000);
+  $("html, body").find('#steps').animate({ scrollTop: $('.col-md-1').offset().top }, 1000);
 });
