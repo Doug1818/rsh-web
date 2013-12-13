@@ -3,7 +3,7 @@
     Week <%= week.number %>:
   </div>
   <div class="col-md-11 small-steps-for-week">
-    <div id="detail-<%= week.number %>" class="collapse <%= 'in' if week.current_week? %>">
+    <div id="detail-<%= week.number %>" class="collapse <%= 'in' if week.current_week? or week.future_week? %>">
       <%= render week.small_steps.order('name'), week: week %>
       <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-small-step-link' unless week.past_week? %>
       <div class="small-step">
