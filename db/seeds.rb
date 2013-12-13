@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-db_tables = %w{ practices coaches users programs weeks small_steps_weeks big_steps small_steps excuses check_ins activities check_ins_excuses }
+db_tables = %w{ practices coaches users programs weeks small_steps_weeks big_steps small_steps excuses check_ins activities check_ins_excuses alerts reminders }
 db_tables.each {|db_table| ActiveRecord::Base.connection.execute("TRUNCATE #{ db_table }") }
 
 class Seed

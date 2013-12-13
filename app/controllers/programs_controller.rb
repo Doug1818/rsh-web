@@ -10,7 +10,7 @@ class ProgramsController < ApplicationController
     @program = current_coach.programs.find(params[:id]).decorate
     @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
 
-    @alerts = @program.alerts
+    @alerts = @program.alerts.decorate
     @reminders = @program.reminders.decorate
     @supporters = @program.supporters
     @todos = @program.todos

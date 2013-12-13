@@ -38,7 +38,9 @@
       <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
           <h2>My Alerts</h2>
+          <% if @alerts.present? %>
           <%= render @alerts %>
+          <% end %>
           <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-alert-link' %>
 
           <div class="alerts">
