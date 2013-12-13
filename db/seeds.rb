@@ -180,8 +180,8 @@ class Seed
 
   def new_program
     program = {
-      purpose: ["to heal their hip", "to recover from back surgery", "to improve their quality of life"].sample,
-      goal: ["so they can get jiggy with it", "so they can run the next 10k race", "so they can spend more time with their kids"].sample,
+      purpose: ["heal my hip", "recover from back surgery", "improve my quality of life"].sample,
+      goal: ["get jiggy with it", "run the next 10k race", "spend more time with my kids"].sample,
       status: 1,
       start_date: 2.weeks.ago
     }
