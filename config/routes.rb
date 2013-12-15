@@ -5,6 +5,7 @@ RshWeb::Application.routes.draw do
     namespace :v1 do
       resources :sessions
       resources :small_steps
+      resources :users
     end
   end
 
