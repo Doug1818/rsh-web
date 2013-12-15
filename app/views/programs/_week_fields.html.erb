@@ -8,7 +8,7 @@
     <%= f.simple_fields_for :small_steps do |small_step| %>
       <%= render 'small_step_fields', f: small_step %>
     <% end %>
-    <div class="links">
+    <div>
       <br/>
       <%= link_to_add_association "<span class='btn-plus'></span>".html_safe, f, :small_steps %>
     </div>
