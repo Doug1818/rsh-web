@@ -7,6 +7,8 @@ class SmallStep < ActiveRecord::Base
   has_many :check_ins, dependent: :destroy
   has_many :activities, through: :check_ins
 
+  validates :name, length: { maximum: 100 }, presence: true
+
   def humanize_days
     days = []
     days.push("Sun") if sunday
