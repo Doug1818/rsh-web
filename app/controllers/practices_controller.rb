@@ -32,6 +32,6 @@ class PracticesController < ApplicationController
   end
 
   def practice_params
-    params.require(:practice).permit(:name, :address, :state, :city, :zip, coaches_attributes: [:email, :password, :password_confirmation])
+    params.require(:practice).permit(:name, :address, :state, :city, :zip, coaches_attributes: [:full_name, :first_name, :last_name, :email, :password, :password_confirmation])
   end
 end

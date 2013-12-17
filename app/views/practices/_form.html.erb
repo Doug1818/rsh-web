@@ -6,6 +6,7 @@
 
   <legend>Your account</legend>
   <%= f.fields_for :coaches do |f| %>
+    <%= f.input :full_name, label: false, placeholder: 'Your Name' %>
     <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
     <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
     <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>

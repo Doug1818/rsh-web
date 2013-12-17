@@ -11,19 +11,23 @@ class Coach < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  def full_name=(full_name)
+    if full_name.present?
+      (self.first_name, self.last_name) = full_name.split(" ")
+    end
+  end
+
   def full_name
     if first_name.present? && last_name.present?
       "#{first_name} #{last_name}"
     else
-      "Coach"
+      name
     end
   end
 
   def name
     if first_name.present?
       "#{first_name}"
-    else
-      "Coach"
     end
   end
 
