@@ -1,10 +1,12 @@
-class Api::V1::SmallStepsController < Api::V1::ApplicationController
-  def index
-    @small_steps = @program.small_steps
+# class Api::V1::SmallStepsController < Api::V1::ApplicationController
+#   def index
 
-    render status: 200, json: {
-      success: true,
-      data: { small_steps: @small_steps }
-    }
-  end
-end
+#     date = params[:date]
+#     @week = @program.weeks.where("DATE(?) BETWEEN start_date AND end_date", date).as_json(include: :small_steps)
+
+#     render status: 200, json: {
+#       success: true,
+#       data: { week: @week }
+#     }
+#   end
+# end
