@@ -47,9 +47,13 @@ class Program < ActiveRecord::Base
   private
 
   def generate_authentication_token
-    loop do
-      token = SecureRandom.base64(4).tr('+/=', '0aZ')
-      break token unless Program.where(authentication_token: token).first
+    if Rails.env.development?
+      token = "a"
+    else
+      loop do
+        token = SecureRandom.base64(4).tr('+/=', '0aZ')
+        break token unless Program.where(authentication_token: token).first
+      end
     end
   end
 
