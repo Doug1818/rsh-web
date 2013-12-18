@@ -1,5 +1,5 @@
 class Api::V1::CheckInsController < Api::V1::ApplicationController
-  def new
+  def create
     week_id = params[:week_id]
     small_step_id = params[:small_step_id]
     date = Date.parse(params[:date])
