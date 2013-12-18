@@ -139,7 +139,7 @@ class Seed
 
             week = program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
 
-            @check_in.small_step_id = small_step.id
+            # @check_in.small_step_id = small_step.id
             @check_in.week_id = week.id
             @check_in.activities.create(small_step_id: small_step.id, status: status, created_at: day)
             @check_in.save!

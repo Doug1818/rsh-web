@@ -1,6 +1,5 @@
 class CheckIn < ActiveRecord::Base
   STATUSES = { none: 0, mixed: 1, all_yes: 2, all_no: 3, future: 4 }
-  belongs_to :small_step
   belongs_to :week
   has_many :activities
   has_and_belongs_to_many :excuses

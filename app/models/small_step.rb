@@ -4,8 +4,8 @@ class SmallStep < ActiveRecord::Base
   belongs_to :program
   has_and_belongs_to_many :weeks
   belongs_to :big_step
-  has_many :check_ins, dependent: :destroy
-  has_many :activities, through: :check_ins
+  has_many :activities
+  has_many :check_ins, through: :activities, dependent: :destroy
 
   validates :name, length: { maximum: 100 }, presence: true
 
