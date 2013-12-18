@@ -1,8 +1,8 @@
 class Api::V1::WeeksController < Api::V1::ApplicationController
   
-  # Get IDs of all weeks in the program
+  # Get all the weeks for a program
   def index
-    @weeks = @program.weeks.pluck(:id)
+    @weeks = @program.weeks.order(:start_date)
 
     render status: 200, json: {
       success: true,

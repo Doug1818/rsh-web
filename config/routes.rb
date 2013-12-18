@@ -7,6 +7,7 @@ RshWeb::Application.routes.draw do
       resources :small_steps
       resources :users
       resources :weeks
+      resources :check_ins
     end
   end
 
