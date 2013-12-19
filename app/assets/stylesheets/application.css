@@ -13,8 +13,8 @@
  *= require_tree .
  *= require select2
  *= require select2-bootstrap
- *= require classic
- *= require classic.date
- *= require classic.time
+ *= require default
+ *= require default.date
+ *= require default.time
  *= require uniform.default
  */
