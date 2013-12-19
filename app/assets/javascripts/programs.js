@@ -1,6 +1,12 @@
 jQuery(document).ready(function($) {
 
-  $('.datepicker').pickadate();
+  $('.datepicker').pickadate({
+    format: 'mmmm dd, yyyy',
+    onStart: function() {
+      var date = new Date()
+      this.set('select', [date.getFullYear(), date.getMonth(), date.getDate() + 1]);
+    }
+  });
 
   if($('form').hasClass('new-program')){
     $('select').select2({
