@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :programs
   has_many :coaches, through: :programs
+  has_many :alerts, through: :programs
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
