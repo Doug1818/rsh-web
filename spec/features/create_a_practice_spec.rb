@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-feature 'a coach creates his practice' do
-
+feature 'a coach creates a practice' do
 
  scenario 'new user visits sign-up page' do
  	visit root_path
@@ -14,6 +13,7 @@ feature 'a coach creates his practice' do
  	practice_counter = Practice.count
  	visit new_practice_path
  	fill_in 'Name', with: 'Test'
+ 	fill_in 'Your Name', with: 'Test Test'
  	fill_in 'Email', with: 'test@test.com'
  	fill_in 'Password', with: '12345678'
  	fill_in 'Password confirmation', with: '12345678'
