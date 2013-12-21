@@ -46,7 +46,6 @@ FactoryGirl.define do
   factory :alert do
     action_type 1
     streak 1
-    # sequence 1
     program
   end
 
