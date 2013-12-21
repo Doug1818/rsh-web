@@ -183,7 +183,7 @@ class Seed
       purpose: ["heal my hip", "recover from back surgery", "improve my quality of life"].sample,
       goal: ["get jiggy with it", "run the next 10k race", "spend more time with my kids"].sample,
       status: 1,
-      start_date: 2.weeks.ago
+      start_date: 2.weeks.ago.beginning_of_week(:sunday)
     }
     @program = Program.new(program)
     yield @program
