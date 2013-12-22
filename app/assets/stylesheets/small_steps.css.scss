@@ -78,7 +78,7 @@ input[name='small_step[sunday]'] + label {
 }
 
 .small-step-fields {
-  padding: 20px;
+  padding: 20px 0;
   margin-bottom: 10px;
 
   label.checkbox {
@@ -107,4 +107,10 @@ input[name='small_step[sunday]'] + label {
 div.checker {
   top: -5px;
   cursor: pointer;
+}
+
+form .program_start_date label {
+  float: left;
+  margin: 0 5px 0 0;
+  line-height: 46px;
 }

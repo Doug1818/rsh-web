@@ -198,6 +198,10 @@ form {
   }
 }
 
+.select2-results {
+  max-height: 400px!important;
+}
+
 .select2-container .select2-choice span.select2-arrow {
   display: inline-block;
   width: 46px;

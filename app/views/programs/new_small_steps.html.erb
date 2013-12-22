@@ -25,11 +25,17 @@
             <%= render 'week_fields', f: week %>
           <% end %>
         </div>
-
-        <%= f.input :start_date, as: :string, input_html: { class: "datepicker" } %>
         <div class="row">
-          <div class="pull-right">
-            <%= f.submit "Next", class: 'btn btn-primary' %>
+          <div class="col-md-12">
+            <%= f.input :start_date, as: :string, input_html: { class: "datepicker" } %>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-12">
+            <div class="pull-right">
+              <%= f.submit "Next", class: 'btn btn-primary' %>
+            </div>
           </div>
         </div>
       <% end %>

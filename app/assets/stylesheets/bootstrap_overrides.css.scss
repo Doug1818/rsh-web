@@ -74,6 +74,10 @@ legend {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+.form-control[readonly] {
+  cursor: pointer;
+}
+
 .row {
   margin-left: -5px;
   margin-right: -5px;
