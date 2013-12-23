@@ -16,7 +16,8 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
       (start_date..end_date).each do |date|
         check_in = @week.find_check_in_for_day(date)
         check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
-        week[:days] << {date: date.strftime('%b %e'), day_number: @program.day_number(date), check_in_status: check_in_status}
+        is_future = date > Date.today.to_time_in_current_zone # TODO: Use user's timezone
+        week[:days] << {date: date.strftime('%b %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future }
       end
     end
 
