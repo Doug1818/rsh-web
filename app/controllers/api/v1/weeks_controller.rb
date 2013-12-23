@@ -19,7 +19,7 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
         check_in = @week.find_check_in_for_day(date)
         check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
         is_future = date.beginning_of_day.in_time_zone('EST') > today.beginning_of_day.in_time_zone('EST') # TODO: Use user's timezone
-        week[:days] << {date: date.strftime('%b %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future }
+        week[:days] << {date: date.strftime('%a %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future }
       end
     end
 
