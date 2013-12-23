@@ -3,6 +3,7 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
   # Get all of the weeks for a program
   def index
     today = Date.today
+    yesterday = Date.yesterday
 
     @program = @program.decorate
     @weeks = @program.weeks.includes(:check_ins).as_json(except: [:program_id, :created_at, :updated_at])
@@ -19,7 +20,8 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
         check_in = @week.find_check_in_for_day(date)
         check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
         is_future = date.beginning_of_day.in_time_zone('EST') > today.beginning_of_day.in_time_zone('EST') # TODO: Use user's timezone
-        week[:days] << {date: date.strftime('%a %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future }
+        today_or_yesterday = (date.beginning_of_day == today.beginning_of_day) || (date.beginning_of_day == yesterday.beginning_of_day)
+        week[:days] << {full_date: date, date: date.strftime('%a %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future, today_or_yesterday: today_or_yesterday }
       end
     end
 
