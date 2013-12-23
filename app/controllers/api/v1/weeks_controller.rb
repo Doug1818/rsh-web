@@ -2,22 +2,21 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
   
   # Get all of the weeks for a program
   def index
-    date = params[:date]
     today = Date.today
 
     @program = @program.decorate
-    @week = @program.weeks.where("DATE(?) BETWEEN start_date AND end_date", date).includes(:check_ins).as_json(except: [:program_id, :created_at, :updated_at])
+    @weeks = @program.weeks.includes(:check_ins).as_json(except: [:program_id, :created_at, :updated_at])
 
-    @week.each do |week| 
+    @weeks.each do |week| 
       start_date = week['start_date']
       end_date = week['end_date']
 
       week[:days] = Array.new
 
-      @current_week = @program.weeks.find week['id']
+      @week = @program.weeks.find week['id']
 
       (start_date..end_date).each do |date|
-        check_in = @current_week.find_check_in_for_day(date)
+        check_in = @week.find_check_in_for_day(date)
         check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
         is_future = date.beginning_of_day.in_time_zone('EST') > today.beginning_of_day.in_time_zone('EST') # TODO: Use user's timezone
         week[:days] << {date: date.strftime('%b %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future }
@@ -26,7 +25,7 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
 
     render status: 200, json: {
       success: true,
-      data: { week: @week }
+      data: { weeks: @weeks }
     }
   end
 
