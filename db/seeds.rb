@@ -104,7 +104,7 @@ class Seed
         puts "\n#{ program.user.first_name }'s Program"
 
         start_date = program.start_date
-        end_date = Date.today
+        end_date = 2.days.ago
 
         (start_date..end_date).each do |day|
           @small_steps = program.small_steps.includes(:weeks).where("DATE(?) BETWEEN weeks.start_date AND weeks.end_date", day).references(:weeks)
