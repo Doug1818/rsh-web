@@ -9,6 +9,7 @@ RshWeb::Application.routes.draw do
       resources :weeks
       get 'week/by_date', to: 'weeks#by_date', as: :week_by_date
       resources :check_ins
+      resources :programs
     end
   end
 

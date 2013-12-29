@@ -2,9 +2,6 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
   
   # Get all of the weeks for a program
   def index
-    today = Date.today
-    yesterday = Date.yesterday
-
     @program = @program.decorate
     @weeks = @program.weeks.includes(:check_ins).as_json(except: [:program_id, :created_at, :updated_at])
 
@@ -19,9 +16,7 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
       (start_date..end_date).each do |date|
         check_in = @week.find_check_in_for_day(date)
         check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
-        is_future = date.beginning_of_day.in_time_zone('EST') > today.beginning_of_day.in_time_zone('EST') # TODO: Use user's timezone
-        today_or_yesterday = (date.beginning_of_day == today.beginning_of_day) || (date.beginning_of_day == yesterday.beginning_of_day)
-        week[:days] << {full_date: date, date: date.strftime('%a %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: is_future, today_or_yesterday: today_or_yesterday }
+        week[:days] << {full_date: date, date: date.strftime('%a %e'), day_number: @program.day_number(date), check_in_status: check_in_status, is_future: date.to_time.beginning_of_day.future?, today_or_yesterday: today_or_yesterday?(date.to_time.beginning_of_day) }
       end
     end
 
@@ -40,5 +35,13 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
       success: true,
       data: { week: @week }
     }
+  end
+
+  private
+
+  def today_or_yesterday?(date)
+    yesterday = Date.yesterday.beginning_of_day.in_time_zone('America/New_York').beginning_of_day
+    today = Date.today.in_time_zone('America/New_York').end_of_day
+    (yesterday..today).cover?(date)
   end
 end

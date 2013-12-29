@@ -36,7 +36,10 @@ class Seed
             end
             program.coach_id = @coach.id
             program.save!
-            program.weeks.create(start_date: program.start_date.beginning_of_week(:sunday), end_date: program.start_date.end_of_week(:sunday), number: 1)
+
+            start_date = program.start_date.in_time_zone("America/New_York").beginning_of_week(:sunday)
+            end_date = program.start_date.in_time_zone("America/New_York").end_of_week(:sunday)
+            program.weeks.create(start_date: start_date, end_date: end_date, number: 1)
 
             @big_steps.each_with_index do |big_step_name, index|
               @big_step = program.big_steps.create(name: big_step_name)
@@ -93,7 +96,6 @@ class Seed
   # Create check-ins for the first Program of each Practice
   def checkins
     @practices = Practice.all
-
     @practices.each do |practice|
 
       puts "\nPractice: #{ practice.name }"
@@ -104,7 +106,7 @@ class Seed
         puts "\n#{ program.user.first_name }'s Program"
 
         start_date = program.start_date
-        end_date = 2.days.ago
+        end_date = 2.days.ago.in_time_zone("America/New_York").to_date
 
         (start_date..end_date).each do |day|
           @small_steps = program.small_steps.includes(:weeks).where("DATE(?) BETWEEN weeks.start_date AND weeks.end_date", day).references(:weeks)
