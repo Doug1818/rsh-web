@@ -13,8 +13,6 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
 
     @program_data.reverse_merge!(check_in_status: check_in_status)
 
-    puts "PROGRAM DATA: #{ @program_data }"
-
     render status: 200, json: {
       success: true,
       data: { program: @program_data }
