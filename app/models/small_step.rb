@@ -9,7 +9,8 @@ class SmallStep < ActiveRecord::Base
 
   validates :name, length: { maximum: 100 }, presence: true
 
-  def humanize_days
+
+  def days
     days = []
     days.push("Sun") if sunday
     days.push("Mon") if monday
@@ -18,8 +19,34 @@ class SmallStep < ActiveRecord::Base
     days.push("Thu") if thursday
     days.push("Fri") if friday
     days.push("Sat") if saturday
+    days
+  end
 
+  def humanize_days
     days.to_sentence
   end
 
+  def needs_check_in(date=nil)
+    case FREQUENCIES.keys[frequency]
+    when "Daily"
+      true
+    when "Specific Days"
+      unless date.nil?
+        days.include?(date.strftime('%a')) ? true : false # %a = Mon, Tues, Wed, etc.
+      else
+        false
+      end
+    when "Times Per Week"
+      unless date.nil?
+        start_date = date.beginning_of_week(:sunday)
+        end_date = date.end_of_week(:sunday)
+        check_in_count = check_ins.where("check_ins.created_at BETWEEN DATE(?) AND DATE(?)", start_date, end_date).count
+        check_in_count < times_per_week ? true : false   
+      end
+    else
+      false
+    end
+  end
 end
+
+
