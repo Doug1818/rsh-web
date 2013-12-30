@@ -111,7 +111,6 @@ ul.view {
   table {
     tr {
       td {
-        width: 100px;
         vertical-align: top;
       }
     }
@@ -126,6 +125,13 @@ ul.view {
     &:last-child {
       border-bottom: none;
     }
+  }
+}
+
+#steps, #advanced-settings {
+  table {
+    margin-bottom: 20px;
+    width: 100%;
   }
 }
 
