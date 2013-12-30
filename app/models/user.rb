@@ -40,4 +40,9 @@ class User < ActiveRecord::Base
   def set_invited_status
     self.status = STATUSES[:invited]
   end
+
+  def image_data=(data)
+    io = CarrierwaveStringIO.new(Base64.decode64(data))
+    self.avatar = io
+  end
 end

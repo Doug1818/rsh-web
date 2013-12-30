@@ -17,3 +17,5 @@
 /solr/development
 /solr/pids
 /solr/test
+
+log/sunspot-solr-development.log.lck
