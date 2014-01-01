@@ -43,12 +43,15 @@ jQuery(document).ready(function($) {
     }
   );
 
-  $('.collapse').on('hidden.bs.collapse', function(){
+
+  if ($("#steps").length) {
+    $('.collapse').on('hidden.bs.collapse', function(){
+      // JOSH, the .top proerty is throwing an error in the console, which is breaking other js stuff
+      $('#steps').animate({ scrollTop: $('.past_week').offset().top - 370 }, 1000);
+    });
+
+
     // JOSH, the .top proerty is throwing an error in the console, which is breaking other js stuff
-    $('#steps').animate({ scrollTop: $('.past_week').offset().top - 370 }, 1000);
-  });
-
-
-  // JOSH, the .top proerty is throwing an error in the console, which is breaking other js stuff
- $("html, body").find('#steps').animate({ scrollTop: $('.col-md-1').offset().top }, 1000);
+   $("html, body").find('#steps').animate({ scrollTop: $('.col-md-1').offset().top }, 1000);
+  }
 });

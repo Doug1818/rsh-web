@@ -54,13 +54,16 @@
         <div class="well">
           <h2>User Reminders</h2>
           <% if @reminders.present? %>
-          <table width="1000">
-            <tr>
-              <th>Frequency</th>
-              <th>Date/Starting</th>
-              <th>Time</th>
-              <th>Message</th>
-            </tr>
+          <table>
+            <thead>
+              <tr>
+                <th>Frequency</th>
+                <th>Date/Starting</th>
+                <th>Time</th>
+                <th>Message</th>
+                <th></th>
+              </tr>
+            </thead>
             <%= render @reminders %>
           </table>
           <% end %>

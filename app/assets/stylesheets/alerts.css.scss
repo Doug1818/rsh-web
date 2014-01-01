@@ -20,6 +20,12 @@
   }
 }
 
+.program-alert {
+  .btn {
+    margin-top: -4px;
+  }
+}
+
 @media (max-width: 991px) {
   #new_alert {
     > p, .form-group {
