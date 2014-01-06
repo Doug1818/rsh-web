@@ -6,7 +6,7 @@
   <% else %>
     <div class="check-in status-<%=CheckIn::STATUSES[:none]%>"></div>
   <% end %>
-  <div class="day-names"><%= Date::ABBR_DAYNAMES[day.wday] %></div>
-  <div class="day-numbers"><%= @program.day_number(day) %></div>
+  <div class="day-names"><%= day.strftime("%a, %b %e") %></div>
+  <!--<div class="day-numbers"><%= @program.day_number(day) %></div>-->
   </div>
 <% end %>
