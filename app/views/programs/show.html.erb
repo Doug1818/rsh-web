@@ -37,7 +37,7 @@
 
       <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
-          <h2>My Alerts</h2>
+          <h2><%= "#{current_coach.name}'s Alerts" %></h2>
           <% if @alerts.present? %>
           <%= render @alerts %>
           <% end %>
@@ -52,7 +52,7 @@
         </div>
         
         <div class="well">
-          <h2>User Reminders</h2>
+          <h2><%= "#{@program.user.first_name}'s Reminders" %></h2>
           <% if @reminders.present? %>
           <table>
             <thead>
