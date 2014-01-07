@@ -38,6 +38,10 @@ class Program < ActiveRecord::Base
     text :goal
   end
 
+  def current_week
+    self.weeks.where("? BETWEEN start_date and end_date", Time.now).first
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -60,5 +64,22 @@ class Program < ActiveRecord::Base
   def send_invitation
     # TODO remove the unless when we're ready to go live
     UserMailer.invitation_email(self).deliver unless Rails.env.production?
+  end
+
+
+  def self.nudge_reminder
+    @today = DateTime.new
+    Program.where(status: STATUSES[:active]).each do |program|
+      @current_week = program.current_week
+      if @current_week.present?
+        unless @current_week.has_check_in_for_day(@today)
+          puts "SEND PUSH"
+          data = { :alert => "Don't forget to check in today!" }
+          push = Parse::Push.new(data, "user_169")
+          push.type = "ios"
+          push.save
+        end
+      end
+    end
   end
 end

@@ -125,6 +125,10 @@ GEM
     formatador (0.2.4)
     hike (1.2.3)
     i18n (0.6.9)
+    iron_core (1.0.2)
+      rest (>= 2.6.4)
+    iron_mq (4.0.5)
+      iron_core (>= 0.5.1)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -153,12 +157,17 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
+    net-http-persistent (2.9)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
+    parse-ruby-client (0.2.0)
+      iron_mq
+      patron
+    patron (0.4.18)
     pg (0.17.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
@@ -196,6 +205,9 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     request_store (1.0.5)
+    rest (2.6.5)
+      net-http-persistent
+      rest-client (>= 0.3.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rsolr (1.0.9)
@@ -302,6 +314,7 @@ DEPENDENCIES
   kaminari
   launchy
   mini_magick
+  parse-ruby-client
   pg
   pry-rails
   quiet_assets

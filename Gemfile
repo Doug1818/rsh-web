@@ -28,6 +28,7 @@ gem 'draper', '~> 1.3' # Decorators
 gem 'faker'
 gem 'sunspot_rails' # search
 gem 'sunspot_solr' # search
+gem 'parse-ruby-client' # parse.com integration
 
 group :doc do
   gem 'sdoc', require: false
