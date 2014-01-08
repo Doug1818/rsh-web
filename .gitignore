@@ -12,10 +12,8 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log/*.log*
 /tmp
-/solr/development
-/solr/pids
-/solr/test
+/solr/
 
 log/sunspot-solr-development.log.lck
