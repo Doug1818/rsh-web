@@ -34,6 +34,7 @@ RshWeb::Application.routes.draw do
   resources :reminders
   resources :supporters
   resources :todos
+  resources :leads
 
   root 'home#index'
 end

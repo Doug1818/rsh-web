@@ -1,8 +1,96 @@
 <div class="container">
-  <div class="well">
-    <div class="col-md-12">
-      <h2>I'm the marketing homepage.</h2>
-      <%= link_to 'Sign Up', new_practice_path %>
-    </div>
-  </div>
+<table>
+	<tr>
+		<td id="mainpane">
+			<div id="header">
+					<div class="logo">
+						<div class="logotype" style="height:90px;width:90px;border: 1px solid #6d6e71;"></div>
+						<!--<a href="http://www.rightsidehealth.com"><img src="rsh_logo.png" id="rshlogo"/></a>
+						-->
+					</div>
+					<div class="byline"><p>by Right Side Health</p></div>
+					<div class= "topnav"><%= link_to 'Sign In', new_coach_session_path %></div> 
+					<div class= "topnav"><a href="http://www.rightsidehealth.com/aboutus">Who We Are</a></div>  
+					<div class= "topnav"><a href="http://www.rightsidehealth.com/blog">How We Think</a></div>
+			</div>
+			
+			<div>
+				<h1 class="headline">Step Up Your Coaching</h1>
+			</div>
+
+			<div style="width:50%; margin:auto;">
+				<div id="tagline_box">
+					<h4 class="tagline wordwrap"><em>Steps</em> helps health coaches be with their clients the 99% of the time they aren't in your office -- without a bunch of extra work.</h4>
+				</div>
+
+				<div id="form">
+					<%= simple_form_for @lead, html: { class: "TODO", style:"width:80%; margin:auto;" } do |f| %>
+					  <%= f.input :name, label: false, placeholder: "Full Name" %>
+					  <%= f.input :email, type: 'email', label: false, placeholder: 'Email Adress' %>
+					  <%= f.submit "Request an Invitation", class: 'btn btn-primary' %>
+					<% end %>
+					<p id="invite"> (We are currently invite-only) </p>
+				</div>
+
+				<div>
+						<div style="float:left"><%= link_to image_tag("email.png"), "mailto:contact@rightsidehealth.com", target: "_blank" %></div>
+						<div style="float:right"><%= link_to image_tag("twitter.png"), "https://twitter.com/RightSideHealth", target: "_blank" %></div>
+				</div>
+				<div id="learnmore"><a href="#more">Learn More ...</a></div>
+			</div>
+		</td>
+	</tr>
+</table>
 </div>
+<!--http://www.spydertrap.com/blog/2012/08/user-experience-jquery-smooth-page-anchor-transitions/-->
+<a name="more"></a>
+<table id="infographic">
+		<tr class="inforow">
+			<td class="infoimagebox">
+				<div class="imagediv"><img class="infoimage" id="image1" src="assets/schedule2.png" />
+				</div>
+			</td>
+			<td class="infotext">
+				<div class="textdiv"><h4>Make a Solid Plan</h4><p>Our plan building tool lets you set long term goals in session with your clients, and break them down into daily actions.  It only takes a couple minutes and won't interfere with your face-to-face interaction.</p>
+				</div>
+			</td>
+		</tr>
+		<tr class="inforow">
+			<td class="infoimagebox">
+				<div class="imagediv"><img class="infoimage" id="image2" src="assets/mobile.png" />
+				</div>
+			</td>
+			<td class="infotext">
+				<div class="textdiv"><h4>Follow Progress in Real Time</h4><p>Your clients check in with a simple "yes" or "no" as to whether or not they've done that day's work.  You see their daily check ins, keeping them accountable and you informed.</p>
+				</div>
+			</td>
+		</tr>
+		<tr class="inforow">
+			<td class="infoimagebox">
+				<div class="imagediv"><img class="infoimage" id="image3" src="assets/desktop.png" />
+				</div>
+			</td>
+			<td class="infotext">
+				<div class="textdiv"><h4>Adjust as Needed</h4><p>Plans are fast and easy to adjust on the fly, so your ambitious clients are constantly challenged and struggling clients can get back on track quickly.</p>
+				</div>
+			</td>
+		</tr>
+</table>
+
+<script>
+
+
+
+$(document).ready(function(){
+	
+	$('.learnmore a').click(function(){
+		
+	goToByScroll($(this).attr('href'));
+	return false;
+	});
+});
+
+function goToByScroll(id){
+$('html,body').animate({scrollTop: $(id).offset().top},'slow');
+}
+</script>

@@ -1,3 +1,303 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*
+COLORS:
+WHITE --> #FFFFFF
+ORANGE --> #FFA721
+YELLOW --> #FFD114
+LIGHT GREY --> #f1f2f2  
+DARK GREY --> #6d6e71  
+*/
+	
+/*Overall*/	
+
+/*html, body{
+	min: 100%;
+	position: relative;
+}
+
+$(window).height();   // returns height of browser viewport
+$(document).height(); // returns height of HTML document
+*/
+
+#header{
+	height: 100px;
+	margin-top:5px;
+	margin-bottom: 50px;
+}
+
+.logo{
+	height: 100px;
+	vertical-align: middle;
+}
+
+#mainpane{
+	position: relative;
+	/*height: 100%;*/
+	/*border: 1px solid black;*/
+	/*overflow: hidden;
+	z-index: 1;*/
+}	
+	
+.logotype{
+	padding-top: 0px;
+	font-family: futura;
+	font-size: 44px;
+	vertical-align: middle;
+	margin-left:15px;
+	margin-top:15px;
+}
+
+p{
+	font-family: Soleil, arial, helvetica, sans serif;
+	color: #FFFFFF;
+
+}	
+
+#invite{
+	font-size: .8em;
+	text-align: center;
+	line-height: 30px;
+	margin-top:5px;
+}
+
+h1{
+	font-family: Soleil, arial, helvetica, sans serif;
+	color: #FFFFFF;
+}
+
+h4{
+	font-family: Soleil, arial, helvetica, sans serif;
+	color: #FFFFFF;
+}
+	
+body{
+	background-color: #ffa721;
+}
+
+th{
+	border: 1px solid black;
+}
+/*Header bar*/
+
+
+#rshlogo{
+	height: 56px;//look up in illustrator
+	width: 112px;
+	border: 2px solid white;
+	border-radius: 4px;
+	display: inline;
+	margin: auto;
+}
+
+.byline{
+	vertical-align: middle; /*Why does top work not middle?*/ 
+	display:inline-block; 
+	position: relative; 
+	margin-left: 10px;
+	width: 60%;
+}
+
+.logo{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.topnav{
+	
+	text-align: center;
+	display: inline-block;
+	width: 8%;
+}
+
+.topnav a{
+	color: white;
+	font-family: Soleil, arial, helvetica, sans serif;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.topnav a:hover{
+	color: #f1f2f2;
+	/*text-decoration: underline;*/
+	text-align: center;
+	/*vertical-align: bottom; Why doesn't alignment seem to actually work in the cells? */
+}
+
+/*Headline*/
+.headline{
+	text-align: center;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 43pt;
+}
+
+/*Tagline*/
+.tagline{
+	text-align: center;
+	font-size: 19pt;
+	font-family: Arial;
+	font-weight: normal;
+	line-height: 35px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+span .tagline{
+	line-height: 25px;
+}
+
+/*#tagline_box{
+	width:70%;
+	margin:auto;
+}*/
+
+.wordwrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
+
+
+
+/*Form*/
+
+#form{
+	text-align: center;
+}
+
+input{
+	width: 250px;
+	height: 30px;
+	border: 1px solid #C6C5C5;
+	border-radius: 10px;
+	margin: 5px;
+	
+}
+
+#signup{
+	background-color: #808285;
+	border-radius: 10px;
+	width: 250px;
+	height: 30px;
+	border: none;
+	font-family: Soleil, Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: 14px;
+	margin: 5px;
+}
+
+#signup:hover{
+	border: 1px solid white;
+}
+
+#signup:click{
+	background-color: white;
+	color: #808285;
+}
+
+/*Contact Bar*/
+.contact{
+	display: inline-block;
+	width: 20%;
+	margin-top:25px;
+	margin-bottom: 25px;
+	color: white;
+	text-align: center;
+}
+
+.contact:first-child{
+	margin-left: 30%;
+}
+
+#learnmore{
+	clear:both;
+	margin-top:50px;
+	text-align: center;
+	color: white;
+}
+
+#learnmore a{
+	color:white;
+	font-size: .8em;
+}
+
+/*Infographic*/
+
+#infographic{
+	position: absolute;
+	top: 100%;
+	background-color: #f1f2f2;
+	width:100%;
+	/*border: 1px solid blue;*/
+}
+
+.inforow{
+	width: 100%;
+}
+
+.infotext h4{
+	color: #6d6e71;
+	font-size: 24pt;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.infotext p{
+	color: #6d6e71; 
+	font-size: 14pt;
+	line-height: 25px;
+}
+
+.infotext{
+	width: 48%;
+	height: 33%;
+	/*clear: both;
+	display: inline;
+	border: 1px solid black;*/
+}
+
+#image1{
+	width: 50%;
+	margin: auto;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+#image2{
+	width: 50%;
+	margin: auto;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+#image3{
+	width: 50%;
+	margin-top: 20px;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+.imagediv{
+	/*border: 1px solid black;*/
+	margin-right: 10%;
+}
+
+.textdiv{
+	margin-left: 10%;
+	/*border: 1px solid black;*/
+	width: 60%;
+}
+
+.infoimagebox{
+	width: 48%;
+	height: 330px;
+	/*clear: both;
+	display: inline;
+	border: 1px solid black;*/
+}
+

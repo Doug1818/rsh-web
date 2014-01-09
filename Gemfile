@@ -29,6 +29,7 @@ gem 'faker'
 gem 'sunspot_rails' # search
 gem 'sunspot_solr' # search
 gem 'parse-ruby-client' # parse.com integration
+gem 'gibbon' # mailchimp
 
 group :doc do
   gem 'sdoc', require: false

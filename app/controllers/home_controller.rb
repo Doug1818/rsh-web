@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout "landing_layout"
   def index
     if current_coach
 
@@ -7,6 +8,7 @@ class HomeController < ApplicationController
       # @users = current_coach.users
       # format.html { render "coaches_homepage" }
     else
+      @lead = Lead.new
       respond_to do |format|
         format.html { render "guest_homepage" }
       end
