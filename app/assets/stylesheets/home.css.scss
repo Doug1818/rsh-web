@@ -200,6 +200,22 @@ input{
 	color: #808285;
 }
 
+#social{
+	width: 30%;
+	position: relative;
+	left: 35%;
+	height: 64px;
+	vertical-align: middle;
+}
+
+#email{
+	float:left;
+}
+
+#twitter{
+	float:right;
+}
+
 /*Contact Bar*/
 .contact{
 	display: inline-block;
@@ -216,7 +232,7 @@ input{
 
 #learnmore{
 	clear:both;
-	margin-top:50px;
+	margin-top:0px;
 	text-align: center;
 	color: white;
 }
