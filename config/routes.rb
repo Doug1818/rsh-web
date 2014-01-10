@@ -15,7 +15,7 @@ RshWeb::Application.routes.draw do
   end
 
   resources :practices
-  devise_for :coaches
+  devise_for :coaches, controllers: { registrations: "coaches" }
   resources :coaches
   devise_for :users
   resources :users

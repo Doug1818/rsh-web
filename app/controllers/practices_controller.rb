@@ -17,7 +17,8 @@ class PracticesController < ApplicationController
     respond_to do |format|
       if @practice.save
         coach = @practice.coaches.first
-        coach.role = "owner"
+        coach.role = 'owner'
+        coach.status = Coach::STATUSES[:active]
         coach.save
 
         sign_in(coach)

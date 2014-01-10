@@ -1,7 +1,13 @@
 <div class="container">
   <div class="col-md-12">
     <div class="well">
-      <h2>Editing coach</h2>
+
+      <%- if params[:invite_token] %>
+        <h2>Please complete your registration to get started.</h2>
+      <%- else %>
+        <h2>Editing coach</h2>
+      <%- end %>
+
       <%= render 'form' %>
     </div>
   </div>

@@ -26,6 +26,7 @@ class Seed
         @coach = @practice.coaches.create(coach)
         @coach.password = 'test123test'
         @coach.password_confirmation = 'test123test'
+        @coach.status = Coach::STATUSES[:active]
         @coach.save!
 
          @program_count.times do
@@ -111,7 +112,7 @@ class Seed
         (start_date..end_date).each do |date|
 
           date = date.to_date
-          
+
           @week = program.weeks.where("DATE(?) BETWEEN start_date and end_date", date).references(:weeks).first
           @small_steps = @week.small_steps
 
