@@ -2,7 +2,7 @@
 
 <%= simple_form_for @practice, html: { class: "form-vertical" } do |f| %>
   <legend>Your practice</legend>
-  <%= f.input :name, label: false, placeholder: 'Name' %>
+  <%= f.input :name, label: false, placeholder: 'Practice Name' %>
 
   <legend>Your account</legend>
   <%= f.fields_for :coaches do |f| %>
@@ -27,5 +27,8 @@
     <input class="card-expiry-year string optional form-control" maxlength="4" size="4" autocomplete="off" type="text" pattern="(19\d\d|20\d\d)" placeholder="YYYY" />
   </div>
 
+  <div id="coach_terms">
+    <%= f.input :terms, as: :boolean, label: "I agree to the #{link_to 'Right Side Health Terms and Conditions', coach_terms_path, target: '_blank' }" %>
+  </div>
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

@@ -5,4 +5,6 @@ class Practice < ActiveRecord::Base
   has_many :excuses
 
   accepts_nested_attributes_for :coaches
+
+  validates :terms, acceptance: true
 end
