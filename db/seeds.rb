@@ -173,6 +173,8 @@ class Seed
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
+      phone: Faker::PhoneNumber.phone_number,
+      timezone: Faker::Address.time_zone,
       status: 1,
       gender: User::GENDERS.sample,
       avatar: nil
