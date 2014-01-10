@@ -2,6 +2,7 @@ jQuery(document).ready(function($) {
   // when the frequency pull down is changed, show the appropriate "extra" fields
   $(document).on('change','.small-step-frequency',function() {
     displayFrequencyFields( $(this) );
+    $('input[type=checkbox]').uniform();
   });
 
   // hide the small-step, display the form

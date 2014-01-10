@@ -1,4 +1,8 @@
-<% (week.start_date..week.end_date).each do |day| %>
+<% 
+  start_date = week.start_date.beginning_of_week(:sunday)
+  end_date = week.end_date.end_of_week(:sunday)
+%>
+<% (start_date..end_date).each do |day| %>
   <div class="check-in-wrap">
   <% if week.has_check_in_for_day(day) %>
     <% status = week.find_check_in_for_day(day).status %>

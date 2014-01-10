@@ -25,22 +25,18 @@ class SmallStep < ActiveRecord::Base
     days.to_sentence
   end
 
-  def required_on_date(date)
-
+  # All check ins needed for a day, regardless of whether or not the check in occurred
+  def can_check_in_on_date(date)
     begin
       date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
-
+      
       case FREQUENCIES.keys[frequency]
       when "Daily"
         true
       when "Specific Days"
         days.include?(date.strftime('%a')) # %a = Mon, Tues, Wed, etc.
       when "Times Per Week"
-        # True if, as of the given date, the user hasn't checked in enough times.
-        beginning_of_week = date.beginning_of_week(:sunday)
-        check_ins_this_week = check_ins.where("check_ins.created_at BETWEEN DATE(?) AND DATE(?)", beginning_of_week, date)
-        
-        check_ins_this_week.count < times_per_week ? true : false   
+        needs_check_in_on_date(date) or has_check_in_on_date(date)
       else
         false
       end
@@ -49,10 +45,39 @@ class SmallStep < ActiveRecord::Base
     end
   end
 
-  def as_json(options = {})
-    json = super(options)
-    json['requires_check_in'] = required_on_date(options[:date]) if options[:date]
-    json
+  # Check ins for a day that are needed and have not occurred
+  def needs_check_in_on_date(date, up_to_date=false)
+    begin
+      date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
+
+      check_ins_on_date = check_ins.where("check_ins.created_at = DATE(?)", date).pluck(:id)
+
+      case FREQUENCIES.keys[frequency]
+      when "Daily"
+        check_ins_on_date.count == 0
+      when "Specific Days"
+        check_ins_on_date.count == 0 and days.include?(date.strftime('%a')) # %a = Mon, Tues, Wed, etc.
+      when "Times Per Week"
+        # True if the user hasn't checked in with "Yes" enough times this week
+        beginning_of_week = date.beginning_of_week(:sunday)
+        end_of_week = up_to_date ? date : date.end_of_week(:sunday)
+
+        check_ins_this_week = check_ins.where("check_ins.created_at BETWEEN DATE(?) AND DATE(?)", beginning_of_week, end_of_week).pluck(:id)
+
+        yes_check_ins_as_of_date = activities.where(check_in_id: check_ins_this_week, status: Activity::STATUSES[:yes]).count
+        check_ins_on_date.count == 0 and yes_check_ins_as_of_date < times_per_week
+      else
+        false
+      end
+    rescue
+      false
+    end
+  end
+
+  def has_check_in_on_date(date)
+    date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
+    check_in = check_ins.find_by(created_at: date)
+    check_in.nil? ? false : true
   end
 end
 

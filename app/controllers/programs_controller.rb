@@ -74,7 +74,7 @@ class ProgramsController < ApplicationController
     # get the start date of the program (based on the attributes)
     # set the start/end dates of the week
     program_start_date = Date.parse(params[:program][:start_date])
-    week_start_date = program_start_date.beginning_of_week(:sunday)
+    week_start_date = program_start_date
     week_end_date = program_start_date.end_of_week(:sunday)
 
     params[:program][:weeks_attributes]["0"][:start_date] = week_start_date

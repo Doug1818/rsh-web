@@ -7,8 +7,9 @@ RshWeb::Application.routes.draw do
       resources :small_steps
       resources :users
       resources :weeks
-      get 'week/by_date', to: 'weeks#by_date', as: :week_by_date
+      get 'week/small_steps_for_day', to: 'weeks#small_steps_for_day', as: :small_steps_for_day
       resources :check_ins
+      post 'check_ins/update/:id', to: 'check_ins#update', as: :update_check_in
       resources :programs
     end
   end

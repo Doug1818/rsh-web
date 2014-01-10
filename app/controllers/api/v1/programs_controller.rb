@@ -10,22 +10,36 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
     unless @week.nil?
       @program_data = @week.as_json(only: :id)
 
-      check_in = @week.find_check_in_for_day(date)
-      check_in_status = check_in.is_a?(CheckIn) ? check_in.status : 0
+      check_in_status = @week.check_ins.find_by(created_at: date).status rescue nil
+
+      has_check_in = check_in_status != nil
 
       @small_steps = @week.small_steps
-      @small_step_data = @small_steps.as_json(only: [:name, :frequency, :requires_check_in], date: date)
+
+      @small_steps_data = @small_steps.as_json(only: [:id, :name, :frequency])
 
       requires_one_or_more_check_ins = false
 
-      @small_step_data.each do |small_step| 
-        if small_step['requires_check_in']
-          requires_one_or_more_check_ins = true 
-          break
+      @small_steps_data.each do |small_step|
+        begin
+          @small_step = @program.small_steps.find(small_step['id'])
+          
+          if @small_step.needs_check_in_on_date(date, true)
+            small_step['needs_check_in'] = true
+            requires_one_or_more_check_ins = true
+          else
+            small_step['needs_check_in'] = false
+          end
+          small_step['can_check_in'] = @small_step.can_check_in_on_date(date)
+          small_step['has_check_in'] = @small_step.has_check_in_on_date(date)
+        rescue ActiveRecord::RecordNotFound
+          small_step['needs_check_in'] = false
+          small_step['can_check_in'] = false
+          small_step['has_check_in'] = false
         end
       end
 
-      @program_data.reverse_merge!({small_steps: @small_step_data, check_in_status: check_in_status, requires_one_or_more_check_ins: requires_one_or_more_check_ins})
+      @program_data.reverse_merge!({small_steps: @small_steps_data, check_in_status: check_in_status, has_check_in: has_check_in, requires_one_or_more_check_ins: requires_one_or_more_check_ins})
       
     else
       @program_data = {} 
