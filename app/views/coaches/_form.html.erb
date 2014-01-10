@@ -10,8 +10,10 @@
     <br/>
     <%= f.submit "Accept Invitation", class: 'btn btn-primary' %>
   <%- else %>
-    <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
-    <% unless @coach.new_record? %>
+    <% if @coach.new_record? %>
+      <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
+      <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
+    <% else %>
       <%= f.input :first_name, label: false, placeholder: 'First Name' %>
       <%= f.input :last_name, label: false, placeholder: 'Last Name' %>
       <%= f.input :email, type: 'email', label: false, placeholder: 'Email', type: 'email' %>
@@ -19,11 +21,6 @@
       <%= f.input :status, as: :select, collection: Coach::STATUSES, label: false, placeholder: 'Status' %>
       <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
       <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
-    <% end %>
-
-    <% if @coach.new_record? %>
-      <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
-    <% else %>
       <%= f.submit class: 'btn btn-primary' %>
     <% end %>
   <% end %>
