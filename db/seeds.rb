@@ -76,7 +76,7 @@ class Seed
 
                 case frequency_name
                 when 'Times Per Week'
-                  small_step[:times_per_week] = 4
+                  small_step[:times_per_week] = 2
                 when 'Specific Days'
                   small_step[:monday] = true
                   small_step[:wednesday] = true
@@ -108,13 +108,18 @@ class Seed
         start_date = program.start_date
         end_date = 2.days.ago.in_time_zone("America/New_York").to_date
 
-        (start_date..end_date).each do |day|
-          @small_steps = program.small_steps.includes(:weeks).where("DATE(?) BETWEEN weeks.start_date AND weeks.end_date", day).references(:weeks)
+        (start_date..end_date).each do |date|
+
+          date = date.to_date
+          
+          @week = program.weeks.where("DATE(?) BETWEEN start_date and end_date", date).references(:weeks).first
+          @small_steps = @week.small_steps
 
           # Create a check in for the day
-          comments = "Checking in for #{ day }"
-          @check_in = CheckIn.create(comments: comments, created_at: day)
-          puts "\n#{ comments }"
+          comments = "Checking in for #{ date }"
+
+          @check_in = program.check_ins.where(created_at: date).first_or_create(week_id: @week.id, comments: comments)
+          @check_in.save!
 
           # Mark each of the small steps for the check in
           @small_steps.each_with_index do |small_step, i|
@@ -122,10 +127,10 @@ class Seed
             # Mark all if it's Monday or Tuesday
             # Mark none if it's Wednesday or Thursday
             # Mark individually otherwise
-              # No if the current iteration is even, yes if it is odd
-            status = if (day.monday? or day.wednesday?)
+            # No if the current iteration is even, yes if it is odd
+            status = if (date.sunday? or date.tuesday?)
               1
-            elsif (day.tuesday? or day.thursday?)
+            elsif (date.monday? or date.wednesday?)
               0
             else
               i.even? ? 0 : 1
@@ -133,18 +138,13 @@ class Seed
 
             puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
 
-            if status == 0 and i.odd? # Give an excuse for every other one marked as did not do
+            if status == 0 and i.even? # Give an excuse for every other one marked as did not do
               excuse_name = "This is my excuse"
-              @excuse = practice.excuses.find_or_create_by name: excuse_name
+              @excuse = practice.excuses.where(name: excuse_name).first_or_create
               @check_in.excuses << @excuse
             end
 
-            week = program.weeks.where("DATE(?) BETWEEN start_date AND end_date", day).first
-
-            # @check_in.small_step_id = small_step.id
-            @check_in.week_id = week.id
-            @check_in.activities.create(small_step_id: small_step.id, status: status, created_at: day)
-            @check_in.save!
+            @check_in.activities.create! small_step_id: small_step.id, status: status, created_at: date
           end
         end
       end

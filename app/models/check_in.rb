@@ -5,7 +5,7 @@ class CheckIn < ActiveRecord::Base
   has_and_belongs_to_many :excuses
 
   def status
-    statuses = self.activities.pluck(:status).uniq!
+    statuses = self.activities.pluck(:status).uniq
     if statuses.size == 2
       STATUSES[:mixed]
     else

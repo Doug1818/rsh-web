@@ -6,7 +6,7 @@ class Week < ActiveRecord::Base
   accepts_nested_attributes_for :small_steps, :reject_if => :all_blank, :allow_destroy => true
 
   def has_check_in_for_day(day)
-    if check_ins.pluck(:created_at).map(&:wday).include?(day.wday)
+    if within_week?(day) and check_ins.pluck(:created_at).map(&:wday).include?(day.wday)
       true
     else
       false
@@ -14,11 +14,18 @@ class Week < ActiveRecord::Base
   end
 
   def find_check_in_for_day(day)
-    check_ins.each do |check_in|
-      if check_in.created_at.wday == day.wday
-        return check_in
+    if within_week?(day)
+      check_ins.each do |check_in|
+        if check_in.created_at.wday == day.wday
+          return check_in
+        end
       end
     end
+  end
+
+  # ensure the given day is within the current week's range
+  def within_week?(day)
+    (start_date..end_date).cover?(day)
   end
 
   def current_week?
