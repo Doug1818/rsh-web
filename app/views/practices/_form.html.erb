@@ -10,6 +10,9 @@
     <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
     <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
     <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
+    <% if session[:referral_code] %>
+      <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
+    <% end %>
   <% end %>
 
   <legend>Billing Info</legend>

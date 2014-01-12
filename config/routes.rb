@@ -36,6 +36,7 @@ RshWeb::Application.routes.draw do
   resources :supporters
   resources :todos
   resources :leads
+  resources :referrals
 
   root 'home#index'
   get "/coach_terms", to: 'legal_docs#coach_terms'
