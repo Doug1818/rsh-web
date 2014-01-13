@@ -16,19 +16,26 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     end
   end
 
-  # TODO add strong params, make this more rails-like
   def update
     @user = @program.user
-    @user.image_data = params[:avatar]
-    @user.phone = params[:phone]
-    @user.timezone = params[:timezone]
-    @user.save
 
-    render status: 200, json: {
-      success: true,
-      data: { user: @user }
-    }
+    if @user.update_attributes!(user_params)
+      render status: 200, json: {
+        success: true,
+        data: { user: @user }
+      }
+    else
+      render status: 200, json: {
+        success: false,
+        data: {}
+      }
+    end
+  end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:image_data, :phone, :timezone)
   end
 
 end

@@ -5,11 +5,10 @@ RshWeb::Application.routes.draw do
     namespace :v1 do
       resources :sessions
       resources :small_steps
-      resources :users
+      resources :users  
       resources :weeks
       get 'week/small_steps_for_day', to: 'weeks#small_steps_for_day', as: :small_steps_for_day
       resources :check_ins
-      post 'check_ins/update/:id', to: 'check_ins#update', as: :update_check_in
       resources :programs
     end
   end
