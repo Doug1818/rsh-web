@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-db_tables = %w{ practices coaches users programs weeks small_steps_weeks big_steps small_steps excuses check_ins activities check_ins_excuses alerts reminders }
+db_tables = %w{ admins practices coaches users programs weeks small_steps_weeks big_steps small_steps excuses check_ins activities check_ins_excuses alerts reminders }
 db_tables.each {|db_table| ActiveRecord::Base.connection.execute("TRUNCATE #{ db_table }") }
 
 class Seed
@@ -92,6 +92,10 @@ class Seed
         end
       end
     end
+
+    # Add Admins
+    Admin.create(email: "doug.raicek@gmail.com", password: "test123test")
+    Admin.create(email: "roderick.mcmullen@gmail.com", password: "test123test")
   end
 
   # Create check-ins for the first Program of each Practice
