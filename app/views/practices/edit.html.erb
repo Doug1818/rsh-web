@@ -1,0 +1,13 @@
+<% content_for :script do %>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script type="text/javascript">Stripe.setPublishableKey('pk_sgMGdcpy0H8F1OqdH0J7esjxavF0O');</script>
+<% end %>
+
+<div class="container">
+  <div class="well">
+    <div class="col-md-12">
+      <h2>Sign up</h2>
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>

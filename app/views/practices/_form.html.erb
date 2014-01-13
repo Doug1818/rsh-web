@@ -1,37 +1,59 @@
-<div class="payment-errors alert alert-error"></div>
-
 <%= simple_form_for @practice, html: { class: "form-vertical" } do |f| %>
-  <legend>Your practice</legend>
-  <%= f.input :name, label: false, placeholder: 'Practice Name' %>
-
-  <legend>Your account</legend>
-  <%= f.fields_for :coaches do |f| %>
-    <%= f.input :full_name, label: false, placeholder: 'Your Name' %>
-    <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
-    <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
-    <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
-    <% if session[:referral_code] %>
-      <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
+  <% if @practice.new_record? %>
+    <%= f.input :name, label: false, placeholder: 'Practice Name' %>
+    <%= f.fields_for :coaches do |f| %>
+      <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
+      <%= f.input :email, type: 'email', label: false, placeholder: 'Coach Email' %>
     <% end %>
+    <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
+  <% elsif params[:invite_token] %>
+    <legend>Your practice</legend>
+    <%= f.input :name, label: false, placeholder: 'Practice Name' %>
+
+    <legend>Your account</legend>
+    <%= f.fields_for @coach do |f| %>
+      <%= f.input :full_name, label: false, placeholder: 'Your Name' %>
+      <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
+      <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
+      <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
+      <%= hidden_field_tag(:invite_token, params[:invite_token]) %>
+      <% if session[:referral_code] %>
+        <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
+      <% end %>
+    <% end %>
+
+    <legend>Billing Info</legend>
+    <div class="form-group string required">
+      <input class="card-number string optional form-control" maxlength="16" size="255" autocomplete="off" type="text" pattern="[0-9]{13,16}" placeholder="Card Number" />
+    </div>
+    <div class="form-group string required">
+      <input class="card-cvc string optional form-control" maxlength="4" size="255" autocomplete="off" type="text" pattern="[0-9]{3,4}" placeholder="CVC" />
+    </div>
+    <div class="form-group string required">
+      <label class="string optional control-label">Expiration (MM/YYYY)</label>
+      <br/>
+      <input class="card-expiry-month string optional form-control" maxlength="2" size="2" autocomplete="off" type="text" pattern="((0[1-9])|(1[0-2]))" placeholder="MM" />
+      <span> / </span>
+      <input class="card-expiry-year string optional form-control" maxlength="4" size="4" autocomplete="off" type="text" pattern="(19\d\d|20\d\d)" placeholder="YYYY" />
+    </div>
+    <div class="payment-errors alert alert-error"></div>
+
+    <div id="coach_terms">
+      <%= f.input :terms, as: :boolean, label: "I agree to the #{link_to 'Right Side Health Terms and Conditions', coach_terms_path, target: '_blank' }" %>
+    </div>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% else %>
+    <%= f.input :name, label: false, placeholder: 'Practice Name' %>
+    <%= f.input :address, label: false, placeholder: 'Practice Address' %>
+    <%= f.input :city, label: false, placeholder: 'City' %>
+    <%= f.input :state, label: false, placeholder: 'State' %>
+    <%= f.input :zip, label: false, placeholder: 'Zip' %>
+    <%= f.fields_for @coach do |f| %>
+      <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
+      <%= f.input :email, type: 'email', label: false, placeholder: 'Coach Email' %>
+      <%= f.input :gender, as: :select, collection: Coach::GENDERS, label: false, placeholder: 'Gender' %>
+      <%= f.input :status, as: :select, collection: Coach::STATUSES, label: false, placeholder: 'Status' %>
+    <% end %>
+    <%= f.submit class: 'btn btn-primary' %>
   <% end %>
-
-  <legend>Billing Info</legend>
-  <div class="form-group string required">
-    <input class="card-number string optional form-control" maxlength="16" size="255" autocomplete="off" type="text" pattern="[0-9]{13,16}" placeholder="Card Number" />
-  </div>
-  <div class="form-group string required">
-    <input class="card-cvc string optional form-control" maxlength="4" size="255" autocomplete="off" type="text" pattern="[0-9]{3,4}" placeholder="CVC" />
-  </div>
-  <div class="form-group string required">
-    <label class="string optional control-label">Expiration (MM/YYYY)</label>
-    <br/>
-    <input class="card-expiry-month string optional form-control" maxlength="2" size="2" autocomplete="off" type="text" pattern="((0[1-9])|(1[0-2]))" placeholder="MM" />
-    <span> / </span>
-    <input class="card-expiry-year string optional form-control" maxlength="4" size="4" autocomplete="off" type="text" pattern="(19\d\d|20\d\d)" placeholder="YYYY" />
-  </div>
-
-  <div id="coach_terms">
-    <%= f.input :terms, as: :boolean, label: "I agree to the #{link_to 'Right Side Health Terms and Conditions', coach_terms_path, target: '_blank' }" %>
-  </div>
-  <%= f.submit class: 'btn btn-primary' %>
 <% end %>

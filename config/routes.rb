@@ -41,7 +41,10 @@ RshWeb::Application.routes.draw do
   resources :referrals
 
   root 'home#index'
+  
   get "/coach_terms", to: 'legal_docs#coach_terms'
   get "/user_terms", to: 'legal_docs#user_terms'
   get "/privacy", to: 'legal_docs#privacy'
+  
+  get "/rshadmin", to: 'rshadmin#index'
 end

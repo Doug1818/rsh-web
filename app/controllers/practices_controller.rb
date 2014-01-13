@@ -1,6 +1,11 @@
 class PracticesController < ApplicationController
   before_filter :authenticate_coach!, only: [:show]
+  before_filter :authenticate_admin!, only: [:index, :new, :create]
   authorize_resource
+
+  def index
+    @practices = Practice.all
+  end
 
   def show
     @practice = Practice.find(params[:id])
@@ -8,27 +13,74 @@ class PracticesController < ApplicationController
 
   def new
     @practice = Practice.new
-    @practice.coaches.build
+    @coach = @practice.coaches.build
   end
 
   def create
     @practice = Practice.new(practice_params)
-
     respond_to do |format|
       if @practice.save
         coach = @practice.coaches.first
         coach.role = 'owner'
-        coach.status = Coach::STATUSES[:active]
+        coach.status = Coach::STATUSES[:invited]
         coach.save
+        UserMailer.practice_invitation_email(coach).deliver
 
-        sign_in(coach)
+        #sign_in(coach)
 
-        format.html { redirect_to(root_url) }
+        format.html { redirect_to(practices_path) }
         format.json { render json: @practice, status: :created, location: @practice }
       else
         format.html { render action: "new" }
         format.json { render json: @practice.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def edit
+    if params[:invite_token]
+      @coach = Coach.where(invite_token: params[:invite_token]).first
+      @practice = Practice.find(@coach.practice_id)
+    elsif current_admin
+      @practice = Practice.find(params[:id])
+      @coach = @practice.coaches.where(role: "owner").first
+    end
+  end
+
+  def update
+    if params[:invite_token]
+      @coach = Coach.where(invite_token: params[:invite_token]).first
+      @practice = Practice.find(@coach.practice_id)
+    elsif current_admin
+      @practice = Practice.find(params[:id])
+      @coach = @practice.coaches.where(role: "owner").first
+    end
+
+    respond_to do |format|
+      if @practice.update_attributes(practice_params)
+
+        if params[:invite_token]
+          @coach.status = Coach::STATUSES[:active]
+          @coach.save
+
+          # @coach.confirmation_email
+          sign_in :coach, @coach
+          format.html { redirect_to coach_path(@coach), notice: "Welcome!" }
+        else
+          format.html { redirect_to practices_path, notice: "Coach was successfully updated" }
+        end
+      else
+        format.html { render action: "edit" }
+      end
+    end
+  end
+
+  def destroy
+    @practice = Practice.find(params[:id])
+    @practice.destroy
+
+    respond_to do |format|
+      format.html { redirect_to practices_path, notice: "#{@practice.name} was successfully deleted." }
     end
   end
 

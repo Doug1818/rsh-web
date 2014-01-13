@@ -41,6 +41,8 @@
             <p>
               <% if current_coach %>
                 <%= link_to 'Sign out', destroy_coach_session_path, method: :delete %>
+              <% elsif current_admin %>
+                <%= link_to 'Sign out', destroy_admin_session_path, method: :delete %>
               <% else %>
                 <%= link_to 'Sign in', new_coach_session_path %></li>
               <% end %>
@@ -48,6 +50,7 @@
           </div>
         </div>
       </div>
+      <% if current_coach %>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <% if can? :manage,  current_practice %>
@@ -70,6 +73,7 @@
           </li>
         </ul>
       </div><!--/.nav-collapse -->
+      <% end %>
     </div>
   </div>
 

@@ -8,6 +8,13 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: "You've been invited to join Steps (by Right Side Health)")
   end
 
+  def practice_invitation_email(coach)
+    @coach = coach
+    @practice = Practice.find(@coach.practice_id)
+
+    mail(to: @coach.email, subject: "You've been invited to join Steps (by Right Side Health)")
+  end
+
   def coach_invitation_email(coach)
     @coach = coach
 
