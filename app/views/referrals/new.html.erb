@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="well">
+    <div class="col-md-12">
+      <h2>Get 1 month of free use for each coach you refer</h2>
+      <%= simple_form_for @referral, html: { class: "form-vertical" } do |f| %>
+        <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
+        <%= f.submit 'Send Invitation', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

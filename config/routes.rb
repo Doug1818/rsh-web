@@ -14,7 +14,7 @@ RshWeb::Application.routes.draw do
   end
 
   resources :practices
-  devise_for :coaches
+  devise_for :coaches, controllers: { registrations: "coaches" }
   resources :coaches
   devise_for :users
   resources :users
@@ -35,6 +35,10 @@ RshWeb::Application.routes.draw do
   resources :supporters
   resources :todos
   resources :leads
+  resources :referrals
 
   root 'home#index'
+  get "/coach_terms", to: 'legal_docs#coach_terms'
+  get "/user_terms", to: 'legal_docs#user_terms'
+  get "/privacy", to: 'legal_docs#privacy'
 end

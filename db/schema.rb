@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110041622) do
+ActiveRecord::Schema.define(version: 20140111183555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20140110041622) do
     t.string   "last_sign_in_ip"
     t.string   "role"
     t.string   "invite_token"
+    t.string   "referral_code"
+    t.string   "referred_by_code"
   end
 
   add_index "coaches", ["email"], name: "index_coaches_on_email", unique: true, using: :btree
@@ -90,6 +92,7 @@ ActiveRecord::Schema.define(version: 20140110041622) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "referred_by_code"
   end
 
   create_table "practices", force: true do |t|
@@ -117,6 +120,13 @@ ActiveRecord::Schema.define(version: 20140110041622) do
     t.string   "authentication_token"
     t.date     "start_date"
     t.datetime "nudge_at_time",        default: '-4712-01-01 20:00:00'
+  end
+
+  create_table "referrals", force: true do |t|
+    t.integer  "coach_id"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reminders", force: true do |t|

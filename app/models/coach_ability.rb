@@ -10,6 +10,7 @@ class CoachAbility
 
   def guest
     can :create, Practice
+    can :update, Coach
   end
 
   def coach

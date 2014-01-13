@@ -5,11 +5,17 @@ class Coach < ActiveRecord::Base
   belongs_to :practice
   has_many :programs
   has_many :users, through: :programs
+  has_many :referrals
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   mount_uploader :avatar, AvatarUploader
+
+  before_create :generate_invite_token
+  before_create :generate_referral_code
+  after_create :invitation_email
+
 
   def full_name=(full_name)
     if full_name.present?
@@ -38,5 +44,19 @@ class Coach < ActiveRecord::Base
     else
       (self.password_confirmation.present? || (self.status == 'invited')) ? super : false
     end
+  end
+
+  def invitation_email
+    if self.role == 'coach'
+      UserMailer.coach_invitation_email(self).deliver
+    end
+  end
+
+  def generate_invite_token
+    self.invite_token = SecureRandom.urlsafe_base64
+  end
+
+  def generate_referral_code
+    self.referral_code = SecureRandom.urlsafe_base64
   end
 end

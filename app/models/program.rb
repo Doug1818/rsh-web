@@ -63,7 +63,7 @@ class Program < ActiveRecord::Base
 
   def send_invitation
     # TODO remove the unless when we're ready to go live
-    UserMailer.invitation_email(self).deliver unless Rails.env.production?
+    UserMailer.user_invitation_email(self).deliver unless Rails.env.production?
   end
 
 

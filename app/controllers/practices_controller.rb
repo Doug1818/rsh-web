@@ -17,7 +17,8 @@ class PracticesController < ApplicationController
     respond_to do |format|
       if @practice.save
         coach = @practice.coaches.first
-        coach.role = "owner"
+        coach.role = 'owner'
+        coach.status = Coach::STATUSES[:active]
         coach.save
 
         sign_in(coach)
@@ -32,6 +33,6 @@ class PracticesController < ApplicationController
   end
 
   def practice_params
-    params.require(:practice).permit(:name, :address, :state, :city, :zip, coaches_attributes: [:full_name, :first_name, :last_name, :email, :password, :password_confirmation])
+    params.require(:practice).permit(:terms, :name, :address, :state, :city, :zip, coaches_attributes: [:referred_by_code, :full_name, :first_name, :last_name, :email, :password, :password_confirmation])
   end
 end
