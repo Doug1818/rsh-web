@@ -51,19 +51,15 @@ class Program < ActiveRecord::Base
   private
 
   def generate_authentication_token
-    if Rails.env.development?
-      token = "a"
-    else
-      loop do
-        token = SecureRandom.base64(4).tr('+/=', '0aZ')
-        break token unless Program.where(authentication_token: token).first
-      end
+    loop do
+      token = (0...6).map { ('a'..'z').to_a[rand(26)] }.join
+      break token unless Program.where(authentication_token: token).first
     end
   end
 
   def send_invitation
     # TODO remove the unless when we're ready to go live
-    UserMailer.user_invitation_email(self).deliver unless Rails.env.production?
+    UserMailer.user_invitation_email(self).deliver
   end
 
 
