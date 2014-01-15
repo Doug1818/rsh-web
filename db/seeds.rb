@@ -120,38 +120,42 @@ class Seed
           date = date.to_date
 
           @week = program.weeks.where("DATE(?) BETWEEN start_date and end_date", date).references(:weeks).first
-          @small_steps = @week.small_steps
+          @small_steps = @week.small_steps.collect { |ss| ss if ss.can_check_in_on_date(date) }.compact
 
-          # Create a check in for the day
-          comments = "Checking in for #{ date }"
+          if @small_steps.count > 0
+            # Create a check in for the day
+            comments = "Checking in for #{ date }"
 
-          @check_in = program.check_ins.where(created_at: date).first_or_create(week_id: @week.id, comments: comments)
-          @check_in.save!
+            @check_in = program.check_ins.where(created_at: date).first_or_create(week_id: @week.id, comments: comments)
+            @check_in.save!
 
-          # Mark each of the small steps for the check in
-          @small_steps.each_with_index do |small_step, i|
+            # Mark each of the small steps for the check in
+            @small_steps.each_with_index do |small_step, i|
 
-            # Mark all if it's Monday or Tuesday
-            # Mark none if it's Wednesday or Thursday
-            # Mark individually otherwise
-            # No if the current iteration is even, yes if it is odd
-            status = if (date.sunday? or date.tuesday?)
-              1
-            elsif (date.monday? or date.wednesday?)
-              0
-            else
-              i.even? ? 0 : 1
+              # Mark all if it's Monday or Tuesday
+              # Mark none if it's Wednesday or Thursday
+              # Mark individually otherwise
+              # No if the current iteration is even, yes if it is odd
+              status = if (date.sunday? or date.tuesday?)
+                1
+              elsif (date.monday? or date.wednesday?)
+                0
+              else
+                i.even? ? 0 : 1
+              end
+
+              puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
+
+              if status == 0 and i.even? # Give an excuse for every other one marked as did not do
+                excuse_name = "This is my excuse"
+                @excuse = practice.excuses.where(name: excuse_name).first_or_create
+                @check_in.excuses << @excuse
+              end
+
+              @check_in.activities.create! small_step_id: small_step.id, status: status, created_at: date
             end
-
-            puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
-
-            if status == 0 and i.even? # Give an excuse for every other one marked as did not do
-              excuse_name = "This is my excuse"
-              @excuse = practice.excuses.where(name: excuse_name).first_or_create
-              @check_in.excuses << @excuse
-            end
-
-            @check_in.activities.create! small_step_id: small_step.id, status: status, created_at: date
+          else
+            puts "No eligible small steps to check in on #{ date }"
           end
         end
       end
