@@ -1,6 +1,6 @@
 class PracticesController < ApplicationController
   before_filter :authenticate_coach!, only: [:show]
-  before_filter :authenticate_admin!, only: [:index, :new, :create]
+  before_filter :authenticate_admin!, only: [:index]
   authorize_resource
 
   def index
@@ -12,8 +12,10 @@ class PracticesController < ApplicationController
   end
 
   def new
-    @practice = Practice.new
-    @coach = @practice.coaches.build
+    if current_admin || session[:referral_code]
+      @practice = Practice.new
+      @coach = @practice.coaches.build
+    end
   end
 
   def create
@@ -22,13 +24,16 @@ class PracticesController < ApplicationController
       if @practice.save
         coach = @practice.coaches.first
         coach.role = 'owner'
-        coach.status = Coach::STATUSES[:invited]
-        coach.save
-        UserMailer.practice_invitation_email(coach).deliver
-
-        #sign_in(coach)
-
-        format.html { redirect_to(practices_path) }
+        if session[:referral_code]
+          coach.status = Coach::STATUSES[:active]
+          coach.save
+          sign_in(coach)
+          format.html { redirect_to coach_path(coach), notice: "Welcome!" }
+        elsif current_admin
+          coach.save
+          UserMailer.practice_invitation_email(coach).deliver
+          format.html { redirect_to practices_path, notice: "Practice was successfully added" }
+        end
         format.json { render json: @practice, status: :created, location: @practice }
       else
         format.html { render action: "new" }
@@ -53,9 +58,7 @@ class PracticesController < ApplicationController
       @practice = Practice.find(@coach.practice_id)
     elsif current_admin
       @practice = Practice.find(params[:id])
-      @coach = @practice.coaches.where(role: "owner").first
     end
-
     respond_to do |format|
       if @practice.update_attributes(practice_params)
 
@@ -85,6 +88,6 @@ class PracticesController < ApplicationController
   end
 
   def practice_params
-    params.require(:practice).permit(:terms, :name, :address, :state, :city, :zip, coaches_attributes: [:referred_by_code, :full_name, :first_name, :last_name, :email, :password, :password_confirmation])
+    params.require(:practice).permit(:terms, :name, :address, :state, :city, :zip, coaches_attributes: [:id, :referred_by_code, :full_name, :first_name, :last_name, :gender, :email, :password, :password_confirmation])
   end
 end

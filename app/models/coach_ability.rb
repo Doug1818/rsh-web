@@ -9,7 +9,8 @@ class CoachAbility
   end
 
   def guest
-    #can :create, Practice
+    can :create, Practice
+    can :update, Practice
     can :update, Coach
   end
 

@@ -1,4 +1,7 @@
 class ReferralsController < ApplicationController
+  before_filter :authenticate_coach!
+  authorize_resource
+  
 	def new
 		@referral = Referral.new
 	end

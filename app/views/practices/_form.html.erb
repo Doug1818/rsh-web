@@ -1,25 +1,16 @@
 <%= simple_form_for @practice, html: { class: "form-vertical" } do |f| %>
-  <% if @practice.new_record? %>
-    <%= f.input :name, label: false, placeholder: 'Practice Name' %>
-    <%= f.fields_for :coaches do |f| %>
-      <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
-      <%= f.input :email, type: 'email', label: false, placeholder: 'Coach Email' %>
-    <% end %>
-    <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
-  <% elsif params[:invite_token] %>
+  <% if params[:invite_token] || session[:referral_code] %>
     <legend>Your practice</legend>
     <%= f.input :name, label: false, placeholder: 'Practice Name' %>
 
     <legend>Your account</legend>
-    <%= f.fields_for @coach do |f| %>
+    <%= f.fields_for :coaches do |f| %>
       <%= f.input :full_name, label: false, placeholder: 'Your Name' %>
       <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
       <%= f.input :password, type: 'password', label: false, placeholder: 'Password' %>
       <%= f.input :password_confirmation, type: 'password', label: false, placeholder: 'Password confirmation' %>
+      <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
       <%= hidden_field_tag(:invite_token, params[:invite_token]) %>
-      <% if session[:referral_code] %>
-        <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
-      <% end %>
     <% end %>
 
     <legend>Billing Info</legend>
@@ -41,14 +32,21 @@
     <div id="coach_terms">
       <%= f.input :terms, as: :boolean, label: "I agree to the #{link_to 'Right Side Health Terms and Conditions', coach_terms_path, target: '_blank' }" %>
     </div>
-    <%= f.submit class: 'btn btn-primary' %>
+    <%= f.submit "Sign up", class: 'btn btn-primary' %>
+  <% elsif @practice.new_record? %>
+    <%= f.input :name, label: false, placeholder: 'Practice Name' %>
+    <%= f.fields_for :coaches do |f| %>
+      <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
+      <%= f.input :email, type: 'email', label: false, placeholder: 'Coach Email' %>
+    <% end %>
+    <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
   <% else %>
     <%= f.input :name, label: false, placeholder: 'Practice Name' %>
     <%= f.input :address, label: false, placeholder: 'Practice Address' %>
     <%= f.input :city, label: false, placeholder: 'City' %>
     <%= f.input :state, label: false, placeholder: 'State' %>
     <%= f.input :zip, label: false, placeholder: 'Zip' %>
-    <%= f.fields_for @coach do |f| %>
+    <%= f.fields_for :coaches do |f| %>
       <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
       <%= f.input :email, type: 'email', label: false, placeholder: 'Coach Email' %>
       <%= f.input :gender, as: :select, collection: Coach::GENDERS, label: false, placeholder: 'Gender' %>
