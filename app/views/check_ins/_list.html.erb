@@ -7,8 +7,10 @@
   <% if week.has_check_in_for_day(day) %>
     <% status = week.find_check_in_for_day(day).status %>
     <div class="check-in status-<%=status%>"></div>
-  <% else %>
+  <% elsif day < Date.current - 1 # Day is in the past by a full day (to allow for check in window) %>
     <div class="check-in status-<%=CheckIn::STATUSES[:none]%>"></div>
+  <% else %>
+    <div class="check-in status-<%=CheckIn::STATUSES[:future]%>"></div>
   <% end %>
   <div class="day-names"><%= day.strftime("%a, %b %e") %></div>
   <!--<div class="day-numbers"><%= @program.day_number(day) %></div>-->

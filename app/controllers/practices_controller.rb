@@ -30,6 +30,7 @@ class PracticesController < ApplicationController
           sign_in(coach)
           format.html { redirect_to coach_path(coach), notice: "Welcome!" }
         elsif current_admin
+          coach.status = Coach::STATUSES[:invited]
           coach.save
           UserMailer.practice_invitation_email(coach).deliver
           format.html { redirect_to practices_path, notice: "Practice was successfully added" }
