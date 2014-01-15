@@ -25,6 +25,10 @@ class SmallStep < ActiveRecord::Base
     days.to_sentence
   end
 
+  def humanize_frequency
+    FREQUENCIES.keys[frequency]
+  end
+
   # All check ins needed for a day, regardless of whether or not the check in occurred
   def can_check_in_on_date(date)
     begin
@@ -78,6 +82,13 @@ class SmallStep < ActiveRecord::Base
     date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
     check_in = check_ins.find_by(created_at: date)
     check_in.nil? ? false : true
+  end
+
+  def as_json(options = {})
+    json = super(options)
+    json['specific_days'] = humanize_days
+    json['frequency_name'] = humanize_frequency
+    json
   end
 end
 

@@ -23,6 +23,7 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
       @small_steps_data.each do |small_step|
         begin
           @small_step = @program.small_steps.find(small_step['id'])
+          small_step['specific_days'] = @small_step.humanize_days
           
           if @small_step.needs_check_in_on_date(date, true)
             small_step['needs_check_in'] = true
