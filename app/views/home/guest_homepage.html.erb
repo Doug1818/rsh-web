@@ -26,7 +26,7 @@
 				<div id="form">
 					<%= simple_form_for @lead, html: { class: "TODO", style:"width:80%; margin:auto;" } do |f| %>
 					  <%= f.input :name, label: false, placeholder: "Full Name" %>
-					  <%= f.input :email, type: 'email', label: false, placeholder: 'Email Adress' %>
+					  <%= f.input :email, type: 'email', label: false, placeholder: 'Email Address' %>
 					  <% if session[:referral_code] %>
 				      <%= f.hidden_field :referred_by_code, value: session[:referral_code] %>
 				    <% end %>
