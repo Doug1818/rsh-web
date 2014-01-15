@@ -16,44 +16,10 @@ class Reminder < ActiveRecord::Base
     tz = self.user.timezone
     date_time_now = DateTime.now.in_time_zone(tz)
     send_on_date = self.send_on.in_time_zone(tz)
-    send_at_time = date_time_now.change(hour: send_at.in_time_zone(tz).hour, minute: send_at.in_time_zone(tz).min)
+    send_at_time = date_time_now.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
+    expire_time = send_at_time + 30.minutes
 
-    if self.frequency == FREQUENCIES["Once"]
-
-      puts "ONE TIME..."
-      send_at_time = send_on_date.change(hour: send_at.in_time_zone(tz).hour, minute: send_at.in_time_zone(tz).min)
-
-      if send_on_date.beginning_of_day == date_time_now.beginning_of_day
-        if date_time_now >= send_at_time
-          puts "SEND IT"
-        end
-      end
-    elsif self.frequency == FREQUENCIES["Daily"]
-      puts "DAILY..."
-      schedule = IceCube::Schedule.new(now = send_on_date) do |s|
-        s.add_recurrence_rule(IceCube::Rule.daily(self.daily_recurrence))
-      end
-      if schedule.occurs_on?(date_time_now) && (date_time_now >= send_at_time)
-        puts "SEND IT..."
-      end
-    elsif self.frequency == FREQUENCIES["Weekly"]
-      puts "WEEKLY..."
-      schedule = IceCube::Schedule.new(now = send_on_date) do |s|
-        s.add_recurrence_rule(IceCube::Rule.weekly(self.weekly_recurrence).day(send_on_date.wday))
-      end
-      if schedule.occurs_on?(date_time_now) && (date_time_now >= send_at_time)
-        puts "SEND IT..."
-      end
-    elsif self.frequency == FREQUENCIES["Monthly"]
-      puts "MONTHLY..."
-      schedule = IceCube::Schedule.new(now = send_on_date) do |s|
-        s.add_recurrence_rule(IceCube::Rule.monthly(self.monthly_recurrence).day_of_month(send_on_date.day))
-      end
-      puts "FIRST THREE: #{schedule.first(3)}"
-      if schedule.occurs_on?(date_time_now) && (date_time_now >= send_at_time)
-        puts "SEND IT..."
-      end
-    end
+    send("check_frequency_#{FREQUENCIES.keys[self.frequency].downcase}", tz, date_time_now, send_on_date, send_at_time, expire_time)
   end
 
   private
@@ -61,6 +27,51 @@ class Reminder < ActiveRecord::Base
   def set_send_at
     time = Time.parse(send_at.strftime("%H:%M %p"))
     self.send_at = DateTime.parse("#{ send_on } #{ time }")
+  end
+
+
+  def check_frequency_once(tz, date_time_now, send_on_date, send_at_time, expire_time)
+    puts "CHECKING FREQ ONCE"
+    send_at_time = send_on_date.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
+    send_reminder if (send_on_date.to_date == date_time_now.to_date) && time_between?(date_time_now, send_at_time, expire_time)
+  end
+
+  def check_frequency_daily(tz, date_time_now, send_on_date, send_at_time, expire_time)
+    puts "CHECKING FREQ DAILY"
+    schedule = IceCube::Schedule.new(now = send_on_date) do |s|
+      s.add_recurrence_rule(IceCube::Rule.daily(self.daily_recurrence))
+    end
+    send_reminder if schedule.occurs_on?(date_time_now) && time_between?(date_time_now, send_at_time, expire_time)
+  end
+
+  def check_frequency_weekly(tz, date_time_now, send_on_date, send_at_time, expire_time)
+    puts "CHECKING FREQ WEEKLY"
+    schedule = IceCube::Schedule.new(now = send_on_date) do |s|
+      s.add_recurrence_rule(IceCube::Rule.weekly(self.weekly_recurrence).day(send_on_date.wday))
+    end
+    send_reminder if schedule.occurs_on?(date_time_now) && time_between?(date_time_now, send_at_time, expire_time)
+  end
+
+  def check_frequency_monthly(tz, date_time_now, send_on_date, send_at_time, expire_time)
+    puts "CHECKING FREQ MONTHLY"
+    schedule = IceCube::Schedule.new(now = send_on_date) do |s|
+      s.add_recurrence_rule(IceCube::Rule.monthly(self.monthly_recurrence).day_of_month(send_on_date.day))
+    end
+    send_reminder if schedule.occurs_on?(date_time_now) && time_between?(date_time_now, send_at_time, expire_time)
+  end
+
+  def time_between?(date_time_now, send_at_time, expire_time)
+    (date_time_now >= send_at_time && date_time_now <= expire_time)
+  end
+
+  def send_reminder
+      data = { alert: self.body }
+      push = Parse::Push.new(data, "user_#{self.user.id}")
+      push.type = "ios"
+      push.save
+
+      self.last_sent_at = DateTime.new
+      self.save
   end
 
   def self.scheduled_reminder

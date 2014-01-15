@@ -62,22 +62,24 @@ class Program < ActiveRecord::Base
     UserMailer.user_invitation_email(self).deliver
   end
 
-
   def self.nudge_reminder
     @today = DateTime.new
     Program.where(status: STATUSES[:active]).each do |program|
       @current_week = program.current_week
       if @current_week.present?
 
-        # @current_week.small_steps.each
-          # needs_check_in_on_date(@today)
-          # if true, send message
-        #
+        should_notify = false
 
-        unless @current_week.has_check_in_for_day(@today)
-          puts "SEND PUSH"
+        @current_week.small_steps.each do |small_step|
+          if small_step.needs_check_in_on_date(@today) == true
+            should_notify = true
+            break
+          end
+        end
+
+        if should_notify
           data = { :alert => "Don't forget to check in today!" }
-          push = Parse::Push.new(data, "user_169")
+          push = Parse::Push.new(data, "user_#{program.user.id}")
           push.type = "ios"
           push.save
         end
