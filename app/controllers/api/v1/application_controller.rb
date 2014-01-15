@@ -3,6 +3,7 @@ class Api::V1::ApplicationController < ActionController::Base
   respond_to :json
 
   before_filter :authenticate_program
+  before_filter :load_practice
 
   def authenticate_program
     if params[:authentication_token].present?
@@ -11,6 +12,10 @@ class Api::V1::ApplicationController < ActionController::Base
     else
       auth_failure
     end
+  end
+
+  def load_practice
+    @practice = @program.coach.practice if @program.present?
   end
 
   private

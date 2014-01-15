@@ -7,6 +7,7 @@ RshWeb::Application.routes.draw do
       resources :small_steps
       resources :users  
       resources :weeks
+      resources :excuses
       get 'week/small_steps_for_day', to: 'weeks#small_steps_for_day', as: :small_steps_for_day
       resources :check_ins
       resources :programs

@@ -13,6 +13,14 @@ class Api::V1::CheckInsController < Api::V1::ApplicationController
         @check_in.activities.create(status: status, created_at: date, small_step_id: small_step['id'])
         @check_in.save!
       end
+
+      if params.has_key? :excuses
+        @excuses = params[:excuses]
+        @excuses.each do |excuse_name|
+          @excuse = @practice.excuses.where(name: excuse_name).first_or_create
+          @check_in.excuses << @excuse unless @check_in.excuses.include? @excuse
+        end
+      end
     end
 
     render status: 200, json: {
@@ -22,7 +30,7 @@ class Api::V1::CheckInsController < Api::V1::ApplicationController
   end
 
   def update
-      
+
     small_steps = params[:small_steps]
     status      = params[:status]
     week_id     = params[:week_id]
@@ -39,6 +47,16 @@ class Api::V1::CheckInsController < Api::V1::ApplicationController
             activity.update_attributes({ status: status, created_at: date, small_step_id: small_step['id'] })
           end
           @check_in.save!
+        end
+
+        if params.has_key? :excuses
+          @check_in.excuses.delete_all # Remove the current excuses
+
+          @excuses = params[:excuses]
+          @excuses.each do |excuse_name|
+            @excuse = @practice.excuses.where(name: excuse_name).first_or_create
+            @check_in.excuses << @excuse unless @check_in.excuses.include? @excuse
+          end
         end
       end
     end

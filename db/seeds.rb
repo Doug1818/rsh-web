@@ -29,7 +29,9 @@ class Seed
         @coach.status = Coach::STATUSES[:active]
         @coach.save!
 
-         @program_count.times do
+        create_excuses(@practice)
+
+        @program_count.times do
           new_program do |program|
             new_user do |user|
               user = program.build_user(user)
@@ -153,6 +155,13 @@ class Seed
   end
 
   private
+
+  def create_excuses(practice)
+    ['Almost', 'Tried', 'Confused', 'Weird Day'].each do |excuse_name|
+      excuse = practice.excuses.where(name: excuse_name).first_or_create
+      excuse.save!
+    end
+  end
 
   def new_practice
     practice = {
