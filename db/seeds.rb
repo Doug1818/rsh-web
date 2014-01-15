@@ -179,7 +179,7 @@ class Seed
       last_name: Faker::Name.last_name,
       email: Faker::Internet.email,
       phone: Faker::PhoneNumber.phone_number,
-      timezone: Faker::Address.time_zone,
+      timezone: "Eastern Time (US & Canada)",
       status: 1,
       gender: User::GENDERS.sample,
       avatar: nil

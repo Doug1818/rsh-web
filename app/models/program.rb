@@ -72,6 +72,12 @@ class Program < ActiveRecord::Base
     Program.where(status: STATUSES[:active]).each do |program|
       @current_week = program.current_week
       if @current_week.present?
+
+        # @current_week.small_steps.each
+          # needs_check_in_on_date(@today)
+          # if true, send message
+        #
+
         unless @current_week.has_check_in_for_day(@today)
           puts "SEND PUSH"
           data = { :alert => "Don't forget to check in today!" }

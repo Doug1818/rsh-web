@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113160636) do
+ActiveRecord::Schema.define(version: 20140115013322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,8 @@ ActiveRecord::Schema.define(version: 20140113160636) do
     t.integer  "daily_recurrence"
     t.date     "send_on"
     t.integer  "monthly_recurrence"
+    t.integer  "status",             default: 0
+    t.datetime "last_sent_at"
   end
 
   create_table "small_steps", force: true do |t|
@@ -220,18 +222,18 @@ ActiveRecord::Schema.define(version: 20140113160636) do
     t.string   "gender"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",                           null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,                            null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "avatar"
     t.string   "phone"
-    t.string   "timezone"
+    t.string   "timezone",               default: "Eastern Time (US & Canada)"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

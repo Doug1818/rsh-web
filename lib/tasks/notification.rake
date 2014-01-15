@@ -3,4 +3,9 @@ namespace :notification do
   task :nudge_reminder => :environment do
     Program.nudge_reminder
   end
+
+  desc "Scheduled reminders (via push notification)"
+  task :scheduled_reminder => :environment do
+    Reminder.scheduled_reminder
+  end
 end
