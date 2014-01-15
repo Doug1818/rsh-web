@@ -30,6 +30,8 @@ gem 'sunspot_rails' # search
 gem 'sunspot_solr' # search
 gem 'parse-ruby-client' # parse.com integration
 gem 'gibbon' # mailchimp
+gem 'rails_admin' # Admin interface
+gem 'ice_cube' # Recurrence
 
 group :doc do
   gem 'sdoc', require: false

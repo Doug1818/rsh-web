@@ -10,6 +10,7 @@ class CoachAbility
 
   def guest
     can :create, Practice
+    can :update, Practice
     can :update, Coach
   end
 
@@ -40,5 +41,16 @@ class CoachAbility
 
 #   can :update, User, id: @user.id
 
+  end
+
+  def initialize(admin)
+    @admin = admin || Admin.new
+
+    role = 'admin'
+    send(role)
+  end
+
+  def admin
+    can :manage, :all
   end
 end

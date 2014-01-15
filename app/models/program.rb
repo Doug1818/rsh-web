@@ -51,31 +51,35 @@ class Program < ActiveRecord::Base
   private
 
   def generate_authentication_token
-    if Rails.env.development?
-      token = "a"
-    else
-      loop do
-        token = SecureRandom.base64(4).tr('+/=', '0aZ')
-        break token unless Program.where(authentication_token: token).first
-      end
+    loop do
+      token = (0...6).map { ('a'..'z').to_a[rand(26)] }.join
+      break token unless Program.where(authentication_token: token).first
     end
   end
 
   def send_invitation
     # TODO remove the unless when we're ready to go live
-    UserMailer.user_invitation_email(self).deliver unless Rails.env.production?
+    UserMailer.user_invitation_email(self).deliver
   end
-
 
   def self.nudge_reminder
     @today = DateTime.new
     Program.where(status: STATUSES[:active]).each do |program|
       @current_week = program.current_week
       if @current_week.present?
-        unless @current_week.has_check_in_for_day(@today)
-          puts "SEND PUSH"
+
+        should_notify = false
+
+        @current_week.small_steps.each do |small_step|
+          if small_step.needs_check_in_on_date(@today) == true
+            should_notify = true
+            break
+          end
+        end
+
+        if should_notify
           data = { :alert => "Don't forget to check in today!" }
-          push = Parse::Push.new(data, "user_169")
+          push = Parse::Push.new(data, "user_#{program.user.id}")
           push.type = "ios"
           push.save
         end

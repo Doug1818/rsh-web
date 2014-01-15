@@ -1,4 +1,6 @@
 class Practice < ActiveRecord::Base
+	STATUSES = { invited: 0, inactive: 1, active: 2 }
+  
   has_many :coaches, dependent: :destroy
   has_many :programs, through: :coaches, dependent: :destroy
   has_many :users, through: :programs, dependent: :destroy

@@ -1,6 +1,6 @@
 <tr>
   <td><%= reminder.frequency_output %></td>
-  <td><%= reminder.send_at.strftime("%B %e, %Y") %></td>
+  <td><%= reminder.send_at.in_time_zone(reminder.user.timezone).strftime("%B %e, %Y") %></td>
   <td><%= reminder.send_at.getlocal.strftime("%l:%M %p") %></td>
   <td><%= reminder.body %></td>
   <td><button class="btn btn-warning">Done</button></td>
