@@ -8,4 +8,9 @@ namespace :notification do
   task :scheduled_reminder => :environment do
     Reminder.scheduled_reminder
   end
+
+  desc "Alerts (via push notification)"
+  task :check_alerts => :environment do
+    Alert.check_alerts
+  end
 end

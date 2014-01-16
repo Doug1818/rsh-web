@@ -1,0 +1,16 @@
+<%
+  if (@note.blank? || @note.id.blank?)
+    form_url = "/small_steps/#{@small_step.id}/note"
+    form_action = :create
+    form_submit_label = "Submit"
+  else
+    form_url = "/small_steps/#{@small_step.id}/note/#{@note.id}"
+    form_action = :update
+    form_submit_label = "Update"
+  end
+%>
+
+<%= simple_form_for @note, action: form_action, url: form_url, html: { class: "form-vertical" } do |f| %>
+  <%= f.input :body, label: "Notes" %>
+  <%= f.submit form_submit_label, class: 'btn btn-primary' %>
+<% end %>

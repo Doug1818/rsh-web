@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115013322) do
+ActiveRecord::Schema.define(version: 20140115195630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20140115013322) do
     t.integer  "action_type"
     t.integer  "streak"
     t.integer  "sequence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "attachments", force: true do |t|
+    t.integer  "small_step_id"
+    t.string   "filename"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,6 +118,13 @@ ActiveRecord::Schema.define(version: 20140115013322) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "referred_by_code"
+  end
+
+  create_table "notes", force: true do |t|
+    t.integer  "small_step_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "practices", force: true do |t|
