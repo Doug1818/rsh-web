@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/anjlab/bootstrap-rails.git
-  revision: 5132d24e0e8614fbdce5c3c268fc6526406b9363
+  revision: 3250d5494a8fb2715d3a16e24c7b82f57266ff42
   specs:
-    anjlab-bootstrap-rails (3.0.1.0)
+    anjlab-bootstrap-rails (3.0.3.0)
       railties (>= 3.0)
       sass (>= 3.2)
 
@@ -347,6 +347,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   launchy
+  mime-types
   mini_magick
   parse-ruby-client
   pg

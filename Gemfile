@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.0.0"
+ruby '2.0.0'
 
 gem 'rails', '4.0.2'
 gem 'pg'
@@ -11,6 +11,7 @@ gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 1.2'
+# gem 'bootstrap-sass', '~> 3.0.3.0' # bootstrap 3
 gem 'anjlab-bootstrap-rails', require: 'bootstrap-rails', github: 'anjlab/bootstrap-rails'
 gem 'simple_form', git: 'git://github.com/plataformatec/simple_form'
 gem 'devise', '~> 3.1.0' #authentication
@@ -19,8 +20,9 @@ gem 'bootstrap-kaminari-views', git: 'git://github.com/jharbert/bootstrap-kamina
 gem 'cancan' #authorization
 gem 'carrierwave' #file upload
 gem 'mini_magick' # rmagick replacement
-gem "fog" # cloud services api
+gem 'fog' # cloud services api
 gem 'unf' # fog string encoding
+gem 'mime-types' # mime types for carrierwave
 gem 'stripe' #credit card processing
 gem 'cocoon'
 gem 'deep_cloneable', '~> 1.6.0'

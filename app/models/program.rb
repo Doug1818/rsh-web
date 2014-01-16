@@ -9,7 +9,7 @@ class Program < ActiveRecord::Base
 
   has_many :big_steps, dependent: :destroy
   has_many :small_steps, dependent: :destroy
-  has_many :check_ins, through: :small_steps
+  has_many :check_ins, through: :small_steps, uniq: true
   has_many :weeks
 
   has_many :alerts, dependent: :destroy

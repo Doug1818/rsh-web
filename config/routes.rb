@@ -1,14 +1,13 @@
 RshWeb::Application.routes.draw do
-  
+
   devise_for :admins
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
-  resources :weeks
 
   namespace :api do
     namespace :v1 do
       resources :sessions
       resources :small_steps
-      resources :users  
+      resources :users
       resources :weeks
       resources :excuses
       get 'week/small_steps_for_day', to: 'weeks#small_steps_for_day', as: :small_steps_for_day
@@ -30,7 +29,11 @@ RshWeb::Application.routes.draw do
   patch 'programs/update_small_steps/:id', to: 'programs#update_small_steps', as: :update_small_steps
 
   resources :big_steps
-  resources :small_steps
+  resources :small_steps do
+    resources :note
+    resources :attachments
+  end
+  resources :weeks
   resources :check_ins
   resources :activities
   resources :excuses
@@ -42,10 +45,10 @@ RshWeb::Application.routes.draw do
   resources :referrals
 
   root 'home#index'
-  
+
   get "/coach_terms", to: 'legal_docs#coach_terms'
   get "/user_terms", to: 'legal_docs#user_terms'
   get "/privacy", to: 'legal_docs#privacy'
-  
+
   get "/rshadmin", to: 'rshadmin#index'
 end

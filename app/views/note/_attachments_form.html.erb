@@ -1,0 +1,4 @@
+<%= simple_form_for [@small_step, Attachment.new], html: { class: "form-vertical" } do |f| %>
+  <%= f.input :filename, label: 'Add a new file' %>
+  <%= f.submit 'Add Attachment', class: 'btn btn-primary' %>
+<% end %>

@@ -6,6 +6,8 @@ class SmallStep < ActiveRecord::Base
   belongs_to :big_step
   has_many :activities
   has_many :check_ins, through: :activities, dependent: :destroy
+  has_many :attachments, dependent: :destroy
+  has_one :note
 
   validates :name, length: { maximum: 100 }, presence: true
 
@@ -33,7 +35,7 @@ class SmallStep < ActiveRecord::Base
   def can_check_in_on_date(date)
     begin
       date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
-      
+
       case FREQUENCIES.keys[frequency]
       when "Daily"
         true

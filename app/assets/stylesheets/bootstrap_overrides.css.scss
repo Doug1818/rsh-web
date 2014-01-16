@@ -132,6 +132,10 @@ legend {
     -webkit-box-shadow: none;
     box-shadow: none;
   }
+
+  .navbar-form.navbar-right:last-child {
+    margin-right: 0;
+  }
 }
 
 .navbar {

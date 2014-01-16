@@ -6,9 +6,13 @@
     <div class="frequency"><%= display_frequency(small_step) %></div>
     <div class="links">
       <% unless week.past_week? %>
+
+      <%= link_to "<span class='glyphicon glyphicon-paperclip'></span>".html_safe, small_step_note_index_path(small_step), remote: true, class: 'small-step-uploads-link', data: { toggle: 'modal', target: '#small-step-notes'} %>
+
       <%= link_to "<span class='glyphicon glyphicon-edit'></span>".html_safe, edit_small_step_path(small_step, program_id: @program.id, week_id: week.id), remote: true, class: 'small-step-edit-link' %>
 
       <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, small_step_path(small_step, program_id: @program.id, week_id: week.id), data: { confirm: "Are you sure?" }, method: :delete, class: 'small-step-delete-link' %>
+
       <% end %>
     </div>
     <div class="clearfix"></div>
@@ -18,3 +22,4 @@
     </div>
   </div>
 </div>
+
