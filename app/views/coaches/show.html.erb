@@ -7,9 +7,9 @@
       <div class="col-md-7 col-sm-6">
         <ul class="list-inline view">
           <li>View:</li>
-          <li><%= link_to 'All', coach_path %></li>
-          <li><%= link_to 'Alerts', coach_path(filter: 'alerts') %></li>
-          <li><%= link_to 'Active', coach_path(filter: 'active') %></li>
+          <li class="<%= 'active' if @active == 'active' %>"><%= link_to 'Active', coach_path(filter: 'active') %></li>
+          <li class="<%= 'active' if @active == 'all' %>"><%= link_to 'All', coach_path(filter: 'all') %></li>
+          <li class="<%= 'active' if @active == 'alerts' %>"><%= link_to 'Alerts', coach_path(filter: 'alerts') %></li>
         </ul>
       </div>
       <div class="col-md-5 col-sm-6">
@@ -20,6 +20,8 @@
   <div class="row">
     <% if @programs.present? %>
       <%= render @programs %>
+    <% elsif params[:filter] && params[:filter] != 'all' %>
+      <p>You have no <%= params[:filter] %> clients</p>
     <% else %>
       <%= link_to 'Add your first client', new_program_path %>
     <% end %>

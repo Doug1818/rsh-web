@@ -16,10 +16,18 @@ class CoachesController < ApplicationController
         with :coach_id, current_coach.id
       end
       @programs = ProgramDecorator.decorate_collection(@search.results)
+    elsif params[:filter] == 'all'
+      @programs = @coach.programs.includes(:user).decorate # Loads all users
     elsif params[:filter].present? and @coach.programs.respond_to?(params[:filter])
       @programs = @coach.programs.send(params[:filter]).decorate
     else
-      @programs = @coach.programs.includes(:user).decorate
+      redirect_to coach_path(filter: 'active')
+    end
+
+    @active = if params[:filter]
+      params[:filter]
+    else
+      'all'
     end
   end
 
