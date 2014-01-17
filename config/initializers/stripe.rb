@@ -1,7 +1,7 @@
 if Rails.env.production?
-  Stripe.api_key = "sk_7iKnt57EtGQyEQvk7dYD03CtGSGfm"
-  STRIPE_PUBLIC_KEY = "pk_neubDI84lQmB6lgnlJRD885GqtazV"
+  Stripe.api_key = "sk_live_Z7yfpHo0N0chGll4IwWBQ9S7"
+  STRIPE_PUBLIC_KEY = "pk_live_vMTyMR6p42Qtwix7r1W8OUny"
 else
-  Stripe.api_key = "sk_sB4Pq6zuMPutBqOuX0j7CNbzfkXUw"
-  STRIPE_PUBLIC_KEY = "pk_sgMGdcpy0H8F1OqdH0J7esjxavF0O"
+  Stripe.api_key = "sk_test_5VfCOBineyRvm6l07ZAUanJM"
+  STRIPE_PUBLIC_KEY = "pk_test_WHUKR5V6wB7I8VdYOOJIBB6v"
 end
