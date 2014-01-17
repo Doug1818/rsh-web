@@ -5,3 +5,33 @@
 #coach_terms {
 	margin-bottom:25px;
 }
+
+.doc-text {
+	ol {
+		padding-left:0;
+		list-style-position:inside;
+		.heading {
+			text-decoration: underline;
+			margin: 15px 0 15px 50px;
+		}
+		ol {
+			padding-left: 85px;
+			list-style: lower-latin;
+			.subhead {
+				text-decoration: underline;
+			}
+		}
+	}
+	ul {
+		list-style-position: outside;
+		padding-left: 25px;
+	}
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.bold {
+	font-weight: bold;
+}
