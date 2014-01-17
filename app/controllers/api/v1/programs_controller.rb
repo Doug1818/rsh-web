@@ -43,7 +43,7 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
       @program_data.reverse_merge!({small_steps: @small_steps_data, check_in_status: check_in_status, has_check_in: has_check_in, requires_one_or_more_check_ins: requires_one_or_more_check_ins})
       
     else
-      @program_data = {} 
+      @program_data = { program_start_date: @program.start_date } 
     end
 
     render status: 200, json: {
