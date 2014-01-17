@@ -5,8 +5,14 @@ class ProgramDecorator < Draper::Decorator
 
   def daily_checkmarks
     today = Date.today
-    start_date = today.beginning_of_week(:sunday)
-    end_date = today.end_of_week(:sunday)
+    
+    # Gets last Sunday to next Sunday
+    #start_date = today.beginning_of_week(:sunday)
+    #end_date = today.end_of_week(:sunday)
+
+    # Gets the last 7 days of closed (48 hour window) checkin data
+    end_date = today - 2
+    start_date = end_date - 6
 
     statuses = (start_date..end_date).collect do |day|
       check_in = program.check_ins.find_by(created_at: day)
