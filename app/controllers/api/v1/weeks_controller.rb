@@ -45,11 +45,12 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
       check_in = @week.check_ins.find_by(created_at: date)
 
       @week_data[:check_in_id] = check_in.id unless check_in.nil?
+      @week_data[:check_in_comments] = check_in.comments unless check_in.nil?
     else
       @small_steps = @week.small_steps.collect { |ss| ss if ss.needs_check_in_on_date(date) }.compact
     end
     
-    @small_steps_data = @small_steps.as_json(only: [:id, :name, :frequency_name, :times_per_week, :specific_days])
+    @small_steps_data = @small_steps.as_json(only: [:id, :name, :frequency_name, :times_per_week, :specific_days, :note, :attachments])
     
     @week_data[:small_steps] = @small_steps_data
 

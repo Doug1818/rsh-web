@@ -86,10 +86,20 @@ class SmallStep < ActiveRecord::Base
     check_in.nil? ? false : true
   end
 
+  def get_note
+    note.body if note
+  end
+
+  def get_attachments
+    attachments.collect { |attachment| {friendly_name: attachment.filename.file.filename, url: attachment.filename.url } }
+  end
+
   def as_json(options = {})
     json = super(options)
     json['specific_days'] = humanize_days
     json['frequency_name'] = humanize_frequency
+    json['note'] = get_note
+    json['attachments'] = get_attachments
     json
   end
 end
