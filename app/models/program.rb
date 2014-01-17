@@ -38,6 +38,12 @@ class Program < ActiveRecord::Base
     text :goal
   end
 
+  def total_missed_check_ins
+    # get # of days from program.start_date to today
+    # get # of checkins
+    # subtract the two
+  end
+
   def current_week
     self.weeks.where("? BETWEEN start_date and end_date", Time.now).first
   end

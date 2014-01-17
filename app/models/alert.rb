@@ -1,7 +1,8 @@
 class Alert < ActiveRecord::Base
   # Misses: ?, Incompletes: X, Completes: √ (These should be graphical in the interface)
   ACTION_TYPES = { "Misses" => 0, "Incompletes" => 1, "Completes" => 2 }
-  SEQUENCES = { "In a row" => 0, "In a week" => 1 }
+  # SEQUENCES = { "In a row" => 0, "In a week" => 1 }
+  SEQUENCES = { "In a row" => 0 }
   belongs_to :program
   has_one :user, through: :program
 
@@ -23,18 +24,28 @@ class Alert < ActiveRecord::Base
 
         if alert.action_type == ACTION_TYPES["Misses"]
           puts "MISSES..."
+
+          # get the date of the last check-in
+          # get today's date
+          # see the difference between them
+
         elsif alert.action_type == ACTION_TYPES["Incompletes"]
           streak_met = true
+
           statuses.each do |status|
-            unless status == CheckIn::STATUSES[:mixed] || status == CheckIn::STATUSES[:all_no]
+            if status != CheckIn::STATUSES[:mixed] || status != CheckIn::STATUSES[:all_no]
               streak_met = false
+
               break
             end
           end
 
           if streak_met
+            # send an email
+            # program.activity_status = ACTIVITY_STATUSES[:alert]
             puts "STREAK MET FOR INCOMPLETES"
           else
+            # program.activity_status = ACTIVITY_STATUSES[:normal]
             puts "STREAK NOT MET FOR INCOMPLETES"
           end
         elsif alert.action_type == ACTION_TYPES["Completes"]
