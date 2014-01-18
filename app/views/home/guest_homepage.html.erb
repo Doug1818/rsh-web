@@ -28,9 +28,10 @@
 				<h1 class="headline">Step Up Your Coaching</h1>
 			</div>
 
-			<div style="width:50%; margin:auto;">
+			<div style="width:60%; margin:auto;">
 				<div id="tagline_box">
-					<h4 class="tagline wordwrap"><em>Steps</em> helps health coaches be with their clients the 99% of the time they aren't in your office -- without a bunch of extra work.</h4>
+					<h4 class="tagline wordwrap"><em>Steps</em> is a web and mobile application for health coaches.  It helps you be with your clients the 99% of the time they aren't in your office -- without a bunch of extra work.</h4>  
+					<h4 class="tagline wordwrap">We are currently invite-only.</h4>
 				</div>
 
 				<div id="form">
@@ -42,10 +43,12 @@
 				    <% end %>
 					  <%= f.submit "Request an Invitation", class: 'btn btn-primary' %>
 					<% end %>
-					<p id="invite"> (We are currently invite-only) </p>
+					<!--<p id="invite"> (We are currently invite-only) </p>-->
 				</div>
-				
-				<div id="learnmore"><a href="#more">Learn More ...</a></div>
+
+				<div id="learnmore">
+					<%= link_to image_tag("learn_more_button.png"), "#more", class: 'learn_more_btn', target: "_blank" %>
+					<p><a id="seehow" href="#more">See How it Works</a></p></div>
 			</div>
 		</td>
 	</tr>
@@ -53,6 +56,7 @@
 </div>
 <!--http://www.spydertrap.com/blog/2012/08/user-experience-jquery-smooth-page-anchor-transitions/-->
 <a name="more"></a>
+<div>
 <table id="infographic">
 		<tr class="inforow">
 			<td class="infoimagebox">
@@ -70,7 +74,7 @@
 				</div>
 			</td>
 			<td class="infotext">
-				<div class="textdiv"><h4>Follow Progress in Real Time</h4><p>Your clients check in with a simple "yes" or "no" as to whether or not they've done that day's work.  You see their daily check ins, keeping them accountable and you informed.</p>
+				<div class="textdiv"><h4>Follow Progress in Real Time</h4><p>Your clients check in with a simple "yes" or "no" as to whether or not they've done that day's work.  You see their daily check ins, keeping them accountable and you informed.  Plans are fast and easy to adjust on the fly, so your ambitious clients are constantly challenged and struggling clients can get back on track quickly.</p>
 				</div>
 			</td>
 		</tr>
@@ -80,11 +84,14 @@
 				</div>
 			</td>
 			<td class="infotext">
-				<div class="textdiv"><h4>Adjust as Needed</h4><p>Plans are fast and easy to adjust on the fly, so your ambitious clients are constantly challenged and struggling clients can get back on track quickly.</p>
+				<div class="textdiv"><h4>Be More Effective and Efficient</h4><p>Steps streamlines the process of outside-the-office interactions, so you can offer a higher level of service while spending less time per client.</p>
 				</div>
 			</td>
 		</tr>
 </table>
+</div>
+<a id="formAnchor"></a>
+
 
 <script>
 
