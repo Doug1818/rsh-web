@@ -299,8 +299,15 @@ input{
 	font-size: .8em;
 }
 
+.learn_more_btn{
+	height: 136px;
+	width: 136px;
+}
+
 .learn_more_btn:hover{
 	content:url("learn_more_button_hover.png");
+	height: 136px;
+	width: 136px;
 }
 
 #seehow:hover{
