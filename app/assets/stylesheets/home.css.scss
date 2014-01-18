@@ -1,6 +1,6 @@
-// Place all the styles related to the home controller here.
+/* Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com/ */
 
 /*
 COLORS:
@@ -20,6 +20,15 @@ DARK GREY --> #6d6e71
 
 $(window).height();   // returns height of browser viewport
 $(document).height(); // returns height of HTML document
+*/
+
+
+/*Scrolling*/
+
+/*a:target{
+	-webkit-transform: translateY(300px);
+	transform: translateY(300px);
+}
 */
 
 #header{
@@ -83,11 +92,11 @@ th{
 /*Header bar*/
 
 
-#rshlogo{
-	height: 56px;//look up in illustrator
-	width: 112px;
+#stepslogo{
+	height: 100px;
+	width: 100px;
 	border: 2px solid white;
-	border-radius: 4px;
+	border-radius: 8px;
 	display: inline;
 	margin: auto;
 }
@@ -100,6 +109,19 @@ th{
 	width: 60%;
 }
 
+.byline h3{
+	color:white;
+}
+
+.byline a{
+	color:white;
+}
+
+.byline a:hover{
+	color:white;
+	text-decoration: underline;
+}
+
 .logo{
 	display: inline-block;
 	vertical-align: middle;
@@ -109,7 +131,7 @@ th{
 	
 	text-align: center;
 	display: inline-block;
-	width: 8%;
+	/*width: 8%;*/
 }
 
 .topnav a{
@@ -124,6 +146,27 @@ th{
 	/*text-decoration: underline;*/
 	text-align: center;
 	/*vertical-align: bottom; Why doesn't alignment seem to actually work in the cells? */
+}
+
+.topnav li{
+	list-style-type: none;
+	display:inline-block;
+	float: left;
+	margin-left: 10px;
+}
+
+.topnav li a:hover{
+text-decoration: underline;
+}
+
+.topnav ul{
+	height: 100%;
+}
+
+#signin{
+	padding-top: 10px;
+	vertical-align: middle;
+	margin-right: 5px;
 }
 
 /*Headline*/
@@ -167,7 +210,11 @@ span .tagline{
 /*Form*/
 
 #form{
+	margin-top: 20px;
 	text-align: center;
+	display: inline-block;
+	/*width: 60%;
+	margin:auto;*/
 }
 
 input{
@@ -230,9 +277,19 @@ input{
 	margin-left: 30%;
 }
 
+.request{
+	color:white;
+	text-decoration: underline;
+}
+
+.request:hover{
+	color: #f1f2f2;
+	text-decoration: underline; 
+}
+
 #learnmore{
 	clear:both;
-	margin-top:0px;
+	margin-top:40px;
 	text-align: center;
 	color: white;
 }
@@ -240,6 +297,21 @@ input{
 #learnmore a{
 	color:white;
 	font-size: .8em;
+}
+
+.learn_more_btn{
+	height: 136px;
+	width: 136px;
+}
+
+.learn_more_btn:hover{
+	content:url("learn_more_button_hover.png");
+	height: 136px;
+	width: 136px;
+}
+
+#seehow:hover{
+	text-decoration: underline;
 }
 
 /*Infographic*/
