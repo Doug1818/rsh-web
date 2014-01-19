@@ -316,13 +316,33 @@ input{
 
 /*Infographic*/
 
-#infographic{
+/*Small windows*/
+@media screen and (max-height:800px){
+	#infographic{
 	position: absolute;
-	top: 100%;
 	background-color: #f1f2f2;
 	width:100%;
 	/*border: 1px solid blue;*/
-}
+	}
+} 
+
+/*Large windows*/
+@media screen and (min-height:801px){
+	#infographic{
+	position: absolute;
+	background-color: #f1f2f2;
+	width:100%;
+	/*border: 1px solid blue;*/
+	/*This is the line that locks the infographic below the fold*/
+	top: 100%; 
+	}
+} 
+
+/*#infographic{
+	position: absolute;
+	background-color: #f1f2f2;
+	width:100%;
+}*/
 
 .inforow{
 	width: 100%;
