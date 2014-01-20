@@ -1,11 +1,11 @@
 class UserMailer < ActionMailer::Base
-  default from: "no-reply@rightsidehealth.com"
+  default from: "Steps <no-reply@rightsidehealth.com>"
 
   def user_invitation_email(program)
     @program = program
     @user = program.user
 
-    mail(to: @user.email, subject: "You've been invited to join Steps (by Right Side Health)")
+    mail(to: @user.email, subject: "You've been invited to join Steps")
   end
 
   def practice_invitation_email(coach)
