@@ -209,20 +209,19 @@ span .tagline{
 
 /*Form*/
 
+
+
 #form{
 	margin-top: 20px;
 	text-align: center;
 	display: inline-block;
-	/*width: 60%;
-	margin:auto;*/
+	width: 100%;
+	margin:auto;
 }
 
-input{
-	width: 250px;
-	height: 30px;
-	border: 1px solid #C6C5C5;
-	border-radius: 10px;
-	margin: 5px;
+#form input{
+	width: 400px;
+	margin:auto;
 	
 }
 
@@ -287,18 +286,23 @@ input{
 	text-decoration: underline; 
 }
 
+/*The div that contains the button*/
 #learnmore{
 	clear:both;
 	margin-top:40px;
 	text-align: center;
 	color: white;
+	/*border: 1px solid blue;
+	border-radius: 25%;*/
 }
 
 #learnmore a{
 	color:white;
+
 	font-size: .8em;
 }
 
+/*the button itself*/
 .learn_more_btn{
 	height: 136px;
 	width: 136px;

@@ -47,8 +47,8 @@
 				</div>
 
 				<div id="learnmore">
-					<%= link_to image_tag("learn_more_button.png"), "#more", class: 'learn_more_btn', target: "_blank" %>
-					<p><a id="seehow" href="#more">See How it Works</a></p></div>
+					<%= link_to image_tag("learn_more_button.png"), "#", class: 'learn_more_btn'%>
+					<!--<p><a id="seehow" href="#more">See How it Works</a></p></div> -->
 			</div>
 		</td>
 	</tr>
@@ -91,3 +91,12 @@
 </table>
 </div>
 <a id="formAnchor"></a>
+
+<script type="text/javascript">
+$(".learn_more_btn").click(function() {
+
+    $('html, body').animate({
+        scrollTop: $("#infographic").offset().top
+    }, 1000);
+});
+</script>
