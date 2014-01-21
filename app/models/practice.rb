@@ -9,4 +9,12 @@ class Practice < ActiveRecord::Base
   accepts_nested_attributes_for :coaches
 
   validates :terms, acceptance: true
+
+  before_create :create_excuses
+
+  def create_excuses
+    ['Almost', 'Tried', 'Confused', 'Weird Day'].each do |excuse_name|
+      self.excuses.create(name: excuse_name)
+    end
+  end
 end
