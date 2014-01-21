@@ -10,7 +10,7 @@ class Practice < ActiveRecord::Base
 
   validates :terms, acceptance: true
 
-  before_create :create_excuses
+  after_create :create_excuses
 
   def create_excuses
     ['Almost', 'Tried', 'Confused', 'Weird Day'].each do |excuse_name|
