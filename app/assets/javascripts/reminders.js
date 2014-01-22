@@ -4,8 +4,8 @@ jQuery(document).ready(function($) {
   $('.timepicker').pickatime();
 
   $(document).on('click','.new-reminder-link',function (event) {
-    console.log( $(this).next().attr("class") );
-    $(this).next().find(".form").show();
+    //console.log( $(this).prev().prev().attr("class") );
+    $(this).prev().prev().find(".form").show();
     event.preventDefault(); // Prevent link from following its href
   });
 

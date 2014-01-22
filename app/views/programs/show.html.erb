@@ -81,14 +81,14 @@
             <%= render @reminders %>
           </table>
           <% end %>
-          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-reminder-link' %>
 
           <div class="reminder">
-            <div class="form">
+            <div class="form" style="margin-bottom:30px;">
               <%= render partial: 'reminders/form', locals: { reminder: Reminder.new(program: @program) } %>
             </div>
           </div>
           <div class="clearfix"></div>
+          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-reminder-link' %>
         </div>
 
         <% if false # Currently not in use, but may be in the future %>

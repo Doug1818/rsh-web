@@ -6,6 +6,18 @@ class SmallStepsController < ApplicationController
 
     @small_step = @week.small_steps.build(small_step_params)
 
+    # Create a new big step if needed
+    big_step = params[:small_step][:big_step_id] # If it's a new big step, this will be the new big step name
+    big_step_id = big_step.to_i # If it's a big step name, this will be 0 (new big step)
+
+    if big_step_id == 0
+      @big_step = @program.big_steps.where(name: big_step).first_or_create!
+      params[:small_step][:big_step_id] = @big_step.id
+      @big_step.small_steps << @small_step
+      @big_step.save!
+      @week.small_steps << @small_step
+    end
+
     respond_to do |format|
       if @week.save
         format.html { redirect_to(program_path(@small_step.program)) }

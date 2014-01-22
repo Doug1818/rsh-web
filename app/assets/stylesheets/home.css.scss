@@ -296,9 +296,50 @@ span .tagline{
 	border-radius: 25%;*/
 }
 
+.circle{
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+	background-color: white;
+	opacity: 0.4;
+	border: 2px solid white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	position: relative;
+	left: 50%;
+	cursor: pointer;
+}
+
+.circle2{
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+	background-color: #6d6e71 ;
+	opacity: 0.4;
+	border: 2px solid white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	margin-top: 15px;
+	position: relative;
+	left: 50%;
+	cursor: pointer;
+}
+
+.arrow{
+	color: #ffa721;
+	margin-top: 0%;
+}
+
+.arrow2{
+	color: #f1f2f2;
+	margin-top: 0%;
+	position: relative;
+	margin:auto;
+	padding-left: 35%;
+}
+
 #learnmore a{
 	color:white;
-
 	font-size: .8em;
 }
 
@@ -321,7 +362,7 @@ span .tagline{
 /*Infographic*/
 
 /*Small windows*/
-@media screen and (max-height:800px){
+@media screen and (max-height:683px){
 	#infographic{
 	position: absolute;
 	background-color: #f1f2f2;
@@ -331,7 +372,7 @@ span .tagline{
 } 
 
 /*Large windows*/
-@media screen and (min-height:801px){
+@media screen and (min-height:684px){
 	#infographic{
 	position: absolute;
 	background-color: #f1f2f2;
@@ -389,7 +430,7 @@ span .tagline{
 
 #image3{
 	width: 50%;
-	margin-top: 20px;
+	margin-top: 40px;
 	/*border: 1px solid black;*/
 	float: right;
 }
