@@ -209,20 +209,19 @@ span .tagline{
 
 /*Form*/
 
+
+
 #form{
 	margin-top: 20px;
 	text-align: center;
 	display: inline-block;
-	/*width: 60%;
-	margin:auto;*/
+	width: 100%;
+	margin:auto;
 }
 
-input{
-	width: 250px;
-	height: 30px;
-	border: 1px solid #C6C5C5;
-	border-radius: 10px;
-	margin: 5px;
+#form input{
+	width: 400px;
+	margin:auto;
 	
 }
 
@@ -287,11 +286,56 @@ input{
 	text-decoration: underline; 
 }
 
+/*The div that contains the button*/
 #learnmore{
 	clear:both;
 	margin-top:40px;
 	text-align: center;
 	color: white;
+	/*border: 1px solid blue;
+	border-radius: 25%;*/
+}
+
+.circle{
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+	background-color: white;
+	opacity: 0.4;
+	border: 2px solid white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	position: relative;
+	left: 50%;
+	cursor: pointer;
+}
+
+.circle2{
+	width:40px;
+	height:40px;
+	border-radius: 50%;
+	background-color: #6d6e71 ;
+	opacity: 0.4;
+	border: 2px solid white;
+	margin-bottom: 40px;
+	margin-left: -20px;
+	margin-top: 15px;
+	position: relative;
+	left: 50%;
+	cursor: pointer;
+}
+
+.arrow{
+	color: #ffa721;
+	margin-top: 0%;
+}
+
+.arrow2{
+	color: #f1f2f2;
+	margin-top: 0%;
+	position: relative;
+	margin:auto;
+	padding-left: 35%;
 }
 
 #learnmore a{
@@ -299,6 +343,7 @@ input{
 	font-size: .8em;
 }
 
+/*the button itself*/
 .learn_more_btn{
 	height: 136px;
 	width: 136px;
@@ -317,7 +362,7 @@ input{
 /*Infographic*/
 
 /*Small windows*/
-@media screen and (max-height:800px){
+@media screen and (max-height:683px){
 	#infographic{
 	position: absolute;
 	background-color: #f1f2f2;
@@ -327,7 +372,7 @@ input{
 } 
 
 /*Large windows*/
-@media screen and (min-height:801px){
+@media screen and (min-height:684px){
 	#infographic{
 	position: absolute;
 	background-color: #f1f2f2;
@@ -385,7 +430,7 @@ input{
 
 #image3{
 	width: 50%;
-	margin-top: 20px;
+	margin-top: 40px;
 	/*border: 1px solid black;*/
 	float: right;
 }
