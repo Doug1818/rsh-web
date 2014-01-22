@@ -10,9 +10,19 @@ class ProgramDecorator < Draper::Decorator
     #start_date = today.beginning_of_week(:sunday)
     #end_date = today.end_of_week(:sunday)
 
-    # Gets the last 7 days of closed (48 hour window) checkin data
-    end_date = today - 2
-    start_date = end_date - 6
+    # Gets up to the last 7 days of closed (48 hour window) checkin data
+    end_date = if !program.check_ins.find_by(created_at: today).nil?
+      today
+    elsif !program.check_ins.find_by(created_at: today -1).nil?
+      today - 1
+    else
+      today - 2
+    end
+    start_date = if (end_date - program.start_date) < 7
+      program.start_date
+    else
+      end_date - 6
+    end
 
     statuses = (start_date..end_date).collect do |day|
       check_in = program.check_ins.find_by(created_at: day)
