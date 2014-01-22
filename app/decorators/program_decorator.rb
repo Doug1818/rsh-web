@@ -13,7 +13,7 @@ class ProgramDecorator < Draper::Decorator
     # Gets up to the last 7 days of closed (48 hour window) checkin data
     end_date = if !program.check_ins.find_by(created_at: today).nil?
       today
-    elsif !program.check_ins.find_by(created_at: today -1).nil?
+    elsif !program.check_ins.find_by(created_at: today - 1).nil?
       today - 1
     else
       today - 2
