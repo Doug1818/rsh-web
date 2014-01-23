@@ -16,7 +16,7 @@ class Reminder < ActiveRecord::Base
     tz = self.user.timezone
     date_time_now = DateTime.now.in_time_zone(tz)
     send_on_date = self.send_on.in_time_zone(tz)
-    send_at_time = date_time_now.change(hour: self.send_at.in_time_zone(tz).hour, min: self.send_at.in_time_zone(tz).min)
+    send_at_time = date_time_now.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
     expire_time = 10.minutes # expire time now acts as a buffer (old code: expire_time = send_at_time + 5.minutes)
     send("check_frequency_#{FREQUENCIES.keys[self.frequency].downcase}", tz, date_time_now, send_on_date, send_at_time, expire_time)
   end
