@@ -61,7 +61,7 @@ class Reminder < ActiveRecord::Base
 
   def time_between?(date_time_now, send_at_time, expire_time)
     # (date_time_now >= send_at_time && date_time_now <= expire_time) # old code
-    send_at_time >= (date_time_now - expire_time) && send_at_time <= (date_time_now + expire_time)
+    date_time_now >= (send_at_time - expire_time) && date_time_now <= (send_at_time + expire_time)
   end
 
   def send_reminder
