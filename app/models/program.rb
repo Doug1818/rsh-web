@@ -45,7 +45,7 @@ class Program < ActiveRecord::Base
   end
 
   def current_week
-    self.weeks.where("? BETWEEN start_date and end_date", Time.now).first
+    self.weeks.where("? BETWEEN start_date and end_date", Time.current).first
   end
 
   def ensure_authentication_token

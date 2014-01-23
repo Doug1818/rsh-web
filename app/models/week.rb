@@ -29,15 +29,15 @@ class Week < ActiveRecord::Base
   end
 
   def current_week?
-    (start_date..end_date).cover? Date.today
+    (start_date..end_date).cover? Date.current
   end
 
   def past_week?
-    Date.today > end_date
+    Date.current > end_date
   end
 
   def future_week?
-    Date.today < start_date
+    Date.current < start_date
   end
 
 end

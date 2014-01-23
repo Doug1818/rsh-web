@@ -4,7 +4,7 @@ class ProgramDecorator < Draper::Decorator
   include Draper::LazyHelpers
 
   def daily_checkmarks
-    today = Date.today
+    today = Date.current
     
     # Gets last Sunday to next Sunday
     #start_date = today.beginning_of_week(:sunday)
