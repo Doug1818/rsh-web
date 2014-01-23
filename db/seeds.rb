@@ -230,6 +230,7 @@ owners = [{
   first_name: 'Nate',
   last_name: 'Prouty',
   email: 'nate@barbershoplabs.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
@@ -237,6 +238,7 @@ owners = [{
   first_name: 'Adam',
   last_name: 'Rubin',
   email: 'adam@barbershoplabs.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
@@ -244,6 +246,7 @@ owners = [{
   first_name: 'Rick',
   last_name: 'McMullen',
   email: 'roderick.mcmullen@gmail.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
@@ -251,6 +254,7 @@ owners = [{
   first_name: 'Doug',
   last_name: 'Raicek',
   email: 'doug.raicek@gmail.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
@@ -258,6 +262,7 @@ owners = [{
   first_name: 'Josh',
   last_name: 'Boehringer',
   email: 'joshadelic@gmail.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
@@ -265,6 +270,7 @@ owners = [{
   first_name: 'Jon',
   last_name: 'Rish',
   email: 'jon@barbershoplabs.com',
+  timezone: "Eastern Time (US & Canada)",
   gender: 'Male',
   status: 1,
   role: 'owner'
