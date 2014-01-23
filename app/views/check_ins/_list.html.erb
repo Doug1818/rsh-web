@@ -7,7 +7,7 @@
   <% if week.has_check_in_for_day(day) %>
     <% status = week.find_check_in_for_day(day).status %>
     <div class="check-in status-<%=status%>"></div>
-  <% elsif day < Date.today - 1 && day >= Program.find(week.program_id).start_date # Minus 1 to account for 48 hour check in window %>
+  <% elsif day < Date.current - 1 && day >= Program.find(week.program_id).start_date # Minus 1 to account for 48 hour check in window %>
     <div class="check-in status-<%=CheckIn::STATUSES[:none]%>"></div>
   <% else %>
     <div class="check-in status-<%=CheckIn::STATUSES[:future]%>"></div>
