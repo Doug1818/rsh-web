@@ -70,7 +70,7 @@ class Reminder < ActiveRecord::Base
       push.type = "ios"
       push.save
 
-      self.last_sent_at = DateTime.new
+      self.last_sent_at = DateTime.now
       self.save
   end
 
