@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :store_referral_code
-  around_filter :coach_time_zone, if: :current_coach
+  # around_filter :coach_time_zone, if: :current_coach
 
   def store_referral_code
     if params[:referral_code]
