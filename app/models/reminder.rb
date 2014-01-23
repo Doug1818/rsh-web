@@ -7,7 +7,7 @@ class Reminder < ActiveRecord::Base
   belongs_to :program
   has_one :user, through: :program
 
-  before_save :set_send_at
+  #before_save :set_send_at
 
 
   def should_send_now?
@@ -25,7 +25,7 @@ class Reminder < ActiveRecord::Base
 
   def set_send_at
     time = Time.parse(send_at.strftime("%H:%M %p"))
-    self.send_at = DateTime.parse("#{ send_on } #{ time }").utc
+    self.send_at = DateTime.parse("#{ send_on } #{ time }")
   end
 
 
