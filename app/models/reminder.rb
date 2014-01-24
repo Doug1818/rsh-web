@@ -25,7 +25,8 @@ class Reminder < ActiveRecord::Base
 
   def set_send_at
     time = Time.parse(send_at.strftime("%H:%M %p"))
-    self.send_at = DateTime.parse("#{ send_on } #{ time }").utc
+    tz = self.user.timezone
+    self.send_at = DateTime.parse("#{ send_on } #{ time }").in_time_zone(tz)
   end
 
 
