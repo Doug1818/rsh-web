@@ -7,7 +7,7 @@ class Reminder < ActiveRecord::Base
   belongs_to :program
   has_one :user, through: :program
 
-  #before_save :set_send_at
+  before_save :set_send_at
 
 
   def should_send_now?
