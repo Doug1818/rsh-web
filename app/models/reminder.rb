@@ -14,7 +14,7 @@ class Reminder < ActiveRecord::Base
     require 'active_support/time'
 
     tz = self.user.timezone
-    date_time_now = DateTime.current.in_time_zone(tz)
+    date_time_now = DateTime.now.in_time_zone(tz)
     send_on_date = self.send_on.in_time_zone(tz)
     send_at_time = date_time_now.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
     expire_time = 10.minutes # expire time now acts as a buffer (old code: expire_time = send_at_time + 5.minutes)
@@ -70,7 +70,7 @@ class Reminder < ActiveRecord::Base
       push.type = "ios"
       push.save
 
-      self.last_sent_at = DateTime.current
+      self.last_sent_at = DateTime.now.in_time_zone(self.user.timezone)
       self.save
   end
 
