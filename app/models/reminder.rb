@@ -32,7 +32,7 @@ class Reminder < ActiveRecord::Base
 
   def check_frequency_once(tz, date_time_now, send_on_date, send_at_time, expire_time)
     puts "CHECKING FREQ ONCE"
-    send_at_time = send_on_date.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
+    # send_at_time = send_on_date.change(hour: send_at.in_time_zone(tz).hour, min: send_at.in_time_zone(tz).min)
     send_reminder if (send_on_date.to_date == date_time_now.to_date) && time_between?(date_time_now, send_at_time, expire_time)
   end
 
