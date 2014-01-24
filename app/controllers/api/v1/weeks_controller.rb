@@ -19,7 +19,7 @@ class Api::V1::WeeksController < Api::V1::ApplicationController
       (start_date..end_date).each do |date|
         needs_check_in = @small_steps.collect { |small_step| small_step.needs_check_in_on_date(date) }.compact.count(true) > 0
         check_in_status = week.check_ins.find_by(created_at: date).status rescue nil
-        week_data[:days] << { full_date: date, date: date.strftime('%a %e'), day_number: @program.day_number(date), needs_check_in: needs_check_in, check_in_status: check_in_status, is_future: date.to_time.beginning_of_day.future? }
+        week_data[:days] << { full_date: date, date: date.strftime('%a, %b %e'), day_number: @program.day_number(date), needs_check_in: needs_check_in, check_in_status: check_in_status, is_future: date.to_time.beginning_of_day.future? }
       end
       @weeks_data << week_data
     end
