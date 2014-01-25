@@ -83,7 +83,7 @@ class Program < ActiveRecord::Base
           end
         end
 
-        if should_notify && Time.now.in_time_zone(program.user.time_zone).hour == 21
+        if should_notify && Time.now.in_time_zone(program.user.timezone).hour == 21
           data = { :alert => "Don't forget to check in today!" }
           push = Parse::Push.new(data, "user_#{program.user.id}")
           push.type = "ios"
