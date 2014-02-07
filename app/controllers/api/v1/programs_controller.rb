@@ -13,7 +13,7 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
       check_in_status = @week.check_ins.find_by(created_at: date).status rescue nil
 
       has_check_in = check_in_status != nil
-
+      
       @small_steps = @week.small_steps
 
       @small_steps_data = @small_steps.as_json(only: [:id, :name, :frequency])
@@ -40,8 +40,12 @@ class Api::V1::ProgramsController < Api::V1::ApplicationController
         end
       end
 
-      @program_data.reverse_merge!({small_steps: @small_steps_data, check_in_status: check_in_status, has_check_in: has_check_in, requires_one_or_more_check_ins: requires_one_or_more_check_ins})
-      
+      check_in = @week.check_ins.find_by(created_at: date)
+      check_in_id = check_in.id unless check_in.nil?
+      check_in_comments = check_in.comments unless check_in.nil?
+
+      # @program_data.reverse_merge!({small_steps: @small_steps_data, check_in_status: check_in_status, has_check_in: has_check_in, requires_one_or_more_check_ins: requires_one_or_more_check_ins})
+      @program_data.reverse_merge!({small_steps: @small_steps_data, check_in_status: check_in_status, has_check_in: has_check_in, requires_one_or_more_check_ins: requires_one_or_more_check_ins, check_in_comments: check_in_comments})
     else
       @program_data = { program_start_date: @program.start_date } 
     end
