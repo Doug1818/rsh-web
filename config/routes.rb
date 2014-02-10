@@ -49,7 +49,7 @@ RshWeb::Application.routes.draw do
   get "/coach_terms", to: 'legal_docs#coach_terms'
   get "/user_terms", to: 'legal_docs#user_terms'
   get "/privacy", to: 'legal_docs#privacy'
-  get "support", to: 'home#support'
+  get "/support", to: 'home#support'
 
   get "/rshadmin", to: 'rshadmin#index'
 end
