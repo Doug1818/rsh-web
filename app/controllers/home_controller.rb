@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout "landing_layout"
+  layout "landing_layout", only: [:index]
   def index
     if current_coach
 
@@ -13,5 +13,8 @@ class HomeController < ApplicationController
         format.html { render "guest_homepage" }
       end
     end
+  end
+
+  def support
   end
 end
