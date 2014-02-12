@@ -20,12 +20,10 @@
         <%= simple_form_for @program, html: { class: "form-vertical new-program" } do |f| %>
           <%= f.fields_for :user do |f| %>
           <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
               <%= f.input :full_name, label: false, placeholder: 'Name' %>
             </div>
-            <div class="col-md-3">
-              <%= f.input :gender, collection: User::GENDERS, label: false, default: nil, placeholder: 'Gender' %>
-            </div>
+
           </div>
             <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
             

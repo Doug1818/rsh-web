@@ -5,10 +5,13 @@
         <%= image_tag(@program.user.avatar.large.url) %>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-5">
       <h2><%= @program.user.full_name %></h2>
-      <p>I am here to <%= @program.purpose.downcase %> so I can <%= @program.goal.downcase %></p>
+      <p>I am here to <%= @program.purpose.downcase %> so I can <%= @program.goal.downcase %>.</p>
       <hr/>
+    </div>
+    <div class="col-md-3">
+         <%= link_to 'Back to Dashboard', coach_path(@program.coach_id), class: 'btn btn-primary add-patient' %>
     </div>
   </div>
   <div class="row">
