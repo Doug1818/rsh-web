@@ -1,7 +1,9 @@
 <div class="container">
   <div class="well">
     <div class="col-md-12">
-      <h2>Get 1 month of free use for each coach you refer</h2>
+      <h2>Get Steps for FREE for sharing it with your friends!</h2>
+      <p>When someone you referred upgrades their account to Steps Pro, your next month is free.</p>
+      <p>Note: this is for coaches who don't work for you.  To add a coach to your own practice, do it <a href="/coaches">here</a>.  (Don't worry, you get your free month either way!)</p>
       <%= simple_form_for @referral, html: { class: "form-vertical" } do |f| %>
         <%= f.input :email, type: 'email', label: false, placeholder: 'Email' %>
         <%= f.submit 'Send Invitation', class: 'btn btn-primary' %>
