@@ -54,6 +54,7 @@
       <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
           <h2><%= "#{current_coach.name}'s Alerts" %></h2>
+          <p class="adv-settings-desc">Set up email notifications about this client</p>
           <% if @alerts.present? %>
           <%= render @alerts %>
           <% end %>
@@ -70,6 +71,7 @@
 
         <div class="well">
           <h2><%= "#{@program.user.first_name}'s Reminders" %></h2>
+          <p class="adv-settings-desc">Send this client push notifications</p>
           <% if @reminders.present? %>
           <table>
             <thead>
