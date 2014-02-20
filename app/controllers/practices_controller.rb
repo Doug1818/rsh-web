@@ -1,5 +1,5 @@
 class PracticesController < ApplicationController
-  before_filter :authenticate_coach!, only: [:show]
+  before_filter :authenticate_coach!, only: [:show, :billing]
   before_filter :authenticate_admin!, only: [:index]
   authorize_resource
 
@@ -60,6 +60,7 @@ class PracticesController < ApplicationController
     elsif current_admin
       @practice = Practice.find(params[:id])
     end
+
     respond_to do |format|
       if @practice.update_attributes(practice_params)
 
@@ -76,6 +77,20 @@ class PracticesController < ApplicationController
       else
         format.html { render action: "edit" }
       end
+    end
+  end
+
+  def billing
+    @practice = Practice.find(params[:id])
+    @coach = @practice.coaches.where(role: "owner").first
+  end
+
+  def add_billing_info
+    current_practice.stripe_card_token = params[:practice][:stripe_card_token]
+    if current_practice.save_with_payment
+      redirect_to root_path, notice: "Billing info added successfully"
+    else
+      render "billing"
     end
   end
 
