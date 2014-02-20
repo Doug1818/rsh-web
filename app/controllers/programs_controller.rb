@@ -1,13 +1,23 @@
 class ProgramsController < ApplicationController
-  before_filter :authenticate_coach!
+  before_filter :authenticate_coach!, except: [:index, :show]
   authorize_resource
 
   def index
-    @programs = current_practice.programs
+    if current_coach
+      @programs = current_practice.programs
+    elsif current_admin
+      @programs = Program.all
+    end
   end
 
   def show
-    @program = current_coach.programs.find(params[:id]).decorate
+    if current_coach
+      @program = current_coach.programs.find(params[:id]).decorate
+    elsif current_admin
+      @program = Program.find(params[:id]).decorate
+    end
+    @coach = Coach.find(@program.coach_id)
+
     @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
 
     @alerts = @program.alerts.decorate
