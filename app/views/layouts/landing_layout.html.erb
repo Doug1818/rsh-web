@@ -12,7 +12,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <script src="//use.typekit.net/wfv3edg.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
-  <%= yield :script %>
+  <%= analytics_init if Rails.env.production? %>
   <%= csrf_meta_tags %>
 </head>
 <body>
