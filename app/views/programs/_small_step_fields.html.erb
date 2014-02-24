@@ -1,8 +1,7 @@
 <div class="nested-fields small-step-fields">
   <%= f.hidden_field :program_id, value: @program.id %>
-  <%= f.input_field :name %>
-  towards
-  <%= f.input_field :big_step_id, as: :select, collection: BigStep.where(program_id: @program.id).order(:name) , default: nil%>
+  <%= f.input_field :big_step_id, as: :select, collection: BigStep.where(program_id: @program.id).order(:name), default: nil, placeholder: 'Gender' %> : 
+  <%= f.input_field :name, placeholder: "Small Step" %>
   done
   <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
 

@@ -6,8 +6,8 @@
   <%= f.hidden_field :program_id, value: @program.id %>
   <%= f.hidden_field :week_id, value: week.id %>
 
-  <%= f.input_field :name, as: :string %> towards
-  <%= f.input_field :big_step_id, as: :string, collection: @program.big_steps, class: 'big_step_name' %>
+  <%= f.input_field :big_step_id, as: :string, collection: @program.big_steps, class: 'big_step_name', placeholder: 'Big Step' %> :
+  <%= f.input_field :name, as: :string, placeholder: "Small Step" %>
   done
   <%= f.input_field :frequency, class: 'small-step-frequency', as: :select, collection: SmallStep::FREQUENCIES, default: nil %>
 
