@@ -78,6 +78,8 @@ RshWeb::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  # Google Analytics tracker code
+  GA.tracker = "UA-48183600-1"
 
   config.action_mailer.default_url_options = { :host => 'mystepsapp.com' }
   ActionMailer::Base.smtp_settings = {
