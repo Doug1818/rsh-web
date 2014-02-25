@@ -45,7 +45,7 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html { redirect_to program_path(@program), notice: "Client was successfully added" }
+        format.html { redirect_to program_path(@program), notice: "Your client was successfully added and emailed with instructions to download the Steps mobile app" }
         format.json { render json: @program, status: :created, location: @program }
       else
         format.html { render action: "new" }
