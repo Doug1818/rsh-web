@@ -23,6 +23,8 @@ class Program < ActiveRecord::Base
 
   validates_associated :big_steps
   validates_associated :small_steps
+  validates :purpose, presence: true
+  validates :goal, presence: true
 
   scope :active, -> { where(status: STATUSES[:active]) }
   scope :alerts, -> { joins(:alerts) }
