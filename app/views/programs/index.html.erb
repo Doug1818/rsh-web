@@ -13,7 +13,7 @@
               <% if current_coach %>
                 <tr>
                   <th>Created</th>
-                  <th>User</th>
+                  <th>Client</th>
                   <th>Purpose</th>
                   <th></th>
                 </tr>
@@ -37,7 +37,7 @@
                     <td><%= program.user.full_name %></td>
                     <td><%= program.purpose %></td>
                     <td>
-                      <%= link_to 'edit', edit_program_path(program) %> |
+                      <!-- <%= link_to 'edit', edit_program_path(program) %> | -->
                       <%= link_to 'delete', program, data: { confirm: "Are you sure?" }, method: :delete %>
                     </td>
                   </tr>
