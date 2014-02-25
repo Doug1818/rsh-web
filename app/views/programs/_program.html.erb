@@ -4,7 +4,7 @@
     <%= image_tag(program.user.avatar.medium.url, height: 123, width: 123, alt: "user avatar") %>
     <h3><%= program.user.full_name %></h3>
     <div class="check-ins">
-      <%= program.daily_checkmarks %>
+      <%= program.daily_checkmarks if program.start_date %>
     </div>
   </div>
   <% end %>

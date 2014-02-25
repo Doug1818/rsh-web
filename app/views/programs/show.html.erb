@@ -45,9 +45,36 @@
 
         <%= render @weeks %>
 
-        <div class="new-week">
-          <%= link_to "<span class='btn-plus'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
-        </div>
+        <% if @weeks.count == 0 %>
+          <%= simple_form_for @program, url: url_for(:action => 'update_small_steps', :controller => 'programs'), html: { class: "form-vertical" } do |f| %>
+
+            <div class="row start-date">
+              <div class="col-md-12">
+                <p>When do I start?</p>
+                <label class="glyphicon glyphicon-calendar"></label>
+                <%= f.input :start_date, as: :string, input_html: { class: "datepicker" }, label: false %>
+              </div>
+            </div>
+
+            <div id="program-weeks">
+              <p>What small step(s) should I focus on in my first week?</p>
+              <%= f.simple_fields_for :weeks do |week| %>
+                <%= render 'week_fields', f: week %>
+              <% end %>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div>
+                  <%= f.submit "Save", class: 'btn btn-primary' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="new-week">
+            <%= link_to "<span class='btn-plus'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
+          </div>
+        <% end %>
       </div>
 
 
