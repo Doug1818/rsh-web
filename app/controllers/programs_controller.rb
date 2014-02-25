@@ -95,7 +95,6 @@ class ProgramsController < ApplicationController
 
     # Create new steps
     small_steps = params[:program][:weeks_attributes]["0"][:small_steps_attributes]
-    # binding.pry
     small_steps.each do |small_step|
       big_step = small_step[1][:big_step_id] # If it's a new big step, this will be the new big step name
       big_step_id = big_step.to_i # If it's a big step name, this will be 0 (new big step)
@@ -114,7 +113,8 @@ class ProgramsController < ApplicationController
       if @program.update_attributes(program_params.except(:weeks_attributes))
         format.html { redirect_to program_path(@program) }
       else
-        format.html { render action: "new_small_steps" }
+        format.html { redirect_to program_path(@program) }
+        # format.html { render action: "new_small_steps" }
       end
     end
   end
