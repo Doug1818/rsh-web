@@ -9,6 +9,11 @@ class Reminder < ActiveRecord::Base
 
   before_save :set_send_at
 
+  validates :send_at, presence: true
+  validates :send_on, presence: true
+  validates :body, presence: true
+  validate  :presence_of_recurrence
+
 
   def should_send_now?
     require 'active_support/time'
@@ -23,6 +28,12 @@ class Reminder < ActiveRecord::Base
   end
 
   private
+
+  def presence_of_recurrence
+    if daily_recurrence == nil && weekly_recurrence == nil && monthly_recurrence == nil
+      errors.add(:base, "Frequency can't be blank")
+    end
+  end
 
   def set_send_at
     time = Time.zone.parse(send_at.strftime("%H:%M %p"))

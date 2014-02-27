@@ -16,7 +16,7 @@ class RemindersController < ApplicationController
         format.html { redirect_to(program_path(@program, active: 'advanced-settings')) }
         format.json { render json: @reminder, status: :created, location: @reminder }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Your reminder is missing required fields. Please try again.") }
         format.json { render json: @reminder.errors, status: :unprocessable_entity }
       end
     end
