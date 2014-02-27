@@ -2,7 +2,7 @@
   <p>
     Send me an email when <%= alert.criteria_output %>
     <span>
-      <button class="btn btn-warning">Done</button>
+      <%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, alert_path(alert), data: { confirm: "Are you sure?" }, method: :delete, style: "margin-left:25px;" %>
     </span>
   </p>
 </div>
