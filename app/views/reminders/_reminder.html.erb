@@ -5,5 +5,5 @@
   <td><%= reminder.send_at.strftime("%B %e, %Y") %></td>
   <td><%= reminder.send_at.strftime("%l:%M %p") %></td>
   <td><%= reminder.body %></td>
-  <td><button class="btn btn-warning">Done</button></td>
+  <td><%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, reminder_path(reminder), data: { confirm: "Are you sure?" }, method: :delete %></td>
 </tr>

@@ -1,14 +1,26 @@
 class ProgramsController < ApplicationController
-  before_filter :authenticate_coach!
+  before_filter :authenticate_coach!, except: [:index, :show]
   authorize_resource
 
   def index
-    @programs = current_practice.programs
+    if current_coach
+      @programs = current_practice.programs
+    elsif current_admin
+      @programs = Program.all
+    end
   end
 
   def show
-    @program = current_coach.programs.find(params[:id]).decorate
+    if current_coach
+      @program = current_coach.programs.find(params[:id]).decorate
+    elsif current_admin
+      @program = Program.find(params[:id]).decorate
+    end
+    @coach = Coach.find(@program.coach_id)
+
     @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
+    @week = @program.weeks.build(number: 1) # for first week
+    @week.small_steps.build # for first week
 
     @alerts = @program.alerts.decorate
     @reminders = @program.reminders.decorate
@@ -33,7 +45,7 @@ class ProgramsController < ApplicationController
 
     respond_to do |format|
       if @program.save
-        format.html
+        format.html { redirect_to program_path(@program), notice: "Your client was successfully added and emailed with instructions to download the Steps mobile app" }
         format.json { render json: @program, status: :created, location: @program }
       else
         format.html { render action: "new" }
@@ -79,12 +91,30 @@ class ProgramsController < ApplicationController
 
     params[:program][:weeks_attributes]["0"][:start_date] = week_start_date
     params[:program][:weeks_attributes]["0"][:end_date] = week_end_date
+    @week = @program.weeks.create(number: 1, start_date: week_start_date, end_date: week_end_date)
+
+    # Create new steps
+    small_steps = params[:program][:weeks_attributes]["0"][:small_steps_attributes]
+    small_steps.each do |small_step|
+      big_step = small_step[1][:big_step_id] # If it's a new big step, this will be the new big step name
+      big_step_id = big_step.to_i # If it's a big step name, this will be 0 (new big step)
+      if big_step_id == 0
+        # @week = @program.weeks.build
+        @small_step = @week.small_steps.build(small_step[1].except(:_destroy))
+        @big_step = @program.big_steps.where(name: big_step).first_or_create!
+        small_step[1][:big_step_id] = @big_step.id
+        @big_step.small_steps << @small_step
+        @big_step.save!
+        @week.small_steps << @small_step
+      end
+    end
 
     respond_to do |format|
-      if @program.update_attributes(program_params)
+      if @program.update_attributes(program_params.except(:weeks_attributes))
         format.html { redirect_to program_path(@program) }
       else
-        format.html { render action: "new_small_steps" }
+        format.html { redirect_to program_path(@program) }
+        # format.html { render action: "new_small_steps" }
       end
     end
   end

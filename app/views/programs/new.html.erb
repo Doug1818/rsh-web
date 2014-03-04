@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12 center">
-      <h3 class="middle">Add a New User</h3>
+      <h3 class="middle">Add a New Client</h3>
     </div>
   </div>
   <div class="row">
@@ -13,10 +13,11 @@
         <li></li>
       </ol>
     </div>
-  </div>
+  </div> -->
   <div class="row">
     <div class="col-md-12">
       <div class="well create">
+        <h3 class="center">Add a New Client</h3><br>
         <%= simple_form_for @program, html: { class: "form-vertical new-program" } do |f| %>
           <%= f.fields_for :user do |f| %>
           <div class="row">
@@ -33,7 +34,7 @@
           <div class="clearfix"></div>
         <div class="row">
           <div class="pull-right">
-          <%= f.submit 'Add User', class: 'btn btn-primary' %>
+          <%= f.submit 'Add Client', class: 'btn btn-primary' %>
           </div>
         </div>
         <% end %>

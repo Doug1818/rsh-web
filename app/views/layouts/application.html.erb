@@ -9,10 +9,11 @@
   <%= favicon_link_tag 'icons/touch-icon-ipad-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: '152x152' %>
   <%= favicon_link_tag 'icons/favicon.ico', rel: 'shortcut icon' %>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "https://js.stripe.com/v2/", "application", "data-turbolinks-track" => true %>
   <script src="//use.typekit.net/wfv3edg.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
-  <%= yield :script %>
+  <%= tag :meta, :name => "stripe-key", :content => ENV['STRIPE_PUBLIC_KEY'] %>
+  <%= analytics_init if Rails.env.production? %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -55,6 +56,7 @@
         <ul class="nav navbar-nav">
           <% if can? :manage,  current_practice %>
             <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Admin', practice_path(current_practice) %></li>
+            <li><a href="http://www.rightsidehealth.com/support" target="_blank">Support</a></li>
           <% end %>
           <!--<% if current_coach %>
             <li><%= link_to 'Get Steps for free!', new_referral_path %></li>

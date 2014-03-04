@@ -1,0 +1,22 @@
+<%= simple_form_for @practice, url: add_billing_info_practice_path(@practice), html: { method: :put, id: "edit_practice", class: "form-vertical" } do |f| %>
+    <legend>Billing Info</legend>
+
+    <div class="form-group string required">
+      <%= text_field_tag :card_number, nil, name: nil, type: "text", pattern: "[0-9]*", placeholder: "Credit Card Number", class: "card-number string optional form-control" %>
+    </div>
+    <div class="form-group string required">
+      <%= text_field_tag :card_code, nil, name: nil, type: "text", pattern: "[0-9]*", placeholder: "Security Code (CVV)", class: "card-cvc string optional form-control" %>
+    </div>
+    <div class="form-group string required">
+      <label class="string optional control-label">Expiration (MM/YYYY)</label>
+      <br/>
+      <%= text_field_tag :card_month, nil, name: nil, type: "text", pattern: "((0[1-9])|(1[0-2]))", placeholder: "MM", class: "card-expiry-month string optional form-control" %>
+      <span> / </span>
+      <%= text_field_tag :card_year, nil, name: nil, type: "text", pattern: "(19\d\d|20\d\d)", placeholder: "YYYY", class: "card-expiry-year string optional form-control" %>
+    </div>
+    <br>
+    <%= f.hidden_field :stripe_card_token, id: "stripe_card_token" %>
+    <div class="payment-errors alert alert-error"></div>
+    
+    <%= f.submit "Upgrade", class: 'btn btn-primary' %>
+<% end %>

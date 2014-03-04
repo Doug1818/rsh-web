@@ -8,7 +8,7 @@ class Lead < ActiveRecord::Base
 			self.referred_by_code ? referred_by = Coach.where(referral_code: self.referred_by_code).first.full_name : referred_by = ""
 			begin
 	      gb = Gibbon::API.new(MAILCHIMP_API_KEY)
-	      list_id = gb.lists.list({:filters => {:list_name => "Steps Leads"}})["data"].first["id"]
+	      list_id = gb.lists.list({:filters => {:list_name => "Web Signups"}})["data"].first["id"]
 	      gb.lists.subscribe(:id => list_id, :email => {:email => self.email}, :merge_vars => {'NAME' => self.name, 'REF' => referred_by }, :double_optin => false)
 	    rescue Gibbon::MailChimpError => e
 	      e.message

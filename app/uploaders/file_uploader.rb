@@ -13,7 +13,7 @@ class FileUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png pdf)
+    %w(jpg jpeg gif png pdf doc docx xls xlsx ppt pptx)
   end
 
   include CarrierWave::MimeTypes

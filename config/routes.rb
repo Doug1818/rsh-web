@@ -16,7 +16,12 @@ RshWeb::Application.routes.draw do
     end
   end
 
-  resources :practices
+  resources :practices do
+    member do
+      get :billing
+      put :add_billing_info
+    end
+  end
   devise_for :coaches, controllers: { registrations: "coaches" }
   resources :coaches
   devise_for :users
