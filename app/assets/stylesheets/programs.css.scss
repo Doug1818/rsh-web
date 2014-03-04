@@ -94,6 +94,11 @@ a, a:hover {
   }
 }
 
+.plus-button-tooltip {
+  color: #6d6e71;
+  display: none;
+}
+
 /* conflicting with alerts and reminders boxes
 h2 ~ div {
   margin-bottom: 10px;

@@ -72,7 +72,7 @@
           <% end %>
         <% else %>
           <div class="new-week">
-            <%= link_to "<span class='btn-plus'></span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
+            <%= link_to "<span id='new-week-btn' class='btn-plus'></span> <span id='new-week-btn-tooltip' class='plus-button-tooltip'>Add a new week</span>".html_safe, weeks_path(program_id: @program.id), method: :post %>
           </div>
         <% end %>
       </div>
@@ -147,3 +147,18 @@
     </div>
   </div>
 </div>
+
+<script>
+// I don't think this is scalable, because it makes the whole class show, not just the tooltip that is related to the button we're mousing over
+$(document).ready(function() {
+  $('#new-week-btn')
+    .hover(function() {
+      $('#new-week-btn-tooltip').toggle();
+      // alert();
+      });
+});
+
+
+
+</script>
+
