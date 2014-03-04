@@ -56,6 +56,7 @@
         <ul class="nav navbar-nav">
           <% if can? :manage,  current_practice %>
             <li class="<%= 'active' if params[:controller] == 'practice' %>"><%= link_to 'Admin', practice_path(current_practice) %></li>
+            <li><a href="http://www.rightsidehealth.com/support" target="_blank">Support</a></li>
           <% end %>
           <!--<% if current_coach %>
             <li><%= link_to 'Get Steps for free!', new_referral_path %></li>

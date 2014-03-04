@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.adv-settings-desc{
+  font-style: italic;
+  font-size: .8em;
+}
+
 .patient {
   position: relative;
   width: 100%;
@@ -88,6 +93,12 @@ a, a:hover {
     content: "\2b";
   }
 }
+
+.plus-button-tooltip {
+  color: #6d6e71;
+  display: none;
+}
+
 /* conflicting with alerts and reminders boxes
 h2 ~ div {
   margin-bottom: 10px;

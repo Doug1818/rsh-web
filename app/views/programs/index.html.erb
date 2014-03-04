@@ -1,9 +1,18 @@
 <div class="container">
   <div class="well">
     <div class="row">
-      <div class="col-md-12">
-        <h1>Listing Programs (<%= @programs.size %>)</h1>
+      <% if current_coach %>
+      <div class="col-md-9">
+        <h1>Active Clients (<%= @programs.size %>)</h1>
       </div>
+      <div class="col-md-3">
+         <%= link_to 'Back to Dashboard', coach_path(current_coach), class: 'btn btn-primary add-patient' %>
+      </div>
+      <% elsif current_admin %>
+        <div class="col-md-12">
+          <h1>Active Clients (<%= @programs.size %>)</h1>
+        </div>
+      <% end %>
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -34,7 +43,7 @@
                 <% @programs.each do |program| %>
                   <tr>
                     <td><%= program.created_at.strftime("%m/%d/%y") %></td>
-                    <td><%= program.user.full_name %></td>
+                    <td><%= link_to program.user.full_name, program_path(program) %></td>
                     <td><%= program.purpose %></td>
                     <td>
                       <!-- <%= link_to 'edit', edit_program_path(program) %> | -->
