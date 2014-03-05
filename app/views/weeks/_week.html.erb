@@ -5,7 +5,7 @@
   <div class="col-md-11 small-steps-for-week">
     <div id="detail-<%= week.number %>" class="collapse <%= 'in' if week.current_week? or week.future_week? %>">
       <%= render week.small_steps.order('name'), week: week %>
-      <%= link_to "<span id='new-step-btn-#{week.id}' class='btn-plus'></span> <span id='plus-button-tooltip-#{week.id}' class='plus-button-tooltip'>Add a new step in week #{week.number}</span>".html_safe, "#", class: 'new-small-step-link' unless week.past_week? %>
+      <%= link_to "<span id='new-step-btn-#{week.id}' class='btn-plus'></span> <span id='plus-button-tooltip-#{week.id}' class='plus-button-tooltip' style='display:none;'>Add a new step in Week #{week.number}</span>".html_safe, "#", class: 'new-small-step-link' unless week.past_week? %>
       <div class="small-step">
         <div class="form">
           <%= render partial: 'small_steps/form', locals: { week: week, small_step: SmallStep.new(program: @program) } %>
