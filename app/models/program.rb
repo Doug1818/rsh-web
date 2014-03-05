@@ -1,5 +1,6 @@
 class Program < ActiveRecord::Base
   STATUSES = { inactive: 0, active: 1 }
+  ACTIVITY_STATUSES = { normal: 0, alert: 1 }
 
   before_save :ensure_authentication_token
   after_create :send_invitation

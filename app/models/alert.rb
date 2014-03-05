@@ -9,51 +9,68 @@ class Alert < ActiveRecord::Base
 
   def self.check_alerts
     Program.where(status: Program::STATUSES[:active]).each do |program|
-      @alerts = program.alerts
-      @alerts.each do |alert|
-        puts "PROGRAM: #{program.id}"
-        statuses = []
+      now = DateTime.now.in_time_zone(program.user.timezone)
+      if now.hour == 24 # check alerts at midnight local user time
+        @alerts = program.alerts
+        @alerts.each do |alert|
+          puts "PROGRAM: #{program.id}"
+          statuses = []
 
-        @check_ins = program.check_ins.order(created_at: :asc).last(alert.streak)
-        next if @check_ins.empty? || @check_ins.size != alert.streak
+          @check_ins = program.check_ins.order(created_at: :asc).last(alert.streak)
+          next if @check_ins.empty? || @check_ins.size != alert.streak
 
-        puts "CHECK INS: #{@check_ins}"
-        @check_ins.each do |check_in|
-          statuses.push(check_in.status)
-        end
+          puts "CHECK INS: #{@check_ins}"
+          @check_ins.each do |check_in|
+            statuses.push(check_in.status)
+          end
 
-        if alert.action_type == ACTION_TYPES["Misses"]
-          puts "MISSES..."
+          if alert.action_type == ACTION_TYPES["Misses"]
+            puts "MISSES..."
 
-          # get the date of the last check-in
-          # get today's date
-          # see the difference between them
+            today = now.to_date
+            last_closed_check_in = today - 2 # get date of last 'closed' check-in
+            last_check_in_date = program.check_ins.last.created_at.to_date # get the date of the last check-in
+            misses_streak = last_closed_check_in - last_check_in_date # see the difference between them
+            misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
-        elsif alert.action_type == ACTION_TYPES["Incompletes"]
-          streak_met = true
+            if streak_met
+              UserMailer.coach_alert_email(alert, misses_streak).deliver
+              program.activity_status = Program::ACTIVITY_STATUSES[:alert]
+              puts "STREAK MET FOR MISSES"
+            else
+              program.activity_status = Program::ACTIVITY_STATUSES[:normal]
+              puts "STREAK NOT MET FOR MISSES"
+            end
 
-          statuses.each do |status|
-            if status != CheckIn::STATUSES[:mixed] || status != CheckIn::STATUSES[:all_no]
-              streak_met = false
+          elsif alert.action_type == ACTION_TYPES["Incompletes"]
+            streak_met = true
 
-              break
+            statuses.each do |status|
+              if status != CheckIn::STATUSES[:mixed] || status != CheckIn::STATUSES[:all_no]
+                streak_met = false
+
+                break
+              end
+            end
+
+            if streak_met
+              UserMailer.coach_alert_email(alert, alert.streak).deliver
+              program.activity_status = Program::ACTIVITY_STATUSES[:alert]
+              puts "STREAK MET FOR INCOMPLETES"
+            else
+              program.activity_status = Program::ACTIVITY_STATUSES[:normal]
+              puts "STREAK NOT MET FOR INCOMPLETES"
+            end
+
+          elsif alert.action_type == ACTION_TYPES["Completes"]
+            if statuses.uniq.size == 1 && (statuses[0] == CheckIn::STATUSES[:all_yes])
+              UserMailer.coach_alert_email(alert, alert.streak).deliver
+              puts "STREAK MET FOR COMPLETES"
+            else
+              puts "STREAK NOT MET FOR COMPLETES"
             end
           end
-
-          if streak_met
-            # send an email
-            # program.activity_status = ACTIVITY_STATUSES[:alert]
-            puts "STREAK MET FOR INCOMPLETES"
-          else
-            # program.activity_status = ACTIVITY_STATUSES[:normal]
-            puts "STREAK NOT MET FOR INCOMPLETES"
-          end
-        elsif alert.action_type == ACTION_TYPES["Completes"]
-          if statusus.uniq.size == 1 && (statuses[0] == CheckIn::STATUSES[:all_yes])
-            puts "STREAK MET FOR COMPLETES"
-          else
-            puts "STREAK NOT MET FOR COMPLETES"
-          end
+          program.save
         end
       end
     end
