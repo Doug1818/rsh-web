@@ -122,4 +122,14 @@ class ProgramsController < ApplicationController
   def program_params
     params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
   end
+
+  def destroy
+    @program = current_practice.programs.find(params[:id])
+    @program.destroy
+
+    respond_to do |format|
+      format.html { redirect_to programs_path, notice: "Successfully deleted." }
+    end
+  end
+
 end
