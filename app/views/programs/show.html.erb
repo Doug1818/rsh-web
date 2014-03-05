@@ -80,12 +80,8 @@
 
       <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
-<<<<<<< HEAD
-          <h2><%= "#{current_coach.name}'s Alerts" %></h2>
-          <p class="adv-settings-desc">Set up email notifications about this client</p>
-=======
           <h2><%= "#{@coach.name}'s Alerts" %></h2>
->>>>>>> upstream/master
+          <p class="adv-settings-desc">Set up email notifications about this client</p>
           <% if @alerts.present? %>
           <%= render @alerts %>
           <% end %>
