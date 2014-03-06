@@ -9,6 +9,7 @@ class CoachesController < ApplicationController
 
   def show
     @coach = current_practice.coaches.find(params[:id])
+    @coach.check_alerts
 
     if params[:search].present?
       @search = Program.search(include: :user) do
