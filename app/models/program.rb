@@ -28,7 +28,7 @@ class Program < ActiveRecord::Base
   validates :goal, presence: true, :on => :create
 
   scope :active, -> { where(status: STATUSES[:active]) }
-  scope :alerts, -> { joins(:alerts) }
+  scope :alerts, -> { where(activity_status: ACTIVITY_STATUSES[:alert]) }
 
   searchable do
     integer :coach_id do
