@@ -51,6 +51,14 @@ class Program < ActiveRecord::Base
     self.weeks.where("? BETWEEN start_date and end_date", Time.current).first
   end
 
+  def next_week
+    if current_week.present?
+      self.weeks.where(number: current_week.number + 1).first
+    else
+      nil
+    end
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -67,7 +75,6 @@ class Program < ActiveRecord::Base
   end
 
   def send_invitation
-    # TODO remove the unless when we're ready to go live
     UserMailer.user_invitation_email(self).deliver
   end
 
@@ -92,6 +99,18 @@ class Program < ActiveRecord::Base
           push.type = "ios"
           push.save
         end
+      end
+    end
+  end
+
+  def self.more_steps_reminder
+    Program.where(status: STATUSES[:active]).each do |program|
+      @current_week = program.current_week
+      @next_week = program.next_week
+      @coach = Coach.find(program.coach_id)
+      weekday_num = Time.now.in_time_zone(@coach.timezone).to_date.wday
+      if @current_week.present? && weekday_num == 5
+        UserMailer.coach_more_steps_email(program).deliver if @next_week.nil? || @next_week.small_steps.empty?
       end
     end
   end

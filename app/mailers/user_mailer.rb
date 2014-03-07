@@ -35,4 +35,11 @@ class UserMailer < ActionMailer::Base
     @coach = Coach.find(@program.coach_id)
     mail(to: @coach.email, subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
+
+  def coach_more_steps_email(program)
+    @program = program
+    @user = program.user
+    @coach = Coach.find(@program.coach_id)
+    mail(to: @coach.email, subject: "#{@user.full_name} needs steps for next week")
+  end
 end
