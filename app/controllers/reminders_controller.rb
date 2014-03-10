@@ -13,7 +13,7 @@ class RemindersController < ApplicationController
 
     respond_to do |format|
       if @program.present? && @reminder.save
-        format.html { redirect_to(program_path(@program, active: 'advanced-settings')) }
+        format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Reminder successfully created") }
         format.json { render json: @reminder, status: :created, location: @reminder }
       else
         format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Your reminder is missing required fields. Please try again.") }
@@ -28,7 +28,7 @@ class RemindersController < ApplicationController
     @reminder.destroy
 
     respond_to do |format|
-      format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Your reminder has been successfully deleted.") }
+      format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Your reminder has been successfully deleted") }
     end
   end
 

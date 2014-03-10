@@ -32,7 +32,7 @@ class Reminder < ActiveRecord::Base
   def presence_of_recurrence
     if daily_recurrence == nil && weekly_recurrence == nil && monthly_recurrence == nil
       errors.add(:base, "Frequency can't be blank")
-    end
+    end unless frequency == 0
   end
 
   def set_send_at
