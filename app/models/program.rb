@@ -4,6 +4,7 @@ class Program < ActiveRecord::Base
 
   before_save :ensure_authentication_token
   after_create :send_invitation
+  after_create :create_default_alert
 
   belongs_to :user, dependent: :destroy
   belongs_to :coach
@@ -76,6 +77,10 @@ class Program < ActiveRecord::Base
 
   def send_invitation
     UserMailer.user_invitation_email(self).deliver
+  end
+
+  def create_default_alert
+    self.alerts.create(action_type: 0, streak: 3, sequence: 0)
   end
 
   def self.nudge_reminder
