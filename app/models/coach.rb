@@ -67,6 +67,7 @@ class Coach < ActiveRecord::Base
 
         if alert.action_type == Alert::ACTION_TYPES["Misses"]
           puts "MISSES..."
+          next if program.start_date.nil?
 
           now = DateTime.now.in_time_zone(program.user.timezone)
           today = now.to_date

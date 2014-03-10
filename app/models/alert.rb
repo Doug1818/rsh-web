@@ -17,6 +17,7 @@ class Alert < ActiveRecord::Base
 
           if alert.action_type == ACTION_TYPES["Misses"]
             puts "MISSES..."
+            next if program.start_date.nil?
 
             today = now.to_date
             last_closed_check_in_window = today - 2 # get date of last 'closed' check-in
