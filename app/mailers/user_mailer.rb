@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @program = program
     @user = program.user
 
-    mail(to: @user.email, subject: "You've been invited to join Steps")
+    mail(to: @user.email, bcc: "contact@rightsidehealth.com", subject: "You've been invited to join Steps")
   end
 
   def practice_invitation_email(coach)
@@ -18,13 +18,13 @@ class UserMailer < ActionMailer::Base
   def coach_invitation_email(coach)
     @coach = coach
 
-    mail(to: @coach.email, subject: "You've been invited to join Steps (by Right Side Health)")
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "You've been invited to join Steps (by Right Side Health)")
   end
 
   def coach_referral_email(referral)
     @referral = referral
     @coach = Coach.find(@referral.coach_id)
-    mail(to: @referral.email, subject: "#{@coach.full_name} thinks you should join Steps (by Right Side Health)")
+    mail(to: @referral.email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} thinks you should join Steps (by Right Side Health)")
   end
 
   def coach_alert_email(alert, streak)
@@ -33,13 +33,13 @@ class UserMailer < ActionMailer::Base
     @program = Program.find(@alert.program_id)
     @user = @program.user
     @coach = Coach.find(@program.coach_id)
-    mail(to: @coach.email, subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
   def coach_more_steps_email(program)
     @program = program
     @user = program.user
     @coach = Coach.find(@program.coach_id)
-    mail(to: @coach.email, subject: "#{@user.full_name} needs steps for next week")
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} needs steps for next week")
   end
 end
