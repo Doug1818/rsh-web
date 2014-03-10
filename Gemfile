@@ -34,6 +34,7 @@ gem 'parse-ruby-client' # parse.com integration
 gem 'gibbon' # mailchimp
 gem 'rails_admin' # Admin interface
 gem 'ice_cube' # Recurrence
+gem 'rollbar' # exceptions / errors tracking
 
 group :doc do
   gem 'sdoc', require: false
