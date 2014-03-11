@@ -69,6 +69,7 @@ class Alert < ActiveRecord::Base
             end
 
           elsif alert.action_type == ACTION_TYPES["Completes"]
+            next if statuses.nil?
             if statuses.uniq.size == 1 && (statuses[0] == CheckIn::STATUSES[:all_yes])
               UserMailer.coach_alert_email(alert, alert.streak).deliver
               puts "STREAK MET FOR COMPLETES"
