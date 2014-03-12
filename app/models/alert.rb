@@ -10,7 +10,7 @@ class Alert < ActiveRecord::Base
   def self.check_alerts
     Program.where(status: Program::STATUSES[:active]).each do |program|
       now = DateTime.now.in_time_zone(program.user.timezone)
-      if now.hour == 24 # check alerts at midnight local user time
+      if now.hour == 0 # check alerts at midnight local user time
         @alerts = program.alerts
         @alerts.each do |alert|
           puts "PROGRAM: #{program.id}"
