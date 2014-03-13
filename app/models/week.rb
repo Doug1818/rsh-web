@@ -23,6 +23,19 @@ class Week < ActiveRecord::Base
     end
   end
 
+  def can_check_in_on_day(day)
+    if within_week?(day)
+      can_check_in = false
+      small_steps.each do |small_step|
+        if small_step.can_check_in_on_date(day) == true
+          can_check_in = true
+          break
+        end
+      end
+      can_check_in
+    end
+  end
+
   # ensure the given day is within the current week's range
   def within_week?(day)
     (start_date..end_date).cover?(day)

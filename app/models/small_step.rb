@@ -56,7 +56,7 @@ class SmallStep < ActiveRecord::Base
     begin
       date = Date.parse(date) unless date.is_a? Date # ensure date is a Date object if passed in as a string
 
-      check_ins_on_date = check_ins.where("check_ins.created_at = DATE(?)", date).pluck(:id)
+      check_ins_on_date = check_ins.where("check_ins.created_at = DATE(?)", date).pluck(:id) # look to see if a check in exists for this day already
 
       case FREQUENCIES.keys[frequency]
       when "Daily"
