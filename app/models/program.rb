@@ -84,21 +84,22 @@ class Program < ActiveRecord::Base
   end
 
   def self.nudge_reminder
-    @today = DateTime.new
     Program.where(status: STATUSES[:active]).each do |program|
+      @now = DateTime.now.in_time_zone(program.user.timezone)
+      @today = @now.to_date
       @current_week = program.current_week
       if @current_week.present?
 
         should_notify = false
 
         @current_week.small_steps.each do |small_step|
-          if small_step.needs_check_in_on_date(@today) == true
+          if small_step.needs_check_in_on_date(@today) == true && small_step.has_check_in_on_date(@today) == false
             should_notify = true
             break
           end
         end
 
-        if should_notify && Time.now.in_time_zone(program.user.timezone).hour == 21
+        if should_notify && @now.hour == 21
           data = { :alert => "Don't forget to check in today!" }
           push = Parse::Push.new(data, "user_#{program.user.id}")
           push.type = "ios"
