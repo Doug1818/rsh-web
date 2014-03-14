@@ -2,6 +2,6 @@
 
 <p>Your client, <%= @user.full_name %>, has gotten <%= @streak %> <%= Alert::ACTION_TYPES.keys[@alert.action_type] %> in a row.</p>
 
-<p>You can check out <%= @user.first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %>.</p>
+<p>You can check out <%= @user.first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %></p>
 
 <p>-The Steps Team</p>
