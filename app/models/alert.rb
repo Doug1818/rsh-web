@@ -26,11 +26,11 @@ class Alert < ActiveRecord::Base
             else
               program.start_date
             end
-            misses_streak = last_closed_check_in_window - no_check_ins_since # see the difference between them
+            misses_streak = (last_closed_check_in_window - no_check_ins_since).to_int # see the difference between them
             misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
             if streak_met
-              UserMailer.coach_alert_email(alert, misses_streak.to_int).deliver
+              UserMailer.coach_alert_email(alert, misses_streak).deliver
               program.activity_status = Program::ACTIVITY_STATUSES[:alert]
               puts "STREAK MET FOR MISSES"
             else
