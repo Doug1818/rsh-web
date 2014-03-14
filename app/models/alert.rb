@@ -30,7 +30,7 @@ class Alert < ActiveRecord::Base
             misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
             if streak_met
-              UserMailer.coach_alert_email(alert, misses_streak.to_s).deliver
+              UserMailer.coach_alert_email(alert, misses_streak.to_int).deliver
               program.activity_status = Program::ACTIVITY_STATUSES[:alert]
               puts "STREAK MET FOR MISSES"
             else
