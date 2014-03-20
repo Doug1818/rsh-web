@@ -11,7 +11,7 @@
 %>
 
 <%= simple_form_for @note, action: form_action, url: form_url, html: { class: "form-vertical" } do |f| %>
-  <%= f.input :body, label: "Notes" %>
+  <%= f.input :body, label: "Add notes" %>
   <a id="link_rick_test" href="#" onclick="return false;" style="font-size: .6em;">What does this look like to my client?</a><br>
   <img src="/assets/7c8hh.gif" style="display:none; margin-bottom:5px;" id="previewTest"/> <br>
   <%= f.submit form_submit_label, class: 'btn btn-primary' %>
