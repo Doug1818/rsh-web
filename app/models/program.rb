@@ -27,6 +27,7 @@ class Program < ActiveRecord::Base
   validates_associated :small_steps
   validates :purpose, presence: true, :on => :create
   validates :goal, presence: true, :on => :create
+  validates :start_date, presence: true, :on => :update
 
   scope :active, -> { where(status: STATUSES[:active]) }
   scope :alerts, -> { where(activity_status: ACTIVITY_STATUSES[:alert]) }
