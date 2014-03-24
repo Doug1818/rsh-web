@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     @program = program
     @user = program.user
 
-    mail(to: @user.email, bcc: "contact@rightsidehealth.com", subject: "You've been invited to join Steps")
+    mail(to: @user.email, bcc: "contact@rightsidehealth.com", subject: "#{@program.coach.full_name} has invited you to join Steps")
   end
 
   def practice_invitation_email(coach)
