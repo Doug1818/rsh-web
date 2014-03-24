@@ -1,7 +1,11 @@
 <div class="row <%= 'current_week' if week.current_week? %><%= 'past_week' if week.past_week? %>">
   <% if week.past_week? || week.current_week? %>
     <div class="toggle col-md-1" data-toggle="collapse" data-target="#detail-<%= week.number %>">
-      <div style="height:100px;cursor:pointer;">Week <%= week.number %>:</div><!-- Figure out how to set height equal to parent's height -->
+      <div style="height:100px;cursor:pointer;" id='week-label-<%= week.id %>'>
+        <div>Week <%= week.number %>:</div>
+        <div id='expand-<%= week.id %>' style="display:none;font-size:.7em">(Expand)</div>
+        <div id="collapse-<%= week.id %>" style="display:none;font-size:.7em">(Collapse)</div>
+      </div><!-- Figure out how to set height equal to parent's height -->
     </div>
   <% else %>
     <div class="col-md-1">Week <%= week.number %>:</div>
@@ -23,12 +27,26 @@
 </div>
 
 <script>
+// New step button tooltip
 $(document).ready(function() {
-  // $('.btn-plus')
-  $('#new-step-btn-<%= week.id %>')
-    .hover(function() {
-      // alert('<%= week.id %>');
-      $('#plus-button-tooltip-<%= week.id %>').toggle();
-      });
+  $('#new-step-btn-<%= week.id %>').hover(function() {
+    // alert('<%= week.id %>');
+    $('#plus-button-tooltip-<%= week.id %>').toggle();
+  });
+});
+
+// Expand/collapse week tooltip
+$(document).ready(function() {
+  $('#week-label-<%= week.id %>').hover(function() {
+    $('#expand-<%= week.id %>').toggle();
+  });
+  $('#week-label-<%= week.id %>').click(function() {
+    $('#expand-<%= week.id %>').toggle();
+    $('#collapse-<%= week.id %>').toggle();
+    $('#week-label-<%= week.id %>').hover(function() {
+      $('#collapse-<%= week.id %>').toggle();
+      $('#expand-<%= week.id %>').toggle();
+    });
+  });
 });
 </script>
