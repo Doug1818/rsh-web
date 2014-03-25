@@ -28,3 +28,4 @@
 //= require jquery.uniform
 //= require_tree .
 //= require turbolinks
+//= require olark
