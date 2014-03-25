@@ -35,6 +35,10 @@
   text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
 
+.status-1-dash, .status-2-dash, .status-3-dash, .status-4-dash {
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
 // user didn't check in at all (?)
 .status-0 {
   background: #6d6e71;
@@ -43,29 +47,38 @@
   }
 }
 
+.status-0-dash {
+/*  background: #6d6e71;*/
+  &:before {
+    content: "\e085";
+  }
+}
+
 // mixed status (some yes, some no)
 .status-1 {
-  //background: #6d6e71;
   background: #ffa721;
   &:before {
-    //content: "\e014";
     content: "*";
   }
-  //&:after {
-  //  content: " ";
-  //  position: absolute;
-  //  top: 2px;
-  //  right: 2px;
-  //  width: 0;
-  //  height: 0;
-  //  border-top: 0.5em solid #fff;
-  //  border-left: 0.5em solid transparent;
-  //}
+}
+
+.status-1-dash {
+  /*background: #ffa721;*/
+  &:before {
+    content: "*";
+  }
 }
 
 // all yes (check)
 .status-2 {
   background: #ffa721;
+  &:before {
+    content: "\e013";
+  }
+}
+
+.status-2-dash {
+  /*background: #ffa721;*/
   &:before {
     content: "\e013";
   }
@@ -79,9 +92,24 @@
   }
 }
 
+.status-3-dash {
+  /*background: #6d6e71;*/
+  &:before {
+    content: "\e014";
+  }
+}
+
 // no check-in necessary (future)
 .status-4 {
   background: #f1f1f2;
+  color: #f1f1f2;
+  &:before {
+    content: "\e090";
+  }
+}
+
+.status-4-dash {
+  /*background: #f1f1f2;*/
   color: #f1f1f2;
   &:before {
     content: "\e090";

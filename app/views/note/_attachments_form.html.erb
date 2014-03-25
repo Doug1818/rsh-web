@@ -1,6 +1,6 @@
 <%= simple_form_for [@small_step, Attachment.new], html: { class: "form-vertical" } do |f| %>
   <%= f.input :filename, label: 'Add a new file' %>
   <p style="font-size:16px;margin-top:-10px;margin-bottom:15px;">
-  	Note: Permitted formats include pdf, doc, docx, xls, xlsx, ppt, pptx, jpg, jpeg, png, and gif</p>
+  	Permitted formats: pdf, doc, docx, xls, xlsx, ppt, pptx, jpg, jpeg, png, and gif</p>
   <%= f.submit 'Add Attachment', class: 'btn btn-primary' %>
 <% end %>

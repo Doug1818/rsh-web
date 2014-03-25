@@ -4,6 +4,7 @@ class Program < ActiveRecord::Base
 
   before_save :ensure_authentication_token
   after_create :send_invitation
+  after_create :create_default_alert
 
   belongs_to :user, dependent: :destroy
   belongs_to :coach
@@ -26,6 +27,7 @@ class Program < ActiveRecord::Base
   validates_associated :small_steps
   validates :purpose, presence: true, :on => :create
   validates :goal, presence: true, :on => :create
+  validates :start_date, presence: true, :on => :update
 
   scope :active, -> { where(status: STATUSES[:active]) }
   scope :alerts, -> { where(activity_status: ACTIVITY_STATUSES[:alert]) }
@@ -51,6 +53,14 @@ class Program < ActiveRecord::Base
     self.weeks.where("? BETWEEN start_date and end_date", Time.current).first
   end
 
+  def next_week
+    if current_week.present?
+      self.weeks.where(number: current_week.number + 1).first
+    else
+      nil
+    end
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
@@ -67,31 +77,47 @@ class Program < ActiveRecord::Base
   end
 
   def send_invitation
-    # TODO remove the unless when we're ready to go live
     UserMailer.user_invitation_email(self).deliver
   end
 
+  def create_default_alert
+    self.alerts.create(action_type: 0, streak: 3, sequence: 0)
+  end
+
   def self.nudge_reminder
-    @today = DateTime.new
     Program.where(status: STATUSES[:active]).each do |program|
+      @now = DateTime.now.in_time_zone(program.user.timezone)
+      @today = @now.to_date
       @current_week = program.current_week
       if @current_week.present?
 
         should_notify = false
 
         @current_week.small_steps.each do |small_step|
-          if small_step.needs_check_in_on_date(@today) == true
+          if small_step.needs_check_in_on_date(@today) == true && small_step.has_check_in_on_date(@today) == false
             should_notify = true
             break
           end
         end
 
-        if should_notify && Time.now.in_time_zone(program.user.timezone).hour == 21
+        if should_notify && @now.hour == 21
           data = { :alert => "Don't forget to check in today!" }
           push = Parse::Push.new(data, "user_#{program.user.id}")
           push.type = "ios"
           push.save
         end
+      end
+    end
+  end
+
+  def self.more_steps_reminder
+    Program.where(status: STATUSES[:active]).each do |program|
+      @current_week = program.current_week
+      @next_week = program.next_week
+      @coach = Coach.find(program.coach_id)
+      weekday_num = Time.now.in_time_zone(@coach.timezone).to_date.wday
+      if @current_week.present? && weekday_num == 5
+        UserMailer.coach_more_steps_email(program).deliver if @next_week.nil? || @next_week.small_steps.empty?
       end
     end
   end

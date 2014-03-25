@@ -1,7 +1,13 @@
-<%= render 'notes_form' %>
+<% if @week.past_week? %>
+	<%= @note.body? ? @note.body : "No notes" %>
+<% else %>
+	<%= render 'notes_form' %>
+<% end %>
 <hr/>
 <h2>Attachments</h2>
-<ul>
-  <%= render @attachments %>
-</ul>
-<%= render 'attachments_form' %>
+<% if @attachments.any? %>
+	<ul><%= render @attachments %></ul>
+<% else %>
+	<%= "No attachments" if @week.past_week? %>
+<% end %>
+<%= render 'attachments_form' unless @week.past_week? %>

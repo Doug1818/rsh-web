@@ -57,4 +57,8 @@ RshWeb::Application.routes.draw do
   get "/support", to: 'home#support'
 
   get "/rshadmin", to: 'rshadmin#index'
+
+  unless Rails.application.config.consider_all_requests_local
+    get '*not_found', to: 'errors#error_404'
+  end
 end

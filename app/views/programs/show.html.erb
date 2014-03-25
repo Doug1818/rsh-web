@@ -19,7 +19,7 @@
       <ul class="list-inline view">
         <li>View:</li>
         <li class="<%= 'active' if @active == 'steps' %>"><a href="#steps" data-toggle="tab">Steps</a></li>
-        <li class="<%= 'active' if @active == 'advanced-settings' %>"><a href="#advanced-settings" data-toggle="tab">Advanced Settings</a></li>
+        <li class="<%= 'active' if @active == 'advanced-settings' %>"><a href="#advanced-settings" data-toggle="tab">Notifications</a></li>
       </ul>
     </div>
   </div>
@@ -35,7 +35,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h2 class="modal-title" id="myModalLabel">Add Details</h2>
+                <h2 class="modal-title" id="myModalLabel">Notes</h2>
               </div>
               <div class="modal-body">
               </div>
@@ -81,7 +81,7 @@
       <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
         <div class="well">
           <h2><%= "#{@coach.name}'s Alerts" %></h2>
-          <p class="adv-settings-desc">Set up email notifications about this client</p>
+          <p class="adv-settings-desc">Send me email notifications about this client</p>
           <% if @alerts.present? %>
           <%= render @alerts %>
           <% end %>
@@ -99,7 +99,7 @@
         <div class="well">
           <h2><%= "#{@program.user.first_name}'s Reminders" %></h2>
           <p class="adv-settings-desc">Send this client push notifications</p>
-          <% if @reminders.present? %>
+          
           <table>
             <thead>
               <tr>
@@ -110,9 +110,15 @@
                 <th></th>
               </tr>
             </thead>
-            <%= render @reminders %>
+              <tr>
+                <td>Days with steps</td>
+                <td>Start of program</td>
+                <td>9:00 PM</td>
+                <td>Don't forget to check in today!</td>
+                <td></td>
+              </tr>
+            <%= render @reminders if @reminders.present? %>
           </table>
-          <% end %>
 
           <div class="reminder">
             <div class="form" style="margin-bottom:30px;">

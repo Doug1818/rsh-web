@@ -36,7 +36,7 @@ class ProgramDecorator < Draper::Decorator
 
     content_tag(:ul, class: 'list-inline') do 
       statuses.map do |item|
-        concat(content_tag(:li, nil, class: "check-in status-#{item}"))
+        concat(content_tag(:li, nil, class: "check-in status-#{item}-dash"))
       end
     end
   end

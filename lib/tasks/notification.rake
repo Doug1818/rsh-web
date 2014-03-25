@@ -13,4 +13,9 @@ namespace :notification do
   task :check_alerts => :environment do
     Alert.check_alerts
   end
+
+  desc "Weekly more steps reminder (via email)"
+  task :more_steps_reminder => :environment do
+    Program.more_steps_reminder
+  end
 end

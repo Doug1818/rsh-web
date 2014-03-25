@@ -3,6 +3,7 @@ class NoteController < ApplicationController
     @small_step = SmallStep.find(params[:small_step_id])
     @note = @small_step.note || @small_step.build_note
     @attachments = @small_step.attachments
+    @week = Week.find(params[:week_id])
   end
 
 

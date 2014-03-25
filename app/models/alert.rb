@@ -10,27 +10,23 @@ class Alert < ActiveRecord::Base
   def self.check_alerts
     Program.where(status: Program::STATUSES[:active]).each do |program|
       now = DateTime.now.in_time_zone(program.user.timezone)
-      if now.hour == 24 # check alerts at midnight local user time
+      if now.hour == 0 # check alerts at midnight local user time
         @alerts = program.alerts
         @alerts.each do |alert|
           puts "PROGRAM: #{program.id}"
-          statuses = []
-
-          @check_ins = program.check_ins.order(created_at: :asc).last(alert.streak)
-          next if @check_ins.empty? || @check_ins.size != alert.streak
-
-          puts "CHECK INS: #{@check_ins}"
-          @check_ins.each do |check_in|
-            statuses.push(check_in.status)
-          end
 
           if alert.action_type == ACTION_TYPES["Misses"]
             puts "MISSES..."
+            next if program.start_date.nil?
 
             today = now.to_date
-            last_closed_check_in = today - 2 # get date of last 'closed' check-in
-            last_check_in_date = program.check_ins.last.created_at.to_date # get the date of the last check-in
-            misses_streak = last_closed_check_in - last_check_in_date # see the difference between them
+            last_closed_check_in_window = today - 2 # get date of last 'closed' check-in
+            no_check_ins_since = if program.check_ins.any?
+              program.check_ins.last.created_at.to_date # get the date of the last check-in
+            else
+              program.start_date
+            end
+            misses_streak = (last_closed_check_in_window - no_check_ins_since).to_int # see the difference between them
             misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
             if streak_met
@@ -43,6 +39,16 @@ class Alert < ActiveRecord::Base
             end
 
           elsif alert.action_type == ACTION_TYPES["Incompletes"]
+            statuses = []
+
+            @check_ins = program.check_ins.order(created_at: :asc).last(alert.streak)
+            next if @check_ins.empty? || @check_ins.size != alert.streak
+
+            puts "CHECK INS: #{@check_ins}"
+            @check_ins.each do |check_in|
+              statuses.push(check_in.status)
+            end
+
             streak_met = true
 
             statuses.each do |status|
@@ -63,6 +69,7 @@ class Alert < ActiveRecord::Base
             end
 
           elsif alert.action_type == ACTION_TYPES["Completes"]
+            next if statuses.nil?
             if statuses.uniq.size == 1 && (statuses[0] == CheckIn::STATUSES[:all_yes])
               UserMailer.coach_alert_email(alert, alert.streak).deliver
               puts "STREAK MET FOR COMPLETES"

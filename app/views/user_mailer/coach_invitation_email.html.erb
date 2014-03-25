@@ -1,7 +1,7 @@
 <p>Hello,</p>
 
-<p>You have been invited to join Steps, a coaching tool from Right Side Health.</p>
+<p><%= @coach.full_name %> has invited you to join Steps, a coaching tool from Right Side Health.</p>
 
-<p>Please use the following link to activate your account: <%= link_to edit_coach_url(@coach, :invite_token => @coach.invite_token), edit_coach_url(@coach, :invite_token => @coach.invite_token) %>.</p>
+<p>Please use the following link to activate your account: <%= link_to edit_coach_url(@coach, :invite_token => @coach.invite_token), edit_coach_url(@coach, :invite_token => @coach.invite_token) %></p>
 
 <p>-The Steps Team</p>
