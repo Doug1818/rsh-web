@@ -4,7 +4,7 @@
   <%= f.input :email, label: false, placeholder: 'Email', type: 'email' %>
 
   <% 
-    coach = current_coach
+    coach_signed_in? ? coach = current_coach : coach = @program.coaches.first
     coaches = coach.practice.coaches
     new_coach_options = coaches.map { |c| c.full_name }
     @program.coaches.each { |c| new_coach_options.delete(c.full_name) }
