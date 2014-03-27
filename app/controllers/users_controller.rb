@@ -18,7 +18,8 @@ class UsersController < ApplicationController
     new_coach_name = params[:user][:new_coach]
     if new_coach_name != ""
       new_coach = current_practice.coaches.where(first_name: new_coach_name.split(" ")[0], last_name: new_coach_name.split(" ")[1]).last
-      @program.coaches << new_coach
+      new_coach.programs << @program
+      new_coach.save
       UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
     end
 
