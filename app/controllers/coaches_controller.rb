@@ -14,7 +14,7 @@ class CoachesController < ApplicationController
     if params[:search].present?
       @search = Program.search(include: :user) do
         fulltext params[:search]
-        with :coach_id, current_coach.id
+        with :id, current_coach.program_ids
       end
       @programs = ProgramDecorator.decorate_collection(@search.results)
     elsif params[:filter] == 'all'

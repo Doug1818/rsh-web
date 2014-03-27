@@ -13,7 +13,7 @@ class AlertsController < ApplicationController
 
     respond_to do |format|
       if @program.present? && @alert.save
-        format.html { redirect_to(program_path(@program, active: 'advanced-settings')) }
+        format.html { redirect_to(program_path(@program, active: 'notifications')) }
         format.json { render json: @alert, status: :created, location: @alert }
       else
         format.html { render action: "new" }
@@ -28,7 +28,7 @@ class AlertsController < ApplicationController
     @alert.destroy
 
     respond_to do |format|
-      format.html { redirect_to(program_path(@program, active: 'advanced-settings'), notice: "Your alert has been successfully deleted.") }
+      format.html { redirect_to(program_path(@program, active: 'notifications'), notice: "Your alert has been successfully deleted.") }
     end
   end
 

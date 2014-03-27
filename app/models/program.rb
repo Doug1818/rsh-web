@@ -7,7 +7,8 @@ class Program < ActiveRecord::Base
   after_create :create_default_alert
 
   belongs_to :user, dependent: :destroy
-  belongs_to :coach
+  # belongs_to :coach
+  has_and_belongs_to_many :coaches
 
   has_many :big_steps, dependent: :destroy
   has_many :small_steps, dependent: :destroy
@@ -33,9 +34,7 @@ class Program < ActiveRecord::Base
   scope :alerts, -> { where(activity_status: ACTIVITY_STATUSES[:alert]) }
 
   searchable do
-    integer :coach_id do
-      coach.id
-    end
+    integer :id
     text :user do
       user.full_name
     end
@@ -116,7 +115,7 @@ class Program < ActiveRecord::Base
       @next_week = program.next_week
       @coach = Coach.find(program.coach_id)
       weekday_num = Time.now.in_time_zone(@coach.timezone).to_date.wday
-      if @current_week.present? && weekday_num == 5
+      if @current_week.present? && weekday_num == 1
         UserMailer.coach_more_steps_email(program).deliver if @next_week.nil? || @next_week.small_steps.empty?
       end
     end

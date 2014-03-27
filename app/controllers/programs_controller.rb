@@ -16,7 +16,6 @@ class ProgramsController < ApplicationController
     elsif current_admin
       @program = Program.find(params[:id]).decorate
     end
-    @coach = Coach.find(@program.coach_id)
 
     @weeks = @program.weeks.includes(:small_steps => [:big_step]).includes(:check_ins)
     @week = @program.weeks.build(number: 1) # for first week
@@ -41,7 +40,7 @@ class ProgramsController < ApplicationController
 
   def create
     @program = Program.new(program_params)
-    @program.coach_id = current_coach.id
+    @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
 
     respond_to do |format|
       if @program.save

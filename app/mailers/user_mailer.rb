@@ -33,6 +33,7 @@ class UserMailer < ActionMailer::Base
     @program = Program.find(@alert.program_id)
     @user = @program.user
     @coach = Coach.find(@program.coach_id)
+    
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
@@ -40,6 +41,16 @@ class UserMailer < ActionMailer::Base
     @program = program
     @user = program.user
     @coach = Coach.find(@program.coach_id)
+    
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} needs steps for next week")
+  end
+
+  def coach_shared_client_email(program, new_coach, referring_coach)
+    @program = program
+    @user = program.user
+    @new_coach = new_coach
+    @referring_coach = referring_coach
+
+    mail(to: @new_coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@referring_coach.full_name} has shared #{@user.full_name}'s program with you")
   end
 end

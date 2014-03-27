@@ -19,7 +19,8 @@
       <ul class="list-inline view">
         <li>View:</li>
         <li class="<%= 'active' if @active == 'steps' %>"><a href="#steps" data-toggle="tab">Steps</a></li>
-        <li class="<%= 'active' if @active == 'advanced-settings' %>"><a href="#advanced-settings" data-toggle="tab">Notifications</a></li>
+        <li class="<%= 'active' if @active == 'notifications' %>"><a href="#notifications" data-toggle="tab">Notifications</a></li>
+        <li class="<%= 'active' if @active == 'client-info' %>"><a href="#client-info" data-toggle="tab">Client Info</a></li>
       </ul>
     </div>
   </div>
@@ -78,9 +79,9 @@
       </div>
 
 
-      <div class="tab-pane <%= 'active' if @active == 'advanced-settings' %>" id="advanced-settings">
+      <div class="tab-pane <%= 'active' if @active == 'notifications' %>" id="notifications">
         <div class="well">
-          <h2><%= "#{@coach.name}'s Alerts" %></h2>
+          <h2><%= coach_signed_in? ? "#{current_coach.name}'s Alerts" : "Coach's Alerts" %></h2>
           <p class="adv-settings-desc">Send me email notifications about this client</p>
           <% if @alerts.present? %>
           <%= render @alerts %>
@@ -130,19 +131,26 @@
         </div>
 
         <% if false # Currently not in use, but may be in the future %>
-        <div class="well">
-          <h2>Accountability Tools</h2>
-          <%= render @supporters %>
-          <%= link_to "<span class='btn-plus'></span>".html_safe, new_supporter_path(program_id: @program.id) %>
-        </div>
+          <div class="well">
+            <h2>Accountability Tools</h2>
+            <%= render @supporters %>
+            <%= link_to "<span class='btn-plus'></span>".html_safe, new_supporter_path(program_id: @program.id) %>
+          </div>
 
+          <div class="well">
+            <h2>To Dos</h2>
+            <%= render @todos %>
+            <%= link_to "<span class='btn-plus'></span>".html_safe, new_todo_path(program_id: @program.id) %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tab-pane <%= 'active' if @active == 'client-info' %>" id="client-info">
         <div class="well">
-          <h2>To Dos</h2>
-          <%= render @todos %>
-          <%= link_to "<span class='btn-plus'></span>".html_safe, new_todo_path(program_id: @program.id) %>
+          <h2>Client Info</h2>
+          <%= render 'users/form', user: @program.user %>
         </div>
       </div>
-      <% end %>
 
       <!-- end scrollable area -->
 

@@ -13,10 +13,18 @@ class UsersController < ApplicationController
 
   def update
     @user = current_practice.users.find(params[:id])
+    @program = @user.programs.last
+
+    new_coach_name = params[:user][:new_coach]
+    if new_coach_name != ""
+      new_coach = current_practice.coaches.where(first_name: new_coach_name.split(" ")[0], last_name: new_coach_name.split(" ")[1]).last
+      @program.coaches << new_coach
+      UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
+    end
 
     respond_to do |format|
       if @user.update_attributes(user_params)
-        format.html { redirect_to users_path, notice: "#{@user.full_name} was successfully updated" }
+        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@user.full_name} was successfully updated") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

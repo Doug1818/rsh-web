@@ -15,7 +15,7 @@ class Api::V1::ApplicationController < ActionController::Base
   end
 
   def load_practice
-    @practice = @program.coach.practice if @program.present?
+    @practice = @program.coaches.first.practice if @program.present?
   end
 
   private
