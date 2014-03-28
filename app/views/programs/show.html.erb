@@ -11,7 +11,7 @@
       <hr/>
     </div>
     <div class="col-md-3">
-         <%= link_to 'Back to Dashboard', coach_path(current_coach), class: 'btn btn-primary add-patient' %>
+        <%= link_to 'Back to Dashboard', coach_path(current_coach), class: 'btn btn-primary add-patient' if coach_signed_in? %>
     </div>
   </div>
   <div class="row">
