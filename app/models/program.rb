@@ -3,7 +3,7 @@ class Program < ActiveRecord::Base
   ACTIVITY_STATUSES = { normal: 0, alert: 1 }
 
   before_save :ensure_authentication_token
-  after_create :send_invitation
+  # after_create :send_invitation
   after_create :create_default_alert
 
   belongs_to :user, dependent: :destroy
@@ -111,12 +111,13 @@ class Program < ActiveRecord::Base
 
   def self.more_steps_reminder
     Program.where(status: STATUSES[:active]).each do |program|
-      @current_week = program.current_week
-      @next_week = program.next_week
-      @coach = Coach.find(program.coach_id)
-      weekday_num = Time.now.in_time_zone(@coach.timezone).to_date.wday
-      if @current_week.present? && weekday_num == 1
-        UserMailer.coach_more_steps_email(program).deliver if @next_week.nil? || @next_week.small_steps.empty?
+      program.coaches.each do |coach|
+        @current_week = program.current_week
+        @next_week = program.next_week
+        weekday_num = Time.now.in_time_zone(coach.timezone).to_date.wday
+        if @current_week.present? && weekday_num == 5
+          UserMailer.coach_more_steps_email(program, coach).deliver if @next_week.nil? || @next_week.small_steps.empty?
+        end
       end
     end
   end

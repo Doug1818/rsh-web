@@ -3,7 +3,8 @@ class Coach < ActiveRecord::Base
   GENDERS = ['', "Male", "Female"]
 
   belongs_to :practice
-  has_many :programs
+  # has_many :programs
+  has_and_belongs_to_many :programs
   has_many :users, through: :programs
   has_many :referrals
 

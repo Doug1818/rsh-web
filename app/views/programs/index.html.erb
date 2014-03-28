@@ -54,7 +54,7 @@
               <% elsif current_admin %>
                 <% @programs.each do |program| %>
                   <% user = program.user %>
-                  <% coach = Coach.find(program.coach_id) %>
+                  <% current_coach ? coach = current_coach : coach = program.coaches.first %>
                   <% practice = Practice.find(coach.practice_id) %>
                   <tr>
                     <!-- <td><%= practice.name %></td> -->

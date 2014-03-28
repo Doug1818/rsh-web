@@ -40,10 +40,13 @@ class ProgramsController < ApplicationController
 
   def create
     @program = Program.new(program_params)
-    @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
+    @program.coaches << current_coach
+    # @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
 
     respond_to do |format|
       if @program.save
+        UserMailer.user_invitation_email(@program, current_coach).deliver
+
         format.html { redirect_to program_path(@program), notice: "Your client was successfully added and emailed with instructions to download the Steps mobile app" }
         format.json { render json: @program, status: :created, location: @program }
       else

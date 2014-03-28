@@ -30,7 +30,7 @@ class Alert < ActiveRecord::Base
             misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
             if streak_met
-              UserMailer.coach_alert_email(alert, misses_streak).deliver
+              program.coaches.each { |coach| UserMailer.coach_alert_email(alert, misses_streak, coach).deliver }
               program.activity_status = Program::ACTIVITY_STATUSES[:alert]
               puts "STREAK MET FOR MISSES"
             else
@@ -60,7 +60,7 @@ class Alert < ActiveRecord::Base
             end
 
             if streak_met
-              UserMailer.coach_alert_email(alert, alert.streak).deliver
+              program.coaches.each { |coach| UserMailer.coach_alert_email(alert, alert.streak, coach).deliver }
               program.activity_status = Program::ACTIVITY_STATUSES[:alert]
               puts "STREAK MET FOR INCOMPLETES"
             else
@@ -71,7 +71,7 @@ class Alert < ActiveRecord::Base
           elsif alert.action_type == ACTION_TYPES["Completes"]
             next if statuses.nil?
             if statuses.uniq.size == 1 && (statuses[0] == CheckIn::STATUSES[:all_yes])
-              UserMailer.coach_alert_email(alert, alert.streak).deliver
+              program.coaches.each { |coach| UserMailer.coach_alert_email(alert, alert.streak, coach).deliver }
               puts "STREAK MET FOR COMPLETES"
             else
               puts "STREAK NOT MET FOR COMPLETES"
