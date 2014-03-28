@@ -1,7 +1,7 @@
 <div class="row <%= 'current_week' if week.current_week? %><%= 'past_week' if week.past_week? %>">
   <% if week.past_week? || week.current_week? %>
     <div class="toggle col-md-1" data-toggle="collapse" data-target="#detail-<%= week.number %>">
-      <div style="height:100px;cursor:pointer;" id='week-label-<%= week.id %>'>
+      <div style="height:100px;cursor:pointer;" id="week-label-<%= week.id if week.past_week? %>">
         <div>Week <%= week.number %>:</div>
         <div id='expand-<%= week.id %>' style="display:none;font-size:.7em">(Expand)</div>
         <div id="collapse-<%= week.id %>" style="display:none;font-size:.7em">(Collapse)</div>
@@ -35,7 +35,7 @@ $(document).ready(function() {
   });
 });
 
-// Expand/collapse week tooltip
+// Expand/collapse week tooltip [PAST WEEKS]
 $(document).ready(function() {
   $('#week-label-<%= week.id %>').hover(function() {
     $('#expand-<%= week.id %>').toggle();
