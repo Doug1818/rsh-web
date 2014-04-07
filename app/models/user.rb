@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   has_many :coaches, through: :programs
   has_many :alerts, through: :programs
 
-  attr_accessor :new_coach
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

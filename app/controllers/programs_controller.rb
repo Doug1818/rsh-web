@@ -121,6 +121,27 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def update
+    @program = current_practice.programs.find(params[:id])
+
+    new_coach_name = params[:program][:new_coach]
+    if new_coach_name != nil && new_coach_name != ""
+      new_coach = current_practice.coaches.where(first_name: new_coach_name.split(" ")[0], last_name: new_coach_name.split(" ")[1]).last
+      new_coach.programs << @program
+      UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
+    end
+
+    respond_to do |format|
+      if @program.update_attributes(program_params)
+        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@program.user.full_name} was successfully updated") }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @program.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def program_params
     params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
   end

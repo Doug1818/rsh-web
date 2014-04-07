@@ -24,6 +24,8 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :big_steps, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
+  attr_accessor :new_coach
+  
   validates_associated :big_steps
   validates_associated :small_steps
   validates :purpose, presence: true, :on => :create
