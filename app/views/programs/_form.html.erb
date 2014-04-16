@@ -1,5 +1,5 @@
 <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
-  <%= f.fields_for @program.user do |f| %>
+  <%= f.fields_for :user do |f| %>
     <%= f.input :first_name, label: false, placeholder: 'First name' %>
     <%= f.input :last_name, label: false, placeholder: 'Last name' %>
     <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>

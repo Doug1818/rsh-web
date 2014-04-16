@@ -41,7 +41,7 @@ class ProgramsController < ApplicationController
   def create
     @program = Program.new(program_params)
     @program.coaches << current_coach
-    # @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
+    # @program.coach_id = current_coach.id # get rid of this once HABTM switch is complete
 
     respond_to do |format|
       if @program.save
@@ -132,7 +132,7 @@ class ProgramsController < ApplicationController
       new_coach.programs << @program
       UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
     end
-
+    
     respond_to do |format|
       if @program.update_attributes(program_params)
         format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@program.user.full_name} was successfully updated") }
@@ -145,7 +145,7 @@ class ProgramsController < ApplicationController
   end
 
   def program_params
-    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
+    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email, :first_name, :last_name, :gender, :id], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
   end
 
   def destroy
