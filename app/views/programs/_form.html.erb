@@ -2,9 +2,17 @@
 
   <%= f.fields_for @program.user do |f| %>
     <%= f.input :hipaa_compliant %>
-    <%= f.input :first_name, label: false, placeholder: 'First name' %>
-    <%= f.input :last_name, label: false, placeholder: 'Last name' %>
-    <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
+
+    <% if @program.user.hipaa_compliant? %>
+      <% user_pii = @program.user.get_pii %>
+      <%= f.input :first_name, label: false, placeholder: 'First name', input_html: { value: user_pii['first_name'] } %>
+      <%= f.input :last_name, label: false, placeholder: 'Last name', input_html: { value: user_pii['last_name'] } %>
+      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email', input_html: { value: user_pii['email'] } %>
+    <% else %>
+      <%= f.input :first_name, label: false, placeholder: 'First name' %>
+      <%= f.input :last_name, label: false, placeholder: 'Last name' %>
+      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
+    <% end %>
     <%= f.input :gender, as: :select, collection: User::GENDERS, label: false, placeholder: 'Gender' %>
   <% end %>
   <%= f.input :purpose, label: "I am here to...", as: :text, placeholder: 'Do what?' %>

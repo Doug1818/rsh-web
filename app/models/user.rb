@@ -55,11 +55,15 @@ class User < ActiveRecord::Base
 
 
   def get_pii
+    response = {}
+
     if hipaa_compliant? and tv_id.present?
       require 'truevault'
       tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
-      tv.get_document(ENV["TV_A_VAULT_ID"], tv_id)
+      response = tv.get_document(ENV["TV_A_VAULT_ID"], tv_id) || {}
     end
+
+    response
   end
 
   def create_on_truevault
