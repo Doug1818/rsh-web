@@ -43,6 +43,9 @@ class ProgramsController < ApplicationController
     @program.coaches << current_coach
     # @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
 
+
+
+
     respond_to do |format|
       if @program.save
         UserMailer.user_invitation_email(@program, current_coach).deliver
@@ -142,10 +145,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def program_params
-    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
-  end
-
   def destroy
     @program = current_practice.programs.find(params[:id])
     @program.destroy
@@ -155,4 +154,7 @@ class ProgramsController < ApplicationController
     end
   end
 
+  def program_params
+    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:hipaa_compliant, :full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
+  end
 end
