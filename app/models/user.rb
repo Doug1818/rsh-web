@@ -43,6 +43,26 @@ class User < ActiveRecord::Base
     self.status = STATUSES[:invited]
   end
 
+  def email_required?
+    hipaa_compliant? ? false : true
+  end
+
+  def clear_pii
+    self.first_name = nil
+    self.last_name = nil
+    self.email = nil
+  end
+
+  def create_on_truevault
+    tv_data = { first_name: first_name, last_name: last_name, email: email }
+
+    require 'truevault'
+    tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
+    tv_response = tv.create_document(ENV["TV_A_VAULT_ID"], tv_data)
+    self.tv_id = tv_response["document_id"]
+  end
+
+
   def image_data=(data)
     io = CarrierwaveStringIO.new(Base64.decode64(data))
     self.avatar = io

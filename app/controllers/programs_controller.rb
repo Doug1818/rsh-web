@@ -41,14 +41,23 @@ class ProgramsController < ApplicationController
   def create
     @program = Program.new(program_params)
     @program.coaches << current_coach
-    # @program.coach_id = current_coach.id # get rid of this once HABT switch is complete
 
+    if @program.user.hipaa_compliant?
+      @program.user.create_on_truevault
 
-
+      first_name = @program.user.first_name
+      email = @program.user.email
+      @program.user.clear_pii
+    end
 
     respond_to do |format|
       if @program.save
-        UserMailer.user_invitation_email(@program, current_coach).deliver
+
+        if @program.user.hipaa_compliant?
+          UserMailer.user_invitation_email(@program, current_coach, email, first_name).deliver
+        else
+          UserMailer.user_invitation_email(@program, current_coach, @program.user.email, @program.user.first_name).deliver
+        end
 
         format.html { redirect_to program_path(@program), notice: "Your client was successfully added and emailed with instructions to download the Steps mobile app" }
         format.json { render json: @program, status: :created, location: @program }

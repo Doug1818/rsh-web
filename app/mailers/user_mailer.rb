@@ -1,12 +1,13 @@
 class UserMailer < ActionMailer::Base
   default from: "Steps <no-reply@rightsidehealth.com>"
 
-  def user_invitation_email(program, coach)
+  def user_invitation_email(program, coach, email, first_name)
     @program = program
-    @user = program.user
+    @email = email
+    @first_name = first_name
     @coach = coach
 
-    mail(to: @user.email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} has invited you to join Steps")
+    mail(to: @email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} has invited you to join Steps")
   end
 
   def practice_invitation_email(coach)
@@ -34,7 +35,7 @@ class UserMailer < ActionMailer::Base
     @program = Program.find(@alert.program_id)
     @user = @program.user
     @coach = coach
-    
+
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
@@ -42,7 +43,7 @@ class UserMailer < ActionMailer::Base
     @program = program
     @user = program.user
     @coach = coach
-    
+
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} needs steps for next week")
   end
 
