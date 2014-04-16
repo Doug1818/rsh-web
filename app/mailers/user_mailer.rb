@@ -39,12 +39,13 @@ class UserMailer < ActionMailer::Base
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
-  def coach_more_steps_email(program, coach)
+  def coach_more_steps_email(program, coach, full_name, first_name)
     @program = program
-    @user = program.user
+    @full_name = full_name
+    @first_name = first_name
     @coach = coach
 
-    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} needs steps for next week")
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@full_name} needs steps for next week")
   end
 
   def coach_shared_client_email(program, new_coach, referring_coach)
