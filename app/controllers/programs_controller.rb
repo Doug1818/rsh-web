@@ -110,9 +110,11 @@ class ProgramsController < ApplicationController
         @week.small_steps << @small_step
       end
     end
-
+    
     respond_to do |format|
       if @program.update_attributes(program_params.except(:weeks_attributes))
+        @program.start_date = @program.weeks.first.start_date # Redundant code b/c somehow start_date is still getting lost sometimes
+        @program.save # Redundant code b/c somehow start_date is still getting lost sometimes
         format.html { redirect_to program_path(@program) }
       else
         format.html { redirect_to program_path(@program) }
