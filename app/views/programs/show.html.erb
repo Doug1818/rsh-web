@@ -6,7 +6,13 @@
       </div>
     </div>
     <div class="col-md-5">
-      <h2><%= @program.user.full_name %></h2>
+      <h2>
+        <% if @program.user.hipaa_compliant? %>
+          <%= @program.user.get_pii['first_name'] %> <%= @program.user.get_pii['last_name'] %>
+        <% else %>
+          <%= @program.user.full_name %>
+        <% end %>
+        </h2>
       <p>I am here to <%= @program.purpose.downcase %> so I can <%= @program.goal.downcase %></p>
       <hr/>
     </div>

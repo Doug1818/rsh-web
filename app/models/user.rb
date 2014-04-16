@@ -53,6 +53,15 @@ class User < ActiveRecord::Base
     self.email = nil
   end
 
+
+  def get_pii
+    if hipaa_compliant? and tv_id.present?
+      require 'truevault'
+      tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
+      tv.get_document(ENV["TV_A_VAULT_ID"], tv_id)
+    end
+  end
+
   def create_on_truevault
     tv_data = { first_name: first_name, last_name: last_name, email: email }
 
