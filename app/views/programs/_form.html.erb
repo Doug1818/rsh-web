@@ -1,13 +1,14 @@
+<% @user_pii ||= @program.user.get_pii if @program.user.hipaa_compliant? %>
+
 <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
 
   <%= f.fields_for @program.user do |f| %>
     <%= f.input :hipaa_compliant %>
 
-    <% if @program.user.hipaa_compliant? %>
-      <% user_pii = @program.user.get_pii %>
-      <%= f.input :first_name, label: false, placeholder: 'First name', input_html: { value: user_pii['first_name'] } %>
-      <%= f.input :last_name, label: false, placeholder: 'Last name', input_html: { value: user_pii['last_name'] } %>
-      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email', input_html: { value: user_pii['email'] } %>
+    <% if @user_pii.present? %>
+      <%= f.input :first_name, label: false, placeholder: 'First name', input_html: { value: @user_pii['first_name'] } %>
+      <%= f.input :last_name, label: false, placeholder: 'Last name', input_html: { value: @user_pii['last_name'] } %>
+      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email', input_html: { value: @user_pii['email'] } %>
     <% else %>
       <%= f.input :first_name, label: false, placeholder: 'First name' %>
       <%= f.input :last_name, label: false, placeholder: 'Last name' %>

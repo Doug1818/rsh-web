@@ -1,3 +1,5 @@
+<% @user_pii ||= @program.user.get_pii if @program.user.hipaa_compliant?%>
+
 <div class="container">
   <div class="row">
     <div class="col-md-4">
@@ -7,9 +9,8 @@
     </div>
     <div class="col-md-5">
       <h2>
-        <% if @program.user.hipaa_compliant? %>
-          <% user_pii = @program.user.get_pii %>
-          <%= user_pii['first_name'] %> <%= user_pii['last_name'] %>
+        <% if @user_pii.present? %>
+          <%= @user_pii['first_name'] %> <%= @user_pii['last_name'] %>
         <% else %>
           <%= @program.user.full_name %>
         <% end %>
@@ -105,7 +106,13 @@
         </div>
 
         <div class="well">
-          <h2><%= "#{@program.user.first_name}'s Reminders" %></h2>
+          <h2>
+            <% if @user_pii.present? %>
+              <%= "#{ @user_pii['first_name'] }'s Reminders" %>
+            <% else %>
+              <%= "#{ @program.user.first_name }'s Reminders" %>
+            <% end %>
+          </h2>
           <p class="adv-settings-desc">Send this client push notifications</p>
           
           <table>
