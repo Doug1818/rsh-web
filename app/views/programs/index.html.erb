@@ -34,6 +34,8 @@
                   <th>Start Date</th>
                   <th class="center">Wks</th>
                   <th class="center">CIs</th>
+                  <th>Alert</th>
+                  <th class="center">? Strk</th>
                   <th></th>
                 </tr>
               <% end %>
@@ -70,6 +72,8 @@
                       <td><%= program.start_date %></td>
                       <td class="center"><%= program.weeks.count %></td>
                       <td class="center"><%= program.check_ins.count %></td>
+                      <td><%= "Alert" if program.activity_status == Program::ACTIVITY_STATUSES[:alert] %></td>
+                      <td class="center"><%= program.misses_streak if program.misses_streak %></td>
                       <td><%= link_to 'view', program_path(program) %></td>
                     </tr>
                   <% end %>

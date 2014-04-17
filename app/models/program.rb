@@ -50,6 +50,20 @@ class Program < ActiveRecord::Base
     # subtract the two
   end
 
+  def misses_streak
+    if self.start_date != nil
+      now = DateTime.now.in_time_zone(self.user.timezone)
+      today = now.to_date
+      last_closed_check_in_window = today - 2 # get date of last 'closed' check-in
+      no_check_ins_since = if self.check_ins.any?
+        self.check_ins.last.created_at.to_date # get the date of the last check-in
+      else
+        self.start_date
+      end
+      return (last_closed_check_in_window - no_check_ins_since).to_int # see the difference between them
+    end
+  end
+
   def current_week
     self.weeks.where("? BETWEEN start_date and end_date", Time.current).first
   end
