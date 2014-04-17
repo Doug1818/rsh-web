@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   before_create :set_invited_status
 
+  before_update :handle_hipaa
+
   has_many :programs
   has_many :coaches, through: :programs
   has_many :alerts, through: :programs
@@ -75,6 +77,14 @@ class User < ActiveRecord::Base
     self.tv_id = tv_response["document_id"]
   end
 
+  def handle_hipaa
+    if hipaa_compliant?
+      if tv_id.nil?
+        create_on_truevault
+      end
+      clear_pii
+    end
+  end
 
   def image_data=(data)
     io = CarrierwaveStringIO.new(Base64.decode64(data))
