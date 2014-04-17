@@ -77,10 +77,20 @@ class User < ActiveRecord::Base
     self.tv_id = tv_response["document_id"]
   end
 
+  def update_on_truevault
+    tv_data = { first_name: first_name, last_name: last_name, email: email }
+
+    require 'truevault'
+    tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
+    tv.update_document(ENV["TV_A_VAULT_ID"], tv_id, tv_data)
+  end
+
   def handle_hipaa
     if hipaa_compliant?
       if tv_id.nil?
         create_on_truevault
+      else
+        update_on_truevault
       end
       clear_pii
     end
