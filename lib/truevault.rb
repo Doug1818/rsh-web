@@ -1,10 +1,6 @@
-# require 'rubygems'
-# require 'bundler/setup'
 require 'tempfile'
-# Bundler.require
 
 module TrueVault
-  # Custom parser class for TrueVault API
   class Parser < HTTParty::Parser
     SupportedFormats.merge!({"application/octet-stream" => :octet_stream})
 
@@ -15,9 +11,6 @@ module TrueVault
         when :json
           JSON.parse(body)
         when :octet_stream
-          # TODO find a better way of doing this
-          # The issue is that no matter what it gets frmo TV
-          # the ContentType is always octet_stream
           begin
             JSON.parse(Base64.decode64(body))
           rescue JSON::ParserError
