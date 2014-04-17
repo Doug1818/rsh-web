@@ -50,6 +50,8 @@ class ProgramsController < ApplicationController
       @program.user.clear_pii
     end
 
+    # @program.coach_id = current_coach.id # get rid of this once HABTM switch is complete
+
     respond_to do |format|
       if @program.save
 
@@ -122,9 +124,11 @@ class ProgramsController < ApplicationController
         @week.small_steps << @small_step
       end
     end
-
+    
     respond_to do |format|
       if @program.update_attributes(program_params.except(:weeks_attributes))
+        @program.start_date = @program.weeks.first.start_date # Redundant code b/c somehow start_date is still getting lost sometimes
+        @program.save # Redundant code b/c somehow start_date is still getting lost sometimes
         format.html { redirect_to program_path(@program) }
       else
         format.html { redirect_to program_path(@program) }
@@ -142,7 +146,7 @@ class ProgramsController < ApplicationController
       new_coach.programs << @program
       UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
     end
-
+    
     respond_to do |format|
       if @program.update_attributes(program_params)
         format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@program.user.full_name} was successfully updated") }
@@ -154,6 +158,7 @@ class ProgramsController < ApplicationController
     end
   end
 
+
   def destroy
     @program = current_practice.programs.find(params[:id])
     @program.destroy
@@ -163,7 +168,9 @@ class ProgramsController < ApplicationController
     end
   end
 
+
   def program_params
-    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:hipaa_compliant, :full_name, :email], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
+    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:hipaa_compliant, :full_name, :email, :first_name, :last_name, :gender, :id], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
   end
+  
 end

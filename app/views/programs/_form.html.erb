@@ -1,8 +1,7 @@
 <% @user_pii ||= @program.user.get_pii if @program.user.hipaa_compliant? %>
 
 <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
-
-  <%= f.fields_for @program.user do |f| %>
+  <%= f.fields_for :user do |f| %>
     <%= f.input :hipaa_compliant %>
 
     <% if @user_pii.present? %>
