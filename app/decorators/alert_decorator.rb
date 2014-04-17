@@ -8,6 +8,8 @@ class AlertDecorator < Draper::Decorator
     alert_action_type = alert_action_type.singularize if alert.streak == 1
     alert_sequence = Alert::SEQUENCES.keys[alert.sequence].downcase
 
-    "#{ program.user.first_name } gets #{ streak } #{ alert_action_type } #{ alert_sequence }"
+    first_name = program.user.hipaa_compliant? ? program.user.get_pii['first_name'] : program.user.first_name
+
+    "#{ first_name } gets #{ streak } #{ alert_action_type } #{ alert_sequence }"
   end
 end
