@@ -28,11 +28,12 @@
                 </tr>
               <% elsif current_admin %>
                 <tr>
-                  <!-- <th>Practice</th> -->
-                  <th>Coach</th>
+                  <th>Practice</th>
+                  <th>Coach(es)</th>
                   <th>Client</th>
-                  <th>Client Email</th>
                   <th>Start Date</th>
+                  <th class="center">Wks</th>
+                  <th class="center">CIs</th>
                   <th></th>
                 </tr>
               <% end %>
@@ -52,18 +53,26 @@
                   </tr>
                 <% end %>
               <% elsif current_admin %>
-                <% @programs.each do |program| %>
-                  <% user = program.user %>
-                  <% current_coach ? coach = current_coach : coach = program.coaches.first %>
-                  <% practice = Practice.find(coach.practice_id) %>
-                  <tr>
-                    <!-- <td><%= practice.name %></td> -->
-                    <td><%= coach.full_name %></td>
-                    <td><%= user.full_name %></td>
-                    <td><%= user.email %></td>
-                    <td><%= program.start_date %></td>
-                    <td><%= link_to 'view', program_path(program) %></td>
-                  </tr>
+                <% Practice.all.order(created_at: :desc).each do |practice| %>
+                  <% practice.programs.uniq.each do |program| %>
+                    <% 
+                      coaches = []
+                      program.coaches.each { |c| coaches << c.full_name } 
+                    %>
+                    <tr>
+                      <td><%= link_to truncate(practice.name, length: 11), "#", title: practice.name, class: "plain" %></td>
+                      <% if coaches.count > 1 %>
+                        <td><%= link_to truncate("(#{coaches.count}) #{coaches.join(', ')}", length: 15), "#", title: coaches.join(", "), class: "plain" %></td>
+                      <% else %>
+                        <td><%= link_to truncate(coaches.join(", "), length: 11), "#", title: coaches.join(", "), style: "color:#939598;" %></td>
+                      <% end %>
+                      <td><%= link_to truncate(program.user.full_name, length: 11), "#", title: "#{program.user.full_name} (#{program.user.email})", class: "plain" %></td>
+                      <td><%= program.start_date %></td>
+                      <td class="center"><%= program.weeks.count %></td>
+                      <td class="center"><%= program.check_ins.count %></td>
+                      <td><%= link_to 'view', program_path(program) %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
             </tbody>
