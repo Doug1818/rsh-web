@@ -119,10 +119,13 @@ class Program < ActiveRecord::Base
         weekday_num = Time.now.in_time_zone(coach.timezone).to_date.wday
         if @current_week.present? && weekday_num == 5
           if program.user.hipaa_compliant?
-            # TODO: get user's full_name & first_name from TV
+            user_pii = program.user.get_pii
+            full_name, first_name = "#{ user_pii['first_name'] } #{ user_pii['last_name'] }", user_pii['first_name']
           else
-            UserMailer.coach_more_steps_email(program, coach, program.user.full_name, program.user.first_name).deliver if @next_week.nil? || @next_week.small_steps.empty?
+            full_name, first_name = program.user.full_name, program.user.first_name
           end
+
+          UserMailer.coach_more_steps_email(program, coach, full_name, first_name).deliver if @next_week.nil? || @next_week.small_steps.empty?
         end
       end
     end
