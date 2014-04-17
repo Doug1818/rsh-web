@@ -48,12 +48,13 @@ class UserMailer < ActionMailer::Base
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@full_name} needs steps for next week")
   end
 
-  def coach_shared_client_email(program, new_coach, referring_coach)
+  def coach_shared_client_email(program, new_coach, referring_coach, full_name, first_name)
     @program = program
-    @user = program.user
+    @full_name = full_name
+    @first_name = first_name
     @new_coach = new_coach
     @referring_coach = referring_coach
 
-    mail(to: @new_coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@referring_coach.full_name} has shared #{@user.full_name}'s program with you")
+    mail(to: @new_coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@referring_coach.full_name} has shared #{@full_name}'s program with you")
   end
 end

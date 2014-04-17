@@ -144,7 +144,15 @@ class ProgramsController < ApplicationController
     if new_coach_name != nil && new_coach_name != ""
       new_coach = current_practice.coaches.where(first_name: new_coach_name.split(" ")[0], last_name: new_coach_name.split(" ")[1]).last
       new_coach.programs << @program
-      UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
+
+      if @program.user.hipaa_compliant?
+        user_pii = @program.user.get_pii
+        full_name, first_name = "#{ user_pii['first_name'] } #{ user_pii['last_name'] }", user_pii['first_name']
+      else
+        full_name, first_name = @program.user.full_name, @program.user.first_name
+      end
+
+      UserMailer.coach_shared_client_email(@program, new_coach, current_coach, full_name, first_name).deliver
     end
     
     respond_to do |format|

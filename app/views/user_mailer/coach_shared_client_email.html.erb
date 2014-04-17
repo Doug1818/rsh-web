@@ -1,7 +1,7 @@
 <p>Hey <%= @new_coach.first_name %>,</p>
 
-<p><%= @referring_coach.full_name %> has shared <%= @user.full_name %>'s program with you.</p>
+<p><%= @referring_coach.full_name %> has shared <%= @full_name %>'s program with you.</p>
 
-<p>You can manage <%= @user.first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %></p>
+<p>You can manage <%= @first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %></p>
 
 <p>-The Steps Team</p>
