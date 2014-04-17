@@ -157,7 +157,15 @@ class ProgramsController < ApplicationController
     
     respond_to do |format|
       if @program.update_attributes(program_params)
-        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@program.user.full_name} was successfully updated") }
+
+        full_name = if @program.user.hipaa_compliant?
+          user_pii = @program.user.get_pii
+          "#{ user_pii['first_name'] } #{ user_pii['last_name'] }"
+        else
+          @program.user.full_name
+        end
+
+        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{full_name} was successfully updated") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

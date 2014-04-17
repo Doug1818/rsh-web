@@ -1,3 +1,5 @@
+require 'truevault'
+
 class User < ActiveRecord::Base
   STATUSES = { invited: 0, inactive: 1, active: 2 }
   GENDERS = ['', "Male", "Female"]
@@ -40,7 +42,7 @@ class User < ActiveRecord::Base
       (self.first_name, self.last_name) = full_name.split(" ")
     end
   end
-
+  
   def set_invited_status
     self.status = STATUSES[:invited]
   end
@@ -60,7 +62,6 @@ class User < ActiveRecord::Base
     response = {}
 
     if hipaa_compliant? and tv_id.present?
-      require 'truevault'
       tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
       response = tv.get_document(ENV["TV_A_VAULT_ID"], tv_id) || {}
     end
@@ -69,17 +70,12 @@ class User < ActiveRecord::Base
   end
 
   def create_on_truevault
-    tv_data = { first_name: first_name, last_name: last_name, email: email }
-
-    require 'truevault'
     tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
     tv_response = tv.create_document(ENV["TV_A_VAULT_ID"], tv_data)
     self.tv_id = tv_response["document_id"]
   end
 
   def update_on_truevault
-    tv_data = { first_name: first_name, last_name: last_name, email: email }
-
     require 'truevault'
     tv = TrueVault::Client.new(ENV["TV_API_KEY"], ENV["TV_ACCOUNT_ID"], 'v1')
     tv.update_document(ENV["TV_A_VAULT_ID"], tv_id, tv_data)
@@ -99,5 +95,11 @@ class User < ActiveRecord::Base
   def image_data=(data)
     io = CarrierwaveStringIO.new(Base64.decode64(data))
     self.avatar = io
+  end
+
+  private
+
+  def tv_data
+    { first_name: first_name, last_name: last_name, email: email }
   end
 end
