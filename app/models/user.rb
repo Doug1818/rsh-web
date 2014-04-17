@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
       (self.first_name, self.last_name) = full_name.split(" ")
     end
   end
-  
+
   def set_invited_status
     self.status = STATUSES[:invited]
   end
@@ -100,6 +100,6 @@ class User < ActiveRecord::Base
   private
 
   def tv_data
-    { first_name: first_name, last_name: last_name, email: email }
+    { first_name: first_name, last_name: last_name, email: email, phone: phone }
   end
 end
