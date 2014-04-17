@@ -31,6 +31,6 @@ module RshWeb
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
 
-    config.filter_parameters += [:password, :full_name, :email, :gender]
+    config.filter_parameters += [:password, :full_name, :email, :gender, :phone, :first_name, :last_name]
   end
 end
