@@ -20,10 +20,10 @@
   <div class="row">
     <% if @programs.present? %>
       <%= render @programs %>
-    <% elsif params[:filter] && params[:filter] == 'active' %>
+    <% elsif params[:filter] && params[:filter] == 'active' && current_coach.programs.any? %>
       <p>You have no <%= params[:filter] %> clients</p>
-    <% elsif params[:filter] && params[:filter] == 'alerts' %>  
-      <p>None of your clients have alerts right now!</p>
+    <% elsif params[:filter] && params[:filter] == 'alerts' && current_coach.programs.any? %>  
+      <p>None of your clients are on alert right now!</p>
     <% else %>
       <%= link_to 'Add your first client', new_program_path %>
     <% end %>
