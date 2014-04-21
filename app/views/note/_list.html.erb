@@ -1,5 +1,5 @@
 <% if @week.past_week? %>
-	<%= @note.body? ? @note.body : "No notes" %>
+	<%= @note.body? ? simple_format(@note.body) : "No notes" %>
 <% else %>
 	<%= render 'notes_form' %>
 <% end %>
