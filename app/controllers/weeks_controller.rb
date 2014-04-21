@@ -1,6 +1,10 @@
 class WeeksController < ApplicationController
   def create
-    @program = current_practice.programs.find(params[:program_id])
+    @program = if current_coach
+      current_practice.programs.find(params[:program_id])
+    elsif current_admin
+      Program.find(params[:program_id])
+    end
     @last_week = @program.weeks.last
     @week = @last_week.dup :include => :small_steps
     # @week = @last_week.clone
