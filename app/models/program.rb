@@ -50,6 +50,23 @@ class Program < ActiveRecord::Base
     # subtract the two
   end
 
+  def total_could_have_checked_in_days # taking the whole program's small steps... needs to be just the ones relevant for that week (or day?)
+    could_have_checked_in_days = []
+    start_date = self.start_date
+    end_date = DateTime.now.in_time_zone(self.user.timezone).to_date - 2
+    (start_date..end_date).each do |day|
+      can_check_in = false
+      self.small_steps.each do |small_step|
+        if small_step.can_check_in_on_date(day) == true
+          can_check_in = true
+          break
+        end
+      end
+      could_have_checked_in_days << day if can_check_in == false
+    end
+    return could_have_checked_in_days
+  end
+
   def misses_streak
     if self.start_date != nil
       now = DateTime.now.in_time_zone(self.user.timezone)
