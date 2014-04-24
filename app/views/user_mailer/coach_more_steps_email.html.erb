@@ -1,7 +1,7 @@
 <p>Hey <%= @coach.first_name %>,</p>
 
-<p>Your client, <%= @user.full_name %>, doesn't have any steps set up for next week.</p>
+<p>Your client, <%= @full_name %>, doesn't have any steps set up for next week.</p>
 
-<p>You can add more steps to <%= @user.first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %></p>
+<p>You can add more steps to <%= @first_name %>'s program here: <%= link_to program_url(@program), program_url(@program), target: '_blank'  %></p>
 
 <p>-The Steps Team</p>

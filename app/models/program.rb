@@ -25,7 +25,7 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
   attr_accessor :new_coach
-  
+
   validates_associated :big_steps
   validates_associated :small_steps
   validates :purpose, presence: true, :on => :create
@@ -149,7 +149,14 @@ class Program < ActiveRecord::Base
         @next_week = program.next_week
         weekday_num = Time.now.in_time_zone(coach.timezone).to_date.wday
         if @current_week.present? && weekday_num == 5
-          UserMailer.coach_more_steps_email(program, coach).deliver if @next_week.nil? || @next_week.small_steps.empty?
+          if program.user.hipaa_compliant?
+            user_pii = program.user.get_pii
+            full_name, first_name = "#{ user_pii['first_name'] } #{ user_pii['last_name'] }", user_pii['first_name']
+          else
+            full_name, first_name = program.user.full_name, program.user.first_name
+          end
+
+          UserMailer.coach_more_steps_email(program, coach, full_name, first_name).deliver if @next_week.nil? || @next_week.small_steps.empty?
         end
       end
     end

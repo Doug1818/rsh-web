@@ -1,5 +1,6 @@
 <%= simple_form_for alert, html: { class: "form-vertical" } do |f| %>
-  <p>Send me an email when <%= @program.user.first_name %> gets</p>
+  <% first_name = @program.user.hipaa_compliant? ? @program.user.get_pii['first_name'] : @program.user.first_name %>
+  <p>Send me an email when <%= first_name %> gets</p>
   <%= f.hidden_field :program_id %>
   <%= f.input :streak, as: :select, collection: 1..7, label: false, selected: 3 %>
   <%= f.input :action_type, as: :select, collection: Alert::ACTION_TYPES, label: false, selected: Alert::ACTION_TYPES['Misses'] %>

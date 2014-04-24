@@ -30,5 +30,7 @@ module RshWeb
       g.test_framework :rspec, fixture: true, controller_specs: false, helper_specs: false, routing_specs: false, view_specs: false
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
+
+    config.filter_parameters += [:password, :full_name, :email, :gender, :phone, :first_name, :last_name]
   end
 end

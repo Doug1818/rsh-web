@@ -20,14 +20,14 @@
         <h3 class="center">Add a New Client</h3><br>
         <%= simple_form_for @program, html: { class: "form-vertical new-program" } do |f| %>
           <%= f.fields_for :user do |f| %>
-          <div class="row">
-            <div class="col-md-12">
-              <%= f.input :full_name, label: false, placeholder: 'Name' %>
-            </div>
+            <%= f.input :hipaa_compliant %>
 
-          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <%= f.input :full_name, label: false, placeholder: 'Name' %>
+              </div>
+            </div>
             <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
-            
           <% end %>
           <%= f.input :purpose, label: "I am here to...", as: :text, placeholder: 'Do what?' %>
           <%= f.input :goal, label: "So I can...", as: :text, placeholder: 'What will sticking to the plan enable you to do?' %>

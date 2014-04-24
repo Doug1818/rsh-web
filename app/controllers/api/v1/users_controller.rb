@@ -3,6 +3,15 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
     @user = @program.user
 
+    if @user.hipaa_compliant?
+      user_pii = @user.get_pii
+
+      @user.first_name = user_pii["first_name"]
+      @user.last_name = user_pii["last_name"]
+      @user.email = user_pii["email"]
+      @user.phone = user_pii["phone"]
+    end
+
     user_data = Array.new
 
     if @user.present?
@@ -18,6 +27,16 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
   def update
     @user = @program.user
+
+    if @user.hipaa_compliant?
+      user_pii = @user.get_pii
+
+      @user.first_name = user_pii["first_name"]
+      @user.last_name = user_pii["last_name"]
+      @user.email = user_pii["email"]
+      @user.phone = user_pii["phone"]
+    end
+
 
     if @user.update_attributes!(user_params)
       render status: 200, json: {

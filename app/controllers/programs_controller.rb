@@ -41,11 +41,25 @@ class ProgramsController < ApplicationController
   def create
     @program = Program.new(program_params)
     @program.coaches << current_coach
+
+    if @program.user.hipaa_compliant?
+      @program.user.create_on_truevault
+
+      first_name = @program.user.first_name
+      email = @program.user.email
+      @program.user.clear_pii
+    end
+
     # @program.coach_id = current_coach.id # get rid of this once HABTM switch is complete
 
     respond_to do |format|
       if @program.save
-        UserMailer.user_invitation_email(@program, current_coach).deliver
+
+        if @program.user.hipaa_compliant?
+          UserMailer.user_invitation_email(@program, current_coach, email, first_name).deliver
+        else
+          UserMailer.user_invitation_email(@program, current_coach, @program.user.email, @program.user.first_name).deliver
+        end
 
         format.html { redirect_to program_path(@program), notice: "Your client was successfully added and emailed with instructions to download the Steps mobile app" }
         format.json { render json: @program, status: :created, location: @program }
@@ -130,12 +144,28 @@ class ProgramsController < ApplicationController
     if new_coach_name != nil && new_coach_name != ""
       new_coach = current_practice.coaches.where(first_name: new_coach_name.split(" ")[0], last_name: new_coach_name.split(" ")[1]).last
       new_coach.programs << @program
-      UserMailer.coach_shared_client_email(@program, new_coach, current_coach).deliver
+
+      if @program.user.hipaa_compliant?
+        user_pii = @program.user.get_pii
+        full_name, first_name = "#{ user_pii['first_name'] } #{ user_pii['last_name'] }", user_pii['first_name']
+      else
+        full_name, first_name = @program.user.full_name, @program.user.first_name
+      end
+
+      UserMailer.coach_shared_client_email(@program, new_coach, current_coach, full_name, first_name).deliver
     end
     
     respond_to do |format|
       if @program.update_attributes(program_params)
-        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{@program.user.full_name} was successfully updated") }
+
+        full_name = if @program.user.hipaa_compliant?
+          user_pii = @program.user.get_pii
+          "#{ user_pii['first_name'] } #{ user_pii['last_name'] }"
+        else
+          @program.user.full_name
+        end
+
+        format.html { redirect_to(program_path(@program, active: 'client-info'), notice: "#{full_name} was successfully updated") }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -144,9 +174,6 @@ class ProgramsController < ApplicationController
     end
   end
 
-  def program_params
-    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:full_name, :email, :first_name, :last_name, :gender, :id], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
-  end
 
   def destroy
     @program = current_practice.programs.find(params[:id])
@@ -157,4 +184,9 @@ class ProgramsController < ApplicationController
     end
   end
 
+
+  def program_params
+    params.require(:program).permit(:purpose, :goal, :start_date, user_attributes: [:hipaa_compliant, :full_name, :email, :first_name, :last_name, :gender, :id], big_steps_attributes: [:name, :id, :_destroy], weeks_attributes: [:number, :start_date, :end_date, small_steps_attributes: [:name, :program_id, :big_step_id, :frequency, :times_per_week, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :_destroy, :id]])
+  end
+  
 end

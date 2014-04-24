@@ -1,12 +1,13 @@
 class UserMailer < ActionMailer::Base
   default from: "Steps <no-reply@rightsidehealth.com>"
 
-  def user_invitation_email(program, coach)
+  def user_invitation_email(program, coach, email, first_name)
     @program = program
-    @user = program.user
+    @email = email
+    @first_name = first_name
     @coach = coach
 
-    mail(to: @user.email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} has invited you to join Steps")
+    mail(to: @email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} has invited you to join Steps")
   end
 
   def practice_invitation_email(coach)
@@ -34,24 +35,26 @@ class UserMailer < ActionMailer::Base
     @program = Program.find(@alert.program_id)
     @user = @program.user
     @coach = coach
-    
+
     mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
-  def coach_more_steps_email(program, coach)
+  def coach_more_steps_email(program, coach, full_name, first_name)
     @program = program
-    @user = program.user
+    @full_name = full_name
+    @first_name = first_name
     @coach = coach
-    
-    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} needs steps for next week")
+
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@full_name} needs steps for next week")
   end
 
-  def coach_shared_client_email(program, new_coach, referring_coach)
+  def coach_shared_client_email(program, new_coach, referring_coach, full_name, first_name)
     @program = program
-    @user = program.user
+    @full_name = full_name
+    @first_name = first_name
     @new_coach = new_coach
     @referring_coach = referring_coach
 
-    mail(to: @new_coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@referring_coach.full_name} has shared #{@user.full_name}'s program with you")
+    mail(to: @new_coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@referring_coach.full_name} has shared #{@full_name}'s program with you")
   end
 end

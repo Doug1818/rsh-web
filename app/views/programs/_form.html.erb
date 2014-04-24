@@ -1,20 +1,30 @@
+<% @user_pii ||= @program.user.get_pii if @program.user.hipaa_compliant? %>
+
 <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
   <%= f.fields_for :user do |f| %>
-    <%= f.input :first_name, label: false, placeholder: 'First name' %>
-    <%= f.input :last_name, label: false, placeholder: 'Last name' %>
-    <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
+    <%= f.input :hipaa_compliant %>
+
+    <% if @user_pii.present? %>
+      <%= f.input :first_name, label: false, placeholder: 'First name', input_html: { value: @user_pii['first_name'] } %>
+      <%= f.input :last_name, label: false, placeholder: 'Last name', input_html: { value: @user_pii['last_name'] } %>
+      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email', input_html: { value: @user_pii['email'] } %>
+    <% else %>
+      <%= f.input :first_name, label: false, placeholder: 'First name' %>
+      <%= f.input :last_name, label: false, placeholder: 'Last name' %>
+      <%= f.input :email, label: false, placeholder: 'Email Address', type: 'email' %>
+    <% end %>
     <%= f.input :gender, as: :select, collection: User::GENDERS, label: false, placeholder: 'Gender' %>
   <% end %>
   <%= f.input :purpose, label: "I am here to...", as: :text, placeholder: 'Do what?' %>
   <%= f.input :goal, label: "So I can...", as: :text, placeholder: 'What will sticking to the plan enable you to do?' %>
 
-  <% 
+  <%
     coach_signed_in? ? coach = current_coach : coach = @program.coaches.first
     coaches = coach.practice.coaches
     new_coach_options = coaches.map { |c| c.full_name }
     @program.coaches.each { |c| new_coach_options.delete(c.full_name) }
   %>
-  
+
   <% if @program.coaches.count > 1 %>
     <%= "#{@program.user.first_name}'s coaches:"  %>
     <ul>
