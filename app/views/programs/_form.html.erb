@@ -2,7 +2,6 @@
 
 <%= simple_form_for @program, html: { class: "form-vertical" } do |f| %>
   <%= f.fields_for :user do |f| %>
-    <%= f.input :hipaa_compliant %>
 
     <% if @user_pii.present? %>
       <%= f.input :first_name, label: false, placeholder: 'First name', input_html: { value: @user_pii['first_name'] } %>

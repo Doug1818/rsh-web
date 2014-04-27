@@ -1,6 +1,7 @@
 <%= simple_form_for @practice, html: { class: "form-vertical" } do |f| %>
   <% if params[:invite_token] || session[:referral_code] %>
     <legend>Your practice</legend>
+    <%= f.input :hipaa_compliant %>
     <%= f.input :name, label: false, placeholder: 'Practice Name' %>
 
     <legend>Your account</legend>
@@ -34,6 +35,7 @@
     </div>
     <%= f.submit "Sign up", class: 'btn btn-primary' %>
   <% elsif @practice.new_record? %>
+    <%= f.input :hipaa_compliant %>
     <%= f.input :name, label: false, placeholder: 'Practice Name' %>
     <%= f.fields_for :coaches do |f| %>
       <%= f.input :full_name, label: false, placeholder: 'Coach Name' %>
@@ -41,6 +43,7 @@
     <% end %>
     <%= f.submit "Send Invitation", class: 'btn btn-primary' %>
   <% else %>
+    <%= f.input :hipaa_compliant %>
     <%= f.input :name, label: false, placeholder: 'Practice Name' %>
     <%= f.input :address, label: false, placeholder: 'Practice Address' %>
     <%= f.input :city, label: false, placeholder: 'City' %>

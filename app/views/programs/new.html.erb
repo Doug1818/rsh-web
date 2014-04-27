@@ -20,7 +20,6 @@
         <h3 class="center">Add a New Client</h3><br>
         <%= simple_form_for @program, html: { class: "form-vertical new-program" } do |f| %>
           <%= f.fields_for :user do |f| %>
-            <%= f.input :hipaa_compliant %>
 
             <div class="row">
               <div class="col-md-12">

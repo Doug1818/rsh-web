@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416185834) do
+ActiveRecord::Schema.define(version: 20140424230550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20140416185834) do
     t.boolean  "free_pass_flag",       default: false
     t.integer  "upgrade_price"
     t.datetime "upgrade_price_set_at"
+    t.boolean  "hipaa_compliant",      default: false
   end
 
   create_table "programs", force: true do |t|

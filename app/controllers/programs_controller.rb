@@ -42,7 +42,8 @@ class ProgramsController < ApplicationController
     @program = Program.new(program_params)
     @program.coaches << current_coach
 
-    if @program.user.hipaa_compliant?
+    if current_coach.practice.hipaa_compliant?
+      @program.user.hipaa_compliant = true
       @program.user.create_on_truevault
 
       first_name = @program.user.first_name

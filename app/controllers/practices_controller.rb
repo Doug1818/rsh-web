@@ -104,6 +104,6 @@ class PracticesController < ApplicationController
   end
 
   def practice_params
-    params.require(:practice).permit(:terms, :name, :address, :state, :city, :zip, coaches_attributes: [:id, :referred_by_code, :full_name, :first_name, :last_name, :gender, :email, :password, :password_confirmation])
+    params.require(:practice).permit(:hipaa_compliant, :terms, :name, :address, :state, :city, :zip, coaches_attributes: [:id, :referred_by_code, :full_name, :first_name, :last_name, :gender, :email, :password, :password_confirmation])
   end
 end
