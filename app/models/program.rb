@@ -25,6 +25,8 @@ class Program < ActiveRecord::Base
   accepts_nested_attributes_for :weeks, :reject_if => :all_blank, :allow_destroy => true
 
   attr_accessor :new_coach
+  
+  attr_encrypted :authentication_token, key: "e,afLzTy@D*E2F2"
 
   validates_associated :big_steps
   validates_associated :small_steps
@@ -104,7 +106,7 @@ class Program < ActiveRecord::Base
   def generate_authentication_token
     loop do
       token = (0...6).map { ('a'..'z').to_a[rand(26)] }.join
-      break token unless Program.where(authentication_token: token).first
+      break token unless Program.find_by_authentication_token(token).present?
     end
   end
 

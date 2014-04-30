@@ -35,6 +35,7 @@ gem 'gibbon' # mailchimp
 gem 'rails_admin' # Admin interface
 gem 'ice_cube' # Recurrence
 gem 'rollbar' # exceptions / errors tracking
+gem 'attr_encrypted' # encryption/decryption
 
 group :doc do
   gem 'sdoc', require: false

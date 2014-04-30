@@ -6,8 +6,8 @@ class Api::V1::ApplicationController < ActionController::Base
   before_filter :load_practice
 
   def authenticate_program
-    if params[:authentication_token].present?
-      @program = Program.where(authentication_token: params[:authentication_token]).last
+    if params[:authentication_token].present?      
+      @program = Program.find_by_authentication_token(params[:authentication_token])
       auth_failure unless @program.present?
     else
       auth_failure
