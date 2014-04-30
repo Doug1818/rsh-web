@@ -100,6 +100,12 @@ class Program < ActiveRecord::Base
       self.authentication_token = generate_authentication_token
     end
   end
+  
+  def as_json(options={})
+    h = super(options)
+    h["authentication_token"] = authentication_token
+    h
+  end
 
   private
 
