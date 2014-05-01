@@ -54,7 +54,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:image_data, :phone, :timezone)
+    params.require(:user).permit(:image_data, :phone, :timezone, :last_sign_in_at)
   end
 
 end
