@@ -22,17 +22,28 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   version :xsmall do
     process resize_to_fill: [30, 30, gravity='NorthWest']
+    process :auto_orient
   end
 
   version :small do
     process resize_to_fill: [60, 60, gravity='NorthWest']
+    process :auto_orient
   end
 
   version :medium do
     process resize_to_fill: [123, 123, gravity='NorthWest']
+    process :auto_orient
   end
 
   version :large do
     process resize_to_fill: [201, 201, gravity='NorthWest']
+    process :auto_orient
+  end
+
+  def auto_orient
+    manipulate! do |img|
+      img.auto_orient
+      img
+    end
   end
 end
