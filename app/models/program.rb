@@ -69,7 +69,7 @@ class Program < ActiveRecord::Base
 
         # Mark each of the small steps for the check in
         @small_steps.each_with_index do |small_step, i|
-          status = rand(0..1)
+          status = [1,1,0].sample
           puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
           @check_in.activities.create! small_step_id: small_step.id, status: status, created_at: date
         end
