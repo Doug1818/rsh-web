@@ -44,6 +44,7 @@ class CoachesController < ApplicationController
 
     respond_to do |format|
       if @coach.save
+        @coach.add_example_client
         format.html { redirect_to(coaches_path) }
         format.json { render json: @coach, status: :created, location: @coach }
       else

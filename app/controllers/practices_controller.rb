@@ -35,6 +35,7 @@ class PracticesController < ApplicationController
           UserMailer.practice_invitation_email(coach).deliver
           format.html { redirect_to practices_path, notice: "Practice was successfully added" }
         end
+        coach.add_example_client
         format.json { render json: @practice, status: :created, location: @practice }
       else
         format.html { render action: "new" }

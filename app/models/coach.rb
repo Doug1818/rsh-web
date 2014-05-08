@@ -61,6 +61,77 @@ class Coach < ActiveRecord::Base
     self.referral_code = SecureRandom.urlsafe_base64
   end
 
+  def add_example_client
+    puts "ADD JOE EXAMPLE"
+
+    program = {
+      purpose: "Heal my hip",
+      goal: "Play soccer again",
+      status: 1,
+      start_date: 3.weeks.ago.beginning_of_week(:sunday)
+    }
+    @program = Program.new(program)
+
+    user = {
+      first_name: "Joe",
+      last_name: "Example",
+      email: "joe.example@gmail.com",
+      phone: "5555555555",
+      timezone: "Eastern Time (US & Canada)",
+      status: 1,
+      gender: "Female",
+      avatar: nil
+    }
+    @user = @program.build_user(user)
+
+    @program.save!
+    self.programs << @program
+
+    start_date = @program.start_date.in_time_zone("Eastern Time (US & Canada)").beginning_of_week(:sunday)
+    end_date = @program.start_date.in_time_zone("Eastern Time (US & Canada)").end_of_week(:sunday)
+    
+    0.upto(4) { |i| @program.weeks.create(start_date: start_date + i.week, end_date: end_date + i.week, number: 1 + i) }
+    
+    big_step_names = ['Make better food choices', 'Sleep more and better', 'Cook more', 'Strength', 'Cardio']
+    big_step_names.each { |bs_name| @program.big_steps.create(name: bs_name)}
+
+    coffee_small_step = @program.big_steps.find_by_name('Sleep more and better').small_steps.create(
+      name: "Drink 2 or fewer cups of coffee per day", frequency: 0, times_per_week: 1)
+    @program.big_steps.find_by_name('Sleep more and better').small_steps << coffee_small_step
+    @program.small_steps << coffee_small_step
+    @program.weeks.first(2).each { |w| w.small_steps << coffee_small_step }
+
+    groceries_small_step = @program.big_steps.find_by_name('Cook more').small_steps.create(
+      name: "go grocery shopping", frequency: 2, times_per_week: 1, sunday: true)
+    @program.big_steps.find_by_name('Cook more').small_steps << groceries_small_step
+    @program.small_steps << groceries_small_step
+    @program.weeks.first(2).each { |w| w.small_steps << groceries_small_step }
+
+    lowcarb_small_step = @program.big_steps.find_by_name('Make better food choices').small_steps.create(
+      name: "Strict Slow-Carb", frequency: 1, times_per_week: 6)
+    @program.big_steps.find_by_name('Make better food choices').small_steps << lowcarb_small_step
+    @program.small_steps << lowcarb_small_step
+    @program.weeks.last(3).each { |w| w.small_steps << lowcarb_small_step }
+
+    workoutA_small_step = @program.big_steps.find_by_name('Strength').small_steps.create(
+      name: "Total Body A", frequency: 2, times_per_week: 1, tuesday: true, thursday: true)
+    note = Note.create(body: "Warm- Up\r\nRoll- Foam Calves, Quads, Hip\r\nTreadmill- 5 mins 2inc/5-7mph\r\nInchworm, Side Squats, Wall Slides, Knee Pulls\r\nPractice Diaph Breathing\r\n\r\nBridges- 15x\r\nHigh Plank- 1:00\r\n3 sets\r\n\r\nSquats- 12k KB 10x\r\nTRX Rows- 10x\r\n3x\r\n\r\nFront Lunges- Body Weight 10/side (down and back in the lane)\r\nPush ups- low bench- 10x\r\n3x")
+    workoutA_small_step.note = note
+    @program.big_steps.find_by_name('Strength').small_steps << workoutA_small_step
+    @program.small_steps << workoutA_small_step
+    @program.weeks.last(3).each { |w| w.small_steps << workoutA_small_step }
+
+    workoutB_small_step = @program.big_steps.find_by_name('Strength').small_steps.create(
+      name: "Total Body B", frequency: 2, times_per_week: 1, wednesday: true, saturday: true)
+    note = Note.create(body: "Front Lunges 10x/side (hands behind your head)\r\nBicycles 30x/side\r\nHigh Push-ups 10x\r\nRepeat 3x")
+    workoutB_small_step.note = note
+    @program.big_steps.find_by_name('Strength').small_steps << workoutA_small_step
+    @program.small_steps << workoutB_small_step
+    @program.weeks.last(3).each { |w| w.small_steps << workoutB_small_step }
+
+    @program.seed_checkins
+  end
+
   def check_alerts
     self.programs.each do |program|
       program.alerts.each do |alert|

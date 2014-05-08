@@ -46,6 +46,39 @@ class Program < ActiveRecord::Base
     text :goal
   end
 
+  def seed_checkins
+    program = self
+    puts "\n#{ program.user.first_name }'s Program"
+
+    start_date = program.start_date
+    end_date = 2.days.ago.in_time_zone("Eastern Time (US & Canada)").to_date
+
+    (start_date..end_date).each do |date|
+
+      date = date.to_date
+
+      @week = program.weeks.where("DATE(?) BETWEEN start_date and end_date", date).references(:weeks).first
+      @small_steps = @week.small_steps.collect { |ss| ss if ss.can_check_in_on_date(date) }.compact
+
+      if @small_steps.count > 0
+        # Create a check in for the day
+        comments = "Your clients can let you know how things went when they check in from their phones."
+
+        @check_in = program.check_ins.where(created_at: date).first_or_create(week_id: @week.id, comments: comments)
+        @check_in.save!
+
+        # Mark each of the small steps for the check in
+        @small_steps.each_with_index do |small_step, i|
+          status = rand(0..1)
+          puts "Small Step: #{ small_step.name }, Status: #{ status }\n"
+          @check_in.activities.create! small_step_id: small_step.id, status: status, created_at: date
+        end
+      else
+        puts "No eligible small steps to check in on #{ date }"
+      end
+    end
+  end
+
   def total_missed_check_ins
     # get # of days from program.start_date to today
     # get # of checkins
