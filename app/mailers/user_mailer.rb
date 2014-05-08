@@ -36,7 +36,7 @@ class UserMailer < ActionMailer::Base
     @user = @program.user
     @coach = coach
 
-    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
+    mail(to: @coach.email, subject: "#{@user.full_name} has gotten #{@streak} #{Alert::ACTION_TYPES.keys[@alert.action_type]} in a row")
   end
 
   def coach_more_steps_email(program, coach, full_name, first_name)
