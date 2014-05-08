@@ -2,11 +2,11 @@
   if (@note.blank? || @note.id.blank?)
     form_url = "/small_steps/#{@small_step.id}/note"
     form_action = :create
-    form_submit_label = "Submit"
+    form_submit_label = "Add Note"
   else
     form_url = "/small_steps/#{@small_step.id}/note/#{@note.id}"
     form_action = :update
-    form_submit_label = "Update"
+    form_submit_label = "Update Note"
   end
 %>
 
