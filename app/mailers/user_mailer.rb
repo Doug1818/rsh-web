@@ -19,8 +19,8 @@ class UserMailer < ActionMailer::Base
 
   def coach_invitation_email(coach)
     @coach = coach
-
-    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@coach.full_name} has invited you to join Steps (by Right Side Health)")
+    @owner = @coach.practice.coaches.where(role: 'owner').first
+    mail(to: @coach.email, bcc: "contact@rightsidehealth.com", subject: "#{@owner.full_name} has invited you to join Steps (by Right Side Health)")
   end
 
   def coach_referral_email(referral)
