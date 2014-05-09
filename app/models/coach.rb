@@ -75,7 +75,7 @@ class Coach < ActiveRecord::Base
     user = {
       first_name: "Joe",
       last_name: "Example",
-      email: "joe.example@gmail.com",
+      email: Faker::Internet.email,
       phone: "5555555555",
       timezone: "Eastern Time (US & Canada)",
       status: 1,
@@ -92,7 +92,7 @@ class Coach < ActiveRecord::Base
     
     0.upto(4) { |i| @program.weeks.create(start_date: start_date + i.week, end_date: end_date + i.week, number: 1 + i) }
     
-    big_step_names = ['Make better food choices', 'Sleep more and better', 'Cook more', 'Strength', 'Cardio']
+    big_step_names = ['This is a big step', 'Make better food choices', 'Sleep more and better', 'Cook more', 'Strength', 'Cardio']
     big_step_names.each { |bs_name| @program.big_steps.create(name: bs_name)}
 
     coffee_small_step = @program.big_steps.find_by_name('Sleep more and better').small_steps.create(
@@ -106,6 +106,12 @@ class Coach < ActiveRecord::Base
     @program.big_steps.find_by_name('Cook more').small_steps << groceries_small_step
     @program.small_steps << groceries_small_step
     @program.weeks.first(2).each { |w| w.small_steps << groceries_small_step }
+
+    example_small_step = @program.big_steps.find_by_name('This is a big step').small_steps.create(
+      name: "This is a small step (hover/click the edit button to change me)", frequency: 0)
+    @program.big_steps.find_by_name('This is a big step').small_steps << example_small_step
+    @program.small_steps << example_small_step
+    @program.weeks.last(2).each { |w| w.small_steps << example_small_step }
 
     lowcarb_small_step = @program.big_steps.find_by_name('Make better food choices').small_steps.create(
       name: "Strict Slow-Carb", frequency: 1, times_per_week: 6)
@@ -130,6 +136,7 @@ class Coach < ActiveRecord::Base
     @program.weeks.last(3).each { |w| w.small_steps << workoutB_small_step }
 
     @program.seed_checkins
+    @program.alerts.first.update_attributes(streak: 20)
   end
 
   def check_alerts
