@@ -10,7 +10,7 @@ class SmallStepsController < ApplicationController
     big_step = params[:small_step][:big_step_id] # If it's a new big step, this will be the new big step name
     big_step_id = big_step.to_i # If it's a big step name, this will be 0 (new big step)
 
-    if big_step_id == 0
+    if big_step_id == 0 && big_step != ""
       @big_step = @program.big_steps.where(name: big_step).first_or_create!
       params[:small_step][:big_step_id] = @big_step.id
       @big_step.small_steps << @small_step
@@ -23,7 +23,7 @@ class SmallStepsController < ApplicationController
         format.html { redirect_to(program_path(@small_step.program)) }
         format.json { render json: @small_step, status: :created, location: @small_step }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to(program_path(@small_step.program), notice: "Your step is missing required fields. Please try again.") }
         format.json { render json: @small_step.errors, status: :unprocessable_entity }
       end
     end

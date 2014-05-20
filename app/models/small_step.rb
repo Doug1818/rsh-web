@@ -10,6 +10,7 @@ class SmallStep < ActiveRecord::Base
   has_one :note
 
   validates :name, length: { maximum: 100 }, presence: true
+  validates :big_step_id, presence: true
 
   def days
     days = []
