@@ -1,7 +1,5 @@
 <% submit_btn_label = small_step.new_record? ? "Add" : "Update" %>
 
-
-
 <%= simple_form_for small_step, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id, value: @program.id %>
   <%= f.hidden_field :week_id, value: week.id %>

@@ -128,10 +128,6 @@ th{
 }
 
 .topnav{
-	
-	text-align: center;
-	display: inline-block;
-	/*width: 8%;*/
 	float: right;
 }
 
@@ -142,32 +138,17 @@ th{
 	text-decoration: none;
 }
 
-.topnav a:hover{
-	color: #f1f2f2;
-	/*text-decoration: underline;*/
-	text-align: center;
-	/*vertical-align: bottom; Why doesn't alignment seem to actually work in the cells? */
-}
-
-.topnav li{
-	list-style-type: none;
-	display:inline-block;
+.topnav div {
 	float: left;
 	margin-left: 10px;
 }
 
-.topnav li a:hover{
-text-decoration: underline;
-}
-
-.topnav ul{
-	height: 100%;
-}
-
 #signin{
-	padding-top: 10px;
-	vertical-align: middle;
 	margin-right: 5px;
+}
+
+.dropdown {
+	margin-top:13px;
 }
 
 /*Headline*/

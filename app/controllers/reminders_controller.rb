@@ -1,5 +1,6 @@
 class RemindersController < ApplicationController
-  before_filter :authenticate_coach!
+  before_filter :authenticate_coach!, :unless => :non_coach_resource_signed_in
+  before_filter :authenticate_user!, :unless => :non_user_resource_signed_in
   authorize_resource
 
   def new
@@ -9,7 +10,11 @@ class RemindersController < ApplicationController
 
   def create
     @reminder = Reminder.new(reminder_params)
-    @program = current_coach.programs.find(@reminder.program_id)
+    if current_coach
+      @program = current_coach.programs.find(@reminder.program_id)
+    elsif current_user
+      @program = current_user.programs.find(@reminder.program_id)
+    end
 
     respond_to do |format|
       if @program.present? && @reminder.save

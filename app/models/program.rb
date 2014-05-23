@@ -5,6 +5,7 @@ class Program < ActiveRecord::Base
   before_save :ensure_authentication_token
   # after_create :send_invitation
   after_create :create_default_alert
+  after_create :set_user_password
 
   belongs_to :user, dependent: :destroy
   # belongs_to :coach
@@ -156,6 +157,13 @@ class Program < ActiveRecord::Base
 
   def create_default_alert
     self.alerts.create(action_type: 0, streak: 3, sequence: 0)
+  end
+
+  def set_user_password
+    user = self.user
+    user.password = self.authentication_token
+    user.password_confirmation = self.authentication_token
+    user.save
   end
 
   def self.nudge_reminder

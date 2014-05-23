@@ -7,6 +7,8 @@ class HomeController < ApplicationController
       # authorize!(:index, :coaches_home)
       # @users = current_coach.users
       # format.html { render "coaches_homepage" }
+    elsif current_user
+      redirect_to program_path(current_user.programs.last)
     elsif current_admin
       redirect_to rshadmin_path
     else

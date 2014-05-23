@@ -1,5 +1,7 @@
 class ProgramsController < ApplicationController
-  before_filter :authenticate_coach!, except: [:index, :show]
+  before_filter :authenticate_coach!, :unless => :non_coach_resource_signed_in
+  before_filter :authenticate_admin!, :unless => :non_admin_resource_signed_in
+  before_filter :authenticate_user!, :unless => :non_user_resource_signed_in
   authorize_resource
 
   def index
@@ -13,6 +15,8 @@ class ProgramsController < ApplicationController
   def show
     if current_coach
       @program = current_coach.programs.find(params[:id]).decorate
+    elsif current_user
+      @program = current_user.programs.find(params[:id]).decorate
     elsif current_admin
       @program = Program.find(params[:id]).decorate
     end
@@ -51,8 +55,6 @@ class ProgramsController < ApplicationController
       email = @program.user.email
       @program.user.clear_pii
     end
-
-    # @program.coach_id = current_coach.id # get rid of this once HABTM switch is complete
 
     respond_to do |format|
       if @program.save
@@ -99,7 +101,11 @@ class ProgramsController < ApplicationController
   end
 
   def update_small_steps
-    @program = current_practice.programs.find(params[:id])
+    if current_coach
+      @program = current_practice.programs.find(params[:id])
+    elsif current_user
+      @program = current_user.programs.find(params[:id])
+    end
 
     # get the start date of the program (based on the attributes)
     # set the start/end dates of the week
@@ -140,7 +146,11 @@ class ProgramsController < ApplicationController
   end
 
   def update
-    @program = current_practice.programs.find(params[:id])
+    if current_coach
+      @program = current_practice.programs.find(params[:id])
+    elsif current_user
+      @program = current_user.programs.find(params[:id])
+    end
 
     new_coach_name = params[:program][:new_coach]
     if new_coach_name != nil && new_coach_name != ""

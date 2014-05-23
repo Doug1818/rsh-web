@@ -17,25 +17,27 @@
   <%= f.input :purpose, label: "I am here to...", as: :text, placeholder: 'Do what?' %>
   <%= f.input :goal, label: "So I can...", as: :text, placeholder: 'What will sticking to the plan enable you to do?' %>
 
-  <%
-    coach_signed_in? ? coach = current_coach : coach = @program.coaches.first
-    coaches = coach.practice.coaches
-    new_coach_options = coaches.map { |c| c.full_name }
-    @program.coaches.each { |c| new_coach_options.delete(c.full_name) }
-  %>
+  <% unless current_user %>
+    <%
+      coach_signed_in? ? coach = current_coach : coach = @program.coaches.first
+      coaches = coach.practice.coaches
+      new_coach_options = coaches.map { |c| c.full_name }
+      @program.coaches.each { |c| new_coach_options.delete(c.full_name) }
+    %>
 
-  <% if @program.coaches.count > 1 %>
-    <%= "#{@program.user.first_name}'s coaches:"  %>
-    <ul>
-      <% @program.coaches.each do |c| %>
-        <li><%= c.full_name %></li>
-      <% end %>
-    </ul>
-  <% end %>
-  <% if new_coach_options.count > 0 %>
-    <%= f.input :new_coach, as: :select, collection: new_coach_options, label: false, placeholder: 'Add a coach' %>
+    <% if @program.coaches.count > 1 %>
+      <%= "#{@program.user.first_name}'s coaches:"  %>
+      <ul>
+        <% @program.coaches.each do |c| %>
+          <li><%= c.full_name %></li>
+        <% end %>
+      </ul>
+    <% end %>
+    <% if new_coach_options.count > 0 %>
+      <%= f.input :new_coach, as: :select, collection: new_coach_options, label: false, placeholder: 'Add a coach' %>
+    <% end %>
   <% end %>
 
   <p class="clear"></p><br/>
-  <%= f.submit 'Update Client', class: 'btn btn-primary' %>
+  <%= f.submit 'Update', class: 'btn btn-primary' %>
 <% end %>

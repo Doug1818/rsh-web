@@ -34,6 +34,8 @@
           <div class="top">
             <% if current_coach %>
               <h4>Welcome, <%= current_coach.name %></h4>
+            <% elsif current_user %>
+              <h4>Welcome, <%= current_user.first_name %></h4>
             <% else %>
               <h4>Welcome</h4>
             <% end %>
@@ -42,10 +44,18 @@
             <p>
               <% if current_coach %>
                 <%= link_to 'Sign out', destroy_coach_session_path, method: :delete %>
+              <% elsif current_user %>
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
               <% elsif current_admin %>
                 <%= link_to 'Sign out', destroy_admin_session_path, method: :delete %>
               <% else %>
-                <%= link_to 'Sign in', new_coach_session_path %></li>
+                <div class="dropdown">
+                  <a data-toggle="dropdown" href="#" style="text-decoration:none;font-weight:bold;position:relative;bottom:10px;">Sign in</a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="position:relative;bottom:10px;">
+                    <li><%= link_to 'As coach', new_coach_session_path %></li>
+                    <li><%= link_to 'As client', new_user_session_path %></li>
+                  </ul>
+                </div>
               <% end %>
             </p>
           </div>

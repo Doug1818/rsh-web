@@ -2,6 +2,8 @@ class WeeksController < ApplicationController
   def create
     @program = if current_coach
       current_practice.programs.find(params[:program_id])
+    elsif current_user
+      current_user.programs.find(params[:program_id])
     elsif current_admin
       Program.find(params[:program_id])
     end

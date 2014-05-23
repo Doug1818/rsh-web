@@ -1,7 +1,11 @@
 class SmallStepsController < ApplicationController
 
   def create
-    @program = current_practice.programs.find(params[:small_step][:program_id])
+    if current_coach
+      @program = current_practice.programs.find(params[:small_step][:program_id])
+    elsif current_user
+      @program = current_user.programs.find(params[:small_step][:program_id])
+    end
     @week = @program.weeks.find(params[:small_step][:week_id])
 
     @small_step = @week.small_steps.build(small_step_params)
@@ -30,7 +34,11 @@ class SmallStepsController < ApplicationController
   end
 
   def update
-    @program = current_practice.programs.find(params[:small_step][:program_id])
+    if current_coach
+      @program = current_practice.programs.find(params[:small_step][:program_id])
+    elsif current_user
+      @program = current_user.programs.find(params[:small_step][:program_id])
+    end
     @week = @program.weeks.find(params[:small_step][:week_id])
 
     # Remove the old HABTM relationship
@@ -64,7 +72,11 @@ class SmallStepsController < ApplicationController
   end
 
   def destroy
-    @program = current_practice.programs.find(params[:program_id])
+    if current_coach
+      @program = current_practice.programs.find(params[:program_id])
+    elsif current_user
+      @program = current_user.programs.find(params[:program_id])
+    end
     @week = @program.weeks.find(params[:week_id])
     @small_step = @program.small_steps.find(params[:id])
 
@@ -76,7 +88,11 @@ class SmallStepsController < ApplicationController
   end
 
   def edit
-    @program = current_practice.programs.find(params[:program_id])
+    if current_coach
+      @program = current_practice.programs.find(params[:program_id])
+    elsif current_user
+      @program = current_user.programs.find(params[:program_id])
+    end
     @week = @program.weeks.find(params[:week_id])
     @small_step = @program.small_steps.find(params[:id])
 

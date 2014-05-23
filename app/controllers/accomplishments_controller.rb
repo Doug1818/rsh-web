@@ -1,10 +1,15 @@
 class AccomplishmentsController < ApplicationController
-  before_filter :authenticate_coach!
+  before_filter :authenticate_coach!, :unless => :non_coach_resource_signed_in
+  before_filter :authenticate_user!, :unless => :non_user_resource_signed_in
   authorize_resource
 
   def create
     @accomplishment = Accomplishment.new(accomplishment_params)
-    @program = current_coach.programs.find(@accomplishment.program_id)
+    if current_coach
+      @program = current_coach.programs.find(@accomplishment.program_id)
+    elsif current_user
+      @program = current_user.programs.find(@accomplishment.program_id)
+    end
 
     respond_to do |format|
       if @program.present? && @accomplishment.save

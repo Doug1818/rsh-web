@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-top:5px;">
       <ul class="list-inline view">
         <li>View:</li>
         <li class="<%= 'active' if @active == 'steps' %>"><a href="#steps" data-toggle="tab">Steps</a></li>
@@ -89,22 +89,24 @@
 
 
       <div class="tab-pane <%= 'active' if @active == 'notifications' %>" id="notifications">
-        <div class="well">
-          <h2><%= coach_signed_in? ? "#{current_coach.name}'s Alerts" : "Coach's Alerts" %></h2>
-          <p class="adv-settings-desc">Send me email notifications about this client</p>
-          <% if @alerts.present? %>
-          <%= render @alerts %>
-          <% end %>
+        <% unless current_user %>
+          <div class="well">
+            <h2><%= coach_signed_in? ? "#{current_coach.name}'s Alerts" : "Coach's Alerts" %></h2>
+            <p class="adv-settings-desc">Send me email notifications about this client</p>
+            <% if @alerts.present? %>
+            <%= render @alerts %>
+            <% end %>
 
-          <div class="alerts">
-            <div class="form">
-              <%= render partial: 'alerts/form', locals: { alert: Alert.new(program: @program) } %>
+            <div class="alerts">
+              <div class="form">
+                <%= render partial: 'alerts/form', locals: { alert: Alert.new(program: @program) } %>
+              </div>
             </div>
-          </div>
-          <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-alert-link' %>
-        </div>
+            <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-alert-link' %>
+          </div>
+        <% end %>
 
         <div class="well">
           <h2>

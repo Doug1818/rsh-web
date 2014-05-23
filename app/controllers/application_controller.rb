@@ -19,6 +19,18 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_practice
 
+  def non_coach_resource_signed_in
+    admin_signed_in? || user_signed_in?
+  end
+
+  def non_admin_resource_signed_in
+    coach_signed_in? || user_signed_in?
+  end
+
+  def non_user_resource_signed_in
+    admin_signed_in? || coach_signed_in?
+  end
+
   # Exception handling (custom error messages)
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, with: lambda { |exception| render_error 500, exception }
