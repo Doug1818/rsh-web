@@ -1,5 +1,7 @@
 <%= simple_form_for program.accomplishments.new, html: { class: "form-vertical" } do |f| %>
   <%= f.hidden_field :program_id %>
+  <% if current_coach %><%= f.hidden_field :coach_id, value: current_coach.id %><% end %>
+  <% if current_user %><%= f.hidden_field :user_id, value: current_user.id %><% end %>
   <%= f.input :date, as: :string, input_html: { class: "accomp_datepicker" }, label: false %>
   <%= f.input :name, label: false, placeholder: "What did #{program.user.first_name} accomplish?" %>
   <%= f.submit "Add", class: 'btn btn-primary' %>

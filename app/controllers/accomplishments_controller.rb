@@ -33,6 +33,6 @@ class AccomplishmentsController < ApplicationController
   end
 
   def accomplishment_params
-    params.require(:accomplishment).permit(:name, :date, :program_id)
+    params.require(:accomplishment).permit(:name, :date, :program_id, :coach_id, :user_id)
   end
 end
