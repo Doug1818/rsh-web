@@ -48,6 +48,7 @@ RshWeb::Application.routes.draw do
   resources :todos
   resources :leads
   resources :referrals
+  resources :accomplishments
 
   root 'home#index'
 

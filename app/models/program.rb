@@ -14,6 +14,7 @@ class Program < ActiveRecord::Base
   has_many :small_steps, dependent: :destroy
   has_many :check_ins, through: :small_steps, uniq: true
   has_many :weeks
+  has_many :accomplishments
 
   has_many :alerts, dependent: :destroy
   has_many :reminders, dependent: :destroy

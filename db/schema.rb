@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501203517) do
+ActiveRecord::Schema.define(version: 20140522215439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accomplishments", force: true do |t|
+    t.string   "name"
+    t.integer  "program_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "date"
+  end
 
   create_table "activities", force: true do |t|
     t.integer  "check_in_id"
@@ -160,7 +168,7 @@ ActiveRecord::Schema.define(version: 20140501203517) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "start_date"
-    t.datetime "nudge_at_time"
+    t.datetime "nudge_at_time",                  default: '-4712-01-01 20:00:00'
     t.integer  "activity_status",                default: 0
     t.string   "encrypted_authentication_token"
   end

@@ -1,0 +1,45 @@
+// Place all the styles related to the Accomplishments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#new_accomplishment {
+  > p {
+    float: left;
+    margin-right: 8px;
+    line-height: 46px;
+  }
+  .form-group {
+    float: left;
+    margin-right: 8px;
+    #accomplishment_date { 
+      width:150px;
+    }
+    #accomplishment_name { 
+      width:750px;
+    }
+  }
+}
+
+.accomplishments {
+  .form {
+    display: none;
+  }
+}
+
+.program-accomplishment {
+  .btn {
+    margin-top: -4px;
+  }
+}
+
+@media (max-width: 991px) {
+  #new_accomplishment {
+    > p, .form-group {
+      float: none;
+    }
+    > p {
+      margin: 15px 0;
+      line-height: 23px;
+    }
+  }
+}

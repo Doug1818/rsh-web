@@ -23,8 +23,9 @@ class ProgramsController < ApplicationController
 
     @alerts = @program.alerts.decorate
     @reminders = @program.reminders.decorate
-    @supporters = @program.supporters
-    @todos = @program.todos
+    @accomplishments = @program.accomplishments
+    # @supporters = @program.supporters
+    # @todos = @program.todos
 
     @active = if params[:active]
       params[:active]

@@ -1,0 +1,5 @@
+<tr>
+  <td><%= accomplishment.date.strftime('%b %e, %Y') %></td>
+  <td><%= accomplishment.name %></td>
+  <td><%= link_to "<span class='glyphicon glyphicon-remove-circle'></span>".html_safe, accomplishment_path(accomplishment), data: { confirm: "Are you sure?" }, method: :delete %></td>
+</tr>

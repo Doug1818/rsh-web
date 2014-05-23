@@ -28,6 +28,7 @@
         <li>View:</li>
         <li class="<%= 'active' if @active == 'steps' %>"><a href="#steps" data-toggle="tab">Steps</a></li>
         <li class="<%= 'active' if @active == 'notifications' %>"><a href="#notifications" data-toggle="tab">Notifications</a></li>
+        <li class="<%= 'active' if @active == 'accomplishments' %>"><a href="#accomplishments" data-toggle="tab">Accomplishments</a></li>
         <li class="<%= 'active' if @active == 'client-info' %>"><a href="#client-info" data-toggle="tab">Client Info</a></li>
       </ul>
     </div>
@@ -157,6 +158,33 @@
             <%= link_to "<span class='btn-plus'></span>".html_safe, new_todo_path(program_id: @program.id) %>
           </div>
         <% end %>
+      </div>
+
+      <div class="tab-pane <%= 'active' if @active == 'accomplishments' %>" id="accomplishments">
+        <div class="well">
+          <h2>Accomplishments</h2>
+          <% if @accomplishments.present? %>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Accomplishment</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <%= render @accomplishments %>
+            </table>
+          <% end %>
+
+          <div class="accomplishments">
+            <div class="form">
+              <%= render 'accomplishments/form', program: @program %>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <%= link_to "<span class='btn-plus'></span>".html_safe, "#", class: 'new-accomplishment-link' %>
+        </div>
       </div>
 
       <div class="tab-pane <%= 'active' if @active == 'client-info' %>" id="client-info">
