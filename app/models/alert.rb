@@ -30,9 +30,11 @@ class Alert < ActiveRecord::Base
             misses_streak >= alert.streak ? streak_met = true : streak_met = false
 
             if streak_met
-              program.coaches.each { |coach| UserMailer.coach_alert_email(alert, misses_streak, coach).deliver }
-              program.activity_status = Program::ACTIVITY_STATUSES[:alert]
-              puts "STREAK MET FOR MISSES"
+              if misses_streak <= 14
+                program.coaches.each { |coach| UserMailer.coach_alert_email(alert, misses_streak, coach).deliver }
+                program.activity_status = Program::ACTIVITY_STATUSES[:alert]
+                puts "STREAK MET FOR MISSES"
+              end
             else
               program.activity_status = Program::ACTIVITY_STATUSES[:normal]
               puts "STREAK NOT MET FOR MISSES"
